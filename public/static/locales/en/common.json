@@ -1,0 +1,8 @@
+{
+  "TITLE": "Login by username and password",
+  "USERNAME": "USERNAME",
+  "USERNAME_PLACEHOLDER": "Enter username",
+  "PASSWORD": "PASSWORD",
+  "PASSWORD_PLACEHOLDER": "******",
+  "SIGNIN": "Sign In"
+}
