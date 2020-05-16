@@ -1,5 +1,7 @@
 import React from "react";
 import MainLayout from "../components/MainLayout";
+import { i18n } from "../../config/Next18Wrapper";
+import { getToken, getHeaderData, getFooterData } from "../hooks/useGlobalApi";
 import { styled } from "linaria/lib/react";
 
 const Wrapper = styled.div`
@@ -22,7 +24,26 @@ const Spaces = ({ title }) => {
   );
 };
 
-Spaces.getInitialProps = async (context) => {
+Spaces.getInitialProps = async ({ req }) => {
+  if (typeof window === "undefined") {
+    const currentLanguage = req ? req.language : i18n.language;
+    try {
+      const token = await getToken();
+      const [headerData, footerData] = await Promise.all([
+        getHeaderData(currentLanguage),
+        getFooterData(currentLanguage),
+      ]);
+      return {
+        token,
+        headerData,
+        footerData,
+      };
+    } catch (error) {
+      return {
+        error: true,
+      };
+    }
+  }
   return {};
 };
 

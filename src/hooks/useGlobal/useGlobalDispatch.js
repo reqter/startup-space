@@ -1,12 +1,12 @@
 import React, { useContext } from "react";
-import { GlobalContextSetState } from "./index";
+import { GlobalContextDispatch } from "./index";
 
-const useGlobalDispath = () => {
-  const setState = useContext(GlobalContextSetState);
+const useGlobalDispatch = () => {
+  const dispatch = useContext(GlobalContextDispatch);
   const changeLang = (dir) => {
     setState((prev) => ({ ...prev, dir }));
   };
 
-  return { changeLang };
+  return { dispatch };
 };
-export default useGlobalDispath;
+export default useGlobalDispatch;

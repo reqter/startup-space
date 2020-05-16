@@ -4,10 +4,10 @@ import { currentTheme } from "./../../services/theming";
 const { colorPrimaryLight, colorPrimaryDark } = currentTheme;
 
 export const Wrapper = styled.header`
-  background-image: url("/images/bg3.jpg");
   @apply w-full bg-fixed;
   margin-top: 0px;
   z-index: 1;
+  background-image: ${({ bgImage }) => `url(${bgImage})`};
 `;
 
 export const Content = styled.div`

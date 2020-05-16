@@ -10,25 +10,21 @@ import {
   Button,
   ImageBox,
 } from "./styles";
+import useGlobalState from "../../hooks/useGlobal/useGlobalState";
 
 const NewsLetter = () => {
+  const { landingData } = useGlobalState();
+  const data = React.useMemo(() => (landingData ? landingData[0] : {}), []);
   return (
     <Section bgColor={theme`colors.black`}>
       <Container>
-        <ImageBox
-          bgUrl={
-            "https://www.munichre.com/content/dam/munichre/mram/images/AdobeStock_74327759.jpg/_jcr_content/renditions/original./AdobeStock_74327759.jpg"
-          }
-        />
+        <ImageBox bgUrl={data.newslettermedia} />
         <FormBox>
-          <Header>ثبت نام در خبرنامه</Header>
+          <Header>{data.newslettertitle}</Header>
           <Divider />
-          <Description>
-            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با
-            استفاده از طراحان گرافیک است.
-          </Description>
-          <Input placeholder="ایمیل خود را وارد کنید" />
-          <Button>مشترک شوید</Button>
+          <Description>{data.newsletterdescription}</Description>
+          <Input placeholder={data.newsletterplaceholder} />
+          <Button>{data.newsletteractiontext}</Button>
         </FormBox>
       </Container>
     </Section>
