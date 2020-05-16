@@ -1,19 +1,22 @@
 import React from "react";
 import FilterBox from "./../FilterBox";
 import { Wrapper, Content, Left, Right, User } from "./styles";
-const Header = (): JSX.Element => {
+import useGlobalState from "../../hooks/useGlobal/useGlobalState";
+const FirstBox = (): JSX.Element => {
+  const { landingData } = useGlobalState();
+  const data = React.useMemo(() => (landingData ? landingData[0] : {}), []);
   return (
-    <Wrapper>
+    <Wrapper bgImage={data.mainbackimage}>
       <Content>
         <Left>
           <FilterBox />
         </Left>
         <Right>
-          <User src="/images/user.png" />
+          <User src={data.homebrandimage} />
         </Right>
       </Content>
     </Wrapper>
   );
 };
 
-export default Header;
+export default FirstBox;

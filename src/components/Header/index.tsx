@@ -1,7 +1,9 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import { Link, i18n } from "../../../config/Next18Wrapper";
+import { Link, Router } from "../../../config/Next18Wrapper";
 import useGlobalState from "../../hooks/useGlobal/useGlobalState";
+import useGlobalDispatch from "../../hooks/useGlobal/useGlobalDispatch";
+import isServer from "../../utils/isServer";
 import {
   Wrapper,
   Content,
@@ -11,13 +13,14 @@ import {
   Button,
   SearchIcon,
 } from "./styles";
-interface IProps {
-  t: (key: string) => {};
-  data: any;
-}
-const Header: React.FC<IProps> = ({ data }): JSX.Element => {
-  const headerObj = data ? data[0] : {};
-  const { currentLanguage } = useGlobalState();
+import useGlobalApi from "../../hooks/useGlobalApi";
+
+interface IProps {}
+
+const Header: React.FC<IProps> = (): JSX.Element => {
+  const { headerData, landingData } = useGlobalState();
+  const { getHomeData } = useGlobalApi();
+  const headerObj = headerData ? headerData[0] : {};
   const router = useRouter();
   const [isSticky, setSticky] = useState<boolean>(false);
 
@@ -29,77 +32,56 @@ const Header: React.FC<IProps> = ({ data }): JSX.Element => {
     handleScroll();
     window.addEventListener("scroll", handleScroll);
     return () => {
-      window.removeEventListener("scroll", () => handleScroll);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
+  const _getHomeData = async () => {
+    if (!isServer) {
+      if (!landingData || landingData.length === 0) {
+        getHomeData(
+          () => Router.push("/"),
+          () => {}
+        );
+      } else Router.push("/");
+    } else Router.push("/");
+  };
   return (
     <Wrapper isSticky={isSticky}>
       <Content>
         {isSticky ? (
-          <Logo
-            src={
-              currentLanguage &&
-              headerObj.fields["logo2"][0][currentLanguage].replace(
-                "https://assets.herokuapp.com",
-                "https://assets.reqter.com"
-              )
-            }
-          />
+          <Logo src={headerObj["logo2"]} />
         ) : (
-          <Logo
-            src={
-              headerObj.fields &&
-              headerObj.fields.logo1[0][currentLanguage].replace(
-                "https://assets.herokuapp.com",
-                "https://assets.reqter.com"
-              )
-            }
-          />
+          <Logo src={headerObj.logo1} />
         )}
 
         <Menu>
-          <MenuItem selected={router.pathname === "/"} isSticky={isSticky}>
-            <Link href={`/`}>
-              <a>
-                {headerObj.fields &&
-                  headerObj.fields.menuitem1text[currentLanguage]}
-              </a>
-            </Link>
+          <MenuItem
+            selected={router.pathname === "/"}
+            isSticky={isSticky}
+            onClick={_getHomeData}
+          >
+            {headerObj.menuitem1text}
           </MenuItem>
           <MenuItem
             selected={router.pathname === `/spaces`}
             isSticky={isSticky}
           >
             <Link href={`/spaces`}>
-              <a>
-                {headerObj.fields &&
-                  headerObj.fields.menuitem2text[currentLanguage]}
-              </a>
+              <a>{headerObj.menuitem2text}</a>
             </Link>
           </MenuItem>
           <MenuItem isSticky={isSticky}>
-            <a>
-              {headerObj.fields &&
-                headerObj.fields.menuitem3text[currentLanguage]}
-            </a>
+            <a>{headerObj.menuitem3text}</a>
           </MenuItem>
           <MenuItem isSticky={isSticky}>
-            <a>
-              {headerObj.fields &&
-                headerObj.fields.menuitem4text[currentLanguage]}
-            </a>
+            <a>{headerObj.menuitem4text}</a>
           </MenuItem>
           <MenuItem isSticky={isSticky}>
-            <a>
-              {headerObj.fields &&
-                headerObj.fields.menuitem5text[currentLanguage]}
-            </a>
+            <a>{headerObj.menuitem5text}</a>
           </MenuItem>
         </Menu>
-        <Button>
-          +{headerObj.fields && headerObj.fields.action1text[currentLanguage]}
-        </Button>
+        <Button>+{headerObj.action1text}</Button>
         <SearchIcon />
       </Content>
     </Wrapper>

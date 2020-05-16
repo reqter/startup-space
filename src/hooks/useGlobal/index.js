@@ -1,15 +1,19 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useReducer } from "react";
+import { reducer, initialData } from "./reducer";
 
 export const GlobalContextState = React.createContext();
-export const GlobalContextSetState = React.createContext();
+export const GlobalContextDispatch = React.createContext();
 
-export const Provider = ({ children, initialData }) => {
-  const [state, setState] = useState(initialData);
+export const Provider = ({ children, initialDataFromServer }) => {
+  const [state, dispatch] = useReducer(reducer, {
+    ...initialData,
+    ...initialDataFromServer,
+  });
   return (
     <GlobalContextState.Provider value={state}>
-      <GlobalContextSetState.Provider value={setState}>
+      <GlobalContextDispatch.Provider value={dispatch}>
         {children}
-      </GlobalContextSetState.Provider>
+      </GlobalContextDispatch.Provider>
     </GlobalContextState.Provider>
   );
 };

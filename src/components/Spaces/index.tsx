@@ -1,20 +1,20 @@
 import React from "react";
-import { withTranslation } from "../../../config/Next18Wrapper";
 import { Button } from "./styles";
 import Section from "../Common/Section";
-import Categories from "./Categories";
 import SpacesList from "./SpacesList";
+import useGlobalState from "../../hooks/useGlobal/useGlobalState";
 
 const Spaces = () => {
+  const { landingData } = useGlobalState();
+  const data = React.useMemo(() => (landingData ? landingData[0] : {}), []);
   return (
     <Section
       bgColor={theme`colors.gray.100`}
-      title="فضای کار"
-      header="فضای کار اشتراکی"
+      title={data.officesheading}
+      header={data.officestitle}
     >
-      <Categories />
       <SpacesList />
-      <Button>مکان های بیشتر</Button>
+      <Button>{data.officesactiontext}</Button>
     </Section>
   );
 };

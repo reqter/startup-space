@@ -2,19 +2,20 @@ import { styled } from "linaria/lib/react";
 import { lighten, modularScale, rgba } from "polished";
 
 export const Wrapper = styled.div`
-  @apply bg-white py-20 px-24;
+  @apply bg-white py-20 w-1150 m-auto;
 `;
 export const Content = styled.div`
   @apply flex;
 `;
 export const Left = styled.div`
-  @apply w-1/2 flex-shrink-0;
+  @apply w-1/2 flex-shrink-0 flex justify-center;
 `;
 export const Image = styled.img`
   @apply;
 `;
 export const Right = styled.div`
   @apply flex flex-col;
+  padding-inline-end: 30px;
 `;
 export const Title = styled.div`
   @apply;

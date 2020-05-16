@@ -1,6 +1,6 @@
 import React from "react";
-import { withTranslation } from "../../../config/Next18Wrapper";
 import Divider from "../Common/Divider";
+import useGlobalState from "../../hooks/useGlobal/useGlobalState";
 import {
   Wrapper,
   Content,
@@ -12,22 +12,24 @@ import {
   Description,
   Button,
 } from "./styles";
-const Service = ({ t }) => {
+const Service = () => {
+  const { landingData } = useGlobalState();
+  const data = React.useMemo(() => (landingData ? landingData[0] : {}), []);
   return (
     <Wrapper>
       <Content>
         <Left>
-          <Image src="/images/service-icon.jpg" />
+          <Image src={data.servicemedia} />
         </Left>
         <Right>
-          <Title>{t("SERVICE_TITLE")}</Title>
-          <Header>{t("SERVICE_HEADER")}</Header>
+          <Title>{data.serviceheading}</Title>
+          <Header>{data.servicetitle}</Header>
           <Divider />
-          <Description>{t("SERVICE_DESCRIPTION")}</Description>
-          <Button>{t("SERVICE_BUTTON")}</Button>
+          <Description>{data.servicedescription}</Description>
+          <Button>{data.serviceactiontext}</Button>
         </Right>
       </Content>
     </Wrapper>
   );
 };
-export default withTranslation("service")(Service);
+export default Service;
