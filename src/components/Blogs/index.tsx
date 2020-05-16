@@ -2,16 +2,19 @@ import React from "react";
 import { Button } from "./styles";
 import Section from "../Common/Section";
 import List from "./BlogList";
+import useGlobalState from "../../hooks/useGlobal/useGlobalState";
 
 const Spaces = () => {
+  const { landingData } = useGlobalState();
+  const data = React.useMemo(() => (landingData ? landingData[0] : {}), []);
   return (
     <Section
       bgColor={theme`colors.white`}
-      title="اخبار"
-      header="آخرین وبلاگ ما"
+      title={data.blogheading}
+      header={data.blogtitle}
     >
       <List />
-      <Button>وبلاگ های بیشتر</Button>
+      <Button>{data.blogactiontext}</Button>
     </Section>
   );
 };

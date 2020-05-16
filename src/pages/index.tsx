@@ -1,9 +1,18 @@
 import React from "react";
-import fetch from "isomorphic-unfetch";
+import { i18n } from "../../config/Next18Wrapper";
 import { NextPage, NextPageContext } from "next";
 import Head from "next/head";
-import { withTranslation } from "../../config/Next18Wrapper";
-import useSWR from "swr";
+import {
+  getToken,
+  getHeaderData,
+  getLandingData,
+  getOfficesData,
+  getCitiesData,
+  getAgentsData,
+  getBlogsData,
+  getFooterData,
+} from "../hooks/useGlobalApi";
+import useGlobalState from "../hooks/useGlobal/useGlobalState";
 import MainLayout from "../components/MainLayout";
 import First from "../components/First";
 import Service from "../components/Service";
@@ -19,61 +28,63 @@ interface IProps {
   getInitialProps?: (ctx: NextPageContext) => Promise<any>;
 }
 
-const Home = ({ header }): JSX.Element => {
-  const { data, error } = useSWR("headerData", (url) => header, {
-    initialData: header,
-    revalidateOnFocus: false,
-    revalidateOnReconnect: false,
-  });
-
+const Home = (): JSX.Element => {
+  const { landingData } = useGlobalState();
+  const data = React.useMemo(() => (landingData ? landingData[0] : {}), []);
   return (
-    <MainLayout headerData={data}>
+    <MainLayout>
       <Head>
-        <title>Startup-Space</title>
+        <title>{data && data.name}</title>
       </Head>
       <First />
-      <Service />
-      <Spaces />
-      <Cities />
-      <Agents />
-      <NewsLetter />
-      <Blogs />
+      {data && data.isservicesenabled && <Service />}
+      {data && data.isofficesenabled && <Spaces />}
+      {data && data.isareaenabled && <Cities />}
+      {data && data.isagentsenabled && <Agents />}
+      {data && data.isnewsletterenabled && <NewsLetter />}
+      {data && data.isblogenabled && <Blogs />}
     </MainLayout>
   );
 };
 
-Home.getInitialProps = async ({ res }) => {
-  let header = {};
+Home.getInitialProps = async ({ req }) => {
   if (typeof window === "undefined") {
-    const t = await fetch("https://requester.reqter.com/api/v1/auth/token", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        clientid: "1d42c55e-0f44-4613-adba-a5bbbca878e1",
-      },
-    });
-    const token = await t.json();
-    const res = await fetch(
-      "https://requester.reqter.com/api/v1/lists/5eb820137e1a5d001b2c1587",
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          authorization: "Bearer " + token.access_token,
-        },
-      }
-    );
-    header = await res.json();
-    // const products = await Promise.all([header]);
+    const currentLanguage = req ? req.language : i18n.language;
+    try {
+      const token = await getToken();
+      const [
+        headerData,
+        landingData,
+        officesData,
+        citiesData,
+        agentsData,
+        blogsData,
+        footerData,
+      ] = await Promise.all([
+        getHeaderData(currentLanguage),
+        getLandingData(currentLanguage),
+        getOfficesData(currentLanguage, 4),
+        getCitiesData(currentLanguage, 4),
+        getAgentsData(currentLanguage, 3),
+        getBlogsData(currentLanguage, 3),
+        getFooterData(currentLanguage),
+      ]);
+      return {
+        token,
+        headerData,
+        landingData,
+        officesData,
+        citiesData,
+        agentsData,
+        blogsData,
+        footerData,
+      };
+    } catch (error) {
+      return {
+        error: true,
+      };
+    }
   }
-  return {
-    header,
-  };
+  return {};
 };
 export default Home;
-
-/* // const initialData = await getContent("/api/data");
-// header
-// landing { searchBackground, searchImage , serviceTitle,serviceHeader,serviceDescription,serviceButtonText , srviceImage };
-// ...get other collections data
-// footer */

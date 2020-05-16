@@ -6,6 +6,6 @@ export const Container = styled.div`
 `;
 
 export const CardWrapper = styled.div`
-  @apply mb-4  shadow-lg rounded-lg ml-3;
+  @apply mb-4 rounded-lg ml-3;
   width: calc(${theme`width.1/3`} - ${theme`spacing.3`});
 `;

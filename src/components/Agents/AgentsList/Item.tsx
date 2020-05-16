@@ -1,14 +1,14 @@
 import React from "react";
 import useGlobalState from "../../../hooks/useGlobal/useGlobalState";
 import { CardWrapper, Top, Bottom, Name, Role } from "./styles";
-const AgentCard = ({ data }) => {
+const AgentCard = ({ data, listings }) => {
   const { dir } = useGlobalState();
   return (
     <CardWrapper bgUrl={data.image}>
-      <Top dir={dir}> Listings</Top>
+      <Top dir={dir}> {listings}</Top>
       <Bottom>
-        <Name>Johnny</Name>
-        <Role>Space Broker</Role>
+        <Name>{data.name}</Name>
+        <Role>{data.field}</Role>
       </Bottom>
     </CardWrapper>
   );
