@@ -81,7 +81,10 @@ const Header: React.FC<IProps> = (): JSX.Element => {
             <a>{headerObj.menuitem5text}</a>
           </MenuItem>
         </Menu>
-        <Button>+{headerObj.action1text}</Button>
+        <Button>
+          <span>+</span>
+          {headerObj.action1text}
+        </Button>
         <SearchIcon />
       </Content>
     </Wrapper>

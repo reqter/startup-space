@@ -35,9 +35,12 @@ export const MenuItem = styled.li`
 `;
 
 export const Button = styled.button`
-  @apply bg-blue-500 text-white text-base font-bold py-3 px-5 rounded transition ease-in duration-200;
+  @apply bg-blue-500 flex items-center justify-center text-white text-base font-bold py-3 px-5 rounded transition ease-in duration-200;
   &:hover {
     @apply bg-blue-700 transition ease-in duration-200;
+  }
+  span {
+    @apply text-2xl px-1;
   }
 `;
 export const SearchIcon = styled.span``;
