@@ -1,10 +1,10 @@
 {
-  "name": "Caaser",
+  "name": "Startup-space",
   "version": "1.0.0",
   "scripts": {
     "dev": "node server.js",
     "build": "next build",
-    "start": "NODE_ENV=production node server.js -p $PORT"
+    "start": "NODE_ENV=production node server.js"
   },
   "dependencies": {
     "express": "^4.17.1",
