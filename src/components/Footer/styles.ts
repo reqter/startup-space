@@ -1,5 +1,4 @@
 import { styled } from "linaria/lib/react";
-import { lighten, modularScale, rgba } from "polished";
 
 export const Container = styled.div`
   @apply flex relative mb-16 mli-2;

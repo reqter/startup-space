@@ -47,9 +47,9 @@ const Header: React.FC<IProps> = (): JSX.Element => {
     } else Router.push("/");
   };
   return (
-    <Wrapper isSticky={isSticky}>
+    <Wrapper isSticky={isSticky} isLanding={router.pathname === "/"}>
       <Content>
-        {isSticky ? (
+        {router.pathname !== "/" || isSticky ? (
           <Logo src={headerObj["logo2"]} />
         ) : (
           <Logo src={headerObj.logo1} />
@@ -60,24 +60,26 @@ const Header: React.FC<IProps> = (): JSX.Element => {
             selected={router.pathname === "/"}
             isSticky={isSticky}
             onClick={_getHomeData}
+            isLanding={router.pathname === "/"}
           >
             {headerObj.menuitem1text}
           </MenuItem>
           <MenuItem
-            selected={router.pathname === `/spaces`}
+            selected={router.pathname === `/offices`}
             isSticky={isSticky}
+            isLanding={router.pathname === "/"}
           >
-            <Link href={`/spaces`}>
+            <Link href={`/offices`}>
               <a>{headerObj.menuitem2text}</a>
             </Link>
           </MenuItem>
-          <MenuItem isSticky={isSticky}>
+          <MenuItem isSticky={isSticky} isLanding={router.pathname === "/"}>
             <a>{headerObj.menuitem3text}</a>
           </MenuItem>
-          <MenuItem isSticky={isSticky}>
+          <MenuItem isSticky={isSticky} isLanding={router.pathname === "/"}>
             <a>{headerObj.menuitem4text}</a>
           </MenuItem>
-          <MenuItem isSticky={isSticky}>
+          <MenuItem isSticky={isSticky} isLanding={router.pathname === "/"}>
             <a>{headerObj.menuitem5text}</a>
           </MenuItem>
         </Menu>

@@ -9,4 +9,6 @@ export const urls = {
   agents: "/api/v1/lists/lean/5eb4f5a27e1a5d001b2c1519",
   blogs: "/api/v1/lists/lean/5d359f368e6e9a0017c28fca",
   footer: "/api/v1/lists/lean/5ebe45797e1a5d001b2c1643",
+  contentType: "/ctypes/getbyid",
+  getDataUrl: "/api/v1/lists",
 };

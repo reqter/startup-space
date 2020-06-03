@@ -6,11 +6,8 @@ import {
   getToken,
   getHeaderData,
   getLandingData,
-  getOfficesData,
-  getCitiesData,
-  getAgentsData,
-  getBlogsData,
   getFooterData,
+  getContentTypeById,
 } from "../hooks/useGlobalApi";
 import useGlobalState from "../hooks/useGlobal/useGlobalState";
 import MainLayout from "../components/MainLayout";
@@ -55,29 +52,20 @@ Home.getInitialProps = async ({ req }) => {
       const [
         headerData,
         landingData,
-        officesData,
-        citiesData,
-        agentsData,
-        blogsData,
         footerData,
+        searchFormContentType,
       ] = await Promise.all([
         getHeaderData(currentLanguage),
         getLandingData(currentLanguage),
-        getOfficesData(currentLanguage, 4),
-        getCitiesData(currentLanguage, 4),
-        getAgentsData(currentLanguage, 3),
-        getBlogsData(currentLanguage, 3),
         getFooterData(currentLanguage),
+        getContentTypeById("5ec23fa17e1a5d001b2c16f4"),
       ]);
       return {
         token,
         headerData,
         landingData,
-        officesData,
-        citiesData,
-        agentsData,
-        blogsData,
         footerData,
+        searchFormContentType,
       };
     } catch (error) {
       return {

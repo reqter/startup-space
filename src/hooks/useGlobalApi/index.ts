@@ -1,6 +1,10 @@
 import useSWR from "swr";
 import fetch from "isomorphic-unfetch";
 import { clientid, urls } from "../../utils/constants";
+import {
+  makeDataParam,
+  makeSearchFields,
+} from "../../utils/makeGetDataUrlParams";
 import useGlobalState from "../useGlobal/useGlobalState";
 import useGlobalDispatch from "../useGlobal/useGlobalDispatch";
 let token: string = "";
@@ -116,48 +120,93 @@ const getFooterData = async (lang: string) => {
     },
   });
 };
+const getData = async (contentTypeId: string, lang: string, token?: string) => {
+  return await fetcher(
+    urls.getDataUrl + `/${contentTypeId}?lang=${lang}&loadrelations=false`
+  )({
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      authorization: "Bearer " + (getLocalToken() || token),
+    },
+  });
+};
+const getContentTypeById = async (id: string) => {
+  return await fetch(
+    "https://adminapi.reqter.com" + urls.contentType + `?id=${id}`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        authorization: "Bearer " + getLocalToken(),
+        spaceId: clientid,
+      },
+    }
+  ).then((res) => res.json());
+};
 
 const useGlobalApi = () => {
   const { currentLanguage, token } = useGlobalState();
   const { dispatch } = useGlobalDispatch();
+  const storeData = (key, value) =>
+    dispatch({
+      type: "SET_DATA",
+      payload: {
+        name: key,
+        value,
+      },
+    });
   const getLanding = async () => {
     return await getLandingData(currentLanguage, token);
   };
-  const getOffices = async () => {
-    return await getLandingData(currentLanguage, token);
+  const getOffices = async (limit: number) => {
+    getOfficesData(currentLanguage, limit, token).then((data) =>
+      storeData("officesData", data)
+    );
   };
-  const getCities = async () => {
-    return await getLandingData(currentLanguage, token);
+  const getCities = async (limit: number) => {
+    getCitiesData(currentLanguage, limit, token).then((data) =>
+      storeData("citiesData", data)
+    );
   };
-  const getAgents = async () => {
-    return await getLandingData(currentLanguage, token);
+  const getAgents = async (limit: number) => {
+    getAgentsData(currentLanguage, limit, token).then((data) =>
+      storeData("agentsData", data)
+    );
   };
-  const getBlogs = async () => {
-    return await getLandingData(currentLanguage, token);
+  const getBlogs = async (limit: number) => {
+    getBlogsData(currentLanguage, limit, token).then((data) => {
+      storeData("blogsData", data);
+    });
+  };
+  const getDataByCtypeId = async (
+    ctypeId: string,
+    storeName: string,
+    onSuccess: (data: object[]) => {},
+    onError: () => {}
+  ) => {
+    getData(ctypeId, currentLanguage, token)
+      .then((data) => {
+        storeData(storeName, data);
+        if (onSuccess) {
+          onSuccess(data);
+        }
+      })
+      .catch((error) => {
+        if (onError) {
+          onError();
+        }
+      });
   };
   const getHomeData = async (onSuccess: () => void, onError: () => void) => {
     try {
-      const [
-        landingData,
-        officesData,
-        citiesData,
-        agentsData,
-        blogsData,
-      ] = await Promise.all([
+      const [landingData] = await Promise.all([
         getLandingData(currentLanguage, token),
-        getOfficesData(currentLanguage, 4, token),
-        getCitiesData(currentLanguage, 4, token),
-        getAgentsData(currentLanguage, 3, token),
-        getBlogsData(currentLanguage, 3, token),
       ]);
       dispatch({
         type: "SET_PAGE_DATA",
         payload: {
           landingData,
-          officesData,
-          citiesData,
-          agentsData,
-          blogsData,
         },
       });
       if (onSuccess) onSuccess();
@@ -166,15 +215,18 @@ const useGlobalApi = () => {
     }
   };
   return {
+    getData,
     getLanding,
     getOffices,
     getCities,
     getAgents,
     getBlogs,
     getHomeData,
+    getDataByCtypeId,
   };
 };
 export default useGlobalApi;
+
 export {
   getToken,
   getHeaderData,
@@ -184,4 +236,5 @@ export {
   getAgentsData,
   getBlogsData,
   getFooterData,
+  getContentTypeById,
 };

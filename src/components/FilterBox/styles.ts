@@ -5,15 +5,18 @@ export const Wrapper = styled.div`
   background-color: rgba(255, 255, 255, 0.2);
 `;
 export const Content = styled.div`
-  @apply bg-white py-10 rounded-lg px-10;
+  @apply bg-white py-8 rounded-lg px-8;
 `;
 
 export const Actions = styled.div`
-  @apply flex items-center pt-5;
+  @apply flex items-center pt-3;
+`;
+export const ActionsTitle = styled.h4`
+  @apply;
 `;
 
 export const Button = styled.button`
-  @apply flex-1 bg-blue-500 text-white text-sm font-bold py-2 rounded transition ease-in duration-200;
+  @apply flex-1 bg-blue-500 text-white text-sm font-bold py-3 rounded transition ease-in duration-200;
   &:hover {
     @apply bg-blue-700 transition ease-in duration-200;
   }
@@ -21,6 +24,3 @@ export const Button = styled.button`
     @apply mie-5;
   }
 `;
-// ${screen`md`} {
-//     ${apply`mt-20 p-20`}
-//   }
