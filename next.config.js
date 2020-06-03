@@ -4,7 +4,7 @@ const withCSS = require("@zeit/next-css");
 
 const nextConfig = {
   typescript: {
-    ignoreDevErrors: true
+    ignoreDevErrors: true,
   },
   webpack: (config, options) => {
     config.resolve.alias["components"] = path.join(
@@ -16,7 +16,7 @@ const nextConfig = {
     config.resolve.alias["hooks"] = path.join(__dirname, "./src/hooks");
 
     return config;
-  }
+  },
 };
 
 module.exports = withPlugins(
@@ -31,15 +31,32 @@ module.exports = withPlugins(
               {
                 loader: "linaria/loader",
                 options: {
-                  sourceMap: process.env.NODE_ENV !== "production"
-                }
-              }
-            ]
+                  sourceMap: process.env.NODE_ENV !== "production",
+                },
+              },
+            ],
           });
           return config;
-        }
-      }
-    ]
+        },
+      },
+    ],
   ],
   nextConfig
 );
+// module.exports = withCSS({
+//   webpack(config, options) {
+//     config.module.rules.push({
+//       test: /\.js|.jsx|.tsx|ts$/,
+//       use: [
+//         {
+//           loader: "linaria/loader",
+//           options: {
+//             sourceMap: process.env.NODE_ENV !== "production",
+//           },
+//         },
+//       ],
+//     });
+//
+//     return config;
+//   },
+// });

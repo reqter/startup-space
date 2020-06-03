@@ -1,41 +1,43 @@
 import React from "react";
 import MainLayout from "../components/MainLayout";
 import { i18n } from "../../config/Next18Wrapper";
-import { getToken, getHeaderData, getFooterData } from "../hooks/useGlobalApi";
-import { styled } from "linaria/lib/react";
+import isServer from "./../utils/isServer";
+import {
+  getToken,
+  getHeaderData,
+  getContentTypeById,
+  getFooterData,
+} from "../hooks/useGlobalApi";
+import Header from "./../components/OfficesHeader";
+import Content from "./../components/OfficesDataList";
 
-const Wrapper = styled.div`
-  @apply h-screen bg-black;
-`;
-
-const Content = styled.div`
-  @apply w-1150 flex m-auto pt-32 text-white text-2xl;
-`;
-
-const Spaces = ({ title }) => {
+const Spaces = () => {
   return (
     <MainLayout>
-      <Wrapper>
-        <Content>
-          <h1>{title}</h1>
-        </Content>
-      </Wrapper>
+      <Header />
+      <Content />
     </MainLayout>
   );
 };
 
 Spaces.getInitialProps = async ({ req }) => {
-  if (typeof window === "undefined") {
+  if (isServer) {
     const currentLanguage = req ? req.language : i18n.language;
     try {
       const token = await getToken();
-      const [headerData, footerData] = await Promise.all([
+      const [
+        headerData,
+        searchFormContentType,
+        footerData,
+      ] = await Promise.all([
         getHeaderData(currentLanguage),
+        getContentTypeById("5ec23fa17e1a5d001b2c16f4"),
         getFooterData(currentLanguage),
       ]);
       return {
         token,
         headerData,
+        searchFormContentType,
         footerData,
       };
     } catch (error) {

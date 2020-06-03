@@ -16,7 +16,7 @@ const NewsLetter = () => {
   const { landingData } = useGlobalState();
   const data = React.useMemo(() => (landingData ? landingData[0] : {}), []);
   return (
-    <Section bgColor={theme`colors.black`}>
+    <Section bgColor={theme`colors.gray.200`}>
       <Container>
         <ImageBox bgUrl={data.newslettermedia} />
         <FormBox>

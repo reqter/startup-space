@@ -6,14 +6,34 @@ const SpacesList = () => {
   const { officesData } = useGlobalState();
   return (
     <Container>
-      <Left>
-        <Card hasMargin={true} colSpan={1} data={officesData[0]}></Card>
-        <Card hasMargin={false} colSpan={1} data={officesData[1]}></Card>
-        <Card hasMargin={false} colSpan={2} data={officesData[2]}></Card>
-      </Left>
-      <Right>
-        <Card hasMargin={false} colSpan={2} data={officesData[3]}></Card>
-      </Right>
+      {officesData && (
+        <>
+          <Left>
+            <Card
+              hasMargin={true}
+              colSpan={1}
+              data={officesData && officesData[0]}
+            ></Card>
+            <Card
+              hasMargin={false}
+              colSpan={1}
+              data={officesData && officesData[1]}
+            ></Card>
+            <Card
+              hasMargin={false}
+              colSpan={2}
+              data={officesData && officesData[2]}
+            ></Card>
+          </Left>
+          <Right>
+            <Card
+              hasMargin={false}
+              colSpan={2}
+              data={officesData && officesData[3]}
+            ></Card>
+          </Right>
+        </>
+      )}
     </Container>
   );
 };

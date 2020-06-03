@@ -8,6 +8,11 @@ export function reducer(state = initialData, action) {
         ...state,
         ...payload,
       };
+    case "SET_DATA":
+      return {
+        ...state,
+        [payload.name]: payload.value,
+      };
     default:
       state;
   }
