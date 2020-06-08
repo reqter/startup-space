@@ -131,14 +131,14 @@ const getData = async (contentTypeId: string, lang: string, token?: string) => {
     },
   });
 };
-const getContentTypeById = async (id: string) => {
+const getContentTypeById = async (id: string, token?: string) => {
   return await fetch(
     "https://adminapi.reqter.com" + urls.contentType + `?id=${id}`,
     {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        authorization: "Bearer " + getLocalToken(),
+        authorization: "Bearer " + (getLocalToken() || token),
         spaceId: clientid,
       },
     }
@@ -146,7 +146,7 @@ const getContentTypeById = async (id: string) => {
 };
 
 const useGlobalApi = () => {
-  const { currentLanguage, token } = useGlobalState();
+  const { currentLanguage, token, searchFormContentType } = useGlobalState();
   const { dispatch } = useGlobalDispatch();
   const storeData = (key, value) =>
     dispatch({
@@ -198,19 +198,22 @@ const useGlobalApi = () => {
         }
       });
   };
-  const getHomeData = async (onSuccess: () => void, onError: () => void) => {
+  const getHomeData = async (onSuccess?: () => void, onError?: () => void) => {
     try {
-      const [landingData] = await Promise.all([
-        getLandingData(currentLanguage, token),
-      ]);
+      let promisArray = [getLandingData(currentLanguage, token)];
+      if (!searchFormContentType)
+        promisArray.push(getContentTypeById("5ec23fa17e1a5d001b2c16f4", token));
+      const result = await Promise.all(promisArray);
       dispatch({
         type: "SET_PAGE_DATA",
         payload: {
-          landingData,
+          landingData: result[0],
+          searchFormContentType: result[1] ? result[1] : searchFormContentType,
         },
       });
       if (onSuccess) onSuccess();
     } catch (error) {
+      console.log(error);
       if (onError) onError();
     }
   };

@@ -1,7 +1,8 @@
 import React from "react";
-import { i18n } from "../../config/Next18Wrapper";
 import { NextPage, NextPageContext } from "next";
 import Head from "next/head";
+import isServer from "utils/isServer";
+import { i18n } from "../../config/Next18Wrapper";
 import {
   getToken,
   getHeaderData,
@@ -45,7 +46,7 @@ const Home = (): JSX.Element => {
 };
 
 Home.getInitialProps = async ({ req }) => {
-  if (typeof window === "undefined") {
+  if (isServer) {
     const currentLanguage = req ? req.language : i18n.language;
     try {
       const token = await getToken();
@@ -60,6 +61,13 @@ Home.getInitialProps = async ({ req }) => {
         getFooterData(currentLanguage),
         getContentTypeById("5ec23fa17e1a5d001b2c16f4"),
       ]);
+      console.log(
+        token,
+        headerData,
+        landingData,
+        footerData,
+        searchFormContentType
+      );
       return {
         token,
         headerData,

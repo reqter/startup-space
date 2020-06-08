@@ -1,5 +1,12 @@
 import React from "react";
-import { IoIosPin, IoIosPrint, IoIosHeart, IoMdEye } from "react-icons/io";
+import {
+  IoIosLink,
+  IoIosPin,
+  IoLogoFacebook,
+  IoLogoLinkedin,
+  IoLogoInstagram,
+  IoMdCheckmark,
+} from "react-icons/io";
 import {
   SummeryWrapper,
   Content,
@@ -7,10 +14,10 @@ import {
   Right,
   Name,
   Location,
+  Actions,
   BoxInfo,
-  PriceBox,
-  PriceValue,
-  PricePer,
+  Website,
+  Link,
 } from "./styles";
 
 const Summery = () => {
@@ -18,27 +25,36 @@ const Summery = () => {
     <SummeryWrapper>
       <Content>
         <Left>
-          <Name>House Rent in Hydepark</Name>
+          <Name>فضای اشتراکی پارادایس هاب</Name>
           <Location>
             <IoIosPin color={theme`colors.blue.500`} />
-            Iran,Tehran
+            ایران، تهران، شمال تهران
           </Location>
         </Left>
         <Right>
-          <BoxInfo>
-            <IoMdEye color={theme`colors.blue.500`} size="1.8rem" />
-            1200
-          </BoxInfo>
-          <BoxInfo>
-            <IoIosHeart color={theme`colors.blue.500`} size="1.8rem" />
-          </BoxInfo>
-          <BoxInfo>
-            <IoIosPrint color={theme`colors.blue.500`} size="1.8rem" />
-          </BoxInfo>
-          <PriceBox>
-            <PriceValue>$ 2.500</PriceValue>
-            <PricePer>/per month</PricePer>
-          </PriceBox>
+          <Actions>
+            <BoxInfo
+              style={{
+                background: theme`colors.blue.500`,
+                color: theme`colors.white`,
+              }}
+            >
+              <IoMdCheckmark size="1.8rem" />
+              تایید شده
+            </BoxInfo>
+            <BoxInfo>
+              <IoLogoFacebook color={theme`colors.blue.500`} size="1.8rem" />
+            </BoxInfo>
+            <BoxInfo>
+              <IoLogoLinkedin color={theme`colors.blue.500`} size="1.8rem" />
+            </BoxInfo>
+            <BoxInfo>
+              <IoLogoInstagram color={theme`colors.blue.500`} size="1.8rem" />
+            </BoxInfo>
+          </Actions>
+          <Website href="https://paradisehub.ir/about/" target="_blank">
+            <Link>https://paradisehub.ir/about</Link>
+          </Website>
         </Right>
       </Content>
     </SummeryWrapper>

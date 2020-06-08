@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "../../../config/Next18Wrapper";
 import { Button } from "./styles";
 import Section from "../Common/Section";
 import SpacesList from "./SpacesList";
@@ -27,7 +28,9 @@ const Spaces = () => {
             header={data.officestitle}
           >
             <SpacesList />
-            <Button>{data.officesactiontext}</Button>
+            <Button>
+              <Link href={`/offices`}>{data.officesactiontext}</Link>
+            </Button>
           </Section>
         )
       }

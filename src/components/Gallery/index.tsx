@@ -13,9 +13,9 @@ const images = [
   },
   {
     original:
-      "https://lh3.googleusercontent.com/proxy/1ns3J5EXFYVUtWvlGCwu3U-b6s9a91RG4N7E0rEQIE9ih2dq1aRFl9Da8f1mhXBmD1BcDSZdlFjchLt-Do-ULe1kf8ybKvvfGvTfQ__EWStZRokI87I-qpLW3q0IJQHmmDZ9qsy5F53QDkFMRppt",
+      "https://startupiranianir-4870.ov2.com/content/startupiranianir_4870_ov2_com/wp-content_156/uploads/2019/10/WhatsApp-Image-2019-10-29-at-10.12.22.jpeg",
     thumbnail:
-      "https://lh3.googleusercontent.com/proxy/1ns3J5EXFYVUtWvlGCwu3U-b6s9a91RG4N7E0rEQIE9ih2dq1aRFl9Da8f1mhXBmD1BcDSZdlFjchLt-Do-ULe1kf8ybKvvfGvTfQ__EWStZRokI87I-qpLW3q0IJQHmmDZ9qsy5F53QDkFMRppt",
+      "https://startupiranianir-4870.ov2.com/content/startupiranianir_4870_ov2_com/wp-content_156/uploads/2019/10/WhatsApp-Image-2019-10-29-at-10.12.22.jpeg",
   },
   {
     original:

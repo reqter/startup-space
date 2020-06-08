@@ -1,8 +1,4 @@
 import { styled } from "linaria/lib/react";
-import { lighten, modularScale, rgba } from "polished";
-import { currentTheme } from "./../../services/theming";
-const { colorPrimaryLight, colorPrimaryDark } = currentTheme;
-
 export const Wrapper = styled.div`
   @apply w-full bg-gray-200 shadow-sm;
 `;

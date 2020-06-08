@@ -38,11 +38,9 @@ const Header: React.FC<IProps> = (): JSX.Element => {
 
   const _getHomeData = async () => {
     if (!isServer) {
+      Router.push("/");
       if (!landingData || landingData.length === 0) {
-        getHomeData(
-          () => Router.push("/"),
-          () => {}
-        );
+        getHomeData();
       } else Router.push("/");
     } else Router.push("/");
   };

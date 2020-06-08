@@ -9,7 +9,7 @@ export const Left = styled.div`
   @apply flex-1;
 `;
 export const Right = styled.div`
-  @apply flex items-center;
+  @apply flex items-center flex-col;
 `;
 export const Name = styled.div`
   @apply font-semibold text-4xl;
@@ -17,15 +17,18 @@ export const Name = styled.div`
 export const Location = styled.div`
   @apply flex h-10 items-center;
 `;
-export const BoxInfo = styled.div`
-  @apply font-semibold border-dashed border border-gray-500 mx-3 flex  items-center justify-center px-4 rounded;
+export const Actions = styled.div`
+  @apply flex items-center;
+`;
+export const BoxInfo = styled.a`
+  @apply font-semibold border-dashed border border-gray-500 mx-3 flex  items-center justify-center px-4 rounded cursor-pointer;
   min-width: 60px;
   min-height: 40px;
 `;
-export const PriceBox = styled.div``;
-export const PriceValue = styled.div`
-  @apply font-semibold text-lg;
+
+export const Website = styled.a`
+  @apply text-lg text-blue-400  relative w-full mt-5;
 `;
-export const PricePer = styled.div`
-  @apply text-base text-gray-600;
+export const Link = styled.span`
+  @apply absolute left-0 mx-3;
 `;

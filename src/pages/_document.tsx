@@ -20,7 +20,12 @@ class MyDocument extends Document<{
     const { languageDirection, language } = this.props;
     return (
       <Html lang={language} dir={languageDirection}>
-        <Head />
+        <Head>
+          <link
+            rel="stylesheet"
+            href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
+          />
+        </Head>
         <body>
           <Main />
           <NextScript />

@@ -3,6 +3,8 @@ import ColumnWrapper from "./components/ColumnWrapper";
 import SingleOption from "./components/SingleOption";
 import Reference from "./components/Reference";
 import Number from "./components/Number";
+import String from "./components/String";
+import MultiLineString from "./components/MultiLineString";
 export const renderFields = (
   mode,
   rowColumns,
@@ -54,6 +56,29 @@ export const renderFields = (
           initialValue={initialValues && initialValues[item.name]}
           filter={filters && filters[item.name]}
         />
+      </ColumnWrapper>
+    ) : type === "string" ? (
+      <ColumnWrapper
+        fieldsLength={length}
+        key={item.name}
+        rowColumns={rowColumns}
+        colSpan={item.colSpan}
+      >
+        {item.multiline ? (
+          <MultiLineString
+            field={item}
+            mode={mode}
+            initialValue={initialValues && initialValues[item.name]}
+            filter={filters && filters[item.name]}
+          />
+        ) : (
+          <String
+            field={item}
+            mode={mode}
+            initialValue={initialValues && initialValues[item.name]}
+            filter={filters && filters[item.name]}
+          />
+        )}
       </ColumnWrapper>
     ) : null;
   });
