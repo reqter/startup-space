@@ -30,6 +30,7 @@ SpaceDetail.getInitialProps = async ({ req }) => {
         getHeaderData(currentLanguage),
         getFooterData(currentLanguage),
       ]);
+      console.log(token);
       return {
         token,
         headerData,

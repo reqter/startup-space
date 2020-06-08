@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "../../../../config/Next18Wrapper";
 import { IoIosPin } from "react-icons/io";
 import {
   CardWrapper,
@@ -24,7 +25,9 @@ const SpacesItem = ({ data }) => {
         </Address>
         <Price>150,000 تومان</Price>
       </ImageBox>
-      <Name>لوکس ترین فضای کار اشتراکی</Name>
+      <Name>
+        <Link href="/offices/12">لوکس ترین فضای کار اشتراکی</Link>
+      </Name>
       <AmenitiesBox>
         <AmenitName>پارکینگ</AmenitName>
         <AmenitName>اتاق بازی</AmenitName>

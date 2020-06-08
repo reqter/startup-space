@@ -2,7 +2,7 @@ import React from "react";
 import { IoIosPin, IoIosPrint, IoIosHeart, IoMdEye } from "react-icons/io";
 import Section from "../../Common/Section";
 import Features from "../Features";
-import ReserveBox from "../Reserve";
+import ActionsBox from "../ActionsBox";
 import { Main } from "./styles";
 
 const MainContent = () => {
@@ -10,7 +10,7 @@ const MainContent = () => {
     <Section bgColor={theme`colors.gray.200`}>
       <Main>
         <Features />
-        <ReserveBox />
+        <ActionsBox />
       </Main>
     </Section>
   );

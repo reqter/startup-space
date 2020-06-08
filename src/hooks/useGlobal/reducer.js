@@ -4,10 +4,11 @@ export function reducer(state = initialData, action) {
   const { type, payload } = action;
   switch (type) {
     case "SET_PAGE_DATA":
-      return {
+      const s = {
         ...state,
         ...payload,
       };
+      return s;
     case "SET_DATA":
       return {
         ...state,
