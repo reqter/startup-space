@@ -1,20 +1,24 @@
 import React from "react";
-import MainLayout from "../../components/MainLayout";
-import Gallery from "../../components/Gallery";
-import Summery from "../../components/OfficeDetail/Summery";
-import MainContent from "../../components/OfficeDetail/MainContent";
+import MainLayout from "components/MainLayout";
+import Gallery from "components/Gallery";
+import Summery from "components/OfficeDetail/Summery";
+import MainContent from "components/OfficeDetail/MainContent";
 import { i18n } from "../../../config/Next18Wrapper";
-import isServer from "./../../utils/isServer";
+import isServer from "utils/isServer";
 import {
   getToken,
   getHeaderData,
+  getPartnerDetailById,
+  getPartnerDetailPageData,
   getFooterData,
-} from "../../hooks/useGlobalApi";
+} from "hooks/useGlobalApi";
+import useGlobalState from "hooks/useGlobal/useGlobalState";
 
 const SpaceDetail = () => {
+  const { partnerDetail } = useGlobalState();
   return (
     <MainLayout>
-      <Gallery />
+      <Gallery data={partnerDetail && partnerDetail.images} />
       <Summery />
       <MainContent />
     </MainLayout>
@@ -26,14 +30,22 @@ SpaceDetail.getInitialProps = async ({ req }) => {
     const currentLanguage = req ? req.language : i18n.language;
     try {
       const token = await getToken();
-      const [headerData, footerData] = await Promise.all([
+      const [
+        headerData,
+        partnerDetail,
+        partnerDetailPage,
+        footerData,
+      ] = await Promise.all([
         getHeaderData(currentLanguage),
+        getPartnerDetailById("5d6d17bbaedb7b0017ae6b74", currentLanguage),
+        getPartnerDetailPageData(currentLanguage),
         getFooterData(currentLanguage),
       ]);
-      console.log(token);
       return {
         token,
         headerData,
+        partnerDetail: partnerDetail ? partnerDetail.data : {},
+        partnerDetailPage,
         footerData,
       };
     } catch (error) {

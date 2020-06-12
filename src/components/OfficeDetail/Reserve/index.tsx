@@ -1,4 +1,5 @@
 import React from "react";
+import useGlobalState from "hooks/useGlobal/useGlobalState";
 import { IoIosPin, IoIosPrint, IoIosHeart, IoMdEye } from "react-icons/io";
 import {
   Content,
@@ -11,14 +12,19 @@ import {
 import LayoutBox from "../LayoutBox";
 
 const Reserve = () => {
+  const { partnerDetail, partnerDetailPage } = useGlobalState();
+  const data = React.useMemo(
+    () => (partnerDetailPage ? partnerDetailPage[0] : {}),
+    []
+  );
   return (
     <LayoutBox width={370}>
-      <Title>انتخاب محصول و پرداخت</Title>
+      <Title>{data.requestboxtitle}</Title>
       <Divider />
 
-      <ActionsTitle>پرداخت و رزرو محصول</ActionsTitle>
+      <ActionsTitle>{data.requestboxactionstitle}</ActionsTitle>
       <Actions>
-        <Button>پرداخت</Button>
+        <Button>{data.requestboxaction1title}</Button>
       </Actions>
     </LayoutBox>
   );

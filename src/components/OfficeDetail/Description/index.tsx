@@ -1,25 +1,21 @@
 import React from "react";
 import LayoutBox from "../LayoutBox";
 import { Video, Paragraph } from "./styles";
+import useGlobalState from "hooks/useGlobal/useGlobalState";
 const Description = () => {
+  const { partnerDetail, partnerDetailPage } = useGlobalState();
+  const data = React.useMemo(
+    () => (partnerDetailPage ? partnerDetailPage[0] : {}),
+    []
+  );
   return (
-    <LayoutBox title="معرفی">
-      <Video controls width="100%">
-        <source src="https://assets.reqter.com/asset/download/file-1559836947883.mp4" />
-      </Video>
-      <Paragraph>
-        مرکز نوآوری پارادایس‌هاب به عنوان بزرگترین شرکت ارائه‌‌دهنده فضای کار
-        اشتراکی در ایران با هدف فراهم‌سازی زیرساخت‌های مورد نیاز کارآفرینان
-        ایجاد شده و هم‌اکنون با ۴ شعبه فعال در تهران (باغ‌بهشت(آجودانیه)،
-        باغ‌کتاب تهران، دانشگاه علوم و تحقیقات و باغ دانش(پژوهشکده ایران‌‌داک))
-        در حال خدمت‌رسانی به بیش از ۴۰۰ فریلنسر و تیم استارتاپی می‌باشد و در نظر
-        دارد تا در افق ۱۴۰۲ در کلیه استان‌های ایران و کشورهای همسایه یک شعبه
-        فضای کار اشتراکی جهت تسهیل در زیرساخت‌های کسب و کار ایجاد نماید. از
-        خدمات و تجهیزاتی که این شرکت برای فریلنسرها‌ و تیم‌های استارتاپی فراهم
-        کرده است می‌توان به صندلی و اتاق‌های اختصاصی و اشتراکی جهت استقرار نفرات
-        و تیم‌ها، شبکه‌سازی بین نخبگان و مربیان کسب و کار، اتاق‌های جلسه و
-        کنفرانس، کارگاه‌های آموزشی، کافی‌شاپ و اینترنت پرسرعت نامحدود اشاره کرد
-      </Paragraph>
+    <LayoutBox title={data.introductionboxtitle}>
+      {partnerDetail.introduction && (
+        <Video controls width="100%">
+          <source src={partnerDetail.introduction} />
+        </Video>
+      )}
+      <Paragraph>{partnerDetail.overview}</Paragraph>
     </LayoutBox>
   );
 };

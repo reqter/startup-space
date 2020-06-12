@@ -1,4 +1,6 @@
-export const initialData = {};
+export const initialData = {
+  partnerDetailStickySideBar: false,
+};
 
 export function reducer(state = initialData, action) {
   const { type, payload } = action;
@@ -13,6 +15,11 @@ export function reducer(state = initialData, action) {
       return {
         ...state,
         [payload.name]: payload.value,
+      };
+    case "TOGGLE_PARTNER_DETAIL_STICKY_SIDE_BAR":
+      return {
+        ...state,
+        partnerDetailStickySideBar: payload,
       };
     default:
       state;

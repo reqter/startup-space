@@ -1,9 +1,9 @@
 import React from "react";
 import { Map, TileLayer, Marker, Popup } from "react-leaflet";
-const MapBox = () => {
+const MapBox = ({ lat, lng, title }) => {
   const [state, setState] = React.useState({
-    lat: 35.809717,
-    lng: 51.491629,
+    lat,
+    lng,
     zoom: 13,
   });
   return (
@@ -13,9 +13,7 @@ const MapBox = () => {
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
       <Marker position={[state.lat, state.lng]}>
-        <Popup>
-          فضای کار اشتراکی پارادایس هاب. <br /> همه روزه صبح تا 10 شب
-        </Popup>
+        <Popup>{title}</Popup>
       </Marker>
     </Map>
   );

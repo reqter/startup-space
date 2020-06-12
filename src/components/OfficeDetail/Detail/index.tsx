@@ -1,7 +1,13 @@
 import React from "react";
+import useGlobalState from "hooks/useGlobal/useGlobalState";
 import LayoutBox from "../LayoutBox";
 import { DetailContainer, Row, Key, Value } from "./styles";
 const Detail = () => {
+  const { partnerDetail, partnerDetailPage } = useGlobalState();
+  const data = React.useMemo(
+    () => (partnerDetailPage ? partnerDetailPage[0] : {}),
+    []
+  );
   const list = [
     {
       key: "شناسه ملک :",
@@ -45,7 +51,7 @@ const Detail = () => {
     },
   ];
   return (
-    <LayoutBox title="جزئیات">
+    <LayoutBox title={data.detailboxtitle}>
       <DetailContainer>
         {list &&
           list.map((item, index) => (

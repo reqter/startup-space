@@ -4,7 +4,7 @@ import { Button } from "./styles";
 import Section from "../Common/Section";
 import AgentsList from "./AgentsList";
 import useGlobalState from "../../hooks/useGlobal/useGlobalState";
-import useGlobalApi from "../../hooks/useGlobalApi";
+import useGlobalApi from "hooks/useGlobalApi";
 
 const Agents = ({}) => {
   const { getAgents } = useGlobalApi();

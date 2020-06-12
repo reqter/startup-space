@@ -6,12 +6,18 @@ import {
   IoIosHeart,
   IoMdEye,
 } from "react-icons/io";
+import useGlobalState from "hooks/useGlobal/useGlobalState";
 import LayoutBox from "../LayoutBox";
 import { Title, Row, Rule } from "./styles";
 
 const MoreInfo = () => {
+  const { partnerDetail, partnerDetailPage } = useGlobalState();
+  const data = React.useMemo(
+    () => (partnerDetailPage ? partnerDetailPage[0] : {}),
+    []
+  );
   return (
-    <LayoutBox title="اطلاعات بیشتر">
+    <LayoutBox title={data.thingstoknowboxtitle}>
       <Title>قوانین فضای کار</Title>
       <Row>
         <IoMdTime />

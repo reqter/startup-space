@@ -1,11 +1,11 @@
 import React from "react";
 import {
-  IoIosLink,
   IoIosPin,
   IoLogoFacebook,
   IoLogoLinkedin,
   IoLogoInstagram,
   IoMdCheckmark,
+  IoIosInformationCircleOutline,
 } from "react-icons/io";
 import {
   SummeryWrapper,
@@ -19,28 +19,45 @@ import {
   Website,
   Link,
 } from "./styles";
+import useGlobalState from "hooks/useGlobal/useGlobalState";
 
 const Summery = () => {
+  const { partnerDetail, partnerDetailPage } = useGlobalState();
+  const data = React.useMemo(
+    () => (partnerDetailPage ? partnerDetailPage[0] : {}),
+    []
+  );
   return (
     <SummeryWrapper>
       <Content>
         <Left>
-          <Name>فضای اشتراکی پارادایس هاب</Name>
+          <Name>{partnerDetail.name}</Name>
           <Location>
             <IoIosPin color={theme`colors.blue.500`} />
-            ایران، تهران، شمال تهران
+            {partnerDetail.address}
           </Location>
         </Left>
         <Right>
           <Actions>
             <BoxInfo
               style={{
-                background: theme`colors.blue.500`,
+                background: partnerDetail.verified
+                  ? theme`colors.blue.500`
+                  : theme`colors.gray.500`,
                 color: theme`colors.white`,
               }}
             >
-              <IoMdCheckmark size="1.8rem" />
-              تایید شده
+              {partnerDetail.verified ? (
+                <>
+                  <IoMdCheckmark size="1.8rem" />
+                  {data.isverifedtext}
+                </>
+              ) : (
+                <>
+                  <IoIosInformationCircleOutline size="1.8rem" />
+                  {data.notverifedtext}
+                </>
+              )}
             </BoxInfo>
             <BoxInfo>
               <IoLogoFacebook color={theme`colors.blue.500`} size="1.8rem" />
@@ -53,7 +70,7 @@ const Summery = () => {
             </BoxInfo>
           </Actions>
           <Website href="https://paradisehub.ir/about/" target="_blank">
-            <Link>https://paradisehub.ir/about</Link>
+            <Link>{partnerDetail.homepage}</Link>
           </Website>
         </Right>
       </Content>
