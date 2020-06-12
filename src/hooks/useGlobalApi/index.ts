@@ -144,7 +144,47 @@ const getContentTypeById = async (id: string, token?: string) => {
     }
   ).then((res) => res.json());
 };
-
+const getPartnerDetailById = async (
+  id: string,
+  lang: string,
+  token?: string
+) => {
+  return await fetcher(urls.partnerDetailUrl + `?id=${id}&lang=${lang}`)({
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      authorization: "Bearer " + (getLocalToken() || token),
+    },
+  });
+};
+const getPartnerDetailPageData = async (lang: string, token?: string) => {
+  return await fetcher(
+    urls.partnerDetailPage + `?lang=${lang}&loadrelations=false`
+  )({
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      authorization: "Bearer " + (getLocalToken() || token),
+    },
+  });
+};
+const getPartnerProducts = async (
+  contentTypeId: string,
+  partnerId: string,
+  lang: string,
+  token?: string
+) => {
+  return await fetcher(
+    urls.getDataUrl +
+      `/${contentTypeId}?fields.partnerid=${partnerId}&lang=${lang}`
+  )({
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      authorization: "Bearer " + (getLocalToken() || token),
+    },
+  });
+};
 const useGlobalApi = () => {
   const { currentLanguage, token, searchFormContentType } = useGlobalState();
   const { dispatch } = useGlobalDispatch();
@@ -198,6 +238,28 @@ const useGlobalApi = () => {
         }
       });
   };
+  const _getPartnerProducts = (
+    partnerId: string,
+    onSuccess: (data: object[]) => unknown,
+    onError: () => unknown
+  ) => {
+    getPartnerProducts(
+      "5d36a6418e6e9a0017c28fd5",
+      partnerId,
+      currentLanguage,
+      token
+    )
+      .then((data) => {
+        if (onSuccess) {
+          onSuccess(data);
+        }
+      })
+      .catch((error) => {
+        if (onError) {
+          onError();
+        }
+      });
+  };
   const getHomeData = async (onSuccess?: () => void, onError?: () => void) => {
     try {
       let promisArray = [getLandingData(currentLanguage, token)];
@@ -226,6 +288,7 @@ const useGlobalApi = () => {
     getBlogs,
     getHomeData,
     getDataByCtypeId,
+    _getPartnerProducts,
   };
 };
 export default useGlobalApi;
@@ -240,4 +303,6 @@ export {
   getBlogsData,
   getFooterData,
   getContentTypeById,
+  getPartnerDetailById,
+  getPartnerDetailPageData,
 };

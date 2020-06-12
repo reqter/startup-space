@@ -1,12 +1,18 @@
 import React from "react";
+import useGlobalState from "hooks/useGlobal/useGlobalState";
 import LayoutBox from "../LayoutBox";
 import { AddressContainer, Row, Key, Value, Button } from "./styles";
-const Description = () => {
+const Address = () => {
+  const { partnerDetail, partnerDetailPage } = useGlobalState();
+  const data = React.useMemo(
+    () => (partnerDetailPage ? partnerDetailPage[0] : {}),
+    []
+  );
   return (
     <LayoutBox
-      title="آدرس"
+      title={data.addressboxtitle}
       actions={() => {
-        return <Button>نمایش بر روی نقشه</Button>;
+        return <Button>{data.addressboxmaptext}</Button>;
       }}
     >
       <AddressContainer>
@@ -38,4 +44,4 @@ const Description = () => {
     </LayoutBox>
   );
 };
-export default Description;
+export default Address;

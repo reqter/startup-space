@@ -6,7 +6,7 @@ export const ProductContainer = styled.div`
 
 export const ProductWrapper = styled.div`
   width: calc(33.33% - 20px);
-  margin-left: 20px;
+  margin-inline-end: 20px;
   margin-bottom: 20px;
 `;
 

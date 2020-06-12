@@ -1,4 +1,5 @@
 import React from "react";
+import useGlobalState from "hooks/useGlobal/useGlobalState";
 import {
   IoLogoTwitter,
   IoLogoFacebook,
@@ -19,9 +20,14 @@ import {
   DetailRow,
   DetailValue,
 } from "./styles";
-const FloorPlan = () => {
+const Agent = () => {
+  const { partnerDetail, partnerDetailPage } = useGlobalState();
+  const data = React.useMemo(
+    () => (partnerDetailPage ? partnerDetailPage[0] : {}),
+    []
+  );
   return (
-    <LayoutBox title="اطلاعات مشاور">
+    <LayoutBox title={data.agentboxtitle}>
       <AgentContainer>
         <ImageBox src="https://assets.reqter.com/asset/download/file-1589438010203.jpeg">
           <ImageInfo>
@@ -57,4 +63,4 @@ const FloorPlan = () => {
     </LayoutBox>
   );
 };
-export default FloorPlan;
+export default Agent;

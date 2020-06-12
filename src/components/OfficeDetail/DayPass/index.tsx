@@ -1,4 +1,5 @@
 import React from "react";
+import useGlobalState from "hooks/useGlobal/useGlobalState";
 import { IoIosPin, IoIosPrint, IoIosHeart, IoMdEye } from "react-icons/io";
 import {
   Content,
@@ -11,12 +12,17 @@ import {
 import LayoutBox from "../LayoutBox";
 
 const DayPass = () => {
+  const { partnerDetail, partnerDetailPage } = useGlobalState();
+  const data = React.useMemo(
+    () => (partnerDetailPage ? partnerDetailPage[0] : {}),
+    []
+  );
   return (
     <LayoutBox width={370}>
-      <Title>درخواست بازدید</Title>
+      <Title>{data.daypassboxtitle}</Title>
       <Divider />
       <Actions>
-        <Button>درخواست</Button>
+        <Button>{data.daypassboxaction1title}</Button>
       </Actions>
     </LayoutBox>
   );

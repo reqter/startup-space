@@ -1,8 +1,14 @@
 import React from "react";
+import useGlobalState from "hooks/useGlobal/useGlobalState";
 import LayoutBox from "../LayoutBox";
 // import { Pannellum, PannellumVideo } from "pannellum-react";
 const View360 = () => {
-  return <LayoutBox title="360°"></LayoutBox>;
+  const { partnerDetail, partnerDetailPage } = useGlobalState();
+  const data = React.useMemo(
+    () => (partnerDetailPage ? partnerDetailPage[0] : {}),
+    []
+  );
+  return <LayoutBox title={data.view360boxtitle}></LayoutBox>;
 };
 export default View360;
 // <Pannellum

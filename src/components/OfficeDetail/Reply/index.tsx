@@ -6,7 +6,16 @@ import { CommentsWrapper, Title, Description, Button } from "./styles";
 import useGlobalState from "hooks/useGlobal/useGlobalState";
 const Reply = () => {
   const formRef = React.useRef(null);
-  const { searchFormContentType = {}, currentLanguage } = useGlobalState();
+  const {
+    searchFormContentType = {},
+    currentLanguage,
+    partnerDetail,
+    partnerDetailPage,
+  } = useGlobalState();
+  const data = React.useMemo(
+    () => (partnerDetailPage ? partnerDetailPage[0] : {}),
+    []
+  );
 
   const restField = (): object[] => {
     return searchFormContentType && searchFormContentType.fields
@@ -26,8 +35,8 @@ const Reply = () => {
   };
   return (
     <LayoutBox>
-      <Title>ارسال نظر</Title>
-      <Description>آدرس ایمیل شما منتشر نخواهد شد.*</Description>
+      <Title>{data.replyboxtitle}</Title>
+      <Description>{data.replyboxdescription}</Description>
       <Form
         ref={formRef}
         mode="new"
@@ -39,37 +48,29 @@ const Reply = () => {
             name: "a",
             type: "string",
             description: {
-              fa: "نام شما",
+              [currentLanguage]: data.replynameinputtitle,
             },
           },
           {
             name: "aa",
             type: "string",
             description: {
-              fa: "ایمیل شما",
+              [currentLanguage]: data.replyemailinputtitle,
             },
-          },
-          {
-            name: "aaa",
-            type: "string",
-            description: {
-              fa: "نام شرکت",
-            },
-            colSpan: 2,
           },
           {
             name: "aaaaa",
             type: "string",
             multiline: true,
             description: {
-              fa: "نظر شما",
+              [currentLanguage]: data.replydescriptioninputtitle,
             },
             colSpan: 2,
           },
         ]}
       />
-      <Button>ارسال نظر</Button>
-      <Title>لیست نظرات</Title>
+      <Button>{data.replybuttontext}</Button>
+      <Title>{data.commentslisttitle}</Title>
       <CommentsWrapper>
         <Comment />
         <Comment />

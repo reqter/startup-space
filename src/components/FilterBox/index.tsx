@@ -63,7 +63,6 @@ const FilterBox = () => {
         </ActionsTitle>
         <Actions>
           <Button>{action1().title && action1().title[currentLanguage]}</Button>
-          <Button>{action2().title && action2().title[currentLanguage]}</Button>
         </Actions>
       </Content>
     </Wrapper>
