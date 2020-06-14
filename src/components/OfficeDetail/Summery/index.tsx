@@ -22,7 +22,7 @@ import {
 import useGlobalState from "hooks/useGlobal/useGlobalState";
 
 const Summery = () => {
-  const { partnerDetail, partnerDetailPage } = useGlobalState();
+  const { partnerDetail = {}, partnerDetailPage } = useGlobalState();
   const data = React.useMemo(
     () => (partnerDetailPage ? partnerDetailPage[0] : {}),
     []

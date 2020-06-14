@@ -25,8 +25,10 @@ const SpaceDetail = () => {
   );
 };
 
-SpaceDetail.getInitialProps = async ({ req }) => {
+SpaceDetail.getInitialProps = async (context) => {
   if (isServer) {
+    const { req } = context;
+    console.log(context.query.id);
     const currentLanguage = req ? req.language : i18n.language;
     try {
       const token = await getToken();
@@ -37,7 +39,7 @@ SpaceDetail.getInitialProps = async ({ req }) => {
         footerData,
       ] = await Promise.all([
         getHeaderData(currentLanguage),
-        getPartnerDetailById("5d6d17bbaedb7b0017ae6b74", currentLanguage),
+        getPartnerDetailById(context.query.id, currentLanguage),
         getPartnerDetailPageData(currentLanguage),
         getFooterData(currentLanguage),
       ]);

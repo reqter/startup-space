@@ -49,8 +49,8 @@ const Features = () => {
     >
       <Description />
       <Amenities />
-      <MoreInfo />
       <Products />
+      <MoreInfo />
       <MapSection />
       <Address />
       <Detail />

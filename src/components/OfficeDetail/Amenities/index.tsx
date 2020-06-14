@@ -20,24 +20,25 @@ const Amenities = () => {
     () => (partnerDetailPage ? partnerDetailPage[0] : {}),
     []
   );
-  return (
+  return partnerDetail &&
+    partnerDetail.amenities &&
+    partnerDetail.amenities.length ? (
     <LayoutBox title={data.amenitiesboxtitle}>
       <AmenitiesContainer>
-        {partnerDetail.amenities &&
-          partnerDetail.amenities.map((item, index) => (
-            <Amenit key={index}>
-              <IoMdBook />
-              <Name>
-                {item.fields &&
-                item.fields.name &&
-                item.fields.name[currentLanguage]
-                  ? item.fields.name[currentLanguage]
-                  : item.fields.name}
-              </Name>
-            </Amenit>
-          ))}
+        {partnerDetail.amenities.map((item, index) => (
+          <Amenit key={index}>
+            <IoMdBook />
+            <Name>
+              {item.fields &&
+              item.fields.name &&
+              item.fields.name[currentLanguage]
+                ? item.fields.name[currentLanguage]
+                : item.fields.name}
+            </Name>
+          </Amenit>
+        ))}
       </AmenitiesContainer>
     </LayoutBox>
-  );
+  ) : null;
 };
 export default Amenities;

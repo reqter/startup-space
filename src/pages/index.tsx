@@ -61,13 +61,6 @@ Home.getInitialProps = async ({ req }) => {
         getFooterData(currentLanguage),
         getContentTypeById("5ec23fa17e1a5d001b2c16f4"),
       ]);
-      console.log(
-        token,
-        headerData,
-        landingData,
-        footerData,
-        searchFormContentType
-      );
       return {
         token,
         headerData,

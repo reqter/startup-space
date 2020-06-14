@@ -11,14 +11,17 @@ const Map = () => {
     () => (partnerDetailPage ? partnerDetailPage[0] : {}),
     []
   );
-  return (
+  return partnerDetail &&
+    partnerDetail.location &&
+    partnerDetail.location.latitude &&
+    partnerDetail.location.longitude ? (
     <LayoutBox title={data.mapboxtitle}>
       <MapBox
         title={partnerDetail.name}
-        lat={partnerDetail.location ? partnerDetail.location.latitude : ""}
-        lng={partnerDetail ? partnerDetail.location.longitude : ""}
+        lat={partnerDetail.location.latitude}
+        lng={partnerDetail.location.longitude}
       />
     </LayoutBox>
-  );
+  ) : null;
 };
 export default Map;

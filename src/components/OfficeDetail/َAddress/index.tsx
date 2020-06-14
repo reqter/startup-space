@@ -1,13 +1,20 @@
 import React from "react";
 import useGlobalState from "hooks/useGlobal/useGlobalState";
+import useObjectPropsValue from "hooks/useObjectPropsValue";
 import LayoutBox from "../LayoutBox";
 import { AddressContainer, Row, Key, Value, Button } from "./styles";
 const Address = () => {
+  const { getValue } = useObjectPropsValue();
   const { partnerDetail, partnerDetailPage } = useGlobalState();
   const data = React.useMemo(
     () => (partnerDetailPage ? partnerDetailPage[0] : {}),
     []
   );
+  const addressTitle = getValue(data, "addressboxaddresstitle");
+  const postalCodeTitle = getValue(data, "addressboxpostcodetitle");
+  const districtTitle = getValue(data, "addressboxdistricttitle");
+  const cityTitle = getValue(data, "addressboxcitytitle");
+  const countryTitle = getValue(data, "addressboxcountrytitle");
   return (
     <LayoutBox
       title={data.addressboxtitle}
@@ -17,28 +24,24 @@ const Address = () => {
     >
       <AddressContainer>
         <Row>
-          <Key>آدرس:</Key>
-          <Value>ایران، تهران، سعادت آباد</Value>
+          <Key>{addressTitle}:</Key>
+          <Value>{getValue(partnerDetail, "address")}</Value>
         </Row>
         <Row>
-          <Key>کد پستی</Key>
-          <Value>60615</Value>
+          <Key>{postalCodeTitle}:</Key>
+          <Value>{getValue(partnerDetail, "postalcode")}</Value>
         </Row>
         <Row>
-          <Key>منطقه</Key>
-          <Value>شمال تهران</Value>
+          <Key>{districtTitle}:</Key>
+          <Value>{getValue(partnerDetail, "regionid.fields.name")}</Value>
         </Row>
         <Row>
-          <Key>شهر</Key>
-          <Value>تهران</Value>
+          <Key>{cityTitle}:</Key>
+          <Value>{getValue(partnerDetail, "city.fields.name")}</Value>
         </Row>
         <Row>
-          <Key>استان</Key>
-          <Value>تهران</Value>
-        </Row>
-        <Row>
-          <Key>کشور</Key>
-          <Value>ایران</Value>
+          <Key>{countryTitle}:</Key>
+          <Value>{getValue(partnerDetail, "country.fields.name")}</Value>
         </Row>
       </AddressContainer>
     </LayoutBox>

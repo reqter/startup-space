@@ -1,15 +1,15 @@
 import React from "react";
-import MainLayout from "../../components/MainLayout";
+import MainLayout from "components/MainLayout";
 import { i18n } from "../../../config/Next18Wrapper";
-import isServer from "./../../utils/isServer";
+import isServer from "utils/isServer";
 import {
   getToken,
   getHeaderData,
   getContentTypeById,
   getFooterData,
-} from "../../hooks/useGlobalApi";
-import Header from "./../../components/OfficesHeader";
-import Content from "./../../components/OfficesDataList";
+} from "hooks/useGlobalApi";
+import Header from "components/OfficesHeader";
+import Content from "components/OfficesDataList";
 
 const Spaces = () => {
   return (

@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "../../../../config/Next18Wrapper";
 import { IoIosPin } from "react-icons/io";
 import {
   CardWrapper,
@@ -13,7 +12,11 @@ import {
 } from "./styles";
 const SpacesItem = ({ data }) => {
   return (
-    <CardWrapper>
+    <CardWrapper
+      target="_blank"
+      rel="noopener noreferrer"
+      href={`/offices/${data._id}`}
+    >
       <ImageBox>
         <Image
           src="https://library.kissclipart.com/20181001/bbq/kissclipart-workdar-coworking-space-clipart-coworking-a7a0512b3741f118.png"
@@ -23,11 +26,8 @@ const SpacesItem = ({ data }) => {
           <IoIosPin />
           منطفه 17، گلپایگان
         </Address>
-        <Price>150,000 تومان</Price>
       </ImageBox>
-      <Name>
-        <Link href="/offices/12">لوکس ترین فضای کار اشتراکی</Link>
-      </Name>
+      <Name>{data && data.name}</Name>
       <AmenitiesBox>
         <AmenitName>پارکینگ</AmenitName>
         <AmenitName>اتاق بازی</AmenitName>

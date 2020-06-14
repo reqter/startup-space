@@ -8,15 +8,18 @@ const Description = () => {
     () => (partnerDetailPage ? partnerDetailPage[0] : {}),
     []
   );
-  return (
+  return (partnerDetail && partnerDetail.introduction) ||
+    (partnerDetail && partnerDetail.overview) ? (
     <LayoutBox title={data.introductionboxtitle}>
       {partnerDetail.introduction && (
         <Video controls width="100%">
           <source src={partnerDetail.introduction} />
         </Video>
       )}
-      <Paragraph>{partnerDetail.overview}</Paragraph>
+      {partnerDetail.overview && (
+        <Paragraph>{partnerDetail.overview}</Paragraph>
+      )}
     </LayoutBox>
-  );
+  ) : null;
 };
 export default Description;

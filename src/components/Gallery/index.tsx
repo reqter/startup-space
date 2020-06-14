@@ -2,15 +2,16 @@ import React from "react";
 import ImageGallery from "react-image-gallery";
 import "react-image-gallery/styles/css/image-gallery.css";
 import useGlobalState from "hooks/useGlobal/useGlobalState";
-import { urls } from "utils/constants";
+import useObjectPropsValue from "hooks/useObjectPropsValue";
 import { GalleryWrapper } from "./styles";
 
 const Gallery = ({ data = [] }) => {
   const { dir } = useGlobalState();
+  const { includeImageBaseUrl } = useObjectPropsValue();
   const images = data.map((item) => {
     return {
-      original: item,
-      thumbnail: item,
+      original: includeImageBaseUrl(item),
+      thumbnail: includeImageBaseUrl(item),
     };
   });
   return (

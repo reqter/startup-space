@@ -6,7 +6,7 @@ export const AgentContainer = styled.div`
 export const ImageBox = styled.div`
   background-image: ${({ src }) => `url(${src})`};
   @apply relative bg-cover;
-  height: 280px;
+  min-height: 280px;
   width: 270px;
   margin-inline-end: 40px;
 `;
@@ -23,7 +23,7 @@ export const Name = styled.div`
   @apply font-semibold text-2xl mb-3;
 `;
 export const DetailRow = styled.div`
-  @apply flex h-10 items-center text-blue-500 py-3 px-2 mb-1;
+  @apply flex items-center text-blue-500 py-3 px-2 mb-1 flex-shrink-0;
   &:nth-child(2n) {
     @apply bg-gray-200;
   }
