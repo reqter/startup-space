@@ -8,7 +8,11 @@ const View360 = () => {
     () => (partnerDetailPage ? partnerDetailPage[0] : {}),
     []
   );
-  return <LayoutBox title={data.view360boxtitle}></LayoutBox>;
+  return partnerDetail &&
+    partnerDetail.view360 &&
+    partnerDetail.view360.length ? (
+    <LayoutBox title={data.view360boxtitle}></LayoutBox>
+  ) : null;
 };
 export default View360;
 // <Pannellum

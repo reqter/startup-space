@@ -175,8 +175,27 @@ const getPartnerProducts = async (
   token?: string
 ) => {
   return await fetcher(
-    urls.getDataUrl +
+    urls.listLeanUrl +
       `/${contentTypeId}?fields.partnerid=${partnerId}&lang=${lang}`
+  )({
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      authorization: "Bearer " + (getLocalToken() || token),
+    },
+  });
+};
+const getPartnerComments = async (
+  contentTypeId: string,
+  lang: string,
+  skip: string | number,
+  limit: string | number,
+  partnerId: string,
+  token?: string
+) => {
+  return await fetcher(
+    urls.listLeanUrl +
+      `/${contentTypeId}?lang=${lang}&skip=${skip}&limit=${limit}&loadrelations=false&fields.objectid=${partnerId}`
   )({
     method: "GET",
     headers: {
@@ -199,10 +218,14 @@ const useGlobalApi = () => {
   const getLanding = async () => {
     return await getLandingData(currentLanguage, token);
   };
-  const getOffices = async (limit: number) => {
-    getOfficesData(currentLanguage, limit, token).then((data) =>
-      storeData("officesData", data)
-    );
+  const getOffices = async (
+    limit: number,
+    onSuccess?: (d: object[]) => unknown
+  ) => {
+    getOfficesData(currentLanguage, limit, token).then((data) => {
+      storeData("officesData", data);
+      if (onSuccess) onSuccess(data);
+    });
   };
   const getCities = async (limit: number) => {
     getCitiesData(currentLanguage, limit, token).then((data) =>
@@ -260,6 +283,32 @@ const useGlobalApi = () => {
         }
       });
   };
+  const _getPartnerComments = (
+    skip: string | number,
+    limit: string | number = 25,
+    partnerId: string,
+    onSuccess: (data: object[]) => unknown,
+    onError: () => unknown
+  ) => {
+    getPartnerComments(
+      "5d3eeaba915bfb00174547f4",
+      currentLanguage,
+      skip,
+      limit,
+      partnerId,
+      token
+    )
+      .then((data) => {
+        if (onSuccess) {
+          onSuccess(data);
+        }
+      })
+      .catch((error) => {
+        if (onError) {
+          onError();
+        }
+      });
+  };
   const getHomeData = async (onSuccess?: () => void, onError?: () => void) => {
     try {
       let promisArray = [getLandingData(currentLanguage, token)];
@@ -289,6 +338,7 @@ const useGlobalApi = () => {
     getHomeData,
     getDataByCtypeId,
     _getPartnerProducts,
+    _getPartnerComments,
   };
 };
 export default useGlobalApi;

@@ -1,52 +1,50 @@
 import React from "react";
-import {
-  IoMdTime,
-  IoIosPin,
-  IoIosPrint,
-  IoIosHeart,
-  IoMdEye,
-} from "react-icons/io";
+import { IoMdTime, IoIosAttach } from "react-icons/io";
 import useGlobalState from "hooks/useGlobal/useGlobalState";
 import LayoutBox from "../LayoutBox";
 import { Title, Row, Rule } from "./styles";
 
 const MoreInfo = () => {
-  const { partnerDetail, partnerDetailPage } = useGlobalState();
+  const {
+    partnerDetail,
+    partnerDetailPage,
+    currentLanguage,
+  } = useGlobalState();
   const data = React.useMemo(
     () => (partnerDetailPage ? partnerDetailPage[0] : {}),
     []
   );
-  return (
+  const workingHours =
+    partnerDetail && partnerDetail.workinghours
+      ? JSON.parse(partnerDetail.workinghours)
+      : [];
+  return (partnerDetail && workingHours && workingHours.length) ||
+    (partnerDetail && partnerDetail.rules && partnerDetail.rules.length) ? (
     <LayoutBox title={data.thingstoknowboxtitle}>
-      <Title>قوانین فضای کار</Title>
-      <Row>
-        <IoMdTime />
-        <Rule>شنبه تا جمعه</Rule>
-      </Row>
-      <Row>
-        <IoMdTime />
-        <Rule>از 8 صبح الی 24 </Rule>
-      </Row>
-      <Row>
-        <IoMdTime />
-        <Rule>استعمال سیگار بلامانع است </Rule>
-      </Row>
-      <Row>
-        <IoMdTime />
-        <Rule>ورود با حیوانات خانگی ممنوع می باشد </Rule>
-      </Row>
-      <br />
-      <Title>قوانین لغو رزور </Title>
-      <Row>
-        <Rule>لغو رایگان رزور تا 48 ساعت </Rule>
-      </Row>
-      <Row>
-        <Rule>
-          بعد از آن تا یک هفته اگر رزور خود را لغو کنید، 50% مبلغ به شما
-          بازگردانده خواهد شد{" "}
-        </Rule>
-      </Row>
+      {workingHours && workingHours.length && (
+        <>
+          <Title>{data.workinghourstitle}</Title>
+          {workingHours.map((item, index) => (
+            <Row key={index}>
+              <IoMdTime />
+              <Rule>{item.header + " - " + item.body}</Rule>
+            </Row>
+          ))}
+          <br />
+        </>
+      )}
+      {partnerDetail.rules && partnerDetail.rules.length && (
+        <>
+          <Title>{data.rulestitle}</Title>
+          {partnerDetail.rules.split("\n").map((item, index) => (
+            <Row key={index}>
+              <IoIosAttach />
+              <Rule key={index}>{item} </Rule>
+            </Row>
+          ))}
+        </>
+      )}
     </LayoutBox>
-  );
+  ) : null;
 };
 export default MoreInfo;

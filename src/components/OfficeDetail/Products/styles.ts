@@ -1,7 +1,6 @@
 import { styled } from "linaria/lib/react";
-
 export const ProductContainer = styled.div`
-  @apply flex flex-wrap;
+  @apply flex flex-wrap items-stretch;
 `;
 
 export const ProductWrapper = styled.div`
@@ -15,7 +14,7 @@ export const Button = styled.button`
   width: 90%;
   margin: 0px 5% 10px 5%;
   &:hover {
-    @apply bg-blue-700 transition ease-in duration-200 text-white;
+    @apply bg-blue-500 transition ease-in duration-200 text-white;
   }
   &:first-child {
     @apply mie-5;

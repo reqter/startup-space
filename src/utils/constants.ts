@@ -1,6 +1,7 @@
 export const clientid = "1d42c55e-0f44-4613-adba-a5bbbca878e1";
 export const urls = {
   baseUrl: "https://requester.reqter.com",
+  listLeanUrl: "/api/v1/lists/lean",
   token: "/api/v1/auth/token",
   header: "/api/v1/lists/lean/5eb820137e1a5d001b2c1587",
   landing: "/api/v1/lists/lean/5eb901107e1a5d001b2c1590",

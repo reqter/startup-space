@@ -39,7 +39,7 @@ export const AmenitName = styled.div`
   margin-inline-start: 12px;
 `;
 
-export const CardWrapper = styled.div`
+export const CardWrapper = styled.a`
   @apply mb-4 rounded-lg cursor-pointer overflow-hidden bg-white  rounded-lg shadow;
   width: calc(${theme`width.1/2`} - 15px);
   margin-inline-end: 15px;

@@ -1,5 +1,6 @@
 import React from "react";
 import useGlobalState from "hooks/useGlobal/useGlobalState";
+import useObjectPropsValue from "hooks/useObjectPropsValue";
 import {
   IoLogoTwitter,
   IoLogoFacebook,
@@ -26,10 +27,15 @@ const Agent = () => {
     () => (partnerDetailPage ? partnerDetailPage[0] : {}),
     []
   );
+  const { getValue, includeImageBaseUrl } = useObjectPropsValue();
+  const img = React.useMemo(() => {
+    const val = getValue(partnerDetail, "agent.fields.image");
+    if (val && val.length > 0) return includeImageBaseUrl(val[0]);
+  }, [partnerDetail]);
   return (
     <LayoutBox title={data.agentboxtitle}>
       <AgentContainer>
-        <ImageBox src="https://assets.reqter.com/asset/download/file-1589438010203.jpeg">
+        <ImageBox src={img}>
           <ImageInfo>
             <IoLogoTwitter />
             <IoLogoFacebook />
@@ -37,26 +43,36 @@ const Agent = () => {
           </ImageInfo>
         </ImageBox>
         <Detail>
-          <Name>سعید پادیاب</Name>
+          <Name>{getValue(partnerDetail, "agent.fields.name")}</Name>
           <DetailRow>
             <IoMdPhonePortrait />
-            <DetailValue>09213378941</DetailValue>
+            <DetailValue>
+              {getValue(partnerDetail, "agent.fields.phonenumber")}
+            </DetailValue>
           </DetailRow>
           <DetailRow>
             <IoIosPin />
-            <DetailValue>تهران - خیابان ولیعصر</DetailValue>
+            <DetailValue>
+              {getValue(partnerDetail, "agent.fields.address")}
+            </DetailValue>
           </DetailRow>
           <DetailRow>
             <IoLogoSkype />
-            <DetailValue>mercy.skyper</DetailValue>
+            <DetailValue>
+              {getValue(partnerDetail, "agent.fields.skypeid")}
+            </DetailValue>
           </DetailRow>
           <DetailRow>
             <IoMdMailOpen />
-            <DetailValue>mercy@gmail.com</DetailValue>
+            <DetailValue>
+              {getValue(partnerDetail, "agent.fields.email")}
+            </DetailValue>
           </DetailRow>
           <DetailRow>
             <IoIosLink />
-            <DetailValue>http://tafresh-theme.com/zoacres</DetailValue>
+            <DetailValue>
+              {getValue(partnerDetail, "agent.fields.about")}
+            </DetailValue>
           </DetailRow>
         </Detail>
       </AgentContainer>

@@ -1,67 +1,34 @@
 import React from "react";
 import useGlobalState from "hooks/useGlobal/useGlobalState";
+import useObjectPropsValue from "hooks/useObjectPropsValue";
 import LayoutBox from "../LayoutBox";
 import { DetailContainer, Row, Key, Value } from "./styles";
 const Detail = () => {
-  const { partnerDetail, partnerDetailPage } = useGlobalState();
+  const { getValue } = useObjectPropsValue();
+  const {
+    partnerDetail,
+    partnerDetailPage,
+    currentLanguage,
+  } = useGlobalState();
   const data = React.useMemo(
     () => (partnerDetailPage ? partnerDetailPage[0] : {}),
     []
   );
-  const list = [
-    {
-      key: "شناسه ملک :",
-      value: "ZOAC26",
-    },
-    {
-      key: "قیمت ملک:",
-      value: "450,000 تومان77 تومان هر متر",
-    },
-    {
-      key: "نوع ملک :",
-      value: "آپارتمان",
-    },
-    {
-      key: "وضعیت ملک :",
-      value: "فروش",
-    },
-    {
-      key: "مساحت ملک :",
-      value: "750",
-    },
-    {
-      key: "اندازه زمین :",
-      value: "1250",
-    },
-    {
-      key: "تعداد اتاق :",
-      value: "2",
-    },
-    {
-      key: "تعداد خواب ها :",
-      value: "2",
-    },
-    {
-      key: "تعداد حمام :",
-      value: "3",
-    },
-    {
-      key: "تعداد گاراژ :",
-      value: "1",
-    },
-  ];
-  return (
+  const detail =
+    partnerDetail && partnerDetail.details
+      ? JSON.parse(partnerDetail.details)
+      : [];
+  return detail && detail.length ? (
     <LayoutBox title={data.detailboxtitle}>
       <DetailContainer>
-        {list &&
-          list.map((item, index) => (
-            <Row key={index}>
-              <Key>{item.key}</Key>
-              <Value>{item.value}</Value>
-            </Row>
-          ))}
+        {detail.map((item, index) => (
+          <Row key={index}>
+            <Key>{item.header[currentLanguage]}</Key>
+            <Value>{item.body}</Value>
+          </Row>
+        ))}
       </DetailContainer>
     </LayoutBox>
-  );
+  ) : null;
 };
 export default Detail;

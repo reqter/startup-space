@@ -1,5 +1,5 @@
 import useGlobalState from "hooks/useGlobal/useGlobalState";
-
+import { urls } from "utils/constants";
 const useObjectPropsValue = () => {
   const { currentLanguage } = useGlobalState();
   const getValue = (
@@ -7,25 +7,40 @@ const useObjectPropsValue = () => {
     key: string,
     defaultValue: string | number = ""
   ) => {
+    if (!object) {
+      return defaultValue;
+    }
     const keys = key.split(".");
-    // ["contact", "user", "name"];
     let val = object[keys[0]];
-    if (keys.length > 1) {
-      for (let i = 1; i < keys.length; i++) {
-        if (keys[i] && keys[i].length) val = val[keys[i]];
+    if (val) {
+      if (keys.length > 1) {
+        for (let i = 1; i < keys.length; i++) {
+          if (keys[i] && keys[i].length && val && val[keys[i]])
+            val = val[keys[i]];
+        }
       }
     }
     return val
-      ? typeof val === "object"
+      ? Array.isArray(val)
+        ? val
+        : typeof val === "object"
         ? val[currentLanguage]
           ? val[currentLanguage]
-          : Object.keys(val)[0] && Object.keys(val).length
-          ? typeof val[Object.keys(val)[0]] !== "object"
-            ? val[Object.keys(val)[0]]
-            : defaultValue
           : defaultValue
         : val
       : defaultValue;
+
+    // return val
+    //   ? typeof val === "object"
+    //     ? val[currentLanguage]
+    //       ? val[currentLanguage]
+    //       : Object.keys(val)[0] && Object.keys(val).length
+    //       ? typeof val[Object.keys(val)[0]] !== "object"
+    //         ? val[Object.keys(val)[0]]
+    //         : defaultValue
+    //       : defaultValue
+    //     : val
+    //   : defaultValue;
   };
   const thousandSeperator = (value: string | number, char: string = ",") => {
     return !value
@@ -33,9 +48,15 @@ const useObjectPropsValue = () => {
       : value.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, `$1${char}`);
   };
 
+  const includeImageBaseUrl = (src: string): string => {
+    if (src.startsWith("https://assets.reqter.com/asset/download/")) return src;
+    return urls.assetsDownloadBaseUrl + src;
+  };
+
   return {
     getValue,
     thousandSeperator,
+    includeImageBaseUrl,
   };
 };
 
