@@ -4,6 +4,7 @@ import "react-image-gallery/styles/css/image-gallery.css";
 import useGlobalState from "hooks/useGlobal/useGlobalState";
 import useObjectPropsValue from "hooks/useObjectPropsValue";
 import { GalleryWrapper } from "./styles";
+import isServer from "utils/isServer";
 
 const Gallery = ({ data = [] }) => {
   const { dir } = useGlobalState();
@@ -16,11 +17,13 @@ const Gallery = ({ data = [] }) => {
   });
   return (
     <GalleryWrapper>
-      <ImageGallery
-        items={images}
-        showPlayButton={false}
-        isRTL={dir === "rtl" ? true : false}
-      />
+      {!isServer && (
+        <ImageGallery
+          items={images}
+          showPlayButton={false}
+          isRTL={dir === "rtl" ? true : false}
+        />
+      )}
     </GalleryWrapper>
   );
 };

@@ -1,9 +1,8 @@
 import React from "react";
 import Card from "./Item";
 import { Container, Left, Right } from "./styles";
-import useGlobalState from "../../../hooks/useGlobal/useGlobalState";
-const SpacesList = () => {
-  const { officesData } = useGlobalState();
+
+const SpacesList = ({ officesData = [] }) => {
   return (
     <Container>
       {officesData && (

@@ -12,6 +12,7 @@ export const urls = {
   footer: "/api/v1/lists/lean/5ebe45797e1a5d001b2c1643",
   contentType: "/ctypes/getbyid",
   getDataUrl: "/api/v1/lists",
+  partnersId: "5ee77e9f4b7f35001b7e535d",
   partnerDetailUrl: "/api/v1/partners/info",
   assetsDownloadBaseUrl: "https://assets.reqter.com/asset/download/",
   partnerDetailPage: "/api/v1/lists/lean/5ee2393b4b7f35001b7e514a",

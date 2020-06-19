@@ -13,11 +13,27 @@ import {
   getFooterData,
 } from "hooks/useGlobalApi";
 import useGlobalState from "hooks/useGlobal/useGlobalState";
+import useObjectPropsValue from "hooks/useObjectPropsValue";
 
 const SpaceDetail = () => {
-  const { partnerDetail } = useGlobalState();
+  const { partnerDetail, partnerDetailPage } = useGlobalState();
+  const { includeImageBaseUrl } = useObjectPropsValue();
+  const logo =
+    partnerDetail.logo && partnerDetail.logo.length
+      ? includeImageBaseUrl(partnerDetail.logo[0])
+      : "";
+  const pageData = React.useMemo(
+    () => (partnerDetailPage ? partnerDetailPage[0] : {}),
+    []
+  );
   return (
-    <MainLayout>
+    <MainLayout
+      title={
+        (pageData.pageheadertext ? pageData.pageheadertext : "") +
+        (partnerDetail.name ? partnerDetail.name : "")
+      }
+      logo={logo}
+    >
       <Gallery data={partnerDetail && partnerDetail.images} />
       <Summery />
       <MainContent />
@@ -28,7 +44,6 @@ const SpaceDetail = () => {
 SpaceDetail.getInitialProps = async (context) => {
   if (isServer) {
     const { req } = context;
-    console.log(context.query.id);
     const currentLanguage = req ? req.language : i18n.language;
     try {
       const token = await getToken();

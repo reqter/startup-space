@@ -30,10 +30,7 @@ const Home = (): JSX.Element => {
   const { landingData } = useGlobalState();
   const data = React.useMemo(() => (landingData ? landingData[0] : {}), []);
   return (
-    <MainLayout>
-      <Head>
-        <title>{data && data.name}</title>
-      </Head>
+    <MainLayout title={data && data.name}>
       <First />
       {data && data.isservicesenabled && <Service />}
       {data && data.isofficesenabled && <Spaces />}

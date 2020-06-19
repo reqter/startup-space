@@ -11,8 +11,14 @@ const Spaces = () => {
   const { getOffices } = useGlobalApi();
   const { landingData, officesData } = useGlobalState();
   const data = React.useMemo(() => (landingData ? landingData[0] : {}), []);
+  const [dataList, setDataList] = React.useState<object[]>();
+
   function handleChange(isVisible: boolean) {
-    if (isVisible) if (!officesData) getOffices(4);
+    if (isVisible)
+      if (!dataList)
+        getOffices(0, 4, {}, (result) => {
+          setDataList(result);
+        });
   }
   return (
     <VisibilitySensor
@@ -27,7 +33,7 @@ const Spaces = () => {
             title={data.officesheading}
             header={data.officestitle}
           >
-            <SpacesList />
+            <SpacesList officesData={dataList} />
             <Button>
               <Link href={`/offices`}>{data.officesactiontext}</Link>
             </Button>

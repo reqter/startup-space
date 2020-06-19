@@ -1,4 +1,3 @@
-import useSWR from "swr";
 import fetch from "isomorphic-unfetch";
 import { clientid, urls } from "../../utils/constants";
 import {
@@ -67,9 +66,16 @@ const getLandingData = async (lang: string, token?: string) => {
     },
   });
 };
-const getOfficesData = async (lang: string, limit: number, token?: string) => {
+const getOfficesData = async (
+  skip: number,
+  limit: number,
+  filteredData: object,
+  lang: string,
+  token?: string
+) => {
   return await fetcher(
-    urls.offices + `?lang=${lang}&limit=${limit}&loadrelations=false`
+    urls.offices +
+      `?lang=${lang}&skip=${skip}&limit=${limit}&loadrelations=true`
   )({
     method: "GET",
     headers: {
@@ -143,6 +149,20 @@ const getContentTypeById = async (id: string, token?: string) => {
       },
     }
   ).then((res) => res.json());
+};
+const getPartnersData = async (lang: string, token?: string) => {
+  return await fetcher(
+    urls.listLeanUrl +
+      "/" +
+      urls.partnersId +
+      `?lang=${lang}&loadrelations=false`
+  )({
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      authorization: "Bearer " + (getLocalToken() || token),
+    },
+  });
 };
 const getPartnerDetailById = async (
   id: string,
@@ -218,14 +238,17 @@ const useGlobalApi = () => {
   const getLanding = async () => {
     return await getLandingData(currentLanguage, token);
   };
-  const getOffices = async (
+  const getOffices = (
+    skip: number,
     limit: number,
+    filteredData: object,
     onSuccess?: (d: object[]) => unknown
   ) => {
-    getOfficesData(currentLanguage, limit, token).then((data) => {
-      storeData("officesData", data);
-      if (onSuccess) onSuccess(data);
-    });
+    getOfficesData(skip, limit, filteredData, currentLanguage, token).then(
+      (data) => {
+        if (onSuccess) onSuccess(data);
+      }
+    );
   };
   const getCities = async (limit: number) => {
     getCitiesData(currentLanguage, limit, token).then((data) =>
@@ -353,6 +376,7 @@ export {
   getBlogsData,
   getFooterData,
   getContentTypeById,
+  getPartnersData,
   getPartnerDetailById,
   getPartnerDetailPageData,
 };

@@ -28,7 +28,7 @@ export const Image = styled.div`
   background-image: ${({ bgImage }) =>
     `url("https://library.kissclipart.com/20181001/bbq/kissclipart-workdar-coworking-space-clipart-coworking-a7a0512b3741f118.png")`};
 `;
-export const CardWrapper = styled.div`
+export const CardWrapper = styled.a`
   @apply mb-4 relative rounded-lg cursor-pointer overflow-hidden;
   width: ${({ colSpan, hasMargin }) =>
     !colSpan

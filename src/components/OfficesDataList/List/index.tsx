@@ -1,20 +1,33 @@
 import React from "react";
 import Card from "./Item";
-import { Container } from "./styles";
+import { Container, Button } from "./styles";
 import useGlobalState from "hooks/useGlobal/useGlobalState";
-import useGlobalApi from "hooks/useGlobalApi";
-const SpacesList = () => {
-  const [dataList, setData] = React.useState<object[]>();
-  const { getOffices } = useGlobalApi();
-  React.useEffect(() => {
-    getOffices(5, (data) => {
-      setData(data);
-    });
-  }, []);
+import useObjectPropsValue from "hooks/useObjectPropsValue";
+
+const SpacesList = ({ dataList = [], onMoreDataClicked }) => {
+  const { partnersPageData } = useGlobalState();
+  const { getValue } = useObjectPropsValue();
+  const data = React.useMemo(
+    () => (partnersPageData ? partnersPageData[0] : {}),
+    []
+  );
+
   return (
     <Container>
-      {dataList &&
-        dataList.map((item, index) => <Card key={index} data={item} />)}
+      {dataList ? (
+        <>
+          {dataList.map((item, index) => (
+            <Card key={index} data={item} />
+          ))}
+        </>
+      ) : null}
+      {dataList.length > 0 && (
+        <div className="w-full flex justify-center">
+          <Button onClick={onMoreDataClicked}>
+            {getValue(data, "pagingactiontitle")}
+          </Button>
+        </div>
+      )}
     </Container>
   );
 };

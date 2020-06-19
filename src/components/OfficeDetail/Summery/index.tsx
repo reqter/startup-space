@@ -39,26 +39,17 @@ const Summery = () => {
         </Left>
         <Right>
           <Actions>
-            <BoxInfo
-              style={{
-                background: partnerDetail.verified
-                  ? theme`colors.blue.500`
-                  : theme`colors.gray.500`,
-                color: theme`colors.white`,
-              }}
-            >
-              {partnerDetail.verified ? (
-                <>
-                  <IoMdCheckmark size="1.8rem" />
-                  {data.isverifedtext}
-                </>
-              ) : (
-                <>
-                  <IoIosInformationCircleOutline size="1.8rem" />
-                  {data.notverifedtext}
-                </>
-              )}
-            </BoxInfo>
+            {partnerDetail.verified && (
+              <BoxInfo
+                style={{
+                  background: theme`colors.blue.500`,
+                  color: theme`colors.white`,
+                }}
+              >
+                <IoMdCheckmark size="1.8rem" />
+                {data.isverifedtext}
+              </BoxInfo>
+            )}
             <BoxInfo>
               <IoLogoFacebook color={theme`colors.blue.500`} size="1.8rem" />
             </BoxInfo>
