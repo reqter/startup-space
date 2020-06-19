@@ -1,4 +1,5 @@
 import React from "react";
+import useObjectPropsValue from "hooks/useObjectPropsValue";
 import { IoIosPin } from "react-icons/io";
 import {
   CardWrapper,
@@ -11,6 +12,9 @@ import {
   AmenitName,
 } from "./styles";
 const SpacesItem = ({ data }) => {
+  const { getValue, includeImageBaseUrl } = useObjectPropsValue();
+  const bg = getValue(data, "images");
+  const img = bg ? includeImageBaseUrl(bg[0]) : "";
   return (
     <CardWrapper
       target="_blank"
@@ -18,20 +22,22 @@ const SpacesItem = ({ data }) => {
       href={`/offices/${data._id}`}
     >
       <ImageBox>
-        <Image
-          src="https://library.kissclipart.com/20181001/bbq/kissclipart-workdar-coworking-space-clipart-coworking-a7a0512b3741f118.png"
-          alt=""
-        />
+        <Image src={""} alt="" />
         <Address>
           <IoIosPin />
-          منطفه 17، گلپایگان
+          {getValue(data, "regionid.fields.name")},{" "}
+          {getValue(data, "city.fields.name")}
         </Address>
       </ImageBox>
       <Name>{data && data.name}</Name>
       <AmenitiesBox>
-        <AmenitName>پارکینگ</AmenitName>
-        <AmenitName>اتاق بازی</AmenitName>
-        <AmenitName>اینترنت</AmenitName>
+        {data.amenities && data.amenities.length
+          ? data.amenities.splice(0, 3).map((item, index) => (
+              <AmenitName key={index} title={getValue(item, "fields.name")}>
+                {getValue(item, "fields.name")}
+              </AmenitName>
+            ))
+          : null}
       </AmenitiesBox>
     </CardWrapper>
   );

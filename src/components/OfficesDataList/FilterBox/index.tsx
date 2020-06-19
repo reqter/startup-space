@@ -10,10 +10,25 @@ import {
   Button,
   ActionsTitle,
 } from "./styles";
-import useGlobalState from "../../../hooks/useGlobal/useGlobalState";
+import useGlobalState from "hooks/useGlobal/useGlobalState";
+import useObjectPropsValue from "hooks/useObjectPropsValue";
 
-const FilterBox = () => {
-  const { searchFormContentType = {}, currentLanguage } = useGlobalState();
+const FilterBox = ({ onFullNameClicked, onSearchButtonClicked }) => {
+  const {
+    searchFormContentType = {},
+    currentLanguage,
+    partnersPageData,
+    partnersPageUrlQuery,
+  } = useGlobalState();
+  const pdata = React.useMemo(
+    () => (partnersPageData ? partnersPageData[0] : {}),
+    []
+  );
+  const {
+    getValue,
+    urlParamsToObject,
+    paramsToValidValueType,
+  } = useObjectPropsValue();
 
   const nameField = () => {
     return searchFormContentType && searchFormContentType.fields
@@ -50,22 +65,32 @@ const FilterBox = () => {
       : [];
   };
   const formRef = React.useRef(null);
+  const getParams = React.useMemo(() => {
+    const params = partnersPageUrlQuery;
+    if (params) {
+      const keys = Object.keys(params);
+      if (keys && keys.length) {
+        const newobj = paramsToValidValueType(restField(), params);
+        return newobj;
+      }
+    }
+    return {};
+  }, []);
 
   return (
     <Wrapper>
       <Content>
-        <Title>Property Search</Title>
+        <Title>{getValue(pdata, "searchboxtitle")}</Title>
         <Divider />
         <FullSearchInput data={nameField()} />
         <Form
           ref={formRef}
-          mode="filter"
+          mode="edit"
           rowColumns={1}
           filters={{}}
-          initialValues={{}}
+          initialValues={getParams}
           fieldsArray={restField()}
         />
-
         <ActionsTitle>
           {actionsTitle().title && actionsTitle().title[currentLanguage]}
         </ActionsTitle>

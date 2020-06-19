@@ -33,10 +33,14 @@ export const Name = styled.div`
 `;
 export const AmenitiesBox = styled.div`
   @apply flex border-t border-gray-200 py-3;
+  padding-inline: 2px;
 `;
 export const AmenitName = styled.div`
   @apply inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700;
-  margin-inline-start: 12px;
+  margin-inline-start: 10px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 `;
 
 export const CardWrapper = styled.a`
@@ -50,4 +54,11 @@ export const CardWrapper = styled.a`
       @apply transform scale-125 transition duration-500;
     }
   }
+`;
+export const Button = styled.button`
+  @apply bg-blue-500 text-white text-sm font-bold py-3 rounded transition ease-in duration-200 m-auto mt-5;
+  &:hover {
+    @apply bg-blue-700 transition ease-in duration-200;
+  }
+  width: 300px;
 `;

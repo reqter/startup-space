@@ -11,11 +11,17 @@ const Description = () => {
   return (partnerDetail && partnerDetail.introduction) ||
     (partnerDetail && partnerDetail.overview) ? (
     <LayoutBox title={data.introductionboxtitle}>
-      {partnerDetail.introduction && (
+      {partnerDetail.introduction && partnerDetail.introduction.length ? (
         <Video controls width="100%">
-          <source src={partnerDetail.introduction} />
+          <source
+            src={
+              Array.isArray(partnerDetail.introduction)
+                ? partnerDetail.introduction[0]
+                : partnerDetail.introduction
+            }
+          />
         </Video>
-      )}
+      ) : null}
       {partnerDetail.overview && (
         <Paragraph>{partnerDetail.overview}</Paragraph>
       )}

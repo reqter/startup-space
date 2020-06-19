@@ -30,12 +30,9 @@
     "react-icons": "^3.10.0",
     "react-image-gallery": "^1.0.7",
     "react-leaflet": "^2.7.0",
-    "react-multi-carousel": "^2.5.5",
-    "react-no-ssr": "^1.1.0",
     "react-select": "^3.1.0",
     "react-star-rating-component": "^1.4.1",
-    "react-visibility-sensor": "^5.1.1",
-    "swr": "^0.2.0"
+    "react-visibility-sensor": "^5.1.1"
   },
   "license": "ISC",
   "devDependencies": {

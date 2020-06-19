@@ -33,7 +33,7 @@ const ReferenceInput = ({ field, mode, initialValue, filter }) => {
     function handleSuccess(result) {
       if (result) {
         const r = result.map((item) => {
-          item.value = Math.random();
+          item.value = item._id;
           return item;
         });
         setOptions(r);
@@ -65,7 +65,7 @@ const ReferenceInput = ({ field, mode, initialValue, filter }) => {
 
   // set selected to form object if form is not in filter mode
   function initValue(allData, f) {
-    const selectedData = f ? f : initialValue;
+    let selectedData = f ? f : initialValue;
     if (field.isList) {
       const result = [];
       for (let i = 0; i < selectedData.length; i++) {

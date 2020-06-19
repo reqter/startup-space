@@ -49,14 +49,57 @@ const useObjectPropsValue = () => {
   };
 
   const includeImageBaseUrl = (src: string): string => {
-    if (src.startsWith("https://assets.reqter.com/asset/download/")) return src;
+    if (!src || !src.length) return;
+    if (src.startsWith(urls.assetsDownloadBaseUrl)) return src;
     return urls.assetsDownloadBaseUrl + src;
   };
+
+  function objectToQuerystring(obj) {
+    return Object.keys(obj).reduce((str, key, i) => {
+      var delimiter, val;
+      delimiter = i === 0 ? "?" : "&";
+      key = encodeURIComponent(key);
+      val = encodeURIComponent(obj[key]);
+      return [str, delimiter, key, "=", val].join("");
+    }, "");
+  }
+  function getParameterByName(name: string, url?: string) {
+    if (!url) url = window.location.href;
+    name = name.replace(/[\[\]]/g, "\\$&");
+    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+      results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return "";
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
+  }
+  function urlParamsToObject(searchUrl?: string): object {
+    if (!searchUrl) searchUrl = window.location.search;
+    const urlParams = new URLSearchParams(searchUrl);
+    return Object.fromEntries(urlParams);
+  }
+
+  function paramsToValidValueType(fields: any, paramsObject: any): object {
+    return Object.keys(paramsObject).reduce((acc, key) => {
+      const f = fields.find((field) => field.name === key);
+      if (f.isList) {
+        if (paramsObject[key].includes(",")) {
+          acc[key] = paramsObject[key].split(",");
+        } else {
+          acc[key] = [paramsObject[key]];
+        }
+      } else acc[key] = paramsObject[key];
+      return acc;
+    }, {});
+  }
 
   return {
     getValue,
     thousandSeperator,
     includeImageBaseUrl,
+    objectToQuerystring,
+    getParameterByName,
+    urlParamsToObject,
+    paramsToValidValueType,
   };
 };
 

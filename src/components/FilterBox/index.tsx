@@ -1,11 +1,14 @@
 import React from "react";
+import { Router } from "../../../config/Next18Wrapper";
 import Form from "../../components/Form";
 import FullSearchInput from "../Form/components/SearchNameBox";
 import { Wrapper, Content, Actions, Button, ActionsTitle } from "./styles";
-import useGlobalState from "../../hooks/useGlobal/useGlobalState";
+import useGlobalState from "hooks/useGlobal/useGlobalState";
+import useObjectPropsValue from "hooks/useObjectPropsValue";
 
 const FilterBox = () => {
   const { searchFormContentType = {}, currentLanguage } = useGlobalState();
+  const { objectToQuerystring } = useObjectPropsValue();
   const nameField = () => {
     return searchFormContentType && searchFormContentType.fields
       ? searchFormContentType.fields.find((item) => item.name === "name")
@@ -45,6 +48,13 @@ const FilterBox = () => {
       : [];
   };
   const formRef = React.useRef(null);
+
+  function handleSearchClicked() {
+    const values = formRef.current.getValues();
+    const s = objectToQuerystring(values);
+    Router.push(`/offices${s && s.length ? s : ""}`);
+  }
+
   return (
     <Wrapper>
       <Content>
@@ -62,7 +72,9 @@ const FilterBox = () => {
           {actionsTitle().title && actionsTitle().title[currentLanguage]}
         </ActionsTitle>
         <Actions>
-          <Button>{action1().title && action1().title[currentLanguage]}</Button>
+          <Button onClick={handleSearchClicked}>
+            {action1().title && action1().title[currentLanguage]}
+          </Button>
         </Actions>
       </Content>
     </Wrapper>

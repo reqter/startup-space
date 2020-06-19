@@ -3,11 +3,11 @@ import { rgba } from "polished";
 export const Wrapper = styled.header`
   @apply w-full bg-cover;
   z-index: 1;
-  background-image: ${({ bgImage }) =>
+  background-image: ${({ bgImage, fallbackImage }) =>
     `linear-gradient(to right, ${rgba(theme`colors.blue.500`, 0.92)},${rgba(
       theme`colors.blue.500`,
       0.92
-    )}),url(${bgImage})`};
+    )}),url(${bgImage && bgImage.length ? bgImage : fallbackImage})`};
   height: 270px;
   margin-top: 100px;
 `;
