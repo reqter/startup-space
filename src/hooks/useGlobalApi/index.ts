@@ -17,25 +17,6 @@ const getLocalToken = () => {
 const fetcher = (url) => (params) =>
   fetch(urls.baseUrl + url, params).then((res) => res.json());
 
-export const useHeaderApi = () => {
-  const token = "";
-  const { data, error } = useSWR(
-    "headerData",
-    fetcher({
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        authorization: "Bearer " + token,
-      },
-    }),
-    {
-      initialData: {},
-      revalidateOnFocus: false,
-      revalidateOnReconnect: false,
-    }
-  );
-};
-
 const getToken = async () => {
   const t = await fetcher(urls.token)({
     method: "POST",
