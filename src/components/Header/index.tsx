@@ -13,13 +13,13 @@ import {
   Button,
   SearchIcon,
 } from "./styles";
-import useGlobalApi from "../../hooks/useGlobalApi";
+import useGlobalApi from "hooks/useGlobalApi";
 
 interface IProps {}
 
 const Header: React.FC<IProps> = (): JSX.Element => {
   const { headerData, landingData } = useGlobalState();
-  const { getHomeData } = useGlobalApi();
+  const { getHomeData, _getPartnersPageData } = useGlobalApi();
   const headerObj = headerData ? headerData[0] : {};
   const router = useRouter();
   const [isSticky, setSticky] = useState<boolean>(false);
@@ -44,6 +44,9 @@ const Header: React.FC<IProps> = (): JSX.Element => {
       } else Router.push("/");
     } else Router.push("/");
   };
+  function getOfficesData() {
+    _getPartnersPageData();
+  }
   return (
     <Wrapper isSticky={isSticky} isLanding={router.pathname === "/"}>
       <Content>
@@ -66,6 +69,7 @@ const Header: React.FC<IProps> = (): JSX.Element => {
             selected={router.pathname === `/offices`}
             isSticky={isSticky}
             isLanding={router.pathname === "/"}
+            onClick={getOfficesData}
           >
             <Link href={`/offices`}>
               <a>{headerObj.menuitem2text}</a>

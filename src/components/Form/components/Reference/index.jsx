@@ -88,7 +88,7 @@ const ReferenceInput = ({ field, mode, initialValue, filter }) => {
     let isValid = true;
     let value;
     if (field.isList) {
-      value = selected.map((item) => item.value);
+      value = selected ? selected.map((item) => item.value) : null;
       if (mode !== "filter") {
         if (field.isRequired && (!value || value.length === 0)) {
           isValid = false;

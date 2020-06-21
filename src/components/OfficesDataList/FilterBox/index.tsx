@@ -1,4 +1,6 @@
 import React from "react";
+import { Router } from "../../../../config/Next18Wrapper";
+import { useRouter } from "next/router";
 import Form from "../../../components/Form";
 import FullSearchInput from "../../Form/components/SearchNameBox";
 import {
@@ -12,22 +14,22 @@ import {
 } from "./styles";
 import useGlobalState from "hooks/useGlobal/useGlobalState";
 import useObjectPropsValue from "hooks/useObjectPropsValue";
+import useGlobalDispatch from "hooks/useGlobal/useGlobalDispatch";
+import isServer from "utils/isServer";
 
-const FilterBox = ({ onFullNameClicked, onSearchButtonClicked }) => {
+const FilterBox = () => {
   const {
     searchFormContentType = {},
     currentLanguage,
     partnersPageData,
     partnersPageUrlQuery,
+    needsUrlQueryToConvert,
   } = useGlobalState();
-  const pdata = React.useMemo(
-    () => (partnersPageData ? partnersPageData[0] : {}),
-    []
-  );
+  const { dispatch } = useGlobalDispatch();
   const {
     getValue,
-    urlParamsToObject,
     paramsToValidValueType,
+    objectToQuerystring,
   } = useObjectPropsValue();
 
   const nameField = () => {
@@ -66,6 +68,9 @@ const FilterBox = ({ onFullNameClicked, onSearchButtonClicked }) => {
   };
   const formRef = React.useRef(null);
   const getParams = React.useMemo(() => {
+    if (!needsUrlQueryToConvert) {
+      return partnersPageUrlQuery;
+    }
     const params = partnersPageUrlQuery;
     if (params) {
       const keys = Object.keys(params);
@@ -77,10 +82,25 @@ const FilterBox = ({ onFullNameClicked, onSearchButtonClicked }) => {
     return {};
   }, []);
 
+  function handleFilterData() {
+    const values = formRef.current.getValues();
+    dispatch({
+      type: "SET_PARTNERS_QUERY_DATA",
+      payload: {
+        data: null,
+        isNeedConvert: true,
+      },
+    });
+    const s = objectToQuerystring(values);
+    Router.push(`/offices${s && s.length ? s : ""}`, undefined, {
+      shallow: true,
+    });
+    // onSearchButtonClicked(values);
+  }
   return (
     <Wrapper>
       <Content>
-        <Title>{getValue(pdata, "searchboxtitle")}</Title>
+        <Title>{getValue(partnersPageData, "searchboxtitle")}</Title>
         <Divider />
         <FullSearchInput data={nameField()} />
         <Form
@@ -95,7 +115,9 @@ const FilterBox = ({ onFullNameClicked, onSearchButtonClicked }) => {
           {actionsTitle().title && actionsTitle().title[currentLanguage]}
         </ActionsTitle>
         <Actions>
-          <Button>{action1().title && action1().title[currentLanguage]}</Button>
+          <Button onClick={handleFilterData}>
+            {action1().title && action1().title[currentLanguage]}
+          </Button>
         </Actions>
       </Content>
     </Wrapper>

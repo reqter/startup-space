@@ -1,9 +1,5 @@
 import fetch from "isomorphic-unfetch";
 import { clientid, urls } from "../../utils/constants";
-import {
-  makeDataParam,
-  makeSearchFields,
-} from "../../utils/makeGetDataUrlParams";
 import useGlobalState from "../useGlobal/useGlobalState";
 import useGlobalDispatch from "../useGlobal/useGlobalDispatch";
 let token: string = "";
@@ -50,19 +46,24 @@ const getLandingData = async (lang: string, token?: string) => {
 const getOfficesData = async (
   skip: number,
   limit: number,
-  filteredData: object,
+  filteredData: object = {},
   lang: string,
   token?: string
 ) => {
-  return await fetcher(
-    urls.offices +
-      `?lang=${lang}&skip=${skip}&limit=${limit}&loadrelations=true`
-  )({
-    method: "GET",
+  const search = Object.keys(filteredData).reduce((acc, key) => {
+    if (filteredData[key]) {
+      acc["fields." + key] = filteredData[key];
+    }
+    return acc;
+  }, {});
+  const url = urls.offices + `?lang=${lang}&skip=${skip}&limit=${limit}`;
+  return await fetcher(url)({
+    method: "POST",
     headers: {
       "Content-Type": "application/json",
       authorization: "Bearer " + (getLocalToken() || token),
     },
+    body: JSON.stringify({ search }),
   });
 };
 const getCitiesData = async (lang: string, limit: number, token?: string) => {
@@ -131,7 +132,7 @@ const getContentTypeById = async (id: string, token?: string) => {
     }
   ).then((res) => res.json());
 };
-const getPartnersData = async (lang: string, token?: string) => {
+const getPartnersPageData = async (lang: string, token?: string) => {
   return await fetcher(
     urls.listLeanUrl +
       "/" +
@@ -206,7 +207,12 @@ const getPartnerComments = async (
   });
 };
 const useGlobalApi = () => {
-  const { currentLanguage, token, searchFormContentType } = useGlobalState();
+  const {
+    currentLanguage,
+    token,
+    searchFormContentType,
+    partnersPageData,
+  } = useGlobalState();
   const { dispatch } = useGlobalDispatch();
   const storeData = (key, value) =>
     dispatch({
@@ -219,6 +225,12 @@ const useGlobalApi = () => {
   const getLanding = async () => {
     return await getLandingData(currentLanguage, token);
   };
+  const _getPartnersPageData = () => {
+    if (!partnersPageData)
+      return getPartnersPageData(currentLanguage, token).then((data) => {
+        storeData("partnersPageData", data && data.length > 0 ? data[0] : {});
+      });
+  };
   const getOffices = (
     skip: number,
     limit: number,
@@ -227,7 +239,7 @@ const useGlobalApi = () => {
   ) => {
     getOfficesData(skip, limit, filteredData, currentLanguage, token).then(
       (data) => {
-        if (onSuccess) onSuccess(data);
+        if (onSuccess) onSuccess(data.data);
       }
     );
   };
@@ -319,11 +331,17 @@ const useGlobalApi = () => {
       if (!searchFormContentType)
         promisArray.push(getContentTypeById("5ec23fa17e1a5d001b2c16f4", token));
       const result = await Promise.all(promisArray);
+      const cType = result[1] ? result[1] : searchFormContentType;
+      if (cType) {
+        cType.fields = cType.fields.sort(function (a, b) {
+          return a.order - b.order;
+        });
+      }
       dispatch({
         type: "SET_PAGE_DATA",
         payload: {
           landingData: result[0],
-          searchFormContentType: result[1] ? result[1] : searchFormContentType,
+          searchFormContentType: cType,
         },
       });
       if (onSuccess) onSuccess();
@@ -341,6 +359,7 @@ const useGlobalApi = () => {
     getBlogs,
     getHomeData,
     getDataByCtypeId,
+    _getPartnersPageData,
     _getPartnerProducts,
     _getPartnerComments,
   };
@@ -357,7 +376,7 @@ export {
   getBlogsData,
   getFooterData,
   getContentTypeById,
-  getPartnersData,
+  getPartnersPageData,
   getPartnerDetailById,
   getPartnerDetailPageData,
 };

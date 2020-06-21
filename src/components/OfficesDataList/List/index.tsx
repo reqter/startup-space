@@ -7,10 +7,6 @@ import useObjectPropsValue from "hooks/useObjectPropsValue";
 const SpacesList = ({ dataList = [], onMoreDataClicked }) => {
   const { partnersPageData } = useGlobalState();
   const { getValue } = useObjectPropsValue();
-  const data = React.useMemo(
-    () => (partnersPageData ? partnersPageData[0] : {}),
-    []
-  );
 
   return (
     <Container>
@@ -24,7 +20,7 @@ const SpacesList = ({ dataList = [], onMoreDataClicked }) => {
       {dataList.length > 0 && (
         <div className="w-full flex justify-center">
           <Button onClick={onMoreDataClicked}>
-            {getValue(data, "pagingactiontitle")}
+            {getValue(partnersPageData, "pagingactiontitle")}
           </Button>
         </div>
       )}

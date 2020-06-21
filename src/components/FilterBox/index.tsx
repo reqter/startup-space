@@ -4,10 +4,12 @@ import Form from "../../components/Form";
 import FullSearchInput from "../Form/components/SearchNameBox";
 import { Wrapper, Content, Actions, Button, ActionsTitle } from "./styles";
 import useGlobalState from "hooks/useGlobal/useGlobalState";
+import useGlobalDispatch from "hooks/useGlobal/useGlobalDispatch";
 import useObjectPropsValue from "hooks/useObjectPropsValue";
 
 const FilterBox = () => {
   const { searchFormContentType = {}, currentLanguage } = useGlobalState();
+  const { dispatch } = useGlobalDispatch();
   const { objectToQuerystring } = useObjectPropsValue();
   const nameField = () => {
     return searchFormContentType && searchFormContentType.fields
@@ -31,7 +33,7 @@ const FilterBox = () => {
       ? searchFormContentType.fields.find((item) => item.name === "action2text")
       : {};
 
-  const restField = (): object[] => {
+  const restField = React.useMemo((): object[] => {
     return searchFormContentType && searchFormContentType.fields
       ? searchFormContentType.fields
           .filter(
@@ -46,11 +48,18 @@ const FilterBox = () => {
             return item;
           })
       : [];
-  };
+  }, []);
   const formRef = React.useRef(null);
 
   function handleSearchClicked() {
     const values = formRef.current.getValues();
+    dispatch({
+      type: "SET_PARTNERS_QUERY_DATA",
+      payload: {
+        data: values,
+        isNeedConvert: false,
+      },
+    });
     const s = objectToQuerystring(values);
     Router.push(`/offices${s && s.length ? s : ""}`);
   }
@@ -65,7 +74,7 @@ const FilterBox = () => {
           rowColumns={2}
           filters={{}}
           initialValues={{}}
-          fieldsArray={restField()}
+          fieldsArray={restField}
         />
 
         <ActionsTitle>
