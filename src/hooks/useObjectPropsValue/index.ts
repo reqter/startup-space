@@ -55,12 +55,21 @@ const useObjectPropsValue = () => {
   };
 
   function objectToQuerystring(obj) {
-    return Object.keys(obj).reduce((str, key, i) => {
+    const newObj = Object.keys(obj).reduce((acc, key) => {
+      if (obj[key] && obj[key].length) {
+        acc[key] = obj[key];
+      }
+      return acc;
+    }, {});
+    return Object.keys(newObj).reduce((str, key, i) => {
       var delimiter, val;
       delimiter = i === 0 ? "?" : "&";
-      key = encodeURIComponent(key);
-      val = encodeURIComponent(obj[key]);
-      return [str, delimiter, key, "=", val].join("");
+      if (obj[key]) {
+        key = encodeURIComponent(key);
+        val = encodeURIComponent(obj[key]);
+        return [str, delimiter, key, "=", val].join("");
+      }
+      return [str].join("");
     }, "");
   }
   function getParameterByName(name: string, url?: string) {
@@ -81,13 +90,15 @@ const useObjectPropsValue = () => {
   function paramsToValidValueType(fields: any, paramsObject: any): object {
     return Object.keys(paramsObject).reduce((acc, key) => {
       const f = fields.find((field) => field.name === key);
-      if (f.isList) {
-        if (paramsObject[key].includes(",")) {
-          acc[key] = paramsObject[key].split(",");
-        } else {
-          acc[key] = [paramsObject[key]];
-        }
-      } else acc[key] = paramsObject[key];
+      if (f) {
+        if (f.isList) {
+          if (paramsObject[key].includes(",")) {
+            acc[key] = paramsObject[key].split(",");
+          } else {
+            acc[key] = [paramsObject[key]];
+          }
+        } else acc[key] = paramsObject[key];
+      }
       return acc;
     }, {});
   }

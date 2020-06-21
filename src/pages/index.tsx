@@ -32,12 +32,12 @@ const Home = (): JSX.Element => {
   return (
     <MainLayout title={data && data.name}>
       <First />
-      {data && data.isservicesenabled && <Service />}
-      {data && data.isofficesenabled && <Spaces />}
-      {data && data.isareaenabled && <Cities />}
-      {data && data.isagentsenabled && <Agents />}
-      {data && data.isnewsletterenabled && <NewsLetter />}
-      {data && data.isblogenabled && <Blogs />}
+      <Service />
+      <Spaces />
+      <Cities />
+      <Agents />
+      <NewsLetter />
+      <Blogs />
     </MainLayout>
   );
 };
@@ -58,6 +58,13 @@ Home.getInitialProps = async ({ req }) => {
         getFooterData(currentLanguage),
         getContentTypeById("5ec23fa17e1a5d001b2c16f4"),
       ]);
+      if (searchFormContentType) {
+        searchFormContentType.fields = searchFormContentType.fields.sort(
+          function (a, b) {
+            return a.order - b.order;
+          }
+        );
+      }
       return {
         token,
         headerData,

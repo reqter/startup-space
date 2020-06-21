@@ -1,5 +1,6 @@
 export const initialData = {
   partnerDetailStickySideBar: false,
+  needsUrlQueryToConvert: true,
 };
 
 export function reducer(state = initialData, action) {
@@ -21,6 +22,13 @@ export function reducer(state = initialData, action) {
         ...state,
         partnerDetailStickySideBar: payload,
       };
+    case "SET_PARTNERS_QUERY_DATA":
+      return {
+        ...state,
+        partnersPageUrlQuery: payload.data,
+        needsUrlQueryToConvert: payload.isNeedConvert,
+      };
+
     default:
       state;
   }

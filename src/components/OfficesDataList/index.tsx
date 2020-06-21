@@ -1,23 +1,62 @@
 import React from "react";
+import { useRouter } from "next/router";
 import Section from "../Common/Section";
 import FilterBox from "./FilterBox";
 import List from "./List";
 import { Content } from "./styles";
 import useGlobalApi from "hooks/useGlobalApi";
 import useGlobalState from "hooks/useGlobal/useGlobalState";
-const limit = 5;
+import useObjectPropsValue from "hooks/useObjectPropsValue";
+
+const limit = 20;
 const Spaces = () => {
-  const { partnersPageUrlQuery } = useGlobalState();
+  const {
+    partnersPageUrlQuery,
+    needsUrlQueryToConvert,
+    searchFormContentType,
+  } = useGlobalState();
+  const { paramsToValidValueType } = useObjectPropsValue();
+  const { query } = useRouter();
   const [skip, setSkip] = React.useState(0);
   const [dataList, setData] = React.useState<object[]>();
+  const [queryParams, setQueryParams] = React.useState<object>();
   const { getOffices } = useGlobalApi();
 
   React.useEffect(() => {
-    const params = partnersPageUrlQuery;
-    getOffices(skip, limit, {}, (data) => {
+    let params = {};
+    debugger;
+    if (needsUrlQueryToConvert) {
+      const _fields =
+        searchFormContentType && searchFormContentType.fields
+          ? searchFormContentType.fields
+          : [];
+      const fields = _fields.filter(
+        (item) =>
+          item.name !== "name" &&
+          item.name !== "actionstitle" &&
+          item.name !== "action1text" &&
+          item.name !== "action2text"
+      );
+      let p;
+      if (partnersPageUrlQuery) {
+        p = partnersPageUrlQuery;
+      } else {
+        p = Object.keys(query).reduce((acc, key) => {
+          const q = fields.find((f) => f.name === key);
+          if (q) {
+            acc[key] = query[key];
+          }
+          return acc;
+        }, {});
+      }
+      params = paramsToValidValueType(fields, p);
+    } else {
+      params = partnersPageUrlQuery;
+    }
+    getOffices(skip, limit, params, (data) => {
       setData(data);
     });
-  }, []);
+  }, [query]);
 
   function handleMoreDataClicked() {
     setSkip((prev) => prev + 1);
@@ -26,15 +65,18 @@ const Spaces = () => {
     });
   }
   function handleFullNameClicked(text) {}
-  function handleSearchButtonClicked(filteredData) {}
+  function handleSearchButtonClicked(filteredData) {
+    setData([]);
+    getOffices(0, limit, filteredData, (data) => {
+      setData(data);
+    });
+  }
+
   return (
     <Section bgColor={theme`colors.gray.200`}>
       <Content>
         <List dataList={dataList} onMoreDataClicked={handleMoreDataClicked} />
-        <FilterBox
-          onFullNameClicked={handleFullNameClicked}
-          onSearchButtonClicked={handleSearchButtonClicked}
-        />
+        <FilterBox />
       </Content>
     </Section>
   );

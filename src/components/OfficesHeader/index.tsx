@@ -6,11 +6,7 @@ import useObjectPropsValue from "hooks/useObjectPropsValue";
 const SpacesHeader = (): JSX.Element => {
   const { getValue, includeImageBaseUrl } = useObjectPropsValue();
   const { partnersPageData } = useGlobalState();
-  const data = React.useMemo(
-    () => (partnersPageData ? partnersPageData[0] : {}),
-    []
-  );
-  const imgProp = getValue(data, "headerimage");
+  const imgProp = getValue(partnersPageData, "headerimage");
   const img =
     imgProp && imgProp.length ? includeImageBaseUrl(imgProp[0]) : null;
   return (
@@ -21,7 +17,7 @@ const SpacesHeader = (): JSX.Element => {
       }
     >
       <Content>
-        <Title>{getValue(data, "headertitle")}</Title>
+        <Title>{getValue(partnersPageData, "headertitle")}</Title>
       </Content>
     </Wrapper>
   );

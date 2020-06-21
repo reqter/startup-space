@@ -7,7 +7,9 @@ const Form = (
   { mode, rowColumns, fieldsArray = [], initialValues = {}, filters },
   ref
 ) => {
-  const methods = useForm();
+  const methods = useForm({
+    defaultValues: initialValues,
+  });
   const formRef = React.useRef(methods);
   useImperativeHandle(ref, () => formRef.current);
 
