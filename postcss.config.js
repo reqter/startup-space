@@ -27,9 +27,9 @@ module.exports = {
     require("postcss-logical"),
     require("postcss-dir-pseudo-class"),
     require("postcss-preset-env"),
-    ...(process.env.NODE_ENV === "production" ? [purgecss] : []),
   ],
 };
+// ...(process.env.NODE_ENV === "production" ? [purgecss] : []),
 // ...(process.env.NODE_ENV === `production`
 //   ? {
 //       "@fullhuman/postcss-purgecss": {
