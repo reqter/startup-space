@@ -3,14 +3,18 @@ import { Link } from "../../../config/Next18Wrapper";
 import { Button } from "./styles";
 import Section from "../Common/Section";
 import SpacesList from "./SpacesList";
-import useGlobalState from "../../hooks/useGlobal/useGlobalState";
-import useGlobalApi from "../../hooks/useGlobalApi";
+import useGlobalState from "hooks/useGlobal/useGlobalState";
+import useGlobalApi from "hooks/useGlobalApi";
+import useObjectPropsValue from "hooks/useObjectPropsValue";
 import VisibilitySensor from "react-visibility-sensor";
 
 const Spaces = () => {
   const { getOffices } = useGlobalApi();
-  const { landingData, officesData } = useGlobalState();
-  const data = React.useMemo(() => (landingData ? landingData[0] : {}), []);
+  const { landingData } = useGlobalState();
+  const { getValue } = useObjectPropsValue();
+  const data = React.useMemo(() => (landingData ? landingData[0] : {}), [
+    landingData,
+  ]);
   const [dataList, setDataList] = React.useState<object[]>();
 
   function handleChange(isVisible: boolean) {
@@ -35,7 +39,9 @@ const Spaces = () => {
           >
             <SpacesList officesData={dataList} />
             <Button>
-              <Link href={`/offices`}>{data.officesactiontext}</Link>
+              <Link href={`/offices`}>
+                {getValue(data, "officesactiontext")}
+              </Link>
             </Button>
           </Section>
         )

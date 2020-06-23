@@ -14,7 +14,9 @@ import {
 } from "./styles";
 const Service = () => {
   const { landingData } = useGlobalState();
-  const data = React.useMemo(() => (landingData ? landingData[0] : {}), []);
+  const data = React.useMemo(() => (landingData ? landingData[0] : {}), [
+    landingData,
+  ]);
   return (
     <Wrapper>
       <Content>

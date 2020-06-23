@@ -9,7 +9,9 @@ import useGlobalApi from "../../hooks/useGlobalApi";
 const Cities = ({}) => {
   const { getCities } = useGlobalApi();
   const { landingData, citiesData } = useGlobalState();
-  const data = React.useMemo(() => (landingData ? landingData[0] : {}), []);
+  const data = React.useMemo(() => (landingData ? landingData[0] : {}), [
+    landingData,
+  ]);
   function handleChange(isVisible: boolean) {
     if (isVisible) if (!citiesData) getCities(4);
   }

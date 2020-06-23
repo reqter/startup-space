@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { Link, Router } from "../../../config/Next18Wrapper";
-import useGlobalState from "../../hooks/useGlobal/useGlobalState";
-import useGlobalDispatch from "../../hooks/useGlobal/useGlobalDispatch";
-import isServer from "../../utils/isServer";
+import useGlobalState from "hooks/useGlobal/useGlobalState";
+
 import {
   Wrapper,
   Content,
@@ -37,12 +36,14 @@ const Header: React.FC<IProps> = (): JSX.Element => {
   }, []);
 
   const _getHomeData = async () => {
-    if (!isServer) {
-      Router.push("/");
-      if (!landingData || landingData.length === 0) {
-        getHomeData();
-      } else Router.push("/");
-    } else Router.push("/");
+    Router.push("/");
+    if (!landingData || landingData.length === 0) getHomeData();
+    // if (!isServer) {
+    //   Router.push("/");
+    //   if (!landingData || landingData.length === 0) {
+    //     getHomeData();
+    //   } else Router.push("/");
+    // } else Router.push("/");
   };
   function getOfficesData() {
     _getPartnersPageData();
