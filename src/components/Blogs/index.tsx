@@ -9,7 +9,9 @@ import useGlobalApi from "../../hooks/useGlobalApi";
 const Spaces = () => {
   const { getBlogs } = useGlobalApi();
   const { landingData, blogsData } = useGlobalState();
-  const data = React.useMemo(() => (landingData ? landingData[0] : {}), []);
+  const data = React.useMemo(() => (landingData ? landingData[0] : {}), [
+    landingData,
+  ]);
   function handleChange(isVisible: boolean) {
     if (isVisible) if (!blogsData) getBlogs(3);
   }

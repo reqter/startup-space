@@ -24,7 +24,6 @@ const Spaces = () => {
 
   React.useEffect(() => {
     let params = {};
-    debugger;
     if (needsUrlQueryToConvert) {
       const _fields =
         searchFormContentType && searchFormContentType.fields

@@ -1,5 +1,6 @@
 import React from "react";
 import useObjectPropsValue from "hooks/useObjectPropsValue";
+import useGlobalState from "hooks/useGlobal/useGlobalState";
 import { IoIosPin } from "react-icons/io";
 import {
   CardWrapper,
@@ -12,6 +13,7 @@ import {
   AmenitName,
 } from "./styles";
 const SpacesItem = ({ data }) => {
+  const { currentLanguage } = useGlobalState();
   const { getValue, includeImageBaseUrl } = useObjectPropsValue();
   const bg = getValue(data, "images");
   const img = bg ? includeImageBaseUrl(bg[0]) : "";
@@ -19,7 +21,7 @@ const SpacesItem = ({ data }) => {
     <CardWrapper
       target="_blank"
       rel="noopener noreferrer"
-      href={`/offices/${data._id}`}
+      href={`/${currentLanguage}/offices/${data._id}`}
     >
       <ImageBox>
         <Image src={""} alt="" />

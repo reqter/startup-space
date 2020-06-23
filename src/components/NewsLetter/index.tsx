@@ -14,7 +14,9 @@ import useGlobalState from "../../hooks/useGlobal/useGlobalState";
 
 const NewsLetter = () => {
   const { landingData } = useGlobalState();
-  const data = React.useMemo(() => (landingData ? landingData[0] : {}), []);
+  const data = React.useMemo(() => (landingData ? landingData[0] : {}), [
+    landingData,
+  ]);
   return (
     <Section bgColor={theme`colors.gray.200`}>
       <Container>

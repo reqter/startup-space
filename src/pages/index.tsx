@@ -1,6 +1,5 @@
 import React from "react";
 import { NextPage, NextPageContext } from "next";
-import Head from "next/head";
 import isServer from "utils/isServer";
 import { i18n } from "../../config/Next18Wrapper";
 import {

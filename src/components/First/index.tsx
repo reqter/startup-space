@@ -4,7 +4,7 @@ import { Wrapper, Content, Left, Right, User } from "./styles";
 import useGlobalState from "../../hooks/useGlobal/useGlobalState";
 const FirstBox = (): JSX.Element => {
   const { landingData } = useGlobalState();
-  const data = React.useMemo(() => (landingData ? landingData[0] : {}), []);
+  const data = landingData ? landingData[0] : {};
   return (
     <Wrapper bgImage={data.mainbackimage}>
       <Content>
