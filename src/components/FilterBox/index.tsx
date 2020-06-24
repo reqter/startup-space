@@ -11,6 +11,7 @@ const FilterBox = () => {
   const { searchFormContentType = {}, currentLanguage } = useGlobalState();
   const { dispatch } = useGlobalDispatch();
   const { objectToQuerystring } = useObjectPropsValue();
+  const [fullName, setFullName] = React.useState("");
   const nameField = () => {
     return searchFormContentType && searchFormContentType.fields
       ? searchFormContentType.fields.find((item) => item.name === "name")
@@ -53,6 +54,9 @@ const FilterBox = () => {
 
   function handleSearchClicked() {
     const values = formRef.current.getValues();
+    if (fullName && fullName.length) {
+      values[nameField().name] = fullName;
+    }
     dispatch({
       type: "SET_PARTNERS_QUERY_DATA",
       payload: {
@@ -63,11 +67,17 @@ const FilterBox = () => {
     const s = objectToQuerystring(values);
     Router.push(`/offices${s && s.length ? s : ""}`);
   }
-
+  function handleFullNameChanged(e) {
+    setFullName(e.target.value);
+  }
   return (
     <Wrapper>
       <Content>
-        <FullSearchInput data={nameField()} />
+        <FullSearchInput
+          data={nameField()}
+          initValue={fullName}
+          onChange={handleFullNameChanged}
+        />
         <Form
           ref={formRef}
           mode="filter"
