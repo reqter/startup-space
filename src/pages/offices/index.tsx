@@ -10,6 +10,7 @@ import {
   getFooterData,
 } from "hooks/useGlobalApi";
 import useGlobalState from "hooks/useGlobal/useGlobalState";
+import useGlobalDispatch from "hooks/useGlobal/useGlobalDispatch";
 import useObjectPropsValue from "hooks/useObjectPropsValue";
 import useGlobalApi from "hooks/useGlobalApi";
 import Header from "components/OfficesHeader";
@@ -17,11 +18,22 @@ import Content from "components/OfficesDataList";
 
 const Spaces = () => {
   const { partnersPageData } = useGlobalState();
+  const { dispatch } = useGlobalDispatch();
   const { _getPartnersPageData } = useGlobalApi();
   const { getValue } = useObjectPropsValue();
 
   React.useEffect(() => {
     _getPartnersPageData();
+    return () => {
+      // clean the url query data
+      dispatch({
+        type: "SET_PARTNERS_QUERY_DATA",
+        payload: {
+          data: null,
+          isNeedConvert: true,
+        },
+      });
+    };
   }, []);
 
   return (

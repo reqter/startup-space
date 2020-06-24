@@ -1,10 +1,14 @@
 import React from "react";
-import useGlobalState from "../../../hooks/useGlobal/useGlobalState";
+import useGlobalState from "hooks/useGlobal/useGlobalState";
 import { CardWrapper, Content, Plus, Location, Count } from "./styles";
 const CityCard = ({ data }) => {
-  const { dir } = useGlobalState();
+  const { currentLanguage } = useGlobalState();
   return (
-    <CardWrapper bgUrl={data.thumbnail[0]}>
+    <CardWrapper
+      bgUrl={data.thumbnail[0]}
+      rel="noopener noreferrer"
+      href={`/${currentLanguage}/offices?city=${data._id}`}
+    >
       <Content>
         <Plus />
         <Location>{data.name}</Location>

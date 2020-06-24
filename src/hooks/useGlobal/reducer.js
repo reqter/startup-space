@@ -1,6 +1,7 @@
 export const initialData = {
   partnerDetailStickySideBar: false,
   needsUrlQueryToConvert: true,
+  isVisibleFooter: false,
 };
 
 export function reducer(state = initialData, action) {
@@ -28,7 +29,11 @@ export function reducer(state = initialData, action) {
         partnersPageUrlQuery: payload.data,
         needsUrlQueryToConvert: payload.isNeedConvert,
       };
-
+    case "TOGGLE_FOOTER_VISIBILITY":
+      return {
+        ...state,
+        isVisibleFooter: payload,
+      };
     default:
       state;
   }

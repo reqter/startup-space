@@ -1,6 +1,6 @@
 import React from "react";
 import { IoIosSearch, IoIosPin } from "react-icons/io";
-import useGlobalState from "../../../../hooks/useGlobal/useGlobalState";
+import useGlobalState from "hooks/useGlobal/useGlobalState";
 import {
   SearchInput,
   SearchInputLeft,
@@ -8,7 +8,7 @@ import {
   SearchInputRight,
   SearchIcon,
 } from "./styles";
-const FullSearchInput = ({ data }) => {
+const FullSearchInput = ({ data, onChange, initValue }) => {
   const { currentLanguage } = useGlobalState();
   return (
     <SearchInput>
@@ -17,6 +17,8 @@ const FullSearchInput = ({ data }) => {
       </SearchInputLeft>
       <Input
         placeholder={data.description && data.description[currentLanguage]}
+        onChange={onChange}
+        defaultValue={initValue}
       />
       <SearchInputRight>
         <IoIosSearch />

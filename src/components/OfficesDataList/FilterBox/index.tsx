@@ -1,6 +1,5 @@
 import React from "react";
 import { Router } from "../../../../config/Next18Wrapper";
-import { useRouter } from "next/router";
 import Form from "../../../components/Form";
 import FullSearchInput from "../../Form/components/SearchNameBox";
 import {
@@ -15,7 +14,6 @@ import {
 import useGlobalState from "hooks/useGlobal/useGlobalState";
 import useObjectPropsValue from "hooks/useObjectPropsValue";
 import useGlobalDispatch from "hooks/useGlobal/useGlobalDispatch";
-import isServer from "utils/isServer";
 
 const FilterBox = () => {
   const {
@@ -37,7 +35,9 @@ const FilterBox = () => {
       ? searchFormContentType.fields.find((item) => item.name === "name")
       : {};
   };
-
+  const [fullName, setFullName] = React.useState(
+    partnersPageUrlQuery ? partnersPageUrlQuery[nameField().name] : ""
+  );
   const actionsTitle = () =>
     searchFormContentType && searchFormContentType.fields
       ? searchFormContentType.fields.find(
@@ -84,6 +84,9 @@ const FilterBox = () => {
 
   function handleFilterData() {
     const values = formRef.current.getValues();
+    if (fullName && fullName.length) {
+      values[nameField().name] = fullName;
+    }
     dispatch({
       type: "SET_PARTNERS_QUERY_DATA",
       payload: {
@@ -97,12 +100,20 @@ const FilterBox = () => {
     });
     // onSearchButtonClicked(values);
   }
+  function handleFullNameChanged(e) {
+    setFullName(e.target.value);
+  }
+
   return (
     <Wrapper>
       <Content>
         <Title>{getValue(partnersPageData, "searchboxtitle")}</Title>
         <Divider />
-        <FullSearchInput data={nameField()} />
+        <FullSearchInput
+          data={nameField()}
+          initValue={fullName}
+          onChange={handleFullNameChanged}
+        />
         <Form
           ref={formRef}
           mode="edit"

@@ -24,7 +24,8 @@ const Reserve = () => {
 
       <ActionsTitle>{data.requestboxactionstitle}</ActionsTitle>
       <Actions>
-        <Button>{data.requestboxaction1title}</Button>
+        <Button bgColor={"blue"}>{data.requestboxaction1title}</Button>
+        <Button bgColor={"gray"}>درخواست بازدید</Button>
       </Actions>
     </LayoutBox>
   );

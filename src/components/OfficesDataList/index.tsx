@@ -31,7 +31,6 @@ const Spaces = () => {
           : [];
       const fields = _fields.filter(
         (item) =>
-          item.name !== "name" &&
           item.name !== "actionstitle" &&
           item.name !== "action1text" &&
           item.name !== "action2text"
@@ -61,13 +60,6 @@ const Spaces = () => {
     setSkip((prev) => prev + 1);
     getOffices((skip + 1) * limit, limit, {}, (data) => {
       setData((prev) => [...prev, ...data]);
-    });
-  }
-  function handleFullNameClicked(text) {}
-  function handleSearchButtonClicked(filteredData) {
-    setData([]);
-    getOffices(0, limit, filteredData, (data) => {
-      setData(data);
     });
   }
 

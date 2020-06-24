@@ -18,15 +18,29 @@ export const Divider = styled.div`
 `;
 
 export const Actions = styled.div`
-  @apply flex items-center pt-3;
+  @apply flex pt-6 flex-col;
 `;
 export const ActionsTitle = styled.h4`
-  @apply mt-10;
+  @apply mt-20;
 `;
 
 export const Button = styled.button`
-  @apply flex-1 bg-blue-500 text-white text-sm font-bold py-3 rounded transition ease-in duration-200;
+  @apply flex-1 text-sm font-bold py-3 rounded transition ease-in duration-200;
+  background-color: ${({ bgColor }) => {
+    return bgColor === "blue" ? theme`colors.blue.500` : theme`colors.gray.300`;
+  }};
+  color: ${({ bgColor }) => {
+    return bgColor === "blue" ? theme`colors.white` : theme`colors.black`;
+  }};
+  &:first-child {
+    @apply mb-3;
+  }
   &:hover {
-    @apply bg-blue-700 transition ease-in duration-200;
+    @apply transition ease-in duration-200 shadow-lg;
+    background-color: ${({ bgColor }) => {
+      return bgColor === "blue"
+        ? theme`colors.blue.700`
+        : theme`colors.gray.400`;
+    }};
   }
 `;
