@@ -1,11 +1,17 @@
 import React from "react";
 import useGlobalState from "hooks/useGlobal/useGlobalState";
+import useObjectPropsValue from "hooks/useObjectPropsValue";
 import { CardWrapper, Content, Plus, Location, Count } from "./styles";
 const CityCard = ({ data }) => {
   const { currentLanguage } = useGlobalState();
+  const { getValue, includeImageBaseUrl } = useObjectPropsValue();
+  const getImage = () => {
+    const bg = getValue(data, "thumbnail");
+    return bg ? includeImageBaseUrl(bg[0], "image") : "";
+  };
   return (
     <CardWrapper
-      bgUrl={data.thumbnail[0]}
+      bgUrl={getImage()}
       rel="noopener noreferrer"
       href={`/${currentLanguage}/offices?city=${data._id}`}
     >

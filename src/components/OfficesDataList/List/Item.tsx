@@ -16,7 +16,7 @@ const SpacesItem = ({ data }) => {
   const { currentLanguage } = useGlobalState();
   const { getValue, includeImageBaseUrl } = useObjectPropsValue();
   const bg = getValue(data, "images");
-  const img = bg ? includeImageBaseUrl(bg[0]) : "";
+  const img = bg ? includeImageBaseUrl(bg[0], "image", 500, 300) : "";
   return (
     <CardWrapper
       target="_blank"
@@ -24,7 +24,7 @@ const SpacesItem = ({ data }) => {
       href={`/${currentLanguage}/offices/${data._id}`}
     >
       <ImageBox>
-        <Image src={""} alt="" />
+        <Image src={img} alt="" />
         <Address>
           <IoIosPin />
           {getValue(data, "regionid.fields.name")},{" "}
@@ -34,7 +34,7 @@ const SpacesItem = ({ data }) => {
       <Name>{data && data.name}</Name>
       <AmenitiesBox>
         {data.amenities && data.amenities.length
-          ? data.amenities.splice(0, 3).map((item, index) => (
+          ? data.amenities.slice(0, 3).map((item, index) => (
               <AmenitName key={index} title={getValue(item, "fields.name")}>
                 {getValue(item, "fields.name")}
               </AmenitName>

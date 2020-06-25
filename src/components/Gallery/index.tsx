@@ -11,8 +11,8 @@ const Gallery = ({ data = [] }) => {
   const { includeImageBaseUrl } = useObjectPropsValue();
   const images = data.map((item) => {
     return {
-      original: includeImageBaseUrl(item),
-      thumbnail: includeImageBaseUrl(item),
+      original: includeImageBaseUrl(item, "image", 1024, 768),
+      thumbnail: includeImageBaseUrl(item, "image", 100, 100),
     };
   });
   return (
