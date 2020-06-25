@@ -23,6 +23,10 @@ const Spaces = () => {
   const { getValue } = useObjectPropsValue();
 
   React.useEffect(() => {
+    dispatch({
+      type: "SET_CURRENT_ROUTER_NAME",
+      payload: "partners",
+    });
     _getPartnersPageData();
     return () => {
       // clean the url query data

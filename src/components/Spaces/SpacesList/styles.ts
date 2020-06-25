@@ -25,8 +25,7 @@ export const Location = styled.div`
 `;
 export const Image = styled.div`
   @apply bg-cover absolute h-full w-full z-10 rounded-lg transition duration-500;
-  background-image: ${({ bgImage }) =>
-    `url("https://library.kissclipart.com/20181001/bbq/kissclipart-workdar-coworking-space-clipart-coworking-a7a0512b3741f118.png")`};
+  background-image: ${({ bgImage }) => `url(${bgImage})`};
 `;
 export const CardWrapper = styled.a`
   @apply mb-4 relative rounded-lg cursor-pointer overflow-hidden;

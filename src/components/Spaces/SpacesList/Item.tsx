@@ -1,9 +1,13 @@
 import React from "react";
 import { CardWrapper, Image, Content, Name, Location } from "./styles";
 import useGlobalState from "hooks/useGlobal/useGlobalState";
+import useObjectPropsValue from "hooks/useObjectPropsValue";
 
 const SpacesItem = ({ data, colSpan, hasMargin }) => {
   const { currentLanguage } = useGlobalState();
+  const { getValue, includeImageBaseUrl } = useObjectPropsValue();
+  const bg = getValue(data, "images");
+  const img = bg ? includeImageBaseUrl(bg[0], "image", 500, 300) : "";
   return (
     <CardWrapper
       colSpan={colSpan}
@@ -12,7 +16,7 @@ const SpacesItem = ({ data, colSpan, hasMargin }) => {
       rel="noopener noreferrer"
       href={`${currentLanguage}/offices/${data?._id}`}
     >
-      <Image bgImage={data && data.images && data.images && data.images[0]} />
+      <Image bgImage={img} />
       <Content>
         <Name>{data && data.name}</Name>
         <Location>{data && data.fullname}</Location>

@@ -12,7 +12,7 @@ export const Actions = styled.div`
   @apply flex items-center pt-3;
 `;
 export const ActionsTitle = styled.h4`
-  @apply;
+  @apply mt-8;
 `;
 
 export const Button = styled.button`

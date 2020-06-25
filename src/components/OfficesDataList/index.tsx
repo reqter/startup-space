@@ -14,15 +14,19 @@ const Spaces = () => {
     partnersPageUrlQuery,
     needsUrlQueryToConvert,
     searchFormContentType,
+    partnersStickySideBar,
   } = useGlobalState();
   const { paramsToValidValueType } = useObjectPropsValue();
   const { query } = useRouter();
   const [skip, setSkip] = React.useState(0);
   const [dataList, setData] = React.useState<object[]>();
-  const [queryParams, setQueryParams] = React.useState<object>();
+  const [loading, toggleLoading] = React.useState(true);
   const { getOffices } = useGlobalApi();
 
   React.useEffect(() => {
+    if (!loading) {
+      toggleLoading(true);
+    }
     let params = {};
     if (needsUrlQueryToConvert) {
       const _fields =
@@ -53,6 +57,7 @@ const Spaces = () => {
       params = partnersPageUrlQuery;
     }
     getOffices(skip, limit, params, (data) => {
+      toggleLoading(false);
       setData(data);
     });
   }, [query]);
@@ -66,8 +71,12 @@ const Spaces = () => {
 
   return (
     <Section bgColor={theme`colors.gray.200`}>
-      <Content>
-        <List dataList={dataList} onMoreDataClicked={handleMoreDataClicked} />
+      <Content isSideSticky={partnersStickySideBar}>
+        <List
+          dataList={dataList}
+          loading={loading}
+          onMoreDataClicked={handleMoreDataClicked}
+        />
         <FilterBox />
       </Content>
     </Section>
