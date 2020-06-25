@@ -9,7 +9,12 @@ import useGlobalDispatch from "hooks/useGlobal/useGlobalDispatch";
 
 const Footer = () => {
   const { dispatch } = useGlobalDispatch();
-  const { footerData, officesData, isVisibleFooter } = useGlobalState();
+  const {
+    footerData,
+    officesData,
+    isVisibleFooter,
+    curentRouterName,
+  } = useGlobalState();
   const footer = footerData ? footerData[0] : {};
   const handleChange = (isVisible: boolean) => {
     if (isVisible) {
@@ -30,7 +35,7 @@ const Footer = () => {
     <VisibilitySensor
       onChange={handleChange}
       partialVisibility={true}
-      offset={{ bottom: 52 }}
+      offset={{ bottom: curentRouterName === "partners" ? -52 : 52 }}
     >
       <Section bgColor={theme`colors.black`}>
         <Container>

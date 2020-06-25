@@ -18,10 +18,20 @@ export function reducer(state = initialData, action) {
         ...state,
         [payload.name]: payload.value,
       };
+    case "TOGGLE_PARTNERS_STICKY_SIDE_BAR":
+      return {
+        ...state,
+        partnersStickySideBar: payload,
+      };
     case "TOGGLE_PARTNER_DETAIL_STICKY_SIDE_BAR":
       return {
         ...state,
         partnerDetailStickySideBar: payload,
+      };
+    case "SET_CURRENT_ROUTER_NAME":
+      return {
+        ...state,
+        curentRouterName: payload,
       };
     case "SET_PARTNERS_QUERY_DATA":
       return {

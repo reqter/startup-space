@@ -6,6 +6,12 @@ export const Wrapper = styled.div`
   border-radius: 2px;
   border: 1px solid #f2f2f2;
   box-shadow: none;
+
+  position: ${({ isSideSticky, isVisibleFooter }) =>
+    isVisibleFooter ? "absolute" : isSideSticky ? "fixed" : "static"};
+  top: ${({ isSideSticky, isVisibleFooter }) =>
+    isVisibleFooter ? "auto" : isSideSticky ? "110px" : "0"};
+  bottom: ${({ isVisibleFooter }) => (isVisibleFooter ? "15px" : "auto")};
 `;
 export const Content = styled.div`
   @apply bg-white py-6 rounded-lg px-8;

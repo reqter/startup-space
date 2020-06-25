@@ -13,11 +13,20 @@ import {
   getFooterData,
 } from "hooks/useGlobalApi";
 import useGlobalState from "hooks/useGlobal/useGlobalState";
+import useGlobalDispatch from "hooks/useGlobal/useGlobalDispatch";
 import useObjectPropsValue from "hooks/useObjectPropsValue";
 
 const SpaceDetail = () => {
   const { partnerDetail, partnerDetailPage } = useGlobalState();
+  const { dispatch } = useGlobalDispatch();
   const { includeImageBaseUrl } = useObjectPropsValue();
+  React.useEffect(() => {
+    dispatch({
+      type: "SET_CURRENT_ROUTER_NAME",
+      payload: "partnerDetail",
+    });
+  }, []);
+
   const logo =
     partnerDetail.logo && partnerDetail.logo.length
       ? includeImageBaseUrl(partnerDetail.logo[0])
@@ -26,6 +35,7 @@ const SpaceDetail = () => {
     () => (partnerDetailPage ? partnerDetailPage[0] : {}),
     []
   );
+
   return (
     <MainLayout
       title={

@@ -22,6 +22,8 @@ const FilterBox = () => {
     partnersPageData,
     partnersPageUrlQuery,
     needsUrlQueryToConvert,
+    partnersStickySideBar,
+    isVisibleFooter,
   } = useGlobalState();
   const { dispatch } = useGlobalDispatch();
   const {
@@ -105,7 +107,10 @@ const FilterBox = () => {
   }
 
   return (
-    <Wrapper>
+    <Wrapper
+      isSideSticky={partnersStickySideBar}
+      isVisibleFooter={isVisibleFooter}
+    >
       <Content>
         <Title>{getValue(partnersPageData, "searchboxtitle")}</Title>
         <Divider />
