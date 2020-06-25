@@ -31,6 +31,7 @@ const Spaces = () => {
           : [];
       const fields = _fields.filter(
         (item) =>
+          item.name !== "name" &&
           item.name !== "actionstitle" &&
           item.name !== "action1text" &&
           item.name !== "action2text"

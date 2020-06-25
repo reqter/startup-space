@@ -85,7 +85,7 @@ const FilterBox = () => {
   function handleFilterData() {
     const values = formRef.current.getValues();
     if (fullName && fullName.length) {
-      values[nameField().name] = fullName;
+      values["fullname"] = fullName;
     }
     dispatch({
       type: "SET_PARTNERS_QUERY_DATA",

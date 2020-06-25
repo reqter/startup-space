@@ -1,8 +1,7 @@
 import React from "react";
 import Card from "./Item";
 import { Container } from "./styles";
-import useGlobalState from "../../../hooks/useGlobal/useGlobalState";
-// "https://www.socialinnovationacademy.eu/wp-content/uploads/2018/06/cities.png"
+import useGlobalState from "hooks/useGlobal/useGlobalState";
 const CitiesList = () => {
   const { citiesData } = useGlobalState();
   return (

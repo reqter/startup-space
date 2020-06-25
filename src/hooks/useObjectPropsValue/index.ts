@@ -29,18 +29,6 @@ const useObjectPropsValue = () => {
           : defaultValue
         : val
       : defaultValue;
-
-    // return val
-    //   ? typeof val === "object"
-    //     ? val[currentLanguage]
-    //       ? val[currentLanguage]
-    //       : Object.keys(val)[0] && Object.keys(val).length
-    //       ? typeof val[Object.keys(val)[0]] !== "object"
-    //         ? val[Object.keys(val)[0]]
-    //         : defaultValue
-    //       : defaultValue
-    //     : val
-    //   : defaultValue;
   };
   const thousandSeperator = (value: string | number, char: string = ",") => {
     return !value
@@ -48,10 +36,32 @@ const useObjectPropsValue = () => {
       : value.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, `$1${char}`);
   };
 
-  const includeImageBaseUrl = (src: string): string => {
+  const includeImageBaseUrl = (
+    src: string,
+    type: string = "image",
+    width?: string | number,
+    height?: string | number
+  ): string => {
     if (!src || !src.length) return;
-    if (src.startsWith(urls.assetsDownloadBaseUrl)) return src;
-    return urls.assetsDownloadBaseUrl + src;
+    let url: string;
+    if (type === "image") {
+      if (src.startsWith(urls.assetsDownloadBaseUrl)) {
+        src = src.replace(
+          urls.assetsDownloadBaseUrl,
+          urls.imageDownloadBaseUrl
+        );
+      }
+      if (src.startsWith(urls.imageDownloadBaseUrl)) url = src;
+      else url = urls.imageDownloadBaseUrl + src;
+      if (width && height) {
+        return (url = url + `?w=${width}&h=${height}`);
+      }
+      return url;
+    } else {
+      if (src.startsWith(urls.assetsDownloadBaseUrl)) url = src;
+      else url = urls.assetsDownloadBaseUrl + src;
+      return url;
+    }
   };
 
   function objectToQuerystring(obj) {

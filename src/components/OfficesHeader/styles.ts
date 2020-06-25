@@ -8,7 +8,7 @@ export const Wrapper = styled.header`
       theme`colors.blue.500`,
       0.92
     )}),url(${bgImage && bgImage.length ? bgImage : fallbackImage})`};
-  height: 270px;
+  height: 200px;
   margin-top: 100px;
 `;
 

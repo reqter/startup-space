@@ -15,5 +15,6 @@ export const urls = {
   partnersId: "5ee77e9f4b7f35001b7e535d",
   partnerDetailUrl: "/api/v1/partners/info",
   assetsDownloadBaseUrl: "https://assets.reqter.com/asset/download/",
+  imageDownloadBaseUrl: "https://assets.reqter.com/asset/image/download/",
   partnerDetailPage: "/api/v1/lists/lean/5ee2393b4b7f35001b7e514a",
 };
