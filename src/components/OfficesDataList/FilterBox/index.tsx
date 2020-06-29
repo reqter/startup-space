@@ -109,9 +109,11 @@ const FilterBox = ({ dataList }) => {
   return (
     <Wrapper
       isSideSticky={
-        !dataList || !dataList.length ? false : partnersStickySideBar
+        !dataList || dataList.length < 2 ? false : partnersStickySideBar
       }
-      isVisibleFooter={!dataList || !dataList.length ? false : isVisibleFooter}
+      isVisibleFooter={
+        !dataList || dataList.length < 2 ? false : isVisibleFooter
+      }
     >
       <Content>
         <Title>{getValue(partnersPageData, "searchboxtitle")}</Title>
