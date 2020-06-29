@@ -18,6 +18,7 @@ const Spaces = () => {
   } = useGlobalState();
   const { paramsToValidValueType } = useObjectPropsValue();
   const { query } = useRouter();
+  const [dataLength, setDataLength] = React.useState(0);
   const [skip, setSkip] = React.useState(0);
   const [dataList, setData] = React.useState<object[]>();
   const [loading, toggleLoading] = React.useState(true);
@@ -59,6 +60,7 @@ const Spaces = () => {
     getOffices(skip, limit, params, (data) => {
       toggleLoading(false);
       setData(data);
+      setDataLength(data ? data.length : 0);
     });
   }, [query]);
 
@@ -66,6 +68,7 @@ const Spaces = () => {
     setSkip((prev) => prev + 1);
     getOffices((skip + 1) * limit, limit, {}, (data) => {
       setData((prev) => [...prev, ...data]);
+      setDataLength(data ? data.length : 0);
     });
   }
 
@@ -73,13 +76,14 @@ const Spaces = () => {
     <Section bgColor={theme`colors.gray.200`}>
       <Content
         isSideSticky={
-          !dataList || !dataList.length ? false : partnersStickySideBar
+          !dataList || dataList.length < 2 ? false : partnersStickySideBar
         }
       >
         <List
           dataList={dataList}
           loading={loading}
           onMoreDataClicked={handleMoreDataClicked}
+          showMoreButton={dataLength === limit}
         />
         <FilterBox dataList={dataList} />
       </Content>

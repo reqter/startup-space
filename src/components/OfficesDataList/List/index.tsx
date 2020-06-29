@@ -6,7 +6,12 @@ import useGlobalState from "hooks/useGlobal/useGlobalState";
 import useGlobalDispatch from "hooks/useGlobal/useGlobalDispatch";
 import useObjectPropsValue from "hooks/useObjectPropsValue";
 
-const SpacesList = ({ dataList = [], loading, onMoreDataClicked }) => {
+const SpacesList = ({
+  dataList = [],
+  showMoreButton,
+  loading,
+  onMoreDataClicked,
+}) => {
   const { partnersPageData, partnersStickySideBar } = useGlobalState();
   const { getValue } = useObjectPropsValue();
   const { dispatch } = useGlobalDispatch();
@@ -36,7 +41,7 @@ const SpacesList = ({ dataList = [], loading, onMoreDataClicked }) => {
   return (
     <Container
       isSideSticky={
-        !dataList || !dataList.length ? false : partnersStickySideBar
+        !dataList || dataList.length < 2 ? false : partnersStickySideBar
       }
       ref={containerRef}
     >
@@ -52,7 +57,7 @@ const SpacesList = ({ dataList = [], loading, onMoreDataClicked }) => {
           {dataList.map((item, index) => (
             <Card key={index} data={item} />
           ))}
-          {dataList.length > 0 && (
+          {showMoreButton > 0 && (
             <div className="w-full flex justify-center">
               <Button onClick={onMoreDataClicked}>
                 {getValue(partnersPageData, "pagingactiontitle")}
