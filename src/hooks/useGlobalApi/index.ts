@@ -66,6 +66,23 @@ const getOfficesData = async (
     body: JSON.stringify({ search }),
   });
 };
+const getMostPopularPartners = async (
+  skip: number,
+  limit: number,
+  lang: string,
+  token?: string
+) => {
+  const url =
+    urls.mostPopularPartners + `?lang=${lang}&skip=${skip}&limit=${limit}`;
+  return await fetcher(url)({
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      authorization: "Bearer " + (getLocalToken() || token),
+    },
+    body: JSON.stringify({}),
+  });
+};
 const getCitiesData = async (lang: string, limit: number, token?: string) => {
   return await fetcher(
     urls.cities + `?lang=${lang}&limit=${limit}&loadrelations=false`
@@ -243,6 +260,15 @@ const useGlobalApi = () => {
       }
     );
   };
+  const getPopularOffices = (
+    skip: number,
+    limit: number,
+    onSuccess?: (d: object[]) => unknown
+  ) => {
+    getMostPopularPartners(skip, limit, currentLanguage, token).then((data) => {
+      if (onSuccess) onSuccess(data.data);
+    });
+  };
   const getCities = async (limit: number) => {
     getCitiesData(currentLanguage, limit, token).then((data) =>
       storeData("citiesData", data)
@@ -359,6 +385,7 @@ const useGlobalApi = () => {
     getBlogs,
     getHomeData,
     getDataByCtypeId,
+    getPopularOffices,
     _getPartnersPageData,
     _getPartnerProducts,
     _getPartnerComments,

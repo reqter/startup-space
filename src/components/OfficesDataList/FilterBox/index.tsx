@@ -15,7 +15,7 @@ import useGlobalState from "hooks/useGlobal/useGlobalState";
 import useObjectPropsValue from "hooks/useObjectPropsValue";
 import useGlobalDispatch from "hooks/useGlobal/useGlobalDispatch";
 
-const FilterBox = () => {
+const FilterBox = ({ dataList }) => {
   const {
     searchFormContentType = {},
     currentLanguage,
@@ -108,8 +108,10 @@ const FilterBox = () => {
 
   return (
     <Wrapper
-      isSideSticky={partnersStickySideBar}
-      isVisibleFooter={isVisibleFooter}
+      isSideSticky={
+        !dataList || !dataList.length ? false : partnersStickySideBar
+      }
+      isVisibleFooter={!dataList || !dataList.length ? false : isVisibleFooter}
     >
       <Content>
         <Title>{getValue(partnersPageData, "searchboxtitle")}</Title>

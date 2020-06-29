@@ -6,6 +6,7 @@ export const urls = {
   header: "/api/v1/lists/lean/5eb820137e1a5d001b2c1587",
   landing: "/api/v1/lists/lean/5eb901107e1a5d001b2c1590",
   offices: "/api/v1/partners/query",
+  mostPopularPartners: "/api/v1/partners/mostpopular",
   cities: "/api/v1/lists/lean/5d35e6fa8e6e9a0017c28fce",
   agents: "/api/v1/lists/lean/5eb4f5a27e1a5d001b2c1519",
   blogs: "/api/v1/lists/lean/5d359f368e6e9a0017c28fca",
