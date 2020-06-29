@@ -4,6 +4,7 @@ import { rgba } from "polished";
 export const Container = styled.div`
   @apply flex flex-1 flex-wrap pie-5;
   margin-inline-end: ${({ isSideSticky }) => (isSideSticky ? "400px" : "0px")};
+  min-height: 200px;
 `;
 
 export const ImageBox = styled.div`

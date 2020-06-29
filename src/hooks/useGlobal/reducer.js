@@ -43,6 +43,8 @@ export function reducer(state = initialData, action) {
       return {
         ...state,
         isVisibleFooter: payload,
+        partnersStickySideBar: false,
+        partnerDetailStickySideBar: false,
       };
     default:
       state;

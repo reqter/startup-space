@@ -34,7 +34,12 @@ const SpacesList = ({ dataList = [], loading, onMoreDataClicked }) => {
   }, []);
 
   return (
-    <Container isSideSticky={partnersStickySideBar} ref={containerRef}>
+    <Container
+      isSideSticky={
+        !dataList || !dataList.length ? false : partnersStickySideBar
+      }
+      ref={containerRef}
+    >
       {loading ? (
         <div className="flex w-full flex-wrap">
           <Loading />

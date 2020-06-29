@@ -9,7 +9,7 @@ import useObjectPropsValue from "hooks/useObjectPropsValue";
 import VisibilitySensor from "react-visibility-sensor";
 
 const Spaces = () => {
-  const { getOffices } = useGlobalApi();
+  const { getPopularOffices } = useGlobalApi();
   const { landingData } = useGlobalState();
   const { getValue } = useObjectPropsValue();
   const data = React.useMemo(() => (landingData ? landingData[0] : {}), [
@@ -20,7 +20,7 @@ const Spaces = () => {
   function handleChange(isVisible: boolean) {
     if (isVisible)
       if (!dataList)
-        getOffices(0, 4, {}, (result) => {
+        getPopularOffices(0, 4, (result) => {
           setDataList(result);
         });
   }

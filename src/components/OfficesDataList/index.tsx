@@ -71,13 +71,17 @@ const Spaces = () => {
 
   return (
     <Section bgColor={theme`colors.gray.200`}>
-      <Content isSideSticky={partnersStickySideBar}>
+      <Content
+        isSideSticky={
+          !dataList || !dataList.length ? false : partnersStickySideBar
+        }
+      >
         <List
           dataList={dataList}
           loading={loading}
           onMoreDataClicked={handleMoreDataClicked}
         />
-        <FilterBox />
+        <FilterBox dataList={dataList} />
       </Content>
     </Section>
   );
