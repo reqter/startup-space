@@ -279,10 +279,14 @@ const useGlobalApi = () => {
       storeData("agentsData", data)
     );
   };
-  const getBlogs = async (limit: number) => {
-    getBlogsData(currentLanguage, limit, token).then((data) => {
-      storeData("blogsData", data);
-    });
+  const getBlogs = async (limit: number, onSuccess, onError) => {
+    getBlogsData(currentLanguage, limit, token)
+      .then((data) => {
+        if (onSuccess) {
+          onSuccess(data);
+        }
+      })
+      .catch(() => onError && onError());
   };
   const getDataByCtypeId = async (
     ctypeId: string,

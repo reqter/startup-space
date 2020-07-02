@@ -17,13 +17,14 @@ const Gallery = ({ data = [] }) => {
   });
   return (
     <GalleryWrapper>
-      {!isServer && (
+      {!isServer && data.length > 0 ? (
         <ImageGallery
+          lazyLoad={true}
           items={images}
           showPlayButton={false}
           isRTL={dir === "rtl" ? true : false}
         />
-      )}
+      ) : null}
     </GalleryWrapper>
   );
 };

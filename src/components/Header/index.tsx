@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { Link, Router } from "../../../config/Next18Wrapper";
 import useGlobalState from "hooks/useGlobal/useGlobalState";
@@ -76,11 +76,23 @@ const Header: React.FC<IProps> = (): JSX.Element => {
               <a>{headerObj.menuitem2text}</a>
             </Link>
           </MenuItem>
-          <MenuItem isSticky={isSticky} isLanding={router.pathname === "/"}>
-            <a>{headerObj.menuitem3text}</a>
+          <MenuItem
+            selected={router.pathname === `/faq`}
+            isSticky={isSticky}
+            isLanding={router.pathname === "/"}
+          >
+            <Link href={`/faq`}>
+              <a>{headerObj.menuitem3text}</a>
+            </Link>
           </MenuItem>
-          <MenuItem isSticky={isSticky} isLanding={router.pathname === "/"}>
-            <a>{headerObj.menuitem4text}</a>
+          <MenuItem
+            selected={router.pathname === `/blogs`}
+            isSticky={isSticky}
+            isLanding={router.pathname === "/"}
+          >
+            <Link href={`/blogs`}>
+              <a>{headerObj.menuitem4text}</a>
+            </Link>
           </MenuItem>
           <MenuItem isSticky={isSticky} isLanding={router.pathname === "/"}>
             <a>{headerObj.menuitem5text}</a>
