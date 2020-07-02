@@ -1,6 +1,6 @@
 import React from "react";
 import Card from "./Item";
-import Loading from "./Loading";
+import Loading from "../../CardSkeleton";
 import { Container, Button } from "./styles";
 import useGlobalState from "hooks/useGlobal/useGlobalState";
 import useGlobalDispatch from "hooks/useGlobal/useGlobalDispatch";

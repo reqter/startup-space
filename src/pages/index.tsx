@@ -11,13 +11,13 @@ import {
 } from "../hooks/useGlobalApi";
 import useGlobalState from "../hooks/useGlobal/useGlobalState";
 import MainLayout from "../components/MainLayout";
-import First from "../components/First";
-import Service from "../components/Service";
-import Spaces from "../components/Spaces";
-import Cities from "../components/Cities";
-import NewsLetter from "../components/NewsLetter";
-import Blogs from "../components/Blogs";
-import Agents from "../components/Agents";
+import First from "../components/LandingComponents/First";
+import Service from "../components/LandingComponents/Service";
+import Spaces from "../components/LandingComponents/Spaces";
+import Cities from "../components/LandingComponents/Cities";
+import NewsLetter from "../components/LandingComponents/NewsLetter";
+import Blogs from "../components/LandingComponents/Blogs";
+import Agents from "../components/LandingComponents/Agents";
 
 interface IProps {
   t: (key: string) => string;

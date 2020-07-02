@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  IoMdBook,
-  IoIosPin,
-  IoIosPrint,
-  IoIosHeart,
-  IoMdEye,
-} from "react-icons/io";
+import { IoMdBook } from "react-icons/io";
 import LayoutBox from "../LayoutBox";
 import useGlobalState from "hooks/useGlobal/useGlobalState";
 import { AmenitiesContainer, Amenit, Name } from "./styles";
