@@ -8,34 +8,34 @@ import useGlobalDispatch from "hooks/useGlobal/useGlobalDispatch";
 import useObjectPropsValue from "hooks/useObjectPropsValue";
 import useGlobalApi from "hooks/useGlobalApi";
 import Header from "components/Common/PagesHeader";
-import Content from "components/FAQ/ExpanderContent";
+import InfoItems from "components/Contact-us/InfoItems";
 import NewsLetter from "components/Common/NewsLetterSmall";
 
-const Faq = () => {
+const ContactUs = () => {
   const { dispatch } = useGlobalDispatch();
   const { getValue } = useObjectPropsValue();
 
   React.useEffect(() => {
     dispatch({
       type: "SET_CURRENT_ROUTER_NAME",
-      payload: "faq",
+      payload: "contactUs",
     });
   }, []);
 
   return (
-    <MainLayout title={"سئوالات متدوال"}>
+    <MainLayout title={"تماس با ما"}>
       <Header
         image={null}
         fallbackImage="https://i.pinimg.com/736x/fe/45/da/fe45daef11dd032c0ecbe7fdfee97057.jpg"
-        title="سوالات متداول"
+        title="تماس با ما"
       />
-      <Content />
+      <InfoItems />
       <NewsLetter />
     </MainLayout>
   );
 };
 
-Faq.getInitialProps = async (context) => {
+ContactUs.getInitialProps = async (context) => {
   if (isServer) {
     const { req } = context;
     const currentLanguage = req ? req.language : i18n.language;
@@ -60,4 +60,4 @@ Faq.getInitialProps = async (context) => {
   return {};
 };
 
-export default Faq;
+export default ContactUs;
