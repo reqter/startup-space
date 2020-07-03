@@ -1,8 +1,8 @@
 import React from "react";
 import Head from "next/head";
-import HeaderInfo from "../HeaderInfo";
-import Header from "../Header";
-import Footer from "../Footer";
+import HeaderInfo from "./HeaderInfo";
+import Menu from "./Menu";
+import Footer from "./Footer";
 import { Main, Content } from "./styles";
 
 interface MainProps {
@@ -25,7 +25,7 @@ const MainComponent: React.FC<MainProps> = ({
         />
       </Head>
       <HeaderInfo />
-      <Header />
+      <Menu />
       <Content>{children}</Content>
       <Footer />
     </Main>

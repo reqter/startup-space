@@ -9,15 +9,15 @@ import {
   getFooterData,
   getContentTypeById,
 } from "../hooks/useGlobalApi";
-import useGlobalState from "../hooks/useGlobal/useGlobalState";
-import MainLayout from "../components/MainLayout";
-import First from "../components/LandingComponents/First";
-import Service from "../components/LandingComponents/Service";
-import Spaces from "../components/LandingComponents/Spaces";
-import Cities from "../components/LandingComponents/Cities";
-import NewsLetter from "../components/LandingComponents/NewsLetter";
-import Blogs from "../components/LandingComponents/Blogs";
-import Agents from "../components/LandingComponents/Agents";
+import useGlobalState from "hooks/useGlobal/useGlobalState";
+import MainLayout from "components/MainLayout";
+import First from "components/Landing/First";
+import Service from "components/Landing/Service";
+import Spaces from "components/Landing/Spaces";
+import Cities from "components/Landing/Cities";
+import NewsLetter from "components/Landing/NewsLetter";
+import Blogs from "components/Landing/Blogs";
+import Agents from "components/Landing/Agents";
 
 interface IProps {
   t: (key: string) => string;

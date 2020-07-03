@@ -13,14 +13,17 @@ import useGlobalState from "hooks/useGlobal/useGlobalState";
 import useGlobalDispatch from "hooks/useGlobal/useGlobalDispatch";
 import useObjectPropsValue from "hooks/useObjectPropsValue";
 import useGlobalApi from "hooks/useGlobalApi";
-import Header from "components/OfficesHeader";
-import Content from "components/OfficesDataList";
+import Header from "components/Common/PagesHeader";
+import Content from "components/Partners";
 
 const Spaces = () => {
   const { partnersPageData } = useGlobalState();
   const { dispatch } = useGlobalDispatch();
   const { _getPartnersPageData } = useGlobalApi();
-  const { getValue } = useObjectPropsValue();
+  const { getValue, includeImageBaseUrl } = useObjectPropsValue();
+  const imgProp = getValue(partnersPageData, "headerimage");
+  const img =
+    imgProp && imgProp.length ? includeImageBaseUrl(imgProp[0]) : null;
 
   React.useEffect(() => {
     dispatch({
@@ -42,7 +45,11 @@ const Spaces = () => {
 
   return (
     <MainLayout title={getValue(partnersPageData, "pageheadertext")}>
-      <Header />
+      <Header
+        image={img}
+        fallbackImage="https://i.pinimg.com/736x/fe/45/da/fe45daef11dd032c0ecbe7fdfee97057.jpg"
+        title={getValue(partnersPageData, "headertitle")}
+      />
       <Content />
     </MainLayout>
   );

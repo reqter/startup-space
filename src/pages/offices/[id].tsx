@@ -1,8 +1,8 @@
 import React from "react";
 import MainLayout from "components/MainLayout";
-import Gallery from "components/Gallery";
-import Summery from "components/OfficeDetail/Summery";
-import MainContent from "components/OfficeDetail/MainContent";
+import Gallery from "components/Common/Gallery";
+import Summery from "components/PartnerDetail/Summery";
+import Content from "components/PartnerDetail/MainContent";
 import { i18n } from "../../../config/Next18Wrapper";
 import isServer from "utils/isServer";
 import {
@@ -16,7 +16,7 @@ import useGlobalState from "hooks/useGlobal/useGlobalState";
 import useGlobalDispatch from "hooks/useGlobal/useGlobalDispatch";
 import useObjectPropsValue from "hooks/useObjectPropsValue";
 
-const SpaceDetail = () => {
+const PartnerDetail = () => {
   const { partnerDetail, partnerDetailPage } = useGlobalState();
   const { dispatch } = useGlobalDispatch();
   const { includeImageBaseUrl } = useObjectPropsValue();
@@ -46,12 +46,12 @@ const SpaceDetail = () => {
     >
       <Gallery data={partnerDetail && partnerDetail.images} />
       <Summery />
-      <MainContent />
+      <Content />
     </MainLayout>
   );
 };
 
-SpaceDetail.getInitialProps = async (context) => {
+PartnerDetail.getInitialProps = async (context) => {
   if (isServer) {
     const { req } = context;
     const currentLanguage = req ? req.language : i18n.language;
@@ -84,4 +84,4 @@ SpaceDetail.getInitialProps = async (context) => {
   return {};
 };
 
-export default SpaceDetail;
+export default PartnerDetail;
