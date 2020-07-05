@@ -19,5 +19,6 @@ export const urls = {
   imageDownloadBaseUrl: "https://assets.reqter.com/asset/image/download/",
   partnerDetailPage: "/api/v1/lists/lean/5ee2393b4b7f35001b7e514a",
   faqsPageGuid: "5f018622911086001a082673",
+  faqsCollectionGuid: "5f0185a8911086001a082672",
   contactUsGuid: "5f01b26e911086001a08267b",
 };

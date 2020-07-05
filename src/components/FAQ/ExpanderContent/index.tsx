@@ -1,15 +1,18 @@
 import Section from "./../../Common/Section";
 import { ExpanderContainer } from "./styles";
+import useGlobalState from "hooks/useGlobal/useGlobalState";
 import ExpanderItem from "./Item";
-const ExpancderFAQ = () => {
+const ExpanderFAQ = () => {
+  const { faqsData } = useGlobalState();
   return (
     <Section bgColor={theme`colors.white`}>
       <ExpanderContainer>
-        {[1, 1, 1, 1, 1, 1].map((item, index) => (
-          <ExpanderItem key={index} />
-        ))}
+        {faqsData &&
+          faqsData.map((item, index) => (
+            <ExpanderItem key={index} item={item} />
+          ))}
       </ExpanderContainer>
     </Section>
   );
 };
-export default ExpancderFAQ;
+export default ExpanderFAQ;

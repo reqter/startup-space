@@ -10,8 +10,8 @@ const Map = () => {
     <MapContainer>
       <MapBox
         title={""}
-        lat={contactUsPageData.location.latitude}
-        lng={contactUsPageData.location.longitude}
+        lat={contactUsPageData ? contactUsPageData.location.latitude : ""}
+        lng={contactUsPageData ? contactUsPageData.location.longitude : ""}
       />
     </MapContainer>
   );

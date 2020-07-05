@@ -35,17 +35,6 @@ const Reserve = () => {
         initialValues={{}}
         fieldsArray={[
           {
-            name: "a",
-            description: {
-              en: "Product",
-              fa: "",
-            },
-            description1: {
-              en: "",
-              fa: "",
-            },
-          },
-          {
             name: "aa",
             description: {
               en: "Full Name",

@@ -7,6 +7,7 @@ import {
   getHeaderData,
   getFooterData,
   getFAQsPageData,
+  getFAQsData,
 } from "hooks/useGlobalApi";
 import useGlobalState from "hooks/useGlobal/useGlobalState";
 import useGlobalDispatch from "hooks/useGlobal/useGlobalDispatch";
@@ -51,9 +52,15 @@ Faq.getInitialProps = async (context) => {
     const currentLanguage = req ? req.language : i18n.language;
     try {
       const token = await getToken();
-      const [headerData, faqsPageData, footerData] = await Promise.all([
+      const [
+        headerData,
+        faqsPageData,
+        faqsData,
+        footerData,
+      ] = await Promise.all([
         getHeaderData(currentLanguage),
         getFAQsPageData(currentLanguage),
+        getFAQsData(currentLanguage),
         getFooterData(currentLanguage),
       ]);
 
@@ -62,6 +69,9 @@ Faq.getInitialProps = async (context) => {
         headerData,
         faqsPageData:
           faqsPageData && faqsPageData.length ? faqsPageData[0] : {},
+        faqsData: faqsData.sort(function (a, b) {
+          return a.index - b.index;
+        }),
         footerData,
       };
     } catch (error) {

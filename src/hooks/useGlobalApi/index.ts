@@ -238,6 +238,20 @@ const getFAQsPageData = async (lang: string, token?: string) => {
     },
   });
 };
+const getFAQsData = async (lang: string, token?: string) => {
+  return await fetcher(
+    urls.listLeanUrl +
+      "/" +
+      urls.faqsCollectionGuid +
+      `?lang=${lang}&loadrelations=false`
+  )({
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      authorization: "Bearer " + (getLocalToken() || token),
+    },
+  });
+};
 const getContactUsPageData = async (lang: string, token?: string) => {
   return await fetcher(
     urls.listLeanUrl +
@@ -441,5 +455,6 @@ export {
   getPartnerDetailById,
   getPartnerDetailPageData,
   getFAQsPageData,
+  getFAQsData,
   getContactUsPageData,
 };

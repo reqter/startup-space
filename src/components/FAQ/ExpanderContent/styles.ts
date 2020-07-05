@@ -3,12 +3,12 @@ import { styled } from "linaria/lib/react";
 export const ExpanderContainer = styled.div`
   @apply flex flex-wrap items-start;
 `;
-export const ExpanderItemConatiner = styled.div`
+export const ExpanderItemContainer = styled.div`
   @apply bg-gray-100 flex flex-col mb-4 w-1/2;
   background: whitesmoke;
   &:nth-child(n + 1) {
-    width: calc(50% - 10px);
-    margin-inline-end: 10px;
+    width: calc(50% - 30px);
+    margin-inline-end: 30px;
   }
 `;
 
@@ -17,7 +17,7 @@ export const Top = styled.div`
 `;
 
 export const Title = styled.h2`
-  @apply font-semibold text-base;
+  @apply font-semibold text-sm;
 `;
 
 export const Description = styled.p`
