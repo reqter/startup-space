@@ -18,10 +18,10 @@ export const Divider = styled.div`
 `;
 
 export const Actions = styled.div`
-  @apply flex pt-6 flex-col;
+  @apply flex flex-col mt-5;
 `;
 export const ActionsTitle = styled.h4`
-  @apply mt-20;
+  @apply;
 `;
 
 export const Button = styled.button`

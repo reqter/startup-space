@@ -1,17 +1,23 @@
 import { styled } from "linaria/lib/react";
 
-export const ExpanderContainer = styled.div``;
-export const ExpanderItemConatiner = styled.div`
-  @apply bg-gray-100 flex flex-col mb-4;
+export const ExpanderContainer = styled.div`
+  @apply flex flex-wrap items-start;
+`;
+export const ExpanderItemContainer = styled.div`
+  @apply bg-gray-100 flex flex-col mb-4 w-1/2;
   background: whitesmoke;
+  &:nth-child(n + 1) {
+    width: calc(50% - 30px);
+    margin-inline-end: 30px;
+  }
 `;
 
 export const Top = styled.div`
-  @apply flex justify-between p-5 cursor-pointer shadow items-center;
+  @apply flex justify-between p-3 cursor-pointer shadow items-center;
 `;
 
 export const Title = styled.h2`
-  @apply font-semibold text-xl;
+  @apply font-semibold text-sm;
 `;
 
 export const Description = styled.p`

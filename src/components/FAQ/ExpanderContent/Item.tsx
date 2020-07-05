@@ -1,26 +1,24 @@
+import useObjectPropsValue from "hooks/useObjectPropsValue";
 import { useState } from "react";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
-import { ExpanderItemConatiner, Top, Title, Description } from "./styles";
+import { ExpanderItemContainer, Top, Title, Description } from "./styles";
 
-const ExpanderItem = ({}) => {
+const ExpanderItem = ({ item }) => {
+  const { getValue, includeImageBaseUrl } = useObjectPropsValue();
   const [isOpen, toggleExpander] = useState(false);
   function handleClick() {
     toggleExpander((prev) => !prev);
   }
   return (
-    <ExpanderItemConatiner>
+    <ExpanderItemContainer>
       <Top onClick={handleClick}>
-        <Title>In which cities do you offer your services?</Title>
+        <Title>{getValue(item, "name")}</Title>
         {!isOpen ? <IoIosArrowDown /> : <IoIosArrowUp />}
       </Top>
       {isOpen ? (
-        <Description>
-          There are many variations of passages of Lorem Ipsum available, but
-          the majority have suffered alteration in some form, by injected
-          humour, or randomised words which don’t look even slightly believable.
-        </Description>
+        <Description>{getValue(item, "description")}</Description>
       ) : null}
-    </ExpanderItemConatiner>
+    </ExpanderItemContainer>
   );
 };
 

@@ -223,6 +223,50 @@ const getPartnerComments = async (
     },
   });
 };
+
+const getFAQsPageData = async (lang: string, token?: string) => {
+  return await fetcher(
+    urls.listLeanUrl +
+      "/" +
+      urls.faqsPageGuid +
+      `?lang=${lang}&loadrelations=false`
+  )({
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      authorization: "Bearer " + (getLocalToken() || token),
+    },
+  });
+};
+const getFAQsData = async (lang: string, token?: string) => {
+  return await fetcher(
+    urls.listLeanUrl +
+      "/" +
+      urls.faqsCollectionGuid +
+      `?lang=${lang}&loadrelations=false`
+  )({
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      authorization: "Bearer " + (getLocalToken() || token),
+    },
+  });
+};
+const getContactUsPageData = async (lang: string, token?: string) => {
+  return await fetcher(
+    urls.listLeanUrl +
+      "/" +
+      urls.contactUsGuid +
+      `?lang=${lang}&loadrelations=false`
+  )({
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      authorization: "Bearer " + (getLocalToken() || token),
+    },
+  });
+};
+
 const useGlobalApi = () => {
   const {
     currentLanguage,
@@ -410,4 +454,7 @@ export {
   getPartnersPageData,
   getPartnerDetailById,
   getPartnerDetailPageData,
+  getFAQsPageData,
+  getFAQsData,
+  getContactUsPageData,
 };

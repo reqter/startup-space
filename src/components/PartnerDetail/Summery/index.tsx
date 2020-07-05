@@ -5,12 +5,15 @@ import {
   IoLogoLinkedin,
   IoLogoInstagram,
   IoMdCheckmark,
+  IoIosGlobe,
   IoIosInformationCircleOutline,
 } from "react-icons/io";
 import {
   SummeryWrapper,
   Content,
   Left,
+  PartnerInfo,
+  LogoWrapper,
   Right,
   Name,
   Location,
@@ -18,25 +21,34 @@ import {
   BoxInfo,
   Website,
   Link,
+  Logo,
 } from "./styles";
 import useGlobalState from "hooks/useGlobal/useGlobalState";
+import useObjectPropsValue from "hooks/useObjectPropsValue";
 
 const Summery = () => {
   const { partnerDetail = {}, partnerDetailPage } = useGlobalState();
+  const { getValue, includeImageBaseUrl } = useObjectPropsValue();
   const data = React.useMemo(
     () => (partnerDetailPage ? partnerDetailPage[0] : {}),
     []
   );
-  console.log(partnerDetail);
   return (
     <SummeryWrapper>
       <Content>
         <Left>
-          <Name>{partnerDetail.name}</Name>
-          <Location>
-            <IoIosPin color={theme`colors.blue.500`} />
-            {partnerDetail.address}
-          </Location>
+          {partnerDetail.logo && partnerDetail.logo.length ? (
+            <LogoWrapper>
+              <Logo src={includeImageBaseUrl(partnerDetail.logo[0])} alt="" />
+            </LogoWrapper>
+          ) : null}
+          <PartnerInfo>
+            <Name>{partnerDetail.name}</Name>
+            <Location>
+              <IoIosPin color={theme`colors.blue.500`} />
+              {partnerDetail.address}
+            </Location>
+          </PartnerInfo>
         </Left>
         <Right>
           <Actions>
@@ -51,6 +63,15 @@ const Summery = () => {
                 {data.isverifedtext}
               </BoxInfo>
             )}
+            {partnerDetail.homepage && partnerDetail.homepage.length ? (
+              <BoxInfo
+                href={partnerDetail.homepage}
+                target="_blank"
+                title={partnerDetail.homepage}
+              >
+                <IoIosGlobe color={theme`colors.blue.500`} size="1.8rem" />
+              </BoxInfo>
+            ) : null}
             {partnerDetail.facebook ? (
               <BoxInfo href={partnerDetail.facebook} target="_blank">
                 <IoLogoFacebook color={theme`colors.blue.500`} size="1.8rem" />
@@ -67,11 +88,6 @@ const Summery = () => {
               </BoxInfo>
             ) : null}
           </Actions>
-          {partnerDetail.homepage && partnerDetail.homepage.length ? (
-            <Website href={partnerDetail.homepage} target="_blank">
-              <Link>{partnerDetail.homepage}</Link>
-            </Website>
-          ) : null}
         </Right>
       </Content>
     </SummeryWrapper>

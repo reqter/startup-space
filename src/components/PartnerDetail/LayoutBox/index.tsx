@@ -4,19 +4,19 @@ import { Layout, Header, Title } from "./styles";
 interface IProps {
   title?: string;
   actions?: () => React.ReactNode;
-  body?: () => React.ReactNode;
   width?: number;
+  height?: number;
 }
 
 const LayoutBox: React.FC<IProps> = ({
   title,
-  body,
   actions,
   width,
+  height,
   children,
 }) => {
   return (
-    <Layout width={width}>
+    <Layout width={width} height={height}>
       {title && (
         <Header>
           <Title>{title}</Title>

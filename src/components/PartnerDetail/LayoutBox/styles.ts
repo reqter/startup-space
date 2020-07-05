@@ -3,7 +3,11 @@ import { styled } from "linaria/lib/react";
 export const Layout = styled.div`
   @apply bg-white w-full p-8 overflow-hidden shadow rounded;
   width: ${({ width }) => (width ? `${width}px` : "100%")};
+  height: ${({ height }) => (height ? `${height}px` : "auto")};
   margin-bottom: 35px;
+  ${".leaflet-container"} {
+    height: 85%;
+  }
 `;
 
 export const Header = styled.div`
