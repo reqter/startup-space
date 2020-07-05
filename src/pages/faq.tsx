@@ -2,7 +2,12 @@ import React from "react";
 import MainLayout from "components/MainLayout";
 import { i18n } from "../../config/Next18Wrapper";
 import isServer from "utils/isServer";
-import { getToken, getHeaderData, getFooterData } from "hooks/useGlobalApi";
+import {
+  getToken,
+  getHeaderData,
+  getFooterData,
+  getFAQsPageData,
+} from "hooks/useGlobalApi";
 import useGlobalState from "hooks/useGlobal/useGlobalState";
 import useGlobalDispatch from "hooks/useGlobal/useGlobalDispatch";
 import useObjectPropsValue from "hooks/useObjectPropsValue";
@@ -12,8 +17,13 @@ import Content from "components/FAQ/ExpanderContent";
 import NewsLetter from "components/Common/NewsLetterSmall";
 
 const Faq = () => {
+  const { faqsPageData } = useGlobalState();
   const { dispatch } = useGlobalDispatch();
-  const { getValue } = useObjectPropsValue();
+  const { getValue, includeImageBaseUrl } = useObjectPropsValue();
+
+  const imgProp = getValue(faqsPageData, "headerimage");
+  const img =
+    imgProp && imgProp.length ? includeImageBaseUrl(imgProp[0]) : null;
 
   React.useEffect(() => {
     dispatch({
@@ -23,11 +33,11 @@ const Faq = () => {
   }, []);
 
   return (
-    <MainLayout title={"سئوالات متدوال"}>
+    <MainLayout title={getValue(faqsPageData, "name")}>
       <Header
-        image={null}
+        image={img}
         fallbackImage="https://i.pinimg.com/736x/fe/45/da/fe45daef11dd032c0ecbe7fdfee97057.jpg"
-        title="سوالات متداول"
+        title={getValue(faqsPageData, "headertitle")}
       />
       <Content />
       <NewsLetter />
@@ -41,14 +51,17 @@ Faq.getInitialProps = async (context) => {
     const currentLanguage = req ? req.language : i18n.language;
     try {
       const token = await getToken();
-      const [headerData, footerData] = await Promise.all([
+      const [headerData, faqsPageData, footerData] = await Promise.all([
         getHeaderData(currentLanguage),
+        getFAQsPageData(currentLanguage),
         getFooterData(currentLanguage),
       ]);
 
       return {
         token,
         headerData,
+        faqsPageData:
+          faqsPageData && faqsPageData.length ? faqsPageData[0] : {},
         footerData,
       };
     } catch (error) {

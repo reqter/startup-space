@@ -1,6 +1,6 @@
 import React from "react";
 import MainLayout from "components/MainLayout";
-import { i18n } from "../../config/Next18Wrapper";
+import { i18n } from "../../../config/Next18Wrapper";
 import isServer from "utils/isServer";
 import { getToken, getHeaderData, getFooterData } from "hooks/useGlobalApi";
 import useGlobalState from "hooks/useGlobal/useGlobalState";

@@ -15,7 +15,7 @@ const Map = () => {
     partnerDetail.location &&
     partnerDetail.location.latitude &&
     partnerDetail.location.longitude ? (
-    <LayoutBox title={data.mapboxtitle}>
+    <LayoutBox title={data.mapboxtitle} height={400}>
       <MapBox
         title={partnerDetail.name}
         lat={partnerDetail.location.latitude}
