@@ -1,5 +1,6 @@
 var tailwindcssLogical = require("tailwindcss-logical");
 module.exports = {
+  purge: ["./src/components/**/*.{js,ts,jsx,tsx}"],
   plugins: [require("tailwindcss-logical")],
   variants: {
     logical: ["responsive", "hover"],
