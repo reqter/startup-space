@@ -273,6 +273,9 @@ const useGlobalApi = () => {
     token,
     searchFormContentType,
     partnersPageData,
+    contactUsPageData,
+    faqsPageData,
+    faqsData,
   } = useGlobalState();
   const { dispatch } = useGlobalDispatch();
   const storeData = (key, value) =>
@@ -420,8 +423,33 @@ const useGlobalApi = () => {
       });
       if (onSuccess) onSuccess();
     } catch (error) {
-      console.log(error);
       if (onError) onError();
+    }
+  };
+  const _getContactUsPageData = () => {
+    if (!contactUsPageData) {
+      getContactUsPageData(currentLanguage, token).then((data) => {
+        storeData("contactUsPageData", data && data.length ? data[0] : null);
+      });
+    }
+  };
+  const _getFAQsPageData = () => {
+    if (!faqsPageData) {
+      getFAQsPageData(currentLanguage, token).then((data) => {
+        storeData("faqsPageData", data && data.length ? data[0] : null);
+      });
+    }
+  };
+  const _getFAQsData = () => {
+    if (!faqsData) {
+      getFAQsData(currentLanguage, token).then((data) => {
+        storeData(
+          "faqsData",
+          data.sort(function (a, b) {
+            return a.index - b.index;
+          })
+        );
+      });
     }
   };
   return {
@@ -437,6 +465,9 @@ const useGlobalApi = () => {
     _getPartnersPageData,
     _getPartnerProducts,
     _getPartnerComments,
+    _getContactUsPageData,
+    _getFAQsPageData,
+    _getFAQsData,
   };
 };
 export default useGlobalApi;

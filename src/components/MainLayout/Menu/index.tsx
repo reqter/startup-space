@@ -18,7 +18,13 @@ interface IProps {}
 
 const Header: React.FC<IProps> = (): JSX.Element => {
   const { headerData, landingData } = useGlobalState();
-  const { getHomeData, _getPartnersPageData } = useGlobalApi();
+  const {
+    getHomeData,
+    _getPartnersPageData,
+    _getContactUsPageData,
+    _getFAQsPageData,
+    _getFAQsData,
+  } = useGlobalApi();
   const headerObj = headerData ? headerData[0] : {};
   const router = useRouter();
   const [isSticky, setSticky] = useState<boolean>(false);
@@ -47,6 +53,13 @@ const Header: React.FC<IProps> = (): JSX.Element => {
   };
   function getOfficesData() {
     _getPartnersPageData();
+  }
+  function handleContactUsClicked() {
+    _getContactUsPageData();
+  }
+  function handleFAQClicked() {
+    _getFAQsPageData();
+    _getFAQsData();
   }
   return (
     <Wrapper isSticky={isSticky} isLanding={router.pathname === "/"}>
@@ -80,6 +93,7 @@ const Header: React.FC<IProps> = (): JSX.Element => {
             selected={router.pathname === `/faq`}
             isSticky={isSticky}
             isLanding={router.pathname === "/"}
+            onClick={handleFAQClicked}
           >
             <Link href={`/faq`}>
               <a>{headerObj.menuitem3text}</a>
@@ -98,6 +112,7 @@ const Header: React.FC<IProps> = (): JSX.Element => {
             selected={router.pathname === `/contact-us`}
             isSticky={isSticky}
             isLanding={router.pathname === "/"}
+            onClick={handleContactUsClicked}
           >
             <Link href={`/contact-us`}>
               <a>{headerObj.menuitem5text}</a>

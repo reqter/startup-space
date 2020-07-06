@@ -1,7 +1,8 @@
 import { styled } from "linaria/lib/react";
 
 export const ExpanderContainer = styled.div`
-  @apply flex flex-wrap items-start;
+  @apply flex flex-wrap items-start content-start;
+  min-height: 260px;
 `;
 export const ExpanderItemContainer = styled.div`
   @apply bg-gray-100 flex flex-col mb-4 w-1/2;
