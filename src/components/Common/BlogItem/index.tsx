@@ -1,18 +1,18 @@
 import React from "react";
 import { CardWrapper } from "./styles";
 import useObjectPropsValue from "hooks/useObjectPropsValue";
-const BlogCard = ({ data, actionName }) => {
+const BlogCard = ({ data, actionName, colSpan = 3 }) => {
   const { getValue, includeImageBaseUrl } = useObjectPropsValue();
   const img = data.thumbnail
     ? includeImageBaseUrl(data.thumbnail[0], "image", 500, 250)
     : "";
   return (
-    <CardWrapper>
-      <div className="max-w-sm rounded overflow-hidden shadow-lg">
+    <CardWrapper colSpan={colSpan}>
+      <div className="flex flex-col">
         <div style={{ height: 250 }}>
           <img className="h-full bg-cover" src={img} alt="" />
         </div>
-        <div className="px-6 py-4">
+        <div className="px-6 py-4 flex-1">
           <div className="font-bold text-xl mb-2">{data.name}</div>
         </div>
         <div className="px-6 py-4 flex flex-row-reverse">

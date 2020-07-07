@@ -8,22 +8,22 @@ export const Content = styled.div`
   @apply w-1150 m-auto h-full flex items-center py-3;
 `;
 export const PhoneNumber = styled.span`
-  @apply text-base flex relative;
+  @apply text-sm flex relative;
   margin-inline: 20px;
 `;
 export const iconStylePhone = css`
   position: absolute;
   left: -20px;
-  top: 3px;
+  top: 2px;
 `;
 export const Email = styled.div`
-  @apply text-base relative flex;
+  @apply text-sm relative flex;
   margin-inline: 20px;
 `;
 export const iconStyle = css`
   position: absolute;
   left: -20px;
-  top: 3px;
+  top: 2px;
 `;
 export const SocialLinks = styled.div`
   @apply flex-1 flex justify-end;

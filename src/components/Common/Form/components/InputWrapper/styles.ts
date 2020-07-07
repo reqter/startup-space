@@ -1,7 +1,6 @@
 import { styled } from "linaria/lib/react";
 export const Wrapper = styled.div`
   width: 100%;
-  margin-bottom: 15px;
 `;
 export const Label = styled.label`
   display: block;
