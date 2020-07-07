@@ -3,6 +3,7 @@ import Head from "next/head";
 import HeaderInfo from "./HeaderInfo";
 import Menu from "./Menu";
 import Footer from "./Footer";
+import { Modal } from "../Common/Modal";
 import { Main, Content } from "./styles";
 
 interface MainProps {
@@ -28,6 +29,7 @@ const MainComponent: React.FC<MainProps> = ({
       <Menu />
       <Content>{children}</Content>
       <Footer />
+      <Modal />
     </Main>
   );
 };

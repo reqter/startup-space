@@ -291,8 +291,18 @@ const useGlobalApi = () => {
   };
   const _getPartnersPageData = () => {
     if (!partnersPageData)
-      return getPartnersPageData(currentLanguage, token).then((data) => {
+      getPartnersPageData(currentLanguage, token).then((data) => {
         storeData("partnersPageData", data && data.length > 0 ? data[0] : {});
+      });
+    if (!searchFormContentType)
+      getContentTypeById("5ec23fa17e1a5d001b2c16f4", token).then((data) => {
+        const cType = data;
+        if (cType) {
+          cType.fields = cType.fields.sort(function (a, b) {
+            return a.order - b.order;
+          });
+        }
+        storeData("searchFormContentType", cType);
       });
   };
   const getOffices = (

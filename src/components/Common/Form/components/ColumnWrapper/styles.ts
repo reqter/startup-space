@@ -3,6 +3,7 @@ const _gutter_horizontal = 5;
 const gutter_horizontal = "5%";
 
 export const Wrapper = styled.div`
+  margin-bottom: 10px;
   display: flex;
   flex-direction: column;
   width: ${({ colSpan, fieldsLength, rowColumns }) => {

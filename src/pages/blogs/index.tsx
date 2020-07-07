@@ -7,7 +7,7 @@ import useGlobalState from "hooks/useGlobal/useGlobalState";
 import useGlobalDispatch from "hooks/useGlobal/useGlobalDispatch";
 import useObjectPropsValue from "hooks/useObjectPropsValue";
 import useGlobalApi from "hooks/useGlobalApi";
-import Header from "components/Common/PagesHeader";
+import Header from "components/Blogs/Header";
 import Content from "components/Blogs/Content";
 import NewsLetter from "components/Common/NewsLetterSmall";
 
@@ -24,11 +24,7 @@ const Blogs = () => {
 
   return (
     <MainLayout title={"لیست بلاگ ها"}>
-      <Header
-        image={null}
-        fallbackImage="https://i.pinimg.com/736x/fe/45/da/fe45daef11dd032c0ecbe7fdfee97057.jpg"
-        title="لیست بلاگ ها"
-      />
+      <Header />
       <Content />
       <NewsLetter />
     </MainLayout>

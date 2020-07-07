@@ -24,17 +24,18 @@ export const Divider = styled.div`
   height: 2px;
   &:after {
     content: "";
-    @apply absolute bg-blue-500 w-1/3 top-0 z-10;
+    @apply absolute bg-blue-500 w-1/3 top-0;
     height: 2px;
     inset-inline-start: 0;
+    z-index: 1;
   }
 `;
 
 export const Actions = styled.div`
-  @apply flex items-center pt-3;
+  @apply flex items-center;
 `;
 export const ActionsTitle = styled.h4`
-  @apply;
+  @apply mt-5 mb-2;
 `;
 
 export const Button = styled.button`

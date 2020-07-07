@@ -147,7 +147,7 @@ const ReferenceInput = ({ field, mode, initialValue, filter }) => {
           placeholder={
             field.description ? field.description[currentLanguage] : ""
           }
-          menuPlacement="bottom"
+          menuPlacement="top"
           closeMenuOnScroll={true}
           closeMenuOnSelect={!field.isList}
           menuContainerStyle={{ zIndex: 9999 }}
@@ -161,6 +161,10 @@ const ReferenceInput = ({ field, mode, initialValue, filter }) => {
               ...base,
               fontSize: "13px",
             }),
+            menuList: (provided, state) => {
+              const maxHeight = 200;
+              return { ...provided, maxHeight };
+            },
           }}
           isMulti={field.isList}
           isDisabled={mode === "view" ? true : false}

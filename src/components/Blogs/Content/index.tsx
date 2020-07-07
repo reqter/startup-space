@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import Section from "components/Common/Section";
-import { Container, Button } from "./styles";
-import BlogItem from "components/Common/BlogItem";
-import Loading from "components/Common/CardSkeleton";
+import { Container } from "./styles";
+import List from "../List";
+import SideBar from "../SideBar";
 import useGlobalState from "hooks/useGlobal/useGlobalState";
 import useGlobalApi from "hooks/useGlobalApi";
 
@@ -22,21 +22,11 @@ const Content = () => {
     );
   }, []);
   return (
-    <Section bgColor={theme`colors.white`}>
+    <Section bgColor={theme`colors.gray.100`}>
       <Container>
-        {loading ? (
-          <>
-            <Loading colSpan={3} />
-            <Loading colSpan={3} />
-            <Loading colSpan={3} />
-          </>
-        ) : blogsData ? (
-          blogsData.map((item, index) => (
-            <BlogItem key={index} data={item} actionName="Read more..." />
-          ))
-        ) : null}
+        <List data={blogsData} loading={loading} />
+        <SideBar data={blogsData} />
       </Container>
-      <Button>Load More...</Button>
     </Section>
   );
 };

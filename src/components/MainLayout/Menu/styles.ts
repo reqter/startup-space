@@ -1,8 +1,8 @@
 import { styled } from "linaria/lib/react";
 export const Wrapper = styled.header`
   @apply w-full bg-gray-100  shadow-md transition ease-linear duration-75 z-50;
-  background-color: ${({ isSticky, isLanding }) =>
-    !isLanding
+  background-color: ${({ isSticky, isTransparent }) =>
+    !isTransparent
       ? theme`colors.white`
       : isSticky
       ? "white"
@@ -23,10 +23,10 @@ export const Menu = styled.ul`
 `;
 export const MenuItem = styled.li`
   @apply font-bold px-6 cursor-pointer;
-  color: ${({ selected, isSticky, isLanding }) =>
+  color: ${({ selected, isSticky, isTransparent }) =>
     selected
       ? theme`colors.blue.500`
-      : !isLanding
+      : !isTransparent
       ? theme`colors.black`
       : !isSticky
       ? theme`colors.white`

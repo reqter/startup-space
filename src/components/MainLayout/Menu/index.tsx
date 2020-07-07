@@ -61,8 +61,11 @@ const Header: React.FC<IProps> = (): JSX.Element => {
     _getFAQsPageData();
     _getFAQsData();
   }
+  function checkIsTransparent() {
+    return router.pathname === "/";
+  }
   return (
-    <Wrapper isSticky={isSticky} isLanding={router.pathname === "/"}>
+    <Wrapper isSticky={isSticky} isTransparent={checkIsTransparent()}>
       <Content>
         {router.pathname !== "/" || isSticky ? (
           <Logo src={headerObj["logo2"]} />
@@ -75,14 +78,14 @@ const Header: React.FC<IProps> = (): JSX.Element => {
             selected={router.pathname === "/"}
             isSticky={isSticky}
             onClick={_getHomeData}
-            isLanding={router.pathname === "/"}
+            isTransparent={checkIsTransparent()}
           >
             {headerObj.menuitem1text}
           </MenuItem>
           <MenuItem
             selected={router.pathname === `/offices`}
             isSticky={isSticky}
-            isLanding={router.pathname === "/"}
+            isTransparent={checkIsTransparent()}
             onClick={getOfficesData}
           >
             <Link href={`/offices`}>
@@ -92,7 +95,7 @@ const Header: React.FC<IProps> = (): JSX.Element => {
           <MenuItem
             selected={router.pathname === `/faq`}
             isSticky={isSticky}
-            isLanding={router.pathname === "/"}
+            isTransparent={checkIsTransparent()}
             onClick={handleFAQClicked}
           >
             <Link href={`/faq`}>
@@ -102,7 +105,7 @@ const Header: React.FC<IProps> = (): JSX.Element => {
           <MenuItem
             selected={router.pathname === `/blogs`}
             isSticky={isSticky}
-            isLanding={router.pathname === "/"}
+            isTransparent={checkIsTransparent()}
           >
             <Link href={`/blogs`}>
               <a>{headerObj.menuitem4text}</a>
@@ -111,7 +114,7 @@ const Header: React.FC<IProps> = (): JSX.Element => {
           <MenuItem
             selected={router.pathname === `/contact-us`}
             isSticky={isSticky}
-            isLanding={router.pathname === "/"}
+            isTransparent={checkIsTransparent()}
             onClick={handleContactUsClicked}
           >
             <Link href={`/contact-us`}>
