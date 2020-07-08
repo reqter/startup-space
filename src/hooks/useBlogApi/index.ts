@@ -91,12 +91,18 @@ const getTagsData = async (lang: string, token?: string) => {
 
 const getBlogsListData = async (
   lang: string,
+  skip: number,
   limit: number,
+  categoryId: number,
+  tags: number,
   token?: string
 ) => {
-  return await fetcher(
-    urls.blogs + `?lang=${lang}&limit=${limit}&loadrelations=false`
-  )({
+  const url =
+    urls.blogs +
+    `?lang=${lang}&skip=${skip}&limit=${limit}${
+      categoryId ? "&categoryid=" + categoryId : ""
+    }${tags ? "&tags=" + tags : ""}&loadrelations=false`;
+  return await fetcher(url)({
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -159,8 +165,15 @@ const useBlogApi = () => {
       });
     }
   };
-  const _getBlogsList = async (limit: number, onSuccess, onError) => {
-    getBlogsListData(currentLanguage, limit, token)
+  const _getBlogsList = async (
+    skip: number,
+    limit: number,
+    categoryId,
+    tags,
+    onSuccess,
+    onError
+  ) => {
+    getBlogsListData(currentLanguage, skip, limit, categoryId, tags, token)
       .then((data) => {
         if (onSuccess) {
           onSuccess(data);

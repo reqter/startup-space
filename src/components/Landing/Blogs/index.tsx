@@ -18,7 +18,10 @@ const Spaces = () => {
     if (isVisible)
       if (!blogsData)
         _getBlogsList(
+          0,
           3,
+          null,
+          null,
           (data) => setBlogs(data),
           () => {}
         );
