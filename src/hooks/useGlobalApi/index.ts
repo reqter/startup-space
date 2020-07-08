@@ -50,6 +50,11 @@ const getOfficesData = async (
   lang: string,
   token?: string
 ) => {
+  let name: string = "";
+  if (filteredData["name"]) {
+    name = filteredData["name"];
+    delete filteredData["name"];
+  }
   const search = Object.keys(filteredData).reduce((acc, key) => {
     if (filteredData[key]) {
       acc["fields." + key] = filteredData[key];
@@ -63,7 +68,7 @@ const getOfficesData = async (
       "Content-Type": "application/json",
       authorization: "Bearer " + (getLocalToken() || token),
     },
-    body: JSON.stringify({ search }),
+    body: JSON.stringify({ search, name }),
   });
 };
 const getMostPopularPartners = async (
@@ -105,17 +110,7 @@ const getAgentsData = async (lang: string, limit: number, token?: string) => {
     },
   });
 };
-const getBlogsData = async (lang: string, limit: number, token?: string) => {
-  return await fetcher(
-    urls.blogs + `?lang=${lang}&limit=${limit}&loadrelations=false`
-  )({
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      authorization: "Bearer " + (getLocalToken() || token),
-    },
-  });
-};
+
 const getFooterData = async (lang: string) => {
   return await fetcher(urls.footer + `?lang=${lang}&loadrelations=false`)({
     method: "GET",
@@ -336,15 +331,6 @@ const useGlobalApi = () => {
       storeData("agentsData", data)
     );
   };
-  const getBlogs = async (limit: number, onSuccess, onError) => {
-    getBlogsData(currentLanguage, limit, token)
-      .then((data) => {
-        if (onSuccess) {
-          onSuccess(data);
-        }
-      })
-      .catch(() => onError && onError());
-  };
   const getDataByCtypeId = async (
     ctypeId: string,
     storeName: string,
@@ -468,7 +454,6 @@ const useGlobalApi = () => {
     getOffices,
     getCities,
     getAgents,
-    getBlogs,
     getHomeData,
     getDataByCtypeId,
     getPopularOffices,
@@ -489,7 +474,6 @@ export {
   getOfficesData,
   getCitiesData,
   getAgentsData,
-  getBlogsData,
   getFooterData,
   getContentTypeById,
   getPartnersPageData,

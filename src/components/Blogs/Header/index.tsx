@@ -11,25 +11,24 @@ import useGlobalState from "hooks/useGlobal/useGlobalState";
 import useObjectPropsValue from "hooks/useObjectPropsValue";
 
 const BlogHeader = ({}) => {
-  const { currentLanguage } = useGlobalState();
+  const { blogsPageData, lastBlogItem } = useGlobalState();
   const { getValue, includeImageBaseUrl } = useObjectPropsValue();
-  // const bg = getValue(data, "images");
-  // const img = bg ? includeImageBaseUrl(bg[0], "image", 500, 300) : "";
+
+  const img =
+    lastBlogItem && lastBlogItem.thumbnail
+      ? includeImageBaseUrl(lastBlogItem.thumbnail[0], "image", 1024, 350)
+      : "";
   return (
     <Wrapper
       target="_blank"
       rel="noopener noreferrer"
       // href={`${currentLanguage}/offices/${data?._id}`}
     >
-      <Image
-        bgImage={
-          "https://originworkspace.co.uk/app/uploads/2020/02/ORIGIN-BLOG-HEADER-5.jpg"
-        }
-      />
+      <Image bgImage={img} />
       <Content>
         <TextContainer>
-          <Name>رشد استارتاپ ها زیر چتر فضاهای کار اشتراکی</Name>
-          <Location>نمایش جزئیات</Location>
+          <Name>{getValue(lastBlogItem, "name")}</Name>
+          <Location>{getValue(blogsPageData, "blogitemactiontext")}</Location>
         </TextContainer>
       </Content>
     </Wrapper>

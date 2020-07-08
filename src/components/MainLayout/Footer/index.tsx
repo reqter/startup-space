@@ -15,7 +15,7 @@ const Footer = () => {
     isVisibleFooter,
     curentRouterName,
   } = useGlobalState();
-  const footer = footerData ? footerData[0] : {};
+  const footer = footerData && footerData.length ? footerData[0] : {};
   const handleChange = (isVisible: boolean) => {
     if (isVisible) {
       dispatch({

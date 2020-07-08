@@ -38,7 +38,7 @@ const FilterBox = ({ dataList }) => {
       : {};
   };
   const [fullName, setFullName] = React.useState(
-    partnersPageUrlQuery ? partnersPageUrlQuery["fullname"] : ""
+    partnersPageUrlQuery ? partnersPageUrlQuery[nameField().name] : ""
   );
   const actionsTitle = () =>
     searchFormContentType && searchFormContentType.fields
@@ -87,7 +87,7 @@ const FilterBox = ({ dataList }) => {
   function handleFilterData() {
     const values = formRef.current.getValues();
     if (fullName && fullName.length) {
-      values["fullname"] = fullName;
+      values[nameField().name] = fullName;
     }
     dispatch({
       type: "SET_PARTNERS_QUERY_DATA",

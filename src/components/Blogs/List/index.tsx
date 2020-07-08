@@ -2,8 +2,11 @@ import { ListContainer, Button } from "./styles";
 import BlogItem from "components/Common/BlogItem";
 import Loading from "components/Common/CardSkeleton";
 import useGlobalState from "hooks/useGlobal/useGlobalState";
+import useObjectPropsValue from "hooks/useObjectPropsValue";
 
 const BlogsList = ({ loading, data = [] }) => {
+  const { blogsPageData } = useGlobalState();
+  const { getValue } = useObjectPropsValue();
   return (
     <ListContainer>
       {loading ? (
@@ -19,7 +22,7 @@ const BlogsList = ({ loading, data = [] }) => {
                 <BlogItem
                   key={index}
                   data={item}
-                  actionName="Read more..."
+                  actionName={getValue(blogsPageData, "blogitemactiontext")}
                   colSpan={2}
                 />
               ))

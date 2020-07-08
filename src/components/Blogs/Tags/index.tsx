@@ -3,30 +3,17 @@ import SidebarLayout from "../SidbarLayout";
 import Item from "./Item";
 import useGlobalState from "hooks/useGlobal/useGlobalState";
 import useObjectPropsValue from "hooks/useObjectPropsValue";
-import useGlobalDispatch from "hooks/useGlobal/useGlobalDispatch";
 
 const Tags = () => {
-  const { getValue, paramsToValidValueType } = useObjectPropsValue();
+  const { blogsPageData, tags } = useGlobalState();
+  const { getValue } = useObjectPropsValue();
 
   return (
-    <SidebarLayout title="Tags">
+    <SidebarLayout title={getValue(blogsPageData, "tagsboxtitle")}>
       <TagsContainer>
-        {[
-          { name: "Travel" },
-          { name: "Adventure" },
-          { name: "Food" },
-          { name: "Lifestyle" },
-          { name: "Business" },
-          { name: "Freelancing" },
-          { name: "Travel" },
-          { name: "Adventure" },
-          { name: "Food" },
-          { name: "Lifestyle" },
-          { name: "Business" },
-          { name: "Freelancing" },
-        ].map((item) => (
-          <Item data={item} />
-        ))}
+        {tags
+          ? tags.map((item, index) => <Item key={index} data={item} />)
+          : null}
       </TagsContainer>
     </SidebarLayout>
   );

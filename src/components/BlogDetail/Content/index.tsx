@@ -8,7 +8,6 @@ import useGlobalState from "hooks/useGlobal/useGlobalState";
 import useGlobalApi from "hooks/useGlobalApi";
 
 const Content = () => {
-  const { getBlogs } = useGlobalApi();
   const { landingData } = useGlobalState();
   const [loading, toggleLoading] = useState(true);
   const [blogsData, setBlogs] = useState([]);
@@ -17,7 +16,7 @@ const Content = () => {
     <Section bgColor={theme`colors.gray.100`}>
       <Container>
         <Detail />
-        <SideBar data={blogsData} />
+        <SideBar />
       </Container>
       <RelatedBlogs />
     </Section>

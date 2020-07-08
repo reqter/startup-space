@@ -71,7 +71,10 @@ PartnerDetail.getInitialProps = async (context) => {
       return {
         token,
         headerData,
-        partnerDetail: partnerDetail ? partnerDetail.data : {},
+        partnerDetail:
+          partnerDetail && partnerDetail.data ? partnerDetail.data.fields : {},
+        partnerDetailId:
+          partnerDetail && partnerDetail.data ? partnerDetail.data._id : "",
         partnerDetailPage,
         footerData,
       };

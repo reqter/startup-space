@@ -1,4 +1,5 @@
 import useGlobalState from "hooks/useGlobal/useGlobalState";
+import useObjectPropsValue from "hooks/useObjectPropsValue";
 import {
   IoIosCall,
   IoMdMail,
@@ -22,6 +23,7 @@ import {
 const HeaderInfo = () => {
   const { headerData } = useGlobalState();
   const data = headerData ? headerData[0] : {};
+  const { getValue } = useObjectPropsValue();
 
   function handleFBClicked() {
     window.open(data.facebookurl, "_blank");
@@ -36,32 +38,32 @@ const HeaderInfo = () => {
   return (
     <Wrapper>
       <Content>
-        {data.phonenumber && (
+        {data && data.phonenumber && (
           <PhoneNumber>
             <IoIosCall className={iconStylePhone} />
-            {data.phonenumber}
+            {getValue(data, "phonenumber")}
           </PhoneNumber>
         )}
-        {data.email && (
+        {data && data.email && (
           <Email>
             <IoMdMail className={iconStyle} />
-            {data.email}
+            {getValue(data, "email")}
           </Email>
         )}
         <SocialLinks>
-          {data.facebookurl && (
+          {data && data.facebookurl && (
             <IoLogoFacebook
               className={facebookStyle}
               onClick={handleFBClicked}
             />
           )}
-          {data.instagramurl && (
+          {data && data.instagramurl && (
             <IoLogoInstagram
               className={instagramStyle}
               onClick={handleInstagramClicked}
             />
           )}
-          {data.linkedinurl && (
+          {data && data.linkedinurl && (
             <IoLogoLinkedin
               className={linkedinStyle}
               onClick={handleLinkedinClicked}
