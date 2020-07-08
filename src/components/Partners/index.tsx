@@ -28,6 +28,7 @@ const Spaces = () => {
     if (!loading) {
       toggleLoading(true);
     }
+
     let params = {};
     if (needsUrlQueryToConvert) {
       const _fields =
@@ -36,7 +37,6 @@ const Spaces = () => {
           : [];
       const fields = _fields.filter(
         (item) =>
-          item.name !== "name" &&
           item.name !== "actionstitle" &&
           item.name !== "action1text" &&
           item.name !== "action2text"
@@ -56,13 +56,6 @@ const Spaces = () => {
       params = paramsToValidValueType(fields, p);
     } else {
       params = partnersPageUrlQuery;
-    }
-    if (
-      partnersPageUrlQuery &&
-      partnersPageUrlQuery["fullname"] &&
-      partnersPageUrlQuery["fullname"].length
-    ) {
-      params["fullname"] = partnersPageUrlQuery["fullname"];
     }
     getOffices(skip, limit, params, (data) => {
       toggleLoading(false);

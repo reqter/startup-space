@@ -21,4 +21,7 @@ export const urls = {
   faqsPageGuid: "5f018622911086001a082673",
   faqsCollectionGuid: "5f0185a8911086001a082672",
   contactUsGuid: "5f01b26e911086001a08267b",
+  blogsPageGuid: "5f0610d7911086001a0827d9",
+  blogsCategoriesGuid: "5f047dc2911086001a08272a",
+  blogsTagsGuid: "5f0490d4911086001a082739",
 };

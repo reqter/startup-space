@@ -5,10 +5,10 @@ import { Button } from "./styles";
 import Section from "../../Common/Section";
 import List from "./BlogList";
 import useGlobalState from "hooks/useGlobal/useGlobalState";
-import useGlobalApi from "hooks/useGlobalApi";
+import useBlogApi from "hooks/useBlogApi";
 
 const Spaces = () => {
-  const { getBlogs } = useGlobalApi();
+  const { _getBlogsList } = useBlogApi();
   const { landingData, blogsData } = useGlobalState();
   const [blogsList, setBlogs] = React.useState([]);
   const data = React.useMemo(() => (landingData ? landingData[0] : {}), [
@@ -17,7 +17,7 @@ const Spaces = () => {
   function handleChange(isVisible: boolean) {
     if (isVisible)
       if (!blogsData)
-        getBlogs(
+        _getBlogsList(
           3,
           (data) => setBlogs(data),
           () => {}

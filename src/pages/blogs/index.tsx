@@ -3,15 +3,22 @@ import MainLayout from "components/MainLayout";
 import { i18n } from "../../../config/Next18Wrapper";
 import isServer from "utils/isServer";
 import { getToken, getHeaderData, getFooterData } from "hooks/useGlobalApi";
+import {
+  getBlogsPageData,
+  getLastBlog,
+  getCategorisData,
+  getNewestBlogs,
+  getTagsData,
+} from "hooks/useBlogApi";
 import useGlobalState from "hooks/useGlobal/useGlobalState";
 import useGlobalDispatch from "hooks/useGlobal/useGlobalDispatch";
 import useObjectPropsValue from "hooks/useObjectPropsValue";
-import useGlobalApi from "hooks/useGlobalApi";
 import Header from "components/Blogs/Header";
 import Content from "components/Blogs/Content";
 import NewsLetter from "components/Common/NewsLetterSmall";
 
 const Blogs = () => {
+  const { blogsPageData } = useGlobalState();
   const { dispatch } = useGlobalDispatch();
   const { getValue } = useObjectPropsValue();
 
@@ -23,7 +30,7 @@ const Blogs = () => {
   }, []);
 
   return (
-    <MainLayout title={"لیست بلاگ ها"}>
+    <MainLayout title={getValue(blogsPageData, "name")}>
       <Header />
       <Content />
       <NewsLetter />
@@ -37,14 +44,34 @@ Blogs.getInitialProps = async (context) => {
     const currentLanguage = req ? req.language : i18n.language;
     try {
       const token = await getToken();
-      const [headerData, footerData] = await Promise.all([
+      const [
+        headerData,
+        blogsPageData,
+        lastBlogItem,
+        blogsCategories,
+        newestBlogs,
+        tags,
+        footerData,
+      ] = await Promise.all([
         getHeaderData(currentLanguage),
+        getBlogsPageData(currentLanguage, token),
+        getLastBlog(currentLanguage, token),
+        getCategorisData(currentLanguage, token),
+        getNewestBlogs(currentLanguage, token),
+        getTagsData(currentLanguage, token),
         getFooterData(currentLanguage),
       ]);
 
       return {
         token,
         headerData,
+        blogsPageData:
+          blogsPageData && blogsPageData.length ? blogsPageData[0] : {},
+        lastBlogItem:
+          lastBlogItem && lastBlogItem.length ? lastBlogItem[0] : {},
+        blogsCategories,
+        newestBlogs,
+        tags,
         footerData,
       };
     } catch (error) {

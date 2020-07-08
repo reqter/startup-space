@@ -14,12 +14,14 @@ export const Location = styled.div`
   @apply text-sm;
 `;
 export const Image = styled.div`
-  @apply bg-cover absolute h-full w-full z-10 transition duration-500;
+  @apply bg-fixed absolute h-full w-full z-10 transition duration-500;
   background-image: ${({ bgImage }) => `url(${bgImage})`};
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
 `;
 export const Wrapper = styled.div`
   @apply relative cursor-pointer overflow-hidden w-full;
-  height: 350px;
+  height: 400px;
   margin-top: 100px;
   &:hover {
     ${Content} {
