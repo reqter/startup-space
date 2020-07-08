@@ -17,7 +17,7 @@ const Service = () => {
   const data = React.useMemo(() => (landingData ? landingData[0] : {}), [
     landingData,
   ]);
-  return (
+  return data.isservicesenabled ? (
     <Wrapper>
       <Content>
         <Left>
@@ -32,6 +32,6 @@ const Service = () => {
         </Right>
       </Content>
     </Wrapper>
-  );
+  ) : null;
 };
 export default Service;

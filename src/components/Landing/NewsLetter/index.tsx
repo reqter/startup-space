@@ -39,7 +39,7 @@ const NewsLetter = () => {
         );
       },
     });
-  return (
+  return data.isnewsletterenabled ? (
     <Section bgColor={theme`colors.gray.200`}>
       <Container>
         <ImageBox bgUrl={data.newslettermedia} />
@@ -62,6 +62,6 @@ const NewsLetter = () => {
         </FormBox>
       </Container>
     </Section>
-  );
+  ) : null;
 };
 export default NewsLetter;

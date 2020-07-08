@@ -23,7 +23,7 @@ const Spaces = () => {
           () => {}
         );
   }
-  return (
+  return data.isblogenabled ? (
     <VisibilitySensor
       onChange={handleChange}
       partialVisibility={true}
@@ -42,6 +42,6 @@ const Spaces = () => {
         </Button>
       </Section>
     </VisibilitySensor>
-  );
+  ) : null;
 };
 export default Spaces;

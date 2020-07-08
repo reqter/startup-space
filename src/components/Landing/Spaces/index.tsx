@@ -24,31 +24,30 @@ const Spaces = () => {
           setDataList(result);
         });
   }
-  return React.useMemo(() => {
-    return (
-      <VisibilitySensor
-        onChange={handleChange}
-        partialVisibility={true}
-        offset={{ bottom: -100 }}
-      >
-        {(isVisible) =>
-          isVisible && (
-            <Section
-              bgColor={theme`colors.gray.100`}
-              title={data.officesheading}
-              header={data.officestitle}
-            >
-              <SpacesList officesData={dataList} />
-              <Button>
-                <Link href={`/offices`}>
-                  {data && data.officesactiontext ? data.officesactiontext : ""}
-                </Link>
-              </Button>
-            </Section>
-          )
-        }
-      </VisibilitySensor>
-    );
-  }, [landingData, dataList]);
+
+  return data.isofficesenabled ? (
+    <VisibilitySensor
+      onChange={handleChange}
+      partialVisibility={true}
+      offset={{ bottom: -100 }}
+    >
+      {(isVisible) =>
+        isVisible && (
+          <Section
+            bgColor={theme`colors.gray.100`}
+            title={data.officesheading}
+            header={data.officestitle}
+          >
+            <SpacesList officesData={dataList} />
+            <Button>
+              <Link href={`/offices`}>
+                {data && data.officesactiontext ? data.officesactiontext : ""}
+              </Link>
+            </Button>
+          </Section>
+        )
+      }
+    </VisibilitySensor>
+  ) : null;
 };
 export default Spaces;
