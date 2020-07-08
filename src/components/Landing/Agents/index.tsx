@@ -15,7 +15,7 @@ const Agents = ({}) => {
   function handleChange(isVisible: boolean) {
     if (isVisible) if (!agentsData) getAgents(3);
   }
-  return (
+  return data.isagentsenabled ? (
     <VisibilitySensor
       onChange={handleChange}
       partialVisibility={true}
@@ -30,6 +30,6 @@ const Agents = ({}) => {
         <Button>{data.agentsactiontext}</Button>
       </Section>
     </VisibilitySensor>
-  );
+  ) : null;
 };
 export default Agents;

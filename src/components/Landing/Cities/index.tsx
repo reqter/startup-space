@@ -15,23 +15,22 @@ const Cities = ({}) => {
   function handleChange(isVisible: boolean) {
     if (isVisible) if (!citiesData) getCities(4);
   }
-  return React.useMemo(() => {
-    return (
-      <VisibilitySensor
-        onChange={handleChange}
-        partialVisibility={true}
-        offset={{ bottom: -100 }}
+
+  return data.isareaenabled ? (
+    <VisibilitySensor
+      onChange={handleChange}
+      partialVisibility={true}
+      offset={{ bottom: -100 }}
+    >
+      <Section
+        bgImage={data.areabackground}
+        title={data.areaheading}
+        header={data.areatitle}
       >
-        <Section
-          bgImage={data.areabackground}
-          title={data.areaheading}
-          header={data.areatitle}
-        >
-          <CityList />
-          <Button>{getValue(data, "areaactiontext")}</Button>
-        </Section>
-      </VisibilitySensor>
-    );
-  }, [citiesData, landingData]);
+        <CityList />
+        <Button>{getValue(data, "areaactiontext")}</Button>
+      </Section>
+    </VisibilitySensor>
+  ) : null;
 };
 export default Cities;
