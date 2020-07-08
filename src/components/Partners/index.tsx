@@ -57,6 +57,13 @@ const Spaces = () => {
     } else {
       params = partnersPageUrlQuery;
     }
+    if (
+      partnersPageUrlQuery &&
+      partnersPageUrlQuery["fullname"] &&
+      partnersPageUrlQuery["fullname"].length
+    ) {
+      params["fullname"] = partnersPageUrlQuery["fullname"];
+    }
     getOffices(skip, limit, params, (data) => {
       toggleLoading(false);
       setData(data);

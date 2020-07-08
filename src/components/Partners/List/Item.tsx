@@ -21,7 +21,7 @@ const SpacesItem = ({ data }) => {
     <CardWrapper
       target="_blank"
       rel="noopener noreferrer"
-      href={`/${currentLanguage}/offices/${data._id}`}
+      href={`/${currentLanguage}/offices/${data.partnerkey}`}
     >
       <ImageBox>
         <Image src={img} alt="" />

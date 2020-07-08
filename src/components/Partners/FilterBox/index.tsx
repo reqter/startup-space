@@ -38,7 +38,7 @@ const FilterBox = ({ dataList }) => {
       : {};
   };
   const [fullName, setFullName] = React.useState(
-    partnersPageUrlQuery ? partnersPageUrlQuery[nameField().name] : ""
+    partnersPageUrlQuery ? partnersPageUrlQuery["fullname"] : ""
   );
   const actionsTitle = () =>
     searchFormContentType && searchFormContentType.fields
