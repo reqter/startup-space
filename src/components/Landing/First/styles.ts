@@ -11,7 +11,7 @@ export const Content = styled.div`
   @apply w-1150 flex m-auto;
 `;
 export const Left = styled.div`
-  @apply mt-64 w-1/2;
+  @apply mt-56 w-1/2;
 `;
 export const Right = styled.div`
   @apply mt-40  w-1/2;

@@ -168,7 +168,7 @@ const getPartnerDetailById = async (
   lang: string,
   token?: string
 ) => {
-  return await fetcher(urls.partnerDetailUrl + `?id=${id}&lang=${lang}`)({
+  return await fetcher(urls.partnerDetailUrl + `?key=${id}&lang=${lang}`)({
     method: "GET",
     headers: {
       "Content-Type": "application/json",

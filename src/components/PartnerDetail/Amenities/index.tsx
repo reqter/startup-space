@@ -1,15 +1,13 @@
 import React from "react";
-import { IoMdBook } from "react-icons/io";
+import Icon from "components/Common/Icon";
 import LayoutBox from "../LayoutBox";
 import useGlobalState from "hooks/useGlobal/useGlobalState";
+import useObjectPropsValue from "hooks/useObjectPropsValue";
 import { AmenitiesContainer, Amenit, Name } from "./styles";
 
 const Amenities = () => {
-  const {
-    partnerDetail,
-    partnerDetailPage,
-    currentLanguage,
-  } = useGlobalState();
+  const { partnerDetail, partnerDetailPage } = useGlobalState();
+  const { getValue } = useObjectPropsValue();
   const data = React.useMemo(
     () => (partnerDetailPage ? partnerDetailPage[0] : {}),
     []
@@ -21,14 +19,8 @@ const Amenities = () => {
       <AmenitiesContainer>
         {partnerDetail.amenities.map((item, index) => (
           <Amenit key={index}>
-            <IoMdBook />
-            <Name>
-              {item.fields &&
-              item.fields.name &&
-              item.fields.name[currentLanguage]
-                ? item.fields.name[currentLanguage]
-                : item.fields.name}
-            </Name>
+            <Icon name={getValue(item, "fields.icon")} />
+            <Name>{getValue(item, "fields.name")}</Name>
           </Amenit>
         ))}
       </AmenitiesContainer>
