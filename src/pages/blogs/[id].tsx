@@ -1,5 +1,6 @@
 import React from "react";
 import MainLayout from "components/MainLayout";
+import Content from "components/BlogDetail/Content";
 import { i18n } from "../../../config/Next18Wrapper";
 import isServer from "utils/isServer";
 import { getToken, getHeaderData, getFooterData } from "hooks/useGlobalApi";
@@ -18,7 +19,11 @@ const BlogDetail = () => {
     });
   }, []);
 
-  return <MainLayout></MainLayout>;
+  return (
+    <MainLayout>
+      <Content />
+    </MainLayout>
+  );
 };
 
 BlogDetail.getInitialProps = async (context) => {
