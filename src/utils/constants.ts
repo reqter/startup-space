@@ -24,4 +24,5 @@ export const urls = {
   blogsPageGuid: "5f0610d7911086001a0827d9",
   blogsCategoriesGuid: "5f047dc2911086001a08272a",
   blogsTagsGuid: "5f0490d4911086001a082739",
+  commentsCollectionGuid: "5d3eeaba915bfb00174547f4",
 };

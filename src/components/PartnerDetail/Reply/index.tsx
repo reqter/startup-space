@@ -12,7 +12,11 @@ const Reply = () => {
   const formRef = React.useRef(null);
   const [dataList, setData] = React.useState<object[]>();
   const { _getPartnerComments } = useGlobalApi();
-  const { currentLanguage, partnerDetailPage } = useGlobalState();
+  const {
+    currentLanguage,
+    partnerDetailPage,
+    partnerDetailId,
+  } = useGlobalState();
   const data = React.useMemo(
     () => (partnerDetailPage ? partnerDetailPage[0] : {}),
     []
@@ -22,7 +26,7 @@ const Reply = () => {
       _getPartnerComments(
         0,
         25,
-        router.query.id as string,
+        partnerDetailId,
         (result) => setData(result),
         () => {}
       );

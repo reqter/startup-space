@@ -1,62 +1,58 @@
 import React from "react";
-import { useRouter } from "next/router";
 import Form from "components/Common/Form";
 import { CommentFormContainer, Title, Button } from "./styles";
 import useGlobalState from "hooks/useGlobal/useGlobalState";
-import useGlobalApi from "hooks/useGlobalApi";
-const Reply = () => {
-  const router = useRouter();
-  const formRef = React.useRef(null);
-  const [dataList, setData] = React.useState<object[]>();
-  const { _getPartnerComments } = useGlobalApi();
-  const { currentLanguage, partnerDetailPage } = useGlobalState();
-  const data = React.useMemo(
-    () => (partnerDetailPage ? partnerDetailPage[0] : {}),
-    []
-  );
+import useObjectPropsValue from "hooks/useObjectPropsValue";
 
+const Reply = () => {
+  const formRef = React.useRef(null);
+  const { currentLanguage, blogsPageData } = useGlobalState();
+  const { getValue } = useObjectPropsValue();
   return (
     <CommentFormContainer>
-      <Title>Leave a comment</Title>
+      <Title>{getValue(blogsPageData, "detailreplytitle")}</Title>
       <Form
         ref={formRef}
         mode="new"
-        rowColumns={1}
+        rowColumns={2}
         filters={{}}
         initialValues={{}}
         fieldsArray={[
           {
-            name: "a",
+            name: "name",
             type: "string",
             description: {
-              [currentLanguage]: "Name",
+              [currentLanguage]: getValue(
+                blogsPageData,
+                "detailnameinputplaceholder"
+              ),
             },
           },
           {
-            name: "aa",
+            name: "email",
             type: "string",
             description: {
-              [currentLanguage]: "Email",
+              [currentLanguage]: getValue(
+                blogsPageData,
+                "detailemailinputplaceholder"
+              ),
             },
           },
           {
-            name: "aa",
-            type: "string",
-            description: {
-              [currentLanguage]: "Website",
-            },
-          },
-          {
-            name: "aaaaa",
+            name: "message",
             type: "string",
             multiline: true,
             description: {
-              [currentLanguage]: "Message",
+              [currentLanguage]: getValue(
+                blogsPageData,
+                "detailmessageplaceholder"
+              ),
             },
+            colSpan: 2,
           },
         ]}
       />
-      <Button>Post Comment</Button>
+      <Button>{getValue(blogsPageData, "detailreplyactiontext")}</Button>
     </CommentFormContainer>
   );
 };
