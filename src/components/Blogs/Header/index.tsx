@@ -25,7 +25,7 @@ const BlogHeader = ({}) => {
     _callBlogPageApis(lastBlogItem._id);
   }
   return (
-    <Link href={`/blogs/${lastBlogItem._id}`}>
+    <Link href={`/blogs/${lastBlogItem ? lastBlogItem._id : ""}`}>
       <Wrapper onClick={handleClicked}>
         <Image bgImage={img} />
         <Content>
