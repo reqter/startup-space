@@ -380,7 +380,7 @@ const useGlobalApi = () => {
     onError: () => unknown
   ) => {
     getPartnerComments(
-      "5d3eeaba915bfb00174547f4",
+      urls.commentsCollectionGuid,
       currentLanguage,
       skip,
       limit,

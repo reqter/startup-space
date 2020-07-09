@@ -100,8 +100,8 @@ const getBlogsListData = async (
   const url =
     urls.blogs +
     `?lang=${lang}&skip=${skip}&limit=${limit}${
-      categoryId ? "&categoryid=" + categoryId : ""
-    }${tags ? "&tags=" + tags : ""}&loadrelations=false`;
+      categoryId ? "&fields.categoryid=" + categoryId : ""
+    }${tags ? "&fields.tags=" + tags : ""}&loadrelations=false`;
   return await fetcher(url)({
     method: "GET",
     headers: {
@@ -110,7 +110,59 @@ const getBlogsListData = async (
     },
   });
 };
-
+const getBlogById = async (
+  id: string | number,
+  lang: string,
+  token?: string
+) => {
+  const url = urls.blogs + `?lang=${lang}&_id=${id}`;
+  return await fetcher(url)({
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      authorization: "Bearer " + (getLocalToken() || token),
+    },
+  });
+};
+const getRelatedPost = async (
+  lang: string,
+  categoryId: number,
+  tags: number,
+  token?: string
+) => {
+  const url =
+    urls.blogs +
+    `?lang=${lang}&skip=0&limit=3${
+      categoryId ? "&fields.categoryid=" + categoryId : ""
+    }${tags ? "&fields.tags=" + tags : ""}`;
+  return await fetcher(url)({
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      authorization: "Bearer " + (getLocalToken() || token),
+    },
+  });
+};
+const getBlogComments = async (
+  lang: string,
+  skip: string | number,
+  limit: string | number,
+  blogId: string,
+  token?: string
+) => {
+  return await fetcher(
+    urls.listLeanUrl +
+      "/" +
+      urls.commentsCollectionGuid +
+      `?lang=${lang}&skip=${skip}&limit=${limit}&loadrelations=false&fields.objectid=${blogId}`
+  )({
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      authorization: "Bearer " + (getLocalToken() || token),
+    },
+  });
+};
 const useBlogApi = () => {
   const {
     currentLanguage,
@@ -165,6 +217,11 @@ const useBlogApi = () => {
       });
     }
   };
+  const _getRelatedPosts = (categoryId, tags, onSuccess, onError) => {
+    getRelatedPost(currentLanguage, categoryId, tags, token)
+      .then((data) => onSuccess && onSuccess(data))
+      .catch(() => onError && onError());
+  };
   const _getBlogsList = async (
     skip: number,
     limit: number,
@@ -181,6 +238,33 @@ const useBlogApi = () => {
       })
       .catch(() => onError && onError());
   };
+  const _getBlogComments = (
+    skip: string | number,
+    limit: string | number = 25,
+    blogId: string,
+    onSuccess: (data: object[]) => unknown,
+    onError: () => unknown
+  ) => {
+    getBlogComments(currentLanguage, skip, limit, blogId, token)
+      .then((data) => {
+        if (onSuccess) {
+          onSuccess(data);
+        }
+      })
+      .catch((error) => {
+        if (onError) {
+          onError();
+        }
+      });
+  };
+  const _callBlogPageApis = (blogId: string | number) => {
+    getBlogById(blogId, currentLanguage, token).then((data) => {
+      storeData("blogDetailData", data && data.length ? data[0] : {});
+    });
+    _getCategoriesData();
+    _getNewestBlogs();
+    _getTagsData();
+  };
   return {
     _getBlogsPageData,
     _getCategoriesData,
@@ -188,6 +272,9 @@ const useBlogApi = () => {
     _getTagsData,
     _getLastBlog,
     _getBlogsList,
+    _getRelatedPosts,
+    _getBlogComments,
+    _callBlogPageApis,
   };
 };
 export default useBlogApi;
@@ -200,4 +287,5 @@ export {
   getTagsData,
   getLastBlog,
   getBlogsListData,
+  getBlogById,
 };

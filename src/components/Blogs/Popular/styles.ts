@@ -1,7 +1,7 @@
 import { styled } from "linaria/lib/react";
 
 export const PopularItemWrapper = styled.div`
-  @apply flex mb-5;
+  @apply flex mb-5 cursor-pointer;
   &:first-child {
     margin-top: 30px;
   }
@@ -13,5 +13,5 @@ export const Image = styled.img`
   margin-inline-end: 20px;
 `;
 export const Text = styled.div`
-  @apply;
+  @apply text-sm;
 `;

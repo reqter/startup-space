@@ -7,29 +7,37 @@ import {
   Category,
   Date,
 } from "./styles";
-import useGlobalState from "hooks/useGlobal/useGlobalState";
+import { Link } from "../../../../config/Next18Wrapper";
 import useObjectPropsValue from "hooks/useObjectPropsValue";
+import useBlogApi from "hooks/useBlogApi";
 
 const RelatedBlogItem = ({ data }) => {
-  const { currentLanguage } = useGlobalState();
   const { getValue, includeImageBaseUrl } = useObjectPropsValue();
-  const bg = getValue(data, "images");
-  const img = bg ? includeImageBaseUrl(bg[0], "image", 500, 300) : "";
+  const { _callBlogPageApis } = useBlogApi();
+  const img =
+    data && data.thumbnail
+      ? includeImageBaseUrl(data.thumbnail[0], "image", 500, 250)
+      : "";
+  function handleClicked() {
+    _callBlogPageApis(data._id);
+  }
   return (
-    <CardWrapper target="_blank" rel="noopener noreferrer">
-      <Image
-        bgImage={
-          "https://i.pinimg.com/originals/e1/aa/fd/e1aafd01659ea362247eadef32672a16.jpg"
-        }
-      />
-      <Content>
-        <MetaData>
-          <Category>Food</Category>
-          <Date>JANUARY 9, 2018</Date>
-        </MetaData>
-        <Name>There’s a Cool New Way for Men to Wear Socks and Sandals</Name>
-      </Content>
-    </CardWrapper>
+    <Link href={`/blogs/${data._id}`}>
+      <CardWrapper onClick={handleClicked}>
+        <Image bgImage={img} />
+        <Content>
+          <MetaData>
+            {data && data.categoryid && data.categoryid.length
+              ? data.categoryid.map((item) => (
+                  <Category>{getValue(item, "fields.name")}</Category>
+                ))
+              : null}
+            <Date>JANUARY 9, 2018</Date>
+          </MetaData>
+          <Name>{getValue(data, "name")}</Name>
+        </Content>
+      </CardWrapper>
+    </Link>
   );
 };
 export default RelatedBlogItem;

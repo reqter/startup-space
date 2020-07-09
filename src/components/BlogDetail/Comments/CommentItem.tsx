@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import {
   CommentItemWrpapper,
   Image,
@@ -7,9 +6,7 @@ import {
   Date,
   Message,
 } from "./styles";
-
 import useGlobalState from "hooks/useGlobal/useGlobalState";
-import useGlobalApi from "hooks/useGlobalApi";
 
 const CommentItem = ({ data }) => {
   return (

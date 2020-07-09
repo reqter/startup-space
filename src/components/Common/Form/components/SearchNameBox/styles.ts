@@ -8,7 +8,7 @@ export const SearchInputLeft = styled.div`
 `;
 
 export const Input = styled.input`
-  @apply border h-full flex-1 appearance-none  w-full py-2 px-3 text-gray-700 leading-tight;
+  @apply border h-full flex-1 appearance-none  w-full py-2 px-3 text-gray-700 leading-tight text-sm;
   &:focus {
     @apply outline-none border-blue-500;
   }
