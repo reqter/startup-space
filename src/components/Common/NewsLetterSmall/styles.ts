@@ -12,7 +12,7 @@ export const Text = styled.h2`
   margin-inline-end: 100px;
 `;
 
-export const InputWrapper = styled.div`
+export const InputWrapper = styled.form`
   @apply flex bg-red-400 overflow-hidden;
   width: 500px;
   height: 50px;
