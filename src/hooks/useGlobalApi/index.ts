@@ -318,6 +318,7 @@ const useGlobalApi = () => {
     onSuccess?: (d: object[]) => unknown
   ) => {
     getMostPopularPartners(skip, limit, currentLanguage, token).then((data) => {
+      storeData("landingOfficesData", data?.data);
       if (onSuccess) onSuccess(data.data);
     });
   };

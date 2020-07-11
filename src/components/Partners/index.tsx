@@ -22,6 +22,7 @@ const Spaces = () => {
   const [skip, setSkip] = React.useState(0);
   const [dataList, setData] = React.useState<object[]>();
   const [loading, toggleLoading] = React.useState(true);
+  const [filteredParams, setFilteredParams] = React.useState({});
   const { getOffices } = useGlobalApi();
 
   React.useEffect(() => {
@@ -58,6 +59,7 @@ const Spaces = () => {
       params = partnersPageUrlQuery;
     }
     getOffices(skip, limit, params, (data) => {
+      setFilteredParams(params);
       toggleLoading(false);
       setData(data);
       setDataLength(data ? data.length : 0);
@@ -66,7 +68,7 @@ const Spaces = () => {
 
   function handleMoreDataClicked() {
     setSkip((prev) => prev + 1);
-    getOffices((skip + 1) * limit, limit, {}, (data) => {
+    getOffices((skip + 1) * limit, limit, filteredParams, (data) => {
       setData((prev) => [...prev, ...data]);
       setDataLength(data ? data.length : 0);
     });

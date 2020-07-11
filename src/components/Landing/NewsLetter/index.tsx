@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import Section from "../../Common/Section";
 import Divider from "../../Common/Divider";
 import { toggleModal } from "../../Common/Modal";
-import Alert from "./Alert";
+import Alert from "../../Common/NewsLetterAlert";
 import {
   Container,
   FormBox,

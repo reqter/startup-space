@@ -11,11 +11,13 @@ const Cities = ({}) => {
   const { getValue } = useObjectPropsValue();
   const { getCities } = useGlobalApi();
   const { landingData, citiesData } = useGlobalState();
-  const data = React.useMemo(() => (landingData ? landingData[0] : {}), []);
+
+  const data = React.useMemo(() => (landingData ? landingData[0] : {}), [
+    landingData,
+  ]);
   function handleChange(isVisible: boolean) {
     if (isVisible) if (!citiesData) getCities(4);
   }
-
   return data.isareaenabled ? (
     <VisibilitySensor
       onChange={handleChange}

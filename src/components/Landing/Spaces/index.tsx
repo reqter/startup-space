@@ -10,44 +10,28 @@ import VisibilitySensor from "react-visibility-sensor";
 
 const Spaces = () => {
   const { getPopularOffices } = useGlobalApi();
-  const { landingData } = useGlobalState();
+  const { landingData, landingOfficesData } = useGlobalState();
   const { getValue } = useObjectPropsValue();
   const data = React.useMemo(() => (landingData ? landingData[0] : {}), [
     landingData,
   ]);
-  const [dataList, setDataList] = React.useState<object[]>();
-
-  function handleChange(isVisible: boolean) {
-    if (isVisible)
-      if (!dataList)
-        getPopularOffices(0, 4, (result) => {
-          setDataList(result);
-        });
-  }
+  React.useEffect(() => {
+    if (!landingOfficesData) getPopularOffices(0, 4, (result) => {});
+  }, []);
 
   return data.isofficesenabled ? (
-    <VisibilitySensor
-      onChange={handleChange}
-      partialVisibility={true}
-      offset={{ bottom: -100 }}
+    <Section
+      bgColor={theme`colors.gray.100`}
+      title={data.officesheading}
+      header={data.officestitle}
     >
-      {(isVisible) =>
-        isVisible && (
-          <Section
-            bgColor={theme`colors.gray.100`}
-            title={data.officesheading}
-            header={data.officestitle}
-          >
-            <SpacesList officesData={dataList} />
-            <Button>
-              <Link href={`/offices`}>
-                {data && data.officesactiontext ? data.officesactiontext : ""}
-              </Link>
-            </Button>
-          </Section>
-        )
-      }
-    </VisibilitySensor>
+      <SpacesList officesData={landingOfficesData} />
+      <Button>
+        <Link href={`/offices`}>
+          {data && data.officesactiontext ? data.officesactiontext : ""}
+        </Link>
+      </Button>
+    </Section>
   ) : null;
 };
 export default Spaces;

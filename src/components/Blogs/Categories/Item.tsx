@@ -7,7 +7,7 @@ const BlogsCatgeories = ({ data }) => {
   const { getValue, paramsToValidValueType } = useObjectPropsValue();
 
   function handleCategoryClicked() {
-    Router.push(`/blogs?categoryid=${data._id}`);
+    Router.push(`/blogs?categoryid=${data?._id}`);
   }
 
   return (

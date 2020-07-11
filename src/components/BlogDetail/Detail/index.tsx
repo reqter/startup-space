@@ -1,3 +1,4 @@
+import { Link } from "../../../../config/Next18Wrapper";
 import {
   BlogDetailContainer,
   Image,
@@ -49,9 +50,11 @@ const BlogDetail = () => {
             </CategoriesText>
             <CategoriesList>
               {blogDetailData.categoryid.map((item) => (
-                <CategoriesListItem>
-                  {getValue(item, "fields.name")},{" "}
-                </CategoriesListItem>
+                <Link key={item._id} href={`/blogs?categoryid=${item._id}`}>
+                  <span className="text-blue-500 text-sm mt-1 cursor-pointer">
+                    {getValue(item, "fields.name")},{" "}
+                  </span>
+                </Link>
               ))}
             </CategoriesList>
           </>
@@ -63,9 +66,11 @@ const BlogDetail = () => {
             </CategoriesText>
             <CategoriesList>
               {blogDetailData.tags.map((item) => (
-                <CategoriesListItem>
-                  #{getValue(item, "fields.name")},{" "}
-                </CategoriesListItem>
+                <Link key={item._id} href={`/blogs?tags=${item._id}`}>
+                  <span className="text-blue-500 text-sm mt-1  cursor-pointer">
+                    #{getValue(item, "fields.name")},{" "}
+                  </span>
+                </Link>
               ))}
             </CategoriesList>
           </>
