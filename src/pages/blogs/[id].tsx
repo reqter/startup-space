@@ -56,8 +56,6 @@ BlogDetail.getInitialProps = async (context) => {
         getTagsData(currentLanguage, token),
         getFooterData(currentLanguage),
       ]);
-      console.log(query);
-      console.log(blogDetailData);
       return {
         token,
         headerData,

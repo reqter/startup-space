@@ -33,6 +33,12 @@ const Summery = () => {
     () => (partnerDetailPage ? partnerDetailPage[0] : {}),
     []
   );
+  function getWebSite(link: string): string {
+    if (link.includes("http") || link.includes("https")) {
+      return link;
+    }
+    return "https://" + link;
+  }
   return (
     <SummeryWrapper>
       <Content>
@@ -65,7 +71,7 @@ const Summery = () => {
             )}
             {partnerDetail.homepage && partnerDetail.homepage.length ? (
               <BoxInfo
-                href={partnerDetail.homepage}
+                href={getWebSite(partnerDetail.homepage)}
                 target="_blank"
                 title={partnerDetail.homepage}
               >

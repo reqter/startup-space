@@ -7,6 +7,12 @@ module.exports = {
     logical: ["responsive", "hover"],
   },
   theme: {
+    screens: {
+      phone: { max: "37.5em" },
+      "tab-port": { max: "56.25em" },
+      "tab-land": { max: "75em" },
+      "big-desktop": { max: "112.5em" },
+    },
     extend: {
       spacing: {
         "1150": "73.125rem",

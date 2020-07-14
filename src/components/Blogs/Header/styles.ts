@@ -5,7 +5,7 @@ export const Content = styled.div`
   background-image: linear-gradient(to bottom, transparent 80%, black);
 `;
 export const TextContainer = styled.div`
-  @apply w-1150 h-full m-auto flex flex-col justify-end text-white pb-12;
+  @apply max-w-6xl h-full m-auto flex flex-col justify-end text-white pb-12;
 `;
 export const Name = styled.div`
   @apply font-bold text-3xl;

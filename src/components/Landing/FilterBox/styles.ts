@@ -3,6 +3,9 @@ import { styled } from "linaria/lib/react";
 export const Wrapper = styled.div`
   @apply shadow rounded-lg p-2 w-10/12;
   background-color: rgba(255, 255, 255, 0.2);
+  @screen tab-port {
+    @apply w-full;
+  }
 `;
 export const Content = styled.div`
   @apply bg-white py-8 rounded-lg px-8;

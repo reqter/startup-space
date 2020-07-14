@@ -4,7 +4,7 @@ export const NewsLetterWrapper = styled.div`
   @apply bg-black border-b border-gray-800 border-solid;
 `;
 export const NewsLetterContent = styled.div`
-  @apply bg-black w-1150 m-auto flex items-center h-40;
+  @apply bg-black max-w-6xl m-auto flex items-center h-40;
 `;
 
 export const Text = styled.h2`

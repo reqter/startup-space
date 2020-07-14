@@ -1,3 +1,4 @@
+import Loading from "./Loading";
 import Section from "./../../Common/Section";
 import { ExpanderContainer } from "./styles";
 import useGlobalState from "hooks/useGlobal/useGlobalState";
@@ -7,10 +8,18 @@ const ExpanderFAQ = () => {
   return (
     <Section bgColor={theme`colors.white`}>
       <ExpanderContainer>
-        {faqsData &&
+        {faqsData ? (
           faqsData.map((item, index) => (
             <ExpanderItem key={index} item={item} />
-          ))}
+          ))
+        ) : (
+          <>
+            <Loading />
+            <Loading />
+            <Loading />
+            <Loading />
+          </>
+        )}
       </ExpanderContainer>
     </Section>
   );

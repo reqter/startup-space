@@ -2,21 +2,25 @@ import { styled } from "linaria/lib/react";
 import { css } from "linaria";
 export const Wrapper = styled.div`
   @apply w-full bg-gray-200 shadow-sm;
+  @screen tab-port {
+    @apply hidden;
+  }
 `;
 
 export const Content = styled.div`
-  @apply w-1150 m-auto h-full flex items-center py-3;
+  @apply max-w-6xl m-auto h-full flex items-center py-3;
 `;
-export const PhoneNumber = styled.span`
+export const PhoneNumber = styled.a`
   @apply text-sm flex relative;
   margin-inline: 20px;
+  direction: ltr;
 `;
 export const iconStylePhone = css`
   position: absolute;
   left: -20px;
   top: 2px;
 `;
-export const Email = styled.div`
+export const Email = styled.a`
   @apply text-sm relative flex;
   margin-inline: 20px;
 `;

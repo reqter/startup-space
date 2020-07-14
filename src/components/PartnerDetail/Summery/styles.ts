@@ -3,7 +3,7 @@ export const SummeryWrapper = styled.div`
   @apply bg-white;
 `;
 export const Content = styled.div`
-  @apply flex w-1150 m-auto py-10;
+  @apply flex max-w-6xl m-auto py-10;
 `;
 export const LogoWrapper = styled.div`
   width: 80px;

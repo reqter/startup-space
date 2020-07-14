@@ -122,6 +122,7 @@ const FilterBox = ({ dataList }) => {
           data={nameField()}
           initValue={fullName}
           onChange={handleFullNameChanged}
+          onSearchClicked={handleFilterData}
         />
         <Form
           ref={formRef}

@@ -2,15 +2,17 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { Link, Router } from "../../../../config/Next18Wrapper";
 import useGlobalState from "hooks/useGlobal/useGlobalState";
-
+import { IoMdMenu } from "react-icons/io";
 import {
   Wrapper,
   Content,
   Logo,
+  CenterLogo,
   Menu,
   MenuItem,
   Button,
   SearchIcon,
+  menuIcon,
 } from "./styles";
 import useGlobalApi from "hooks/useGlobalApi";
 import useBlogApi from "hooks/useBlogApi";
@@ -87,7 +89,8 @@ const Header: React.FC<IProps> = (): JSX.Element => {
         ) : (
           <Logo src={headerObj ? headerObj.logo1 : null} />
         )}
-
+        <CenterLogo src={headerObj ? headerObj["logo2"] : null} />
+        <IoMdMenu className={menuIcon} />
         <Menu>
           <MenuItem
             selected={router.pathname === "/"}

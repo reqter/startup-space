@@ -1,5 +1,8 @@
 import { styled } from "linaria/lib/react";
+import { css } from "linaria";
 export const Wrapper = styled.header`
+  min-height: 50px;
+
   @apply w-full bg-gray-100  shadow-md transition ease-linear duration-75 z-50;
   background-color: ${({ isSticky, isTransparent }) =>
     !isTransparent
@@ -11,15 +14,42 @@ export const Wrapper = styled.header`
   position: ${({ isSticky }) => (isSticky ? "fixed" : "absolute")};
   padding: ${({ isSticky }) =>
     isSticky ? theme`spacing.3` : theme`spacing.5`};
+
+  @screen tab-port {
+    @apply bg-white p-5 fixed w-full shadow-md transition ease-linear duration-75 z-50;
+  }
 `;
 export const Content = styled.div`
-  @apply w-1150 m-auto h-full flex items-center;
+  @apply max-w-6xl m-auto h-full flex items-center;
 `;
 export const Logo = styled.img`
   @apply w-32;
+  @screen tab-port {
+    @apply hidden;
+  }
+`;
+export const CenterLogo = styled.img`
+  @apply w-24 absolute hidden;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  @screen tab-port {
+    @apply block;
+  }
+`;
+export const menuIcon = css`
+  font-size: 30px;
+  cursor: pointer;
+  display: none;
+  @media only screen and (max-width: 56.25em) {
+    display: block;
+  }
 `;
 export const Menu = styled.ul`
   @apply flex-1 flex justify-center;
+  @screen tab-port {
+    @apply hidden;
+  }
 `;
 export const MenuItem = styled.li`
   @apply font-bold px-6 cursor-pointer;
@@ -42,6 +72,9 @@ export const Button = styled.button`
   }
   span {
     @apply text-2xl px-1;
+  }
+  @screen tab-port {
+    @apply hidden;
   }
 `;
 export const SearchIcon = styled.span``;

@@ -13,7 +13,7 @@ export const Wrapper = styled.header`
 `;
 
 export const Content = styled.div`
-  @apply w-1150 flex m-auto  bg-opacity-75 h-full items-center;
+  @apply max-w-6xl flex m-auto  bg-opacity-75 h-full items-center;
 `;
 
 export const Title = styled.h1`
