@@ -4,10 +4,10 @@ import { lighten, modularScale, rgba } from "polished";
 export const Wrapper = styled.div`
   background: ${({ bgColor, bgImage }) =>
     bgImage ? `url(${bgImage})` : bgColor ? bgColor : theme`colors.white`};
-  @apply py-20 bg-cover;
+  @apply py-20 bg-cover px-5;
 `;
 export const Content = styled.div`
-  @apply flex flex-col w-1150 m-auto;
+  @apply flex flex-col max-w-6xl m-auto;
 `;
 
 export const Title = styled.div`

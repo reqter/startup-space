@@ -77,6 +77,7 @@ const FilterBox = () => {
           data={nameField()}
           initValue={fullName}
           onChange={handleFullNameChanged}
+          onSearchClicked={handleSearchClicked}
         />
         <Form
           ref={formRef}

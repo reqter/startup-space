@@ -8,13 +8,22 @@ export const Wrapper = styled.header`
 `;
 
 export const Content = styled.div`
-  @apply w-1150 flex m-auto;
+  @apply max-w-6xl flex m-auto;
+  @screen tab-port {
+    @apply px-5;
+  }
 `;
 export const Left = styled.div`
   @apply mt-56 w-1/2;
+  @screen tab-port {
+    @apply mt-32 w-full mb-16;
+  }
 `;
 export const Right = styled.div`
   @apply mt-40  w-1/2;
+  @screen tab-port {
+    @apply hidden;
+  }
 `;
 export const User = styled.img`
   @apply w-full m-auto;

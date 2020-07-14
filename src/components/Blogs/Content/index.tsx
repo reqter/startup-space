@@ -15,6 +15,9 @@ const Content = () => {
   const [blogsData, setBlogs] = useState([]);
   const [skip, setSkip] = useState(0);
   useEffect(() => {
+    if (!loading) {
+      toggleLoading(true);
+    }
     _getBlogsList(
       skip * limit,
       limit,

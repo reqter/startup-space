@@ -1,5 +1,6 @@
 import React from "react";
 import VisibilitySensor from "react-visibility-sensor";
+import { Link } from "../../../../config/Next18Wrapper";
 import { Button } from "./styles";
 import Section from "../../Common/Section";
 import CityList from "./CityList";
@@ -30,7 +31,9 @@ const Cities = ({}) => {
         header={data.areatitle}
       >
         <CityList />
-        <Button>{getValue(data, "areaactiontext")}</Button>
+        <Button>
+          <Link href={`/offices`}>{getValue(data, "areaactiontext")}</Link>
+        </Button>
       </Section>
     </VisibilitySensor>
   ) : null;

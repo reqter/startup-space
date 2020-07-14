@@ -8,7 +8,6 @@ const SpacesItem = ({ data, colSpan, hasMargin }) => {
   const { getValue, includeImageBaseUrl } = useObjectPropsValue();
   const bg = getValue(data, "images");
   const img = bg ? includeImageBaseUrl(bg[0], "image", 500, 300) : "";
-  console.log(data);
   return (
     <CardWrapper
       colSpan={colSpan}

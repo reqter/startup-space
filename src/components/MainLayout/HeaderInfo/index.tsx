@@ -39,13 +39,13 @@ const HeaderInfo = () => {
     <Wrapper>
       <Content>
         {data && data.phonenumber && (
-          <PhoneNumber>
+          <PhoneNumber href={`tel:${getValue(data, "phonenumber")}`}>
             <IoIosCall className={iconStylePhone} />
             {getValue(data, "phonenumber")}
           </PhoneNumber>
         )}
         {data && data.email && (
-          <Email>
+          <Email href={`mailto:${getValue(data, "email")}`}>
             <IoMdMail className={iconStyle} />
             {getValue(data, "email")}
           </Email>

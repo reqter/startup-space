@@ -1,14 +1,19 @@
 import { styled } from "linaria/lib/react";
-import { lighten, modularScale, rgba } from "polished";
 
 export const Wrapper = styled.div`
-  @apply bg-white py-20 w-1150 m-auto;
+  @apply bg-white py-20 max-w-6xl m-auto px-5;
 `;
 export const Content = styled.div`
-  @apply flex;
+  @apply flex flex-row;
+  @screen tab-port {
+    @apply flex-col;
+  }
 `;
 export const Left = styled.div`
   @apply w-1/2 flex-shrink-0 flex justify-center;
+  @screen tab-port {
+    @apply mb-8;
+  }
 `;
 export const Image = styled.img`
   @apply;

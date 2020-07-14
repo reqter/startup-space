@@ -27,7 +27,7 @@ const SpacesItem = ({ data }) => {
         <Image src={img} alt="" />
         <Address>
           <IoIosPin />
-          {getValue(data, "regionid.fields.name")},{" "}
+          {getValue(data, "regionid.fields.name")}{" "}
           {getValue(data, "city.fields.name")}
         </Address>
       </ImageBox>

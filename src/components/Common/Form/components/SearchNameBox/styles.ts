@@ -14,7 +14,7 @@ export const Input = styled.input`
   }
 `;
 export const SearchInputRight = styled.div`
-  @apply bg-blue-500 text-white text-xl flex items-center justify-center;
+  @apply bg-blue-500 text-white text-xl flex items-center justify-center cursor-pointer;
   width: 50px;
 `;
 export const SearchIcon = styled.i``;

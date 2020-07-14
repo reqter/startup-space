@@ -8,7 +8,14 @@ import useGlobalState from "hooks/useGlobal/useGlobalState";
 import useBlogApi from "hooks/useBlogApi";
 
 const Spaces = () => {
-  const { _getBlogsList } = useBlogApi();
+  const {
+    _getBlogsList,
+    _getBlogsPageData,
+    _getLastBlog,
+    _getCategoriesData,
+    _getNewestBlogs,
+    _getTagsData,
+  } = useBlogApi();
   const { landingData, blogsData } = useGlobalState();
   const [blogsList, setBlogs] = React.useState([]);
   const data = React.useMemo(() => (landingData ? landingData[0] : {}), [
@@ -26,6 +33,13 @@ const Spaces = () => {
           () => {}
         );
   }
+  function handleMoreClicked() {
+    _getBlogsPageData();
+    _getLastBlog();
+    _getCategoriesData();
+    _getNewestBlogs();
+    _getTagsData();
+  }
   return data.isblogenabled ? (
     <VisibilitySensor
       onChange={handleChange}
@@ -38,7 +52,7 @@ const Spaces = () => {
         header={data.blogtitle}
       >
         <List data={blogsList} />
-        <Button>
+        <Button onClick={handleMoreClicked}>
           <Link href={`/blogs`}>
             {data && data.blogactiontext ? data.blogactiontext : ""}
           </Link>
