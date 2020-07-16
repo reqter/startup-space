@@ -14,6 +14,7 @@ const InfoItems = () => {
         description={getValue(contactUsPageData, "firtsboxdescription")}
       />
       <InfoItem
+        isEmail
         icon={<IoIosHeadset />}
         title={getValue(contactUsPageData, "secondboxtitle")}
         description={getValue(contactUsPageData, "secondboxdescription")}

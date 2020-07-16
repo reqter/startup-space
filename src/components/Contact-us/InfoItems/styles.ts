@@ -18,3 +18,6 @@ export const Title = styled.div`
 export const Description = styled.div`
   @apply text-sm;
 `;
+export const Email = styled.a`
+  @apply text-sm;
+`;

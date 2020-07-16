@@ -11,6 +11,7 @@ import {
 } from "./styles";
 import useGlobalState from "hooks/useGlobal/useGlobalState";
 import useObjectPropsValue from "hooks/useObjectPropsValue";
+
 const NewsLetterFAQ = () => {
   const { register, handleSubmit, watch, errors } = useForm({
     mode: "onSubmit",

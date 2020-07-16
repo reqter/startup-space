@@ -30,10 +30,51 @@ const Content = () => {
       () => {}
     );
   }, [query]);
+  function handleNextPage() {
+    if (!loading) {
+      toggleLoading(true);
+      setSkip(skip + 1);
+      _getBlogsList(
+        skip + 1 * limit,
+        limit,
+        query.categoryid,
+        query.tags,
+        (data) => {
+          toggleLoading(false);
+          setBlogs(data);
+        },
+        () => {}
+      );
+    }
+  }
+  function handlePrevPage() {
+    if (!loading) {
+      toggleLoading(true);
+      setSkip(skip - 1);
+      _getBlogsList(
+        skip + -1 * limit,
+        limit,
+        query.categoryid,
+        query.tags,
+        (data) => {
+          toggleLoading(false);
+          setBlogs(data);
+        },
+        () => {}
+      );
+    }
+  }
   return (
     <Section bgColor={theme`colors.gray.100`}>
       <Container>
-        <List data={blogsData} loading={loading} />
+        <List
+          data={blogsData}
+          loading={loading}
+          skip={skip}
+          limit={limit}
+          onNextPageClicked={handleNextPage}
+          onPrevClicked={handlePrevPage}
+        />
         <SideBar />
       </Container>
     </Section>

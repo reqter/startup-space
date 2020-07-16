@@ -8,7 +8,9 @@ const PopularItem = ({ item }) => {
     : "";
   function handleItemClicked() {}
   return (
-    <Link href={`/blogs/${item._id}`}>
+    <Link
+      href={`/blogs/${item ? (item.slug ? item.slug : item._id) : item._id}`}
+    >
       <PopularItemWrapper onClick={handleItemClicked}>
         <Image src={img} />
         <Text>{item.name}</Text>

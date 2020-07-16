@@ -14,6 +14,18 @@ export const Button = styled.button`
   }
 `;
 
-export const CommentFormContainer = styled.div`
+export const CommentFormContainer = styled.form`
   @apply mt-10;
+`;
+
+export const Row = styled.div`
+  @apply flex mb-5;
+`;
+
+export const Column = styled.div`
+  @apply flex-1;
+  margin-inline-end: 10px;
+  &:last-child {
+    margin: 0;
+  }
 `;

@@ -19,14 +19,32 @@ const BlogCard = ({ data, actionName, colSpan = 3 }) => {
   return (
     <CardWrapper colSpan={colSpan}>
       <div className="flex flex-col h-full">
-        <div style={{ height: 250 }}>
-          <img className="h-full bg-cover" src={img} alt="" />
+        <div style={{ height: 250 }} className="cursor-pointer">
+          <Link
+            href={`/blogs/${
+              data ? (data.slug ? data.slug : data._id) : data._id
+            }`}
+          >
+            <img className="h-full bg-cover" src={img} alt="" />
+          </Link>
         </div>
         <div className="px-6 py-4 flex-1">
-          <div className="font-bold text-xl mb-2">{data.name}</div>
+          <div className="font-bold text-xl mb-2">
+            <Link
+              href={`/blogs/${
+                data ? (data.slug ? data.slug : data._id) : data._id
+              }`}
+            >
+              {data.name}
+            </Link>
+          </div>
         </div>
         <div className="px-6 py-4 flex flex-row-reverse">
-          <Link href={`/blogs/${data?._id}`}>
+          <Link
+            href={`/blogs/${
+              data ? (data.slug ? data.slug : data._id) : data._id
+            }`}
+          >
             <span
               className="cursor-pointer inline-block bg-gray-200 hover:bg-gray-300 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 cursor-pointer"
               onClick={handleClicked}

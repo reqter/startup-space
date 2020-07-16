@@ -23,7 +23,7 @@ export const Content = styled.div`
   @apply max-w-6xl m-auto h-full flex items-center;
 `;
 export const Logo = styled.img`
-  @apply w-32;
+  @apply w-32 cursor-pointer;
   @screen tab-port {
     @apply hidden;
   }
