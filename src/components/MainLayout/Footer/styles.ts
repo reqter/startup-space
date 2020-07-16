@@ -1,7 +1,8 @@
 import { styled } from "linaria/lib/react";
+import { css } from "linaria";
 
 export const Container = styled.div`
-  @apply flex relative mb-16 mli-2;
+  @apply flex relative mb-24 mli-2;
 `;
 
 export const Box = styled.div`
@@ -29,8 +30,17 @@ export const Divider = styled.div`
 `;
 
 export const CopyRight = styled.div`
-  @apply text-center  text-white absolute left-0 right-0;
-  bottom: 20px;
+  @apply text-center text-white absolute left-0 bottom-0 right-0 border-t border-gray-800 flex justify-center items-center;
+  height: 100px;
+`;
+export const SocialContainer = styled.div`
+  @apply flex text-white;
+`;
+export const SocialLink = styled.a``;
+export const socialIconStyle = css`
+  margin-inline-end: 10px;
+  font-size: 22px;
+  color: ${theme`colors.white`};
 `;
 
 export const ImageContainer = styled.div`

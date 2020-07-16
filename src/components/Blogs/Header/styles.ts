@@ -2,7 +2,7 @@ import { styled } from "linaria/lib/react";
 
 export const Content = styled.div`
   @apply absolute h-full w-full z-20 transition duration-500;
-  background-image: linear-gradient(to bottom, transparent 80%, black);
+  background-image: linear-gradient(to bottom, transparent 40%, black);
 `;
 export const TextContainer = styled.div`
   @apply max-w-6xl h-full m-auto flex flex-col justify-end text-white pb-12;
@@ -26,7 +26,7 @@ export const Wrapper = styled.div`
   &:hover {
     ${Content} {
       @apply transition duration-500;
-      background-image: linear-gradient(to bottom, transparent 60%, black);
+      background-image: linear-gradient(to bottom, transparent 20%, black);
     }
   }
 `;

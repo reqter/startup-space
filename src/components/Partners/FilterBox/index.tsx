@@ -109,10 +109,10 @@ const FilterBox = ({ dataList }) => {
   return (
     <Wrapper
       isSideSticky={
-        !dataList || dataList.length < 2 ? false : partnersStickySideBar
+        !dataList || dataList.length <= 4 ? false : partnersStickySideBar
       }
       isVisibleFooter={
-        !dataList || dataList.length < 2 ? false : isVisibleFooter
+        !dataList || dataList.length <= 4 ? false : isVisibleFooter
       }
     >
       <Content>

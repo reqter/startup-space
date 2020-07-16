@@ -15,6 +15,9 @@ const NewsLetterFAQ = () => {
   const { register, handleSubmit, watch, errors } = useForm({
     mode: "onSubmit",
   });
+  const { footerData } = useGlobalState();
+  const { getValue } = useObjectPropsValue();
+  const footer = footerData ? footerData[0] : {};
   function handleCloseAlert() {
     toggleModal();
   }
@@ -22,13 +25,16 @@ const NewsLetterFAQ = () => {
     toggleModal({
       render: () => {
         return (
-          <Alert title={""} info={""} btnText={""} onClose={handleCloseAlert} />
+          <Alert
+            title={getValue(footer, "subscribesuccesstitle")}
+            info={getValue(footer, "subscribesuccessdescription")}
+            btnText={getValue(footer, "subscribesuccessactiontext")}
+            onClose={handleCloseAlert}
+          />
         );
       },
     });
-  const { footerData } = useGlobalState();
-  const { getValue } = useObjectPropsValue();
-  const footer = footerData ? footerData[0] : {};
+
   return (
     <NewsLetterWrapper>
       <NewsLetterContent>

@@ -41,7 +41,7 @@ const SpacesList = ({
   return (
     <Container
       isSideSticky={
-        !dataList || dataList.length < 2 ? false : partnersStickySideBar
+        !dataList || dataList.length <= 4 ? false : partnersStickySideBar
       }
       ref={containerRef}
     >

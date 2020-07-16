@@ -59,16 +59,18 @@ const Spaces = () => {
       params = partnersPageUrlQuery;
     }
     getOffices(skip, limit, params, (data) => {
+      window.scroll({ top: 200, left: 0, behavior: "smooth" });
       setFilteredParams(params);
-      toggleLoading(false);
       setData(data);
       setDataLength(data ? data.length : 0);
+      toggleLoading(false);
     });
   }, [query]);
 
   function handleMoreDataClicked() {
     setSkip((prev) => prev + 1);
     getOffices((skip + 1) * limit, limit, filteredParams, (data) => {
+      window.scroll({ top: 0, left: 0, behavior: "smooth" });
       setData((prev) => [...prev, ...data]);
       setDataLength(data ? data.length : 0);
     });
@@ -78,7 +80,7 @@ const Spaces = () => {
     <Section bgColor={theme`colors.gray.200`}>
       <Content
         isSideSticky={
-          !dataList || dataList.length < 2 ? false : partnersStickySideBar
+          !dataList || dataList.length <= 4 ? false : partnersStickySideBar
         }
       >
         <List
