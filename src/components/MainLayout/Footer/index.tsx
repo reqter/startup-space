@@ -1,20 +1,36 @@
-import React from "react";
+import Select, { components } from "react-select";
+import { i18n, config } from "../../../../config/Next18Wrapper";
+import Router from "next/router";
+import {
+  IoLogoFacebook,
+  IoLogoInstagram,
+  IoLogoLinkedin,
+} from "react-icons/io";
 import VisibilitySensor from "react-visibility-sensor";
 import Section from "components/Common/Section";
 import Box from "./Box";
 import FeatureItem from "./FeatureItem";
-import { Container, CopyRight } from "./styles";
+import {
+  Container,
+  SocialContainer,
+  CopyRight,
+  socialIconStyle,
+  SocialLink,
+} from "./styles";
 import useGlobalState from "hooks/useGlobal/useGlobalState";
 import useGlobalDispatch from "hooks/useGlobal/useGlobalDispatch";
 
 const Footer = () => {
   const { dispatch } = useGlobalDispatch();
   const {
+    currentLanguage,
+    headerData,
     footerData,
     officesData,
     isVisibleFooter,
     curentRouterName,
   } = useGlobalState();
+  const header = headerData ? headerData[0] : {};
   const footer = footerData && footerData.length ? footerData[0] : {};
   const handleChange = (isVisible: boolean) => {
     if (isVisible) {
@@ -31,6 +47,12 @@ const Footer = () => {
       }
     }
   };
+  function handleLangChanged(lang) {
+    const path = window.location.href.replace(currentLanguage, lang.value);
+    window.location.href = path;
+    // Router.reload();
+    // i18n.changeLanguage(lang.value, (item) => {});
+  }
   return (
     <VisibilitySensor
       onChange={handleChange}
@@ -41,6 +63,33 @@ const Footer = () => {
         <Container>
           <Box title={footer.aboutustitle}>
             <span>{footer.aboutusdescription}</span>
+            <br />
+            <Box title={footer.languagetitle}>
+              <Select
+                menuPlacement="bottom"
+                closeMenuOnScroll={true}
+                closeMenuOnSelect={true}
+                options={config.allLanguages.map((lang) => {
+                  return {
+                    value: lang,
+                    label: lang,
+                  };
+                })}
+                styles={{
+                  option: (base) => ({
+                    ...base,
+                    color: "black",
+                  }),
+                }}
+                isMulti={false}
+                isSearchable={false}
+                onChange={handleLangChanged}
+                defaultValue={{
+                  value: currentLanguage,
+                  label: currentLanguage,
+                }}
+              />
+            </Box>
           </Box>
           <Box title={footer.featuredtitle}>
             {officesData &&
@@ -59,10 +108,23 @@ const Footer = () => {
             </ul>
           </Box>
           <Box title={footer.sociallinkstitle}>
-            <span>
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum.
-            </span>
+            <SocialContainer>
+              {header && header.facebookurl && (
+                <SocialLink href={header.facebookurl} target="_blank">
+                  <IoLogoFacebook className={socialIconStyle} />
+                </SocialLink>
+              )}
+              {header && header.instagramurl && (
+                <SocialLink href={header.instagramurl} target="_blank">
+                  <IoLogoInstagram className={socialIconStyle} />
+                </SocialLink>
+              )}
+              {header && header.linkedinurl && (
+                <SocialLink href={header.linkedinurl} target="_blank">
+                  <IoLogoLinkedin className={socialIconStyle} />
+                </SocialLink>
+              )}
+            </SocialContainer>
           </Box>
         </Container>
         <CopyRight>{footer.copyright}</CopyRight>
@@ -71,3 +133,13 @@ const Footer = () => {
   );
 };
 export default Footer;
+
+const CustomOption = ({ innerProps, isDisabled, data }) => {
+  if (!isDisabled) {
+    return (
+      <div {...innerProps} className={"text-sm text-gray-900"}>
+        {data.label}
+      </div>
+    );
+  } else return null;
+};

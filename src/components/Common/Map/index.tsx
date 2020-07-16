@@ -7,7 +7,11 @@ const MapBox = ({ lat, lng, title }) => {
     zoom: 13,
   });
   return (
-    <Map center={[state.lat, state.lng]} zoom={state.zoom}>
+    <Map
+      center={[state.lat, state.lng]}
+      zoom={state.zoom}
+      scrollWheelZoom={false}
+    >
       <TileLayer
         attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

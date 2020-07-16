@@ -14,15 +14,18 @@ import {
   ImageBox,
 } from "./styles";
 import useGlobalState from "hooks/useGlobal/useGlobalState";
+import useObjectPropsValue from "hooks/useObjectPropsValue";
 
 const NewsLetter = () => {
   const { register, handleSubmit, watch, errors } = useForm({
     mode: "onSubmit",
   });
-  const { landingData } = useGlobalState();
+  const { footerData, landingData } = useGlobalState();
   const data = React.useMemo(() => (landingData ? landingData[0] : {}), [
     landingData,
   ]);
+  const { getValue } = useObjectPropsValue();
+  const footer = footerData ? footerData[0] : {};
   function handleCloseAlert() {
     toggleModal();
   }
@@ -31,9 +34,9 @@ const NewsLetter = () => {
       render: () => {
         return (
           <Alert
-            title={data.newslettersuccesstitle}
-            info={data.newslettersuccessdescription}
-            btnText={data.newsletterasuccessactiontext}
+            title={getValue(footer, "subscribesuccesstitle")}
+            info={getValue(footer, "subscribesuccessdescription")}
+            btnText={getValue(footer, "subscribesuccessactiontext")}
             onClose={handleCloseAlert}
           />
         );
