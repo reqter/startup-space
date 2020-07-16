@@ -81,13 +81,22 @@ const Header: React.FC<IProps> = (): JSX.Element => {
   function checkIsTransparent() {
     return router.pathname === "/";
   }
+  function handleClickOnLogo() {
+    Router.push("/");
+  }
   return (
     <Wrapper isSticky={isSticky} isTransparent={checkIsTransparent()}>
       <Content>
         {router.pathname !== "/" || isSticky ? (
-          <Logo src={headerObj ? headerObj["logo2"] : null} />
+          <Logo
+            src={headerObj ? headerObj["logo2"] : null}
+            onClick={handleClickOnLogo}
+          />
         ) : (
-          <Logo src={headerObj ? headerObj.logo1 : null} />
+          <Logo
+            src={headerObj ? headerObj.logo1 : null}
+            onClick={handleClickOnLogo}
+          />
         )}
         <CenterLogo src={headerObj ? headerObj["logo2"] : null} />
         <IoMdMenu className={menuIcon} />

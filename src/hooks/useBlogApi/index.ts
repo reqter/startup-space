@@ -115,7 +115,7 @@ const getBlogById = async (
   lang: string,
   token?: string
 ) => {
-  const url = urls.blogs + `?lang=${lang}&_id=${id}`;
+  const url = urls.blogs + `?lang=${lang}&fields.slug=${id}`;
   return await fetcher(url)({
     method: "GET",
     headers: {

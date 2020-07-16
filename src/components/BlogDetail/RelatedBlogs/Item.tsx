@@ -22,7 +22,9 @@ const RelatedBlogItem = ({ data }) => {
     _callBlogPageApis(data._id);
   }
   return (
-    <Link href={`/blogs/${data._id}`}>
+    <Link
+      href={`/blogs/${data ? (data.slug ? data.slug : data._id) : data._id}`}
+    >
       <CardWrapper onClick={handleClicked}>
         <Image bgImage={img} />
         <Content>
