@@ -15,7 +15,6 @@ const RelatedBlogs = () => {
   function handleChange(isVisible: boolean) {
     if (isVisible)
       if (!data || !data.length) {
-        debugger;
         const categories =
           blogDetailData &&
           blogDetailData.categoryid &&
@@ -35,8 +34,9 @@ const RelatedBlogs = () => {
         _getRelatedPosts(
           c,
           null,
-          (result) => {
-            setData(result);
+          (result = []) => {
+            const d = result.filter((item) => item._id !== blogDetailData._id);
+            setData(d);
           },
           () => {}
         );
@@ -55,9 +55,7 @@ const RelatedBlogs = () => {
         <RelatedList>
           {data &&
             data.map((item) => {
-              return item._id === blogDetailData._id ? null : (
-                <Item key={item._id} data={item} />
-              );
+              return <Item key={item._id} data={item} />;
             })}
         </RelatedList>
       </Container>

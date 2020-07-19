@@ -7,7 +7,7 @@ import useGlobalState from "hooks/useGlobal/useGlobalState";
 import useObjectPropsValue from "hooks/useObjectPropsValue";
 import useBlogApi from "hooks/useBlogApi";
 
-const limit = 5;
+const limit = 10;
 const BlogDetailComments = () => {
   const { _getBlogComments } = useBlogApi();
   const { blogsPageData, blogDetailData } = useGlobalState();
@@ -58,7 +58,7 @@ const BlogDetailComments = () => {
         ) : null}
         {commentsLength === limit && (
           <LoadMore onClick={handleLoadMore}>
-            Load more&nbsp;
+            {getValue(blogsPageData, "commentsloadmore")}&nbsp;
             <IoIosArrowDown />
           </LoadMore>
         )}
