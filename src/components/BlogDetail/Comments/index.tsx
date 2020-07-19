@@ -1,32 +1,47 @@
 import { useState, useEffect } from "react";
-import { useRouter } from "next/router";
+import { IoIosArrowDown } from "react-icons/io";
 import VisibilitySensor from "react-visibility-sensor";
-import { CommentsContainer, Title } from "./styles";
+import { CommentsContainer, Title, LoadMore } from "./styles";
 import CommentItem from "./CommentItem";
 import useGlobalState from "hooks/useGlobal/useGlobalState";
 import useObjectPropsValue from "hooks/useObjectPropsValue";
 import useBlogApi from "hooks/useBlogApi";
 
+const limit = 5;
 const BlogDetailComments = () => {
-  const { query } = useRouter();
   const { _getBlogComments } = useBlogApi();
-  const { blogsPageData } = useGlobalState();
+  const { blogsPageData, blogDetailData } = useGlobalState();
   const { getValue } = useObjectPropsValue();
   const [data, setData] = useState([]);
+  const [skip, setSkip] = useState(0);
+  const [commentsLength, setCommentsLength] = useState(0);
 
   function handleChange(isVisible: boolean) {
-    if (isVisible)
-      if (!data || !data.length) {
-        _getBlogComments(
-          0,
-          10,
-          query.id as string,
-          (result) => {
-            setData(result);
-          },
-          () => {}
-        );
-      }
+    if (!data || !data.length) {
+      _getBlogComments(
+        skip,
+        limit,
+        blogDetailData._id,
+        (result) => {
+          setData(result);
+          setCommentsLength(result ? result.length : 0);
+        },
+        () => {}
+      );
+    }
+  }
+  function handleLoadMore() {
+    _getBlogComments(
+      skip + 1 * limit,
+      limit,
+      blogDetailData._id,
+      (result) => {
+        setSkip(skip + 1);
+        setData([...data, ...result]);
+        setCommentsLength(result ? result.length : 0);
+      },
+      () => {}
+    );
   }
   return (
     <VisibilitySensor
@@ -38,11 +53,15 @@ const BlogDetailComments = () => {
         {data && data.length ? (
           <>
             <Title>{getValue(blogsPageData, "detailcommentstitle")}</Title>
-            {[1, 1, 1].map((item) => (
-              <CommentItem data={item} />
-            ))}
+            {data && data.map((item) => <CommentItem data={item} />)}
           </>
         ) : null}
+        {commentsLength === limit && (
+          <LoadMore onClick={handleLoadMore}>
+            Load more&nbsp;
+            <IoIosArrowDown />
+          </LoadMore>
+        )}
       </CommentsContainer>
     </VisibilitySensor>
   );

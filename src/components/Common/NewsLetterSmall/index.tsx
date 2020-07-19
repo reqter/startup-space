@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
-import { toggleModal } from "..//Modal";
-import Alert from "../NewsLetterAlert";
+import { toggleModal } from "../Modal";
+import Alert from "../AlertModal";
 import {
   NewsLetterWrapper,
   NewsLetterContent,

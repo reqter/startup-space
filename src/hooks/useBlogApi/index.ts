@@ -40,7 +40,8 @@ const getBlogsPageData = async (lang: string, token?: string) => {
 };
 const getLastBlog = async (lang: string, token?: string) => {
   return await fetcher(
-    urls.blogs + `?lang=${lang}&limit=${1}&loadrelations=false`
+    urls.blogs +
+      `?lang=${lang}&limit=${1}&loadrelations=false&sort=-fields.publishdate`
   )({
     method: "GET",
     headers: {
@@ -101,7 +102,9 @@ const getBlogsListData = async (
     urls.blogs +
     `?lang=${lang}&skip=${skip}&limit=${limit}${
       categoryId ? "&fields.categoryid=" + categoryId : ""
-    }${tags ? "&fields.tags=" + tags : ""}&loadrelations=false`;
+    }${
+      tags ? "&fields.tags=" + tags : ""
+    }&loadrelations=false&sort=-fields.publishdate`;
   return await fetcher(url)({
     method: "GET",
     headers: {
@@ -150,17 +153,39 @@ const getBlogComments = async (
   blogId: string,
   token?: string
 ) => {
-  return await fetcher(
-    urls.listLeanUrl +
-      "/" +
-      urls.commentsCollectionGuid +
-      `?lang=${lang}&skip=${skip}&limit=${limit}&loadrelations=false&fields.objectid=${blogId}`
-  )({
+  const url =
+    urls.getReviewsBaseUrl +
+    "/" +
+    blogId +
+    `?lang=${lang}&skip=${skip}&limit=${limit}&loadrelations=false`;
+  debugger;
+  return await fetcher(url)({
     method: "GET",
     headers: {
       "Content-Type": "application/json",
       authorization: "Bearer " + (getLocalToken() || token),
     },
+  });
+};
+const addReview = async (
+  name: string,
+  email: string,
+  body: string,
+  blogId: string,
+  token?: string
+) => {
+  return await fetcher(urls.addReview)({
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      authorization: "Bearer " + (getLocalToken() || token),
+    },
+    body: JSON.stringify({
+      name,
+      body,
+      objectid: blogId,
+      email,
+    }),
   });
 };
 const useBlogApi = () => {
@@ -265,6 +290,11 @@ const useBlogApi = () => {
     _getNewestBlogs();
     _getTagsData();
   };
+  const _addReview = (name, email, body, blogId, onSuccess, onError) => {
+    addReview(name, email, body, blogId, token).then(() => {
+      onSuccess();
+    });
+  };
   return {
     _getBlogsPageData,
     _getCategoriesData,
@@ -275,6 +305,7 @@ const useBlogApi = () => {
     _getRelatedPosts,
     _getBlogComments,
     _callBlogPageApis,
+    _addReview,
   };
 };
 export default useBlogApi;

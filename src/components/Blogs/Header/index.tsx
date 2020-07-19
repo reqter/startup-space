@@ -14,7 +14,7 @@ import useBlogApi from "hooks/useBlogApi";
 
 const BlogHeader = ({}) => {
   const { _callBlogPageApis } = useBlogApi();
-  const { blogsPageData, lastBlogItem } = useGlobalState();
+  const { blogsPageData, lastBlogItem = {} } = useGlobalState();
   const { getValue, includeImageBaseUrl } = useObjectPropsValue();
 
   const img =

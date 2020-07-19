@@ -82,7 +82,7 @@ const Header: React.FC<IProps> = (): JSX.Element => {
     return router.pathname === "/";
   }
   function handleClickOnLogo() {
-    Router.push("/");
+    _getHomeData();
   }
   return (
     <Wrapper isSticky={isSticky} isTransparent={checkIsTransparent()}>
@@ -108,16 +108,6 @@ const Header: React.FC<IProps> = (): JSX.Element => {
             isTransparent={checkIsTransparent()}
           >
             {headerObj ? headerObj.menuitem1text : ""}
-          </MenuItem>
-          <MenuItem
-            selected={router.pathname === `/offices`}
-            isSticky={isSticky}
-            isTransparent={checkIsTransparent()}
-            onClick={getOfficesData}
-          >
-            <Link href={`/offices`}>
-              <a>{headerObj ? headerObj.menuitem2text : ""}</a>
-            </Link>
           </MenuItem>
           <MenuItem
             selected={router.pathname === `/faq`}
