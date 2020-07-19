@@ -15,6 +15,7 @@ const RelatedBlogs = () => {
   function handleChange(isVisible: boolean) {
     if (isVisible)
       if (!data || !data.length) {
+        debugger;
         const categories =
           blogDetailData &&
           blogDetailData.categoryid &&
@@ -48,7 +49,9 @@ const RelatedBlogs = () => {
       offset={{ bottom: -200 }}
     >
       <Container>
-        <Title>{getValue(blogsPageData, "detailrelatedposts")}</Title>
+        {data && data.length ? (
+          <Title>{getValue(blogsPageData, "detailrelatedposts")}</Title>
+        ) : null}
         <RelatedList>
           {data &&
             data.map((item) => {

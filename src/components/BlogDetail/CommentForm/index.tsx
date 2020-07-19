@@ -1,52 +1,91 @@
 import { useForm } from "react-hook-form";
+import { toggleModal } from "../../Common/Modal";
+import Alert from "../../Common/AlertModal";
 import Input from "components/Common/Elements/Input";
 import Textarea from "components/Common/Elements/Textarea";
 import { CommentFormContainer, Title, Row, Column, Button } from "./styles";
 import useGlobalState from "hooks/useGlobal/useGlobalState";
 import useObjectPropsValue from "hooks/useObjectPropsValue";
+import useBlogApi from "hooks/useBlogApi";
 
 const Reply = () => {
-  const { register, handleSubmit, watch, errors } = useForm({
+  const { _addReview } = useBlogApi();
+  const { register, handleSubmit, watch, errors, reset } = useForm({
     mode: "onSubmit",
   });
-  const { blogsPageData } = useGlobalState();
+  const { blogsPageData, blogDetailData } = useGlobalState();
   const { getValue } = useObjectPropsValue();
-  const onSubmit = (formData) => {
-    alert(JSON.stringify(formData));
+  const onSubmit = ({ name, email, body }) => {
+    _addReview(
+      name,
+      email,
+      body,
+      blogDetailData._id,
+      () => {
+        reset();
+        toggleModal({
+          render: () => {
+            return (
+              <Alert
+                title={getValue(blogsPageData, "replysuccesstitle", "ثبت نظر")}
+                info={getValue(
+                  blogsPageData,
+                  "replysuccessinfo",
+                  "نظر شما با موفقیت ثبت شد"
+                )}
+                btnText={getValue(blogsPageData, "replysuccessaction", "ادامه")}
+                onClose={handleCloseAlert}
+              />
+            );
+          },
+        });
+      },
+      () => {}
+    );
   };
+  function handleCloseAlert() {
+    toggleModal();
+  }
   return (
     <CommentFormContainer onSubmit={handleSubmit(onSubmit)}>
       <Title>{getValue(blogsPageData, "detailreplytitle")}</Title>
       <Row>
         <Column>
           <Input
+            placeholder={getValue(blogsPageData, "detailnameinputplaceholder")}
             name="name"
             ref={register({
               required: true,
             })}
-            placeholder={getValue(blogsPageData, "detailnameinputplaceholder")}
+            hasError={errors.name}
           />
         </Column>
         <Column>
           <Input
+            type="email"
+            placeholder={getValue(blogsPageData, "detailemailinputplaceholder")}
             name="email"
             ref={register({
               required: true,
+              pattern: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
             })}
-            placeholder={getValue(blogsPageData, "detailemailinputplaceholder")}
+            hasError={errors.email}
           />
         </Column>
       </Row>
       <Row>
         <Textarea
-          name="message"
+          placeholder={getValue(blogsPageData, "detailmessageplaceholder")}
+          name="body"
           ref={register({
             required: true,
           })}
-          placeholder={getValue(blogsPageData, "detailmessageplaceholder")}
+          hasError={errors.body}
         />
       </Row>
-      <Button>{getValue(blogsPageData, "detailreplyactiontext")}</Button>
+      <Button type="submit">
+        {getValue(blogsPageData, "detailreplyactiontext")}
+      </Button>
     </CommentFormContainer>
   );
 };

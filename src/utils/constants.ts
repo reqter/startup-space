@@ -25,4 +25,6 @@ export const urls = {
   blogsCategoriesGuid: "5f047dc2911086001a08272a",
   blogsTagsGuid: "5f0490d4911086001a082739",
   commentsCollectionGuid: "5d3eeaba915bfb00174547f4",
+  addReview: "/api/v1/reviews",
+  getReviewsBaseUrl: "/api/v1/reviews",
 };

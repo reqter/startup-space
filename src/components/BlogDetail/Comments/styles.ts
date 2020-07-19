@@ -25,5 +25,12 @@ export const Date = styled.div`
   @apply text-gray-500 my-2 text-xs;
 `;
 export const Message = styled.div`
-  @apply text-gray-700;
+  @apply text-gray-700 text-sm text-justify;
+  padding-inline-end: 10px;
+`;
+export const LoadMore = styled.button`
+  @apply bg-gray-200 flex justify-center items-center mt-10 text-sm font-bold py-2 px-5 rounded transition ease-in duration-200;
+  &:hover {
+    @apply bg-gray-300 transition ease-in duration-200;
+  }
 `;

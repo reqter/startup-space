@@ -1,7 +1,14 @@
 import { styled } from "linaria/lib/react";
 export const Input = styled.input`
-  @apply appearance-none border border-gray-500 w-full py-3 px-4 text-gray-600 leading-tight;
+  @apply appearance-none w-full py-3 px-4 text-gray-600 leading-tight outline-none border border-gray-400;
   &:focus {
-    @apply shadow;
+    border: ${({ hasError }) =>
+      hasError
+        ? `1px solid ${theme`colors.red.500`}`
+        : `1px solid ${theme`colors.gray.400`}`};
   }
+  border: ${({ hasError }) =>
+    hasError
+      ? `1px solid ${theme`colors.red.500`}`
+      : `1px solid ${theme`colors.gray.400`}`};
 `;

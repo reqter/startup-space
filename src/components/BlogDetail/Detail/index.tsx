@@ -27,7 +27,7 @@ const BlogDetail = () => {
   return (
     <BlogDetailContainer>
       <Image src={img} />
-      <Date>March 15, 2018</Date>
+      <Date>{getValue(blogDetailData, "publishdate")}</Date>
       <Title>{getValue(blogDetailData, "name")}</Title>
       {blogDetailData && blogDetailData.tags && blogDetailData.tags.length ? (
         <Tags>
@@ -76,8 +76,8 @@ const BlogDetail = () => {
           </>
         ) : null}
       </CategoriesContainer>
-      <Comments />
       <CommentForm />
+      <Comments />
     </BlogDetailContainer>
   );
 };
