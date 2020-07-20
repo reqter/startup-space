@@ -18,13 +18,10 @@ export const Button = styled.button`
 `;
 
 export const CommentsWrapper = styled.div`
-  @apply mb-10;
+  @apply mb-2;
 `;
 export const CommentWrapper = styled.div`
-  @apply py-4 border-b border-solid border-gray-300;
-  &:last-child {
-    @apply border-none;
-  }
+  @apply py-4;
 `;
 export const Top = styled.div`
   @apply flex items-center mb-3;
@@ -45,4 +42,23 @@ export const Date = styled.div`
 `;
 export const Text = styled.p`
   @apply text-sm text-gray-800;
+`;
+
+export const Form = styled.form``;
+export const Row = styled.div`
+  @apply flex mb-5;
+`;
+
+export const Column = styled.div`
+  @apply flex-1;
+  margin-inline-end: 10px;
+  &:last-child {
+    margin: 0;
+  }
+`;
+export const LoadMore = styled.button`
+  @apply bg-gray-200 w-full flex justify-center items-center mt-10 text-sm font-bold py-2 px-5 rounded transition ease-in duration-200;
+  &:hover {
+    @apply bg-gray-300 transition ease-in duration-200;
+  }
 `;

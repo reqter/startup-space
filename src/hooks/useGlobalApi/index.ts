@@ -261,7 +261,28 @@ const getContactUsPageData = async (lang: string, token?: string) => {
     },
   });
 };
-
+const addReview = async (
+  name: string,
+  email: string,
+  body: string,
+  partnerId: string,
+  token?: string
+) => {
+  return await fetcher(urls.addReview)({
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      authorization: "Bearer " + (getLocalToken() || token),
+    },
+    body: JSON.stringify({
+      name,
+      body,
+      objectid: partnerId,
+      email,
+    }),
+  });
+};
+////////////////////////////////////////
 const useGlobalApi = () => {
   const {
     currentLanguage,
@@ -399,6 +420,7 @@ const useGlobalApi = () => {
         }
       });
   };
+
   const getHomeData = async (onSuccess?: () => void, onError?: () => void) => {
     try {
       let promisArray = [getLandingData(currentLanguage, token)];
@@ -449,6 +471,13 @@ const useGlobalApi = () => {
       });
     }
   };
+  const _addReview = (name, email, body, partnerId, onSuccess, onError) => {
+    addReview(name, email, body, partnerId, token)
+      .then(() => {
+        onSuccess();
+      })
+      .catch(() => onError && onError());
+  };
   return {
     getData,
     getLanding,
@@ -464,6 +493,7 @@ const useGlobalApi = () => {
     _getContactUsPageData,
     _getFAQsPageData,
     _getFAQsData,
+    _addReview,
   };
 };
 export default useGlobalApi;

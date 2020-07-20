@@ -158,7 +158,6 @@ const getBlogComments = async (
     "/" +
     blogId +
     `?lang=${lang}&skip=${skip}&limit=${limit}&loadrelations=false`;
-  debugger;
   return await fetcher(url)({
     method: "GET",
     headers: {
