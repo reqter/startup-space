@@ -478,6 +478,21 @@ const useGlobalApi = () => {
       })
       .catch(() => onError && onError());
   };
+  const _subscribe = (email, onSuccess, onError) => {
+    return fetcher(urls.subscribeUrl)({
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        authorization: "Bearer " + token,
+      },
+      body: JSON.stringify({
+        email,
+        name: email,
+      }),
+    })
+      .then((result) => onSuccess && onSuccess())
+      .catch((error) => onError && onError());
+  };
   return {
     getData,
     getLanding,
@@ -494,6 +509,7 @@ const useGlobalApi = () => {
     _getFAQsPageData,
     _getFAQsData,
     _addReview,
+    _subscribe,
   };
 };
 export default useGlobalApi;

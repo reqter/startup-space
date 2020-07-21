@@ -27,4 +27,5 @@ export const urls = {
   commentsCollectionGuid: "5d3eeaba915bfb00174547f4",
   addReview: "/api/v1/reviews",
   getReviewsBaseUrl: "/api/v1/reviews",
+  subscribeUrl: "/api/v1/newsletters/subscribe",
 };

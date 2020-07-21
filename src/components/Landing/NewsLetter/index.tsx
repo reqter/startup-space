@@ -15,11 +15,13 @@ import {
 } from "./styles";
 import useGlobalState from "hooks/useGlobal/useGlobalState";
 import useObjectPropsValue from "hooks/useObjectPropsValue";
+import useGlobalApi from "hooks/useGlobalApi";
 
 const NewsLetter = () => {
-  const { register, handleSubmit, watch, errors } = useForm({
+  const { register, handleSubmit, reset, errors } = useForm({
     mode: "onSubmit",
   });
+  const { _subscribe } = useGlobalApi();
   const { footerData, landingData } = useGlobalState();
   const data = React.useMemo(() => (landingData ? landingData[0] : {}), [
     landingData,
@@ -29,19 +31,28 @@ const NewsLetter = () => {
   function handleCloseAlert() {
     toggleModal();
   }
-  const onSubmit = (formData) =>
-    toggleModal({
-      render: () => {
-        return (
-          <Alert
-            title={getValue(footer, "subscribesuccesstitle")}
-            info={getValue(footer, "subscribesuccessdescription")}
-            btnText={getValue(footer, "subscribesuccessactiontext")}
-            onClose={handleCloseAlert}
-          />
-        );
+  const onSubmit = ({ email }) => {
+    _subscribe(
+      email,
+      (result) => {
+        reset();
+        toggleModal({
+          render: () => {
+            return (
+              <Alert
+                title={getValue(footer, "subscribesuccesstitle")}
+                info={getValue(footer, "subscribesuccessdescription")}
+                btnText={getValue(footer, "subscribesuccessactiontext")}
+                onClose={handleCloseAlert}
+              />
+            );
+          },
+        });
       },
-    });
+      () => {}
+    );
+  };
+
   return data.isnewsletterenabled ? (
     <Section bgColor={theme`colors.gray.200`}>
       <Container>
