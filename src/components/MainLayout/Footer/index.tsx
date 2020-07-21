@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Select, { components } from "react-select";
 import { i18n, config } from "../../../../config/Next18Wrapper";
 import Router from "next/router";
@@ -19,17 +20,19 @@ import {
 } from "./styles";
 import useGlobalState from "hooks/useGlobal/useGlobalState";
 import useGlobalDispatch from "hooks/useGlobal/useGlobalDispatch";
+import useGlobalApi from "hooks/useGlobalApi";
 
 const Footer = () => {
   const { dispatch } = useGlobalDispatch();
+  const { _getNewOffices } = useGlobalApi();
   const {
     currentLanguage,
     headerData,
     footerData,
-    officesData,
     isVisibleFooter,
     curentRouterName,
   } = useGlobalState();
+  const [newOfficess, setNewOffices] = useState([]);
   const header = headerData ? headerData[0] : {};
   const footer = footerData && footerData.length ? footerData[0] : {};
   const handleChange = (isVisible: boolean) => {
@@ -38,6 +41,14 @@ const Footer = () => {
         type: "TOGGLE_FOOTER_VISIBILITY",
         payload: true,
       });
+      if (!newOfficess || !newOfficess.length) {
+        _getNewOffices(
+          (result) => {
+            setNewOffices(result);
+          },
+          () => {}
+        );
+      }
     } else {
       if (isVisibleFooter) {
         dispatch({
@@ -92,19 +103,67 @@ const Footer = () => {
             </Box>
           </Box>
           <Box title={footer.featuredtitle}>
-            {officesData &&
-              officesData
-                .slice(0, 3)
-                .map((item, index) => <FeatureItem key={index} data={item} />)}
+            {newOfficess &&
+              newOfficess.map((item, index) => (
+                <FeatureItem key={index} data={item} />
+              ))}
           </Box>
           <Box title={footer.usefullinkstitle}>
             <ul>
-              <li>Home 2</li>
-              <li>About Us</li>
-              <li>Half Map Page</li>
-              <li>Search Property</li>
-              <li>Faq</li>
-              <li>Contact Us</li>
+              <li>
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href={`${footer.link1url}`}
+                >
+                  {footer.link1title}
+                </a>
+              </li>
+              <li>
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href={`${footer.link2url}`}
+                >
+                  {footer.link2title}
+                </a>
+              </li>
+              <li>
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href={`${footer.link3url}`}
+                >
+                  {footer.link3title}
+                </a>
+              </li>
+              <li>
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href={`${footer.link4url}`}
+                >
+                  {footer.link4title}
+                </a>
+              </li>
+              <li>
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href={`${footer.link5url}`}
+                >
+                  {footer.link5title}
+                </a>
+              </li>
+              <li>
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href={`${footer.link6url}`}
+                >
+                  {footer.link6title}
+                </a>
+              </li>
             </ul>
           </Box>
           <Box title={footer.sociallinkstitle}>

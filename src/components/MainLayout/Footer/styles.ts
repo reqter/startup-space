@@ -44,15 +44,16 @@ export const socialIconStyle = css`
 `;
 
 export const ImageContainer = styled.div`
-  @apply rounded-lg overflow-hidden;
+  @apply rounded-lg overflow-hidden flex-shrink-0;
   height: 60px;
   width: 70px;
   margin-inline-end: 10px;
 `;
-export const Image = styled.img`
+export const Image = styled.div`
   @apply relative bg-cover rounded-lg h-full w-full transition duration-500 flex-shrink-0;
-  background-image: ${({ bgImage }) =>
-    `url("https://library.kissclipart.com/20181001/bbq/kissclipart-workdar-coworking-space-clipart-coworking-a7a0512b3741f118.png")`};
+  background-image: ${({ bgImage }) => `url(${bgImage})`};
+  height: 60px;
+  width: 70px;
 `;
 export const FeatureContent = styled.div`
   @apply flex flex-col;
@@ -64,7 +65,7 @@ export const Location = styled.h5`
   @apply text-xs m-0 p-0;
 `;
 
-export const FeatureItem = styled.div`
+export const FeatureItem = styled.a`
   @apply flex items-center pb-3 mb-3 cursor-pointer;
   &:not(:last-child) {
     @apply border-b border-solid border-gray-800;

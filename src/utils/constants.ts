@@ -29,4 +29,5 @@ export const urls = {
   getReviewsBaseUrl: "/api/v1/reviews",
   subscribeUrl: "/api/v1/newsletters/subscribe",
   contactUsUrl: "/api/v1/contacts",
+  newPartnersUrl: "/api/v1/partners/newplaces",
 };

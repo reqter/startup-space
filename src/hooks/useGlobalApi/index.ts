@@ -521,6 +521,18 @@ const useGlobalApi = () => {
       .then((result) => onSuccess && onSuccess())
       .catch((error) => onError && onError());
   };
+  const _getNewOffices = (onSuccess, onError) => {
+    const url = urls.newPartnersUrl + `?lang=${currentLanguage}&limit=3&skip=0`;
+    return fetcher(url)({
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        authorization: "Bearer " + token,
+      },
+    })
+      .then((result) => onSuccess && onSuccess(result.data))
+      .catch((error) => onError && onError());
+  };
   return {
     getData,
     getLanding,
@@ -539,6 +551,7 @@ const useGlobalApi = () => {
     _addReview,
     _subscribe,
     _addContactUs,
+    _getNewOffices,
   };
 };
 export default useGlobalApi;
