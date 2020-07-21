@@ -50,7 +50,9 @@ body {
 .image-gallery-thumbnail-image {
   height: 100%;
 }
-
+.rdw-editor-main {
+  overflow: hidden !important;
+}
 :root {
   --gray-light: #ececed;
   --gray-accent: #e9e9ea;
