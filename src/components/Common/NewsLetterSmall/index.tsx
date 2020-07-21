@@ -11,30 +11,41 @@ import {
 } from "./styles";
 import useGlobalState from "hooks/useGlobal/useGlobalState";
 import useObjectPropsValue from "hooks/useObjectPropsValue";
+import useGlobalApi from "hooks/useGlobalApi";
 
 const NewsLetterFAQ = () => {
-  const { register, handleSubmit, watch, errors } = useForm({
+  const { register, handleSubmit, reset, errors } = useForm({
     mode: "onSubmit",
   });
+  const { _subscribe } = useGlobalApi();
   const { footerData } = useGlobalState();
   const { getValue } = useObjectPropsValue();
   const footer = footerData ? footerData[0] : {};
   function handleCloseAlert() {
     toggleModal();
   }
-  const onSubmit = (formData) =>
-    toggleModal({
-      render: () => {
-        return (
-          <Alert
-            title={getValue(footer, "subscribesuccesstitle")}
-            info={getValue(footer, "subscribesuccessdescription")}
-            btnText={getValue(footer, "subscribesuccessactiontext")}
-            onClose={handleCloseAlert}
-          />
-        );
+
+  const onSubmit = ({ email }) => {
+    _subscribe(
+      email,
+      (result) => {
+        reset();
+        toggleModal({
+          render: () => {
+            return (
+              <Alert
+                title={getValue(footer, "subscribesuccesstitle")}
+                info={getValue(footer, "subscribesuccessdescription")}
+                btnText={getValue(footer, "subscribesuccessactiontext")}
+                onClose={handleCloseAlert}
+              />
+            );
+          },
+        });
       },
-    });
+      () => {}
+    );
+  };
 
   return (
     <NewsLetterWrapper>

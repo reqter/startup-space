@@ -1,6 +1,6 @@
 import { styled } from "linaria/lib/react";
 
-export const FormContainer = styled.div`
+export const FormContainer = styled.form`
   @apply w-1/2;
 `;
 
@@ -11,5 +11,17 @@ export const Button = styled.button`
   }
   &:first-child {
     @apply mie-5;
+  }
+`;
+
+export const Row = styled.div`
+  @apply flex mb-5;
+`;
+
+export const Column = styled.div`
+  @apply flex-1;
+  margin-inline-end: 10px;
+  &:last-child {
+    margin: 0;
   }
 `;
