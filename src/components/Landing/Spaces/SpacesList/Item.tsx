@@ -14,7 +14,7 @@ const SpacesItem = ({ data, colSpan, hasMargin }) => {
       hasMargin={hasMargin}
       target="_blank"
       rel="noopener noreferrer"
-      href={`${currentLanguage}/offices/${data?.partnerkey}`}
+      href={`${currentLanguage}/offices/${data ? data.partnerkey : ""}`}
     >
       <Image bgImage={img} />
       <Content>

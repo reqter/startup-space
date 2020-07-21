@@ -1,7 +1,7 @@
 import { styled } from "linaria/lib/react";
 
 export const BlogDetailContainer = styled.div`
-  @apply flex flex-col bg-white shadow p-5 rounded;
+  @apply flex-1 flex flex-col bg-white shadow p-5 rounded;
   margin-inline-end: 50px;
 `;
 export const Image = styled.img`

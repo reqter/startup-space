@@ -54,8 +54,8 @@ const RelatedBlogs = () => {
         ) : null}
         <RelatedList>
           {data &&
-            data.map((item) => {
-              return <Item key={item._id} data={item} />;
+            data.map((item, index) => {
+              return <Item key={index} data={item} />;
             })}
         </RelatedList>
       </Container>
