@@ -1,4 +1,5 @@
 import { Link } from "../../../../config/Next18Wrapper";
+import dynamic from "next/dynamic";
 import {
   BlogDetailContainer,
   Image,
@@ -16,6 +17,10 @@ import Comments from "../Comments";
 import CommentForm from "../CommentForm";
 import useGlobalState from "hooks/useGlobal/useGlobalState";
 import useObjectPropsValue from "hooks/useObjectPropsValue";
+
+const HtmlViewer = dynamic(() => import("./HtmlViewer"), {
+  ssr: false,
+});
 
 const BlogDetail = () => {
   const { blogsPageData, blogDetailData } = useGlobalState();
@@ -36,9 +41,7 @@ const BlogDetail = () => {
           ))}
         </Tags>
       ) : null}
-      <Html
-        dangerouslySetInnerHTML={{ __html: getValue(blogDetailData, "body") }}
-      />
+      <HtmlViewer content={getValue(blogDetailData, "body")} />
 
       <CategoriesContainer>
         {blogDetailData &&

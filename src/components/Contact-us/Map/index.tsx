@@ -6,7 +6,7 @@ const MapBox = dynamic(() => import("components/Common/Map"), {
 });
 const Map = () => {
   const { contactUsPageData } = useGlobalState();
-  return (
+  return contactUsPageData && contactUsPageData.location ? (
     <MapContainer>
       <MapBox
         title={""}
@@ -14,6 +14,6 @@ const Map = () => {
         lng={contactUsPageData ? contactUsPageData.location.longitude : ""}
       />
     </MapContainer>
-  );
+  ) : null;
 };
 export default Map;

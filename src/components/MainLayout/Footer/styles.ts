@@ -7,6 +7,9 @@ export const Container = styled.div`
 
 export const Box = styled.div`
   @apply flex flex-col flex-1 text-white pie-5 text-gray-300;
+  &:nth-child(2) {
+    flex: 1.5;
+  }
   ul {
     @apply list-disc;
     padding-inline-start: 15px;
@@ -66,7 +69,7 @@ export const Location = styled.h5`
 `;
 
 export const FeatureItem = styled.a`
-  @apply flex items-center pb-3 mb-3 cursor-pointer;
+  @apply flex items-center pb-3 mb-3 cursor-pointer w-11/12;
   &:not(:last-child) {
     @apply border-b border-solid border-gray-800;
   }
