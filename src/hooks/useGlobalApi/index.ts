@@ -90,7 +90,8 @@ const getMostPopularPartners = async (
 };
 const getCitiesData = async (lang: string, limit: number, token?: string) => {
   return await fetcher(
-    urls.cities + `?lang=${lang}&limit=${limit}&loadrelations=false`
+    urls.cities +
+      `?lang=${lang}&limit=${limit}&loadrelations=false&sort=fields.showinlanding`
   )({
     method: "GET",
     headers: {
@@ -344,9 +345,9 @@ const useGlobalApi = () => {
     });
   };
   const getCities = async (limit: number) => {
-    getCitiesData(currentLanguage, limit, token).then((data) =>
-      storeData("citiesData", data)
-    );
+    getCitiesData(currentLanguage, limit, token).then((data) => {
+      storeData("citiesData", data);
+    });
   };
   const getAgents = async (limit: number) => {
     getAgentsData(currentLanguage, limit, token).then((data) =>
