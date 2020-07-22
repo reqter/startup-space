@@ -1,5 +1,5 @@
-import { useState } from "react";
-import Select, { components } from "react-select";
+import { useState, useEffect } from "react";
+import Select from "react-select";
 import { i18n, config } from "../../../../config/Next18Wrapper";
 import Router from "next/router";
 import {
@@ -35,20 +35,22 @@ const Footer = () => {
   const [newOfficess, setNewOffices] = useState([]);
   const header = headerData ? headerData[0] : {};
   const footer = footerData && footerData.length ? footerData[0] : {};
+  useEffect(() => {
+    if (!newOfficess || !newOfficess.length) {
+      _getNewOffices(
+        (result) => {
+          setNewOffices(result);
+        },
+        () => {}
+      );
+    }
+  }, []);
   const handleChange = (isVisible: boolean) => {
     if (isVisible) {
       dispatch({
         type: "TOGGLE_FOOTER_VISIBILITY",
         payload: true,
       });
-      if (!newOfficess || !newOfficess.length) {
-        _getNewOffices(
-          (result) => {
-            setNewOffices(result);
-          },
-          () => {}
-        );
-      }
     } else {
       if (isVisibleFooter) {
         dispatch({
@@ -61,8 +63,6 @@ const Footer = () => {
   function handleLangChanged(lang) {
     const path = window.location.href.replace(currentLanguage, lang.value);
     window.location.href = path;
-    // Router.reload();
-    // i18n.changeLanguage(lang.value, (item) => {});
   }
   return (
     <VisibilitySensor
