@@ -12,6 +12,7 @@ import {
   getPartnerDetailPageData,
   getFooterData,
 } from "hooks/useGlobalApi";
+import { getNewestBlogs } from "hooks/useBlogApi";
 import useGlobalState from "hooks/useGlobal/useGlobalState";
 import useGlobalDispatch from "hooks/useGlobal/useGlobalDispatch";
 import useObjectPropsValue from "hooks/useObjectPropsValue";
@@ -61,11 +62,13 @@ PartnerDetail.getInitialProps = async (context) => {
         headerData,
         partnerDetail,
         partnerDetailPage,
+        newestBlogs,
         footerData,
       ] = await Promise.all([
         getHeaderData(currentLanguage),
         getPartnerDetailById(context.query.id, currentLanguage),
         getPartnerDetailPageData(currentLanguage),
+        getNewestBlogs(currentLanguage, token),
         getFooterData(currentLanguage),
       ]);
       return {
@@ -76,6 +79,7 @@ PartnerDetail.getInitialProps = async (context) => {
         partnerDetailId:
           partnerDetail && partnerDetail.data ? partnerDetail.data._id : "",
         partnerDetailPage,
+        newestBlogs,
         footerData,
       };
     } catch (error) {

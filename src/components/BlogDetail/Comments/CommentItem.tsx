@@ -11,7 +11,6 @@ import useObjectPropsValue from "hooks/useObjectPropsValue";
 
 const CommentItem = ({ data }) => {
   const { getValue } = useObjectPropsValue();
-  console.log(data);
   return (
     <CommentItemWrpapper>
       <Image src="https://png.pngtree.com/png-clipart/20190924/original/pngtree-vector-user-young-boy-avatar-icon-png-image_4827810.jpg" />
