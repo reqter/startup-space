@@ -1,5 +1,4 @@
 import React from "react";
-import VisibilitySensor from "react-visibility-sensor";
 import { Link } from "../../../../config/Next18Wrapper";
 import { Button } from "./styles";
 import Section from "../../Common/Section";
@@ -16,26 +15,21 @@ const Cities = ({}) => {
   const data = React.useMemo(() => (landingData ? landingData[0] : {}), [
     landingData,
   ]);
-  function handleChange(isVisible: boolean) {
-    if (isVisible) if (!citiesData) getCities(4);
-  }
+  React.useEffect(() => {
+    if (!citiesData) getCities(4);
+  }, []);
+
   return data.isareaenabled ? (
-    <VisibilitySensor
-      onChange={handleChange}
-      partialVisibility={true}
-      offset={{ bottom: -100 }}
+    <Section
+      bgImage={data.areabackground}
+      title={data.areaheading}
+      header={data.areatitle}
     >
-      <Section
-        bgImage={data.areabackground}
-        title={data.areaheading}
-        header={data.areatitle}
-      >
-        <CityList />
-        <Button>
-          <Link href={`/offices`}>{getValue(data, "areaactiontext")}</Link>
-        </Button>
-      </Section>
-    </VisibilitySensor>
+      <CityList />
+      <Button>
+        <Link href={`/offices`}>{getValue(data, "areaactiontext")}</Link>
+      </Button>
+    </Section>
   ) : null;
 };
 export default Cities;

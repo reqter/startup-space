@@ -6,7 +6,6 @@ import SpacesList from "./SpacesList";
 import useGlobalState from "hooks/useGlobal/useGlobalState";
 import useGlobalApi from "hooks/useGlobalApi";
 import useObjectPropsValue from "hooks/useObjectPropsValue";
-import VisibilitySensor from "react-visibility-sensor";
 
 const Spaces = () => {
   const { getPopularOffices } = useGlobalApi();
