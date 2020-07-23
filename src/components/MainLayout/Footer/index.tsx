@@ -24,7 +24,7 @@ import useGlobalApi from "hooks/useGlobalApi";
 
 const Footer = () => {
   const { dispatch } = useGlobalDispatch();
-  const { _getNewOffices } = useGlobalApi();
+  const { _getNewOffices, _getAppLocales } = useGlobalApi();
   const {
     currentLanguage,
     headerData,
@@ -33,6 +33,8 @@ const Footer = () => {
     curentRouterName,
   } = useGlobalState();
   const [newOfficess, setNewOffices] = useState([]);
+  const [appLocales, setAppLocales] = useState();
+  const [languagesOption, setLanguagesOption] = useState([]);
   const header = headerData ? headerData[0] : {};
   const footer = footerData && footerData.length ? footerData[0] : {};
   useEffect(() => {
@@ -44,6 +46,22 @@ const Footer = () => {
         () => {}
       );
     }
+    _getAppLocales(
+      (result) => {
+        const l = config.allLanguages.map((lang) => {
+          const find_l = result.find((item) => item.locale === lang);
+          if (find_l) {
+            return {
+              value: lang,
+              label: lang,
+            };
+          }
+          return null;
+        });
+        setLanguagesOption(l);
+      },
+      () => {}
+    );
   }, []);
   const handleChange = (isVisible: boolean) => {
     if (isVisible) {
@@ -75,32 +93,29 @@ const Footer = () => {
           <Box title={footer.aboutustitle}>
             <span>{footer.aboutusdescription}</span>
             <br />
-            <Box title={footer.languagetitle}>
-              <Select
-                menuPlacement="bottom"
-                closeMenuOnScroll={true}
-                closeMenuOnSelect={true}
-                options={config.allLanguages.map((lang) => {
-                  return {
-                    value: lang,
-                    label: lang,
-                  };
-                })}
-                styles={{
-                  option: (base) => ({
-                    ...base,
-                    color: "black",
-                  }),
-                }}
-                isMulti={false}
-                isSearchable={false}
-                onChange={handleLangChanged}
-                defaultValue={{
-                  value: currentLanguage,
-                  label: currentLanguage,
-                }}
-              />
-            </Box>
+            {languagesOption && languagesOption.length ? (
+              <Box title={footer.languagetitle}>
+                <Select
+                  menuPlacement="bottom"
+                  closeMenuOnScroll={true}
+                  closeMenuOnSelect={true}
+                  options={languagesOption}
+                  styles={{
+                    option: (base) => ({
+                      ...base,
+                      color: "black",
+                    }),
+                  }}
+                  isMulti={false}
+                  isSearchable={false}
+                  onChange={handleLangChanged}
+                  defaultValue={{
+                    value: currentLanguage,
+                    label: currentLanguage,
+                  }}
+                />
+              </Box>
+            ) : null}
           </Box>
           <Box title={footer.featuredtitle}>
             {newOfficess &&

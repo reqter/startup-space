@@ -70,7 +70,6 @@ const Spaces = () => {
   function handleMoreDataClicked() {
     setSkip((prev) => prev + 1);
     getOffices((skip + 1) * limit, limit, filteredParams, (data) => {
-      window.scroll({ top: 0, left: 0, behavior: "smooth" });
       setData((prev) => [...prev, ...data]);
       setDataLength(data ? data.length : 0);
     });

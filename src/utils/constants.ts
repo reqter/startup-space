@@ -30,4 +30,6 @@ export const urls = {
   subscribeUrl: "/api/v1/newsletters/subscribe",
   contactUsUrl: "/api/v1/contacts",
   newPartnersUrl: "/api/v1/partners/newplaces",
+  locales: "/api/v1/config/locales",
+  url404: "5f198104ba0925001ad05b89",
 };
