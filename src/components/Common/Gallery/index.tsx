@@ -11,7 +11,7 @@ const Gallery = ({ data = [] }) => {
   const { includeImageBaseUrl } = useObjectPropsValue();
   const images = data.map((item) => {
     return {
-      original: includeImageBaseUrl(item, "image", 1024, 768),
+      original: includeImageBaseUrl(item, "image", 1024, 700),
       thumbnail: includeImageBaseUrl(item, "image", 100, 100),
     };
   });
@@ -23,6 +23,7 @@ const Gallery = ({ data = [] }) => {
           items={images}
           showPlayButton={false}
           isRTL={dir === "rtl" ? true : false}
+          showFullscreenButton={false}
         />
       ) : null}
     </GalleryWrapper>

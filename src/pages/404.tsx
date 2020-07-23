@@ -1,7 +1,19 @@
 import React from "react";
-import Head from "next/head";
+import MainLayout from "components/MainLayout";
+import NewsLetter from "components/Common/NewsLetterSmall";
+import Content from "components/404";
+import useGlobalState from "hooks/useGlobal/useGlobalState";
+import useObjectPropsValue from "hooks/useObjectPropsValue";
+
 function Custom404() {
-  return <h1>404 - Page Not Found</h1>;
+  const { getValue } = useObjectPropsValue();
+  const { notFoundPageInfo } = useGlobalState();
+  return (
+    <MainLayout title={getValue(notFoundPageInfo, "name")}>
+      <Content />
+      <NewsLetter />
+    </MainLayout>
+  );
 }
 
 export default Custom404;

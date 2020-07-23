@@ -262,6 +262,17 @@ const getContactUsPageData = async (lang: string, token?: string) => {
     },
   });
 };
+const getNotFoundPageData = async (lang: string, token?: string) => {
+  return await fetcher(
+    urls.listLeanUrl + "/" + urls.url404 + `?lang=${lang}&loadrelations=false`
+  )({
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      authorization: "Bearer " + (getLocalToken() || token),
+    },
+  });
+};
 const addReview = async (
   name: string,
   email: string,
@@ -534,6 +545,17 @@ const useGlobalApi = () => {
       .then((result) => onSuccess && onSuccess(result.data))
       .catch((error) => onError && onError());
   };
+  const _getAppLocales = (onSuccess, onError) => {
+    return fetcher(urls.locales)({
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        authorization: "Bearer " + token,
+      },
+    })
+      .then((result) => onSuccess && onSuccess(result ? result.data : []))
+      .catch((error) => onError && onError(error));
+  };
   return {
     getData,
     getLanding,
@@ -553,6 +575,7 @@ const useGlobalApi = () => {
     _subscribe,
     _addContactUs,
     _getNewOffices,
+    _getAppLocales,
   };
 };
 export default useGlobalApi;
@@ -572,4 +595,5 @@ export {
   getFAQsPageData,
   getFAQsData,
   getContactUsPageData,
+  getNotFoundPageData,
 };
