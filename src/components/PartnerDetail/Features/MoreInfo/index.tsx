@@ -17,7 +17,7 @@ const MoreInfo = () => {
   return (partnerDetail && workingHours && workingHours.length) ||
     (partnerDetail && partnerDetail.rules && partnerDetail.rules.length) ? (
     <LayoutBox title={data.thingstoknowboxtitle}>
-      {workingHours && workingHours.length && (
+      {workingHours && workingHours.length ? (
         <>
           <Title>{data.workinghourstitle}</Title>
           {workingHours.map((item, index) => (
@@ -28,18 +28,20 @@ const MoreInfo = () => {
           ))}
           <br />
         </>
-      )}
-      {partnerDetail.rules && partnerDetail.rules.length && (
+      ) : null}
+      {partnerDetail.rules && partnerDetail.rules.length ? (
         <>
           <Title>{data.rulestitle}</Title>
-          {partnerDetail.rules.split("\n").map((item, index) => (
-            <Row key={index}>
-              <IoIosAttach />
-              <Rule key={index}>{item} </Rule>
-            </Row>
-          ))}
+          {partnerDetail.rules.split("\n").map((item, index) =>
+            item && item !== "undefined" ? (
+              <Row key={index}>
+                <IoIosAttach />
+                <Rule key={index}>{item} </Rule>
+              </Row>
+            ) : null
+          )}
         </>
-      )}
+      ) : null}
     </LayoutBox>
   ) : null;
 };

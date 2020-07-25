@@ -15,7 +15,7 @@ import {
   IoMdTv,
   IoIosWifi,
   IoMdWallet,
-  IoMdSquareOutline,
+  IoMdCheckmarkCircleOutline,
 } from "react-icons/io";
 const icons = {
   postalcode: <IoIosMail />,
@@ -39,7 +39,7 @@ const Icon = ({ name = "" }) => {
   return icons[name.toLowerCase()] ? (
     icons[name.toLowerCase()]
   ) : (
-    <IoMdSquareOutline />
+    <IoMdCheckmarkCircleOutline />
   );
 };
 

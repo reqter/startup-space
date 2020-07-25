@@ -1,5 +1,4 @@
 import React from "react";
-import VisibilitySensor from "react-visibility-sensor";
 import useGlobalState from "hooks/useGlobal/useGlobalState";
 import useGlobalApi from "hooks/useGlobalApi";
 import LayoutBox from "../../LayoutBox";
@@ -14,28 +13,22 @@ const Products = () => {
     () => (partnerDetailPage ? partnerDetailPage[0] : {}),
     []
   );
-  function handleChange(isVisible: boolean) {
-    if (isVisible && !dataList) {
+  React.useEffect(() => {
+    if (!dataList) {
       _getPartnerProducts(
         partnerDetailId,
         (result) => setData(result),
         () => {}
       );
     }
-  }
-  return (
-    <VisibilitySensor
-      onChange={handleChange}
-      partialVisibility={true}
-      offset={{ bottom: -100 }}
-    >
-      <LayoutBox title={data.productsboxtitle}>
-        <ProductContainer>
-          {dataList &&
-            dataList.map((item, index) => <Product key={index} data={item} />)}
-        </ProductContainer>
-      </LayoutBox>
-    </VisibilitySensor>
-  );
+  });
+  return dataList && dataList.length ? (
+    <LayoutBox title={data.productsboxtitle}>
+      <ProductContainer>
+        {dataList &&
+          dataList.map((item, index) => <Product key={index} data={item} />)}
+      </ProductContainer>
+    </LayoutBox>
+  ) : null;
 };
 export default Products;
