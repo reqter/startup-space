@@ -19,29 +19,6 @@ const Features = () => {
   const { dispatch } = useGlobalDispatch();
   const { partnerDetailStickySideBar } = useGlobalState();
   const containerRef = React.useRef(null);
-  // React.useEffect(() => {
-  //   const handleScroll = () => {
-  //     const containerTop = containerRef.current.getBoundingClientRect().top;
-  //
-  //     if (containerTop <= 100) {
-  //       dispatch({
-  //         type: "TOGGLE_PARTNER_DETAIL_STICKY_SIDE_BAR",
-  //         payload: true,
-  //       });
-  //     } else {
-  //       dispatch({
-  //         type: "TOGGLE_PARTNER_DETAIL_STICKY_SIDE_BAR",
-  //         payload: false,
-  //       });
-  //     }
-  //     // else toggleSideSticky(true);
-  //   };
-  //   handleScroll();
-  //   window.addEventListener("scroll", handleScroll);
-  //   return () => {
-  //     window.removeEventListener("scroll", handleScroll);
-  //   };
-  // }, []);
   return (
     <FeaturesWrapper ref={containerRef}>
       <Description />

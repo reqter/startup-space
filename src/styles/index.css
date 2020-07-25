@@ -228,3 +228,38 @@ body {
     background-position: 10%;
   }
 }
+
+/* circle spinner */
+.circeSpinnerLoader {
+  border-radius: 50%;
+  -webkit-animation: spin 1s linear infinite; /* Safari */
+  animation: spin 1s linear infinite;
+  margin: 0 auto;
+}
+.smallCircleSpinner {
+  border-width: 3px;
+  border-style: solid;
+  width: 20px !important;
+  height: 20px;
+}
+.mediumCircleSpinner {
+  border-width: 5px;
+  border-style: solid;
+  width: 30px;
+  height: 30px;
+}
+.largeCircleSpinner {
+  border-width: 5px;
+  border-style: solid;
+  width: 45px;
+  height: 45px;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
