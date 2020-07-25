@@ -1,48 +1,55 @@
-import React from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toggleModal } from "../../Common/Modal";
 import Alert from "../../Common/AlertModal";
 import Input from "components/Common/Elements/Input";
 import Textarea from "components/Common/Elements/Textarea";
+import Button from "components/Common/SpinnerButton";
 
-import Form from "components/Common/Form";
 import useGlobalState from "hooks/useGlobal/useGlobalState";
 import useObjectPropsValue from "hooks/useObjectPropsValue";
 import useGlobalApi from "hooks/useGlobalApi";
-import { FormContainer, Row, Column, Button } from "./styles";
+import { FormContainer, Row, Column } from "./styles";
 
 const ContactUsForm = () => {
   const { register, handleSubmit, watch, errors, reset } = useForm({
     mode: "onSubmit",
   });
+  const [loading, toggleLoading] = useState(false);
   const { _addContactUs } = useGlobalApi();
   const { contactUsPageData } = useGlobalState();
   const { getValue } = useObjectPropsValue();
 
   const onSubmit = ({ name, email, phoneNumber, subject, body }) => {
-    _addContactUs(
-      name,
-      email,
-      phoneNumber,
-      subject,
-      body,
-      () => {
-        reset();
-        toggleModal({
-          render: () => {
-            return (
-              <Alert
-                title={getValue(contactUsPageData, "contactsuccesstitle")}
-                info={getValue(contactUsPageData, "contactsuccessinfo")}
-                btnText={getValue(contactUsPageData, "contactsuccessaction")}
-                onClose={handleCloseAlert}
-              />
-            );
-          },
-        });
-      },
-      () => {}
-    );
+    if (!loading) {
+      toggleLoading(true);
+      _addContactUs(
+        name,
+        email,
+        phoneNumber,
+        subject,
+        body,
+        () => {
+          toggleLoading(false);
+          reset();
+          toggleModal({
+            render: () => {
+              return (
+                <Alert
+                  title={getValue(contactUsPageData, "contactsuccesstitle")}
+                  info={getValue(contactUsPageData, "contactsuccessinfo")}
+                  btnText={getValue(contactUsPageData, "contactsuccessaction")}
+                  onClose={handleCloseAlert}
+                />
+              );
+            },
+          });
+        },
+        () => {
+          toggleLoading(false);
+        }
+      );
+    }
   };
   function handleCloseAlert() {
     toggleModal();
@@ -104,7 +111,9 @@ const ContactUsForm = () => {
           hasError={errors.body}
         />
       </Row>
-      <Button>{getValue(contactUsPageData, "formactiontext")}</Button>
+      <Button loading={loading}>
+        {getValue(contactUsPageData, "formactiontext")}
+      </Button>
     </FormContainer>
   );
 };

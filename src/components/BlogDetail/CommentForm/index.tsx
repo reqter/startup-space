@@ -1,9 +1,11 @@
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toggleModal } from "../../Common/Modal";
 import Alert from "../../Common/AlertModal";
 import Input from "components/Common/Elements/Input";
 import Textarea from "components/Common/Elements/Textarea";
 import { CommentFormContainer, Title, Row, Column, Button } from "./styles";
+import SpinnerButton from "components/Common/SpinnerButton";
 import useGlobalState from "hooks/useGlobal/useGlobalState";
 import useObjectPropsValue from "hooks/useObjectPropsValue";
 import useBlogApi from "hooks/useBlogApi";
@@ -15,33 +17,49 @@ const Reply = () => {
   });
   const { blogsPageData, blogDetailData } = useGlobalState();
   const { getValue } = useObjectPropsValue();
+  const [loading, toggleLoading] = useState(false);
   const onSubmit = ({ name, email, body }) => {
-    _addReview(
-      name,
-      email,
-      body,
-      blogDetailData._id,
-      () => {
-        reset();
-        toggleModal({
-          render: () => {
-            return (
-              <Alert
-                title={getValue(blogsPageData, "replysuccesstitle", "ثبت نظر")}
-                info={getValue(
-                  blogsPageData,
-                  "replysuccessinfo",
-                  "نظر شما با موفقیت ثبت شد"
-                )}
-                btnText={getValue(blogsPageData, "replysuccessaction", "ادامه")}
-                onClose={handleCloseAlert}
-              />
-            );
-          },
-        });
-      },
-      () => {}
-    );
+    if (!loading) {
+      toggleLoading(true);
+
+      _addReview(
+        name,
+        email,
+        body,
+        blogDetailData._id,
+        () => {
+          toggleLoading(false);
+          reset();
+          toggleModal({
+            render: () => {
+              return (
+                <Alert
+                  title={getValue(
+                    blogsPageData,
+                    "replysuccesstitle",
+                    "ثبت نظر"
+                  )}
+                  info={getValue(
+                    blogsPageData,
+                    "replysuccessinfo",
+                    "نظر شما با موفقیت ثبت شد"
+                  )}
+                  btnText={getValue(
+                    blogsPageData,
+                    "replysuccessaction",
+                    "ادامه"
+                  )}
+                  onClose={handleCloseAlert}
+                />
+              );
+            },
+          });
+        },
+        () => {
+          toggleLoading(false);
+        }
+      );
+    }
   };
   function handleCloseAlert() {
     toggleModal();
@@ -83,9 +101,9 @@ const Reply = () => {
           hasError={errors.body}
         />
       </Row>
-      <Button type="submit">
+      <SpinnerButton loading={loading} type="submit">
         {getValue(blogsPageData, "detailreplyactiontext")}
-      </Button>
+      </SpinnerButton>
     </CommentFormContainer>
   );
 };

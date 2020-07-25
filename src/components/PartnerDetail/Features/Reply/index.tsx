@@ -8,6 +8,7 @@ import Textarea from "components/Common/Elements/Textarea";
 import VisibilitySensor from "react-visibility-sensor";
 import LayoutBox from "../../LayoutBox";
 import Comment from "./Comment";
+import SpinnerButton from "components/Common/SpinnerButton";
 import {
   CommentsWrapper,
   Title,
@@ -31,6 +32,7 @@ const Reply = () => {
   const [dataList, setData] = React.useState<object[]>();
   const { _getPartnerComments, _addReview } = useGlobalApi();
   const { partnerDetailPage, partnerDetailId } = useGlobalState();
+  const [loading, toggleLoading] = React.useState(false);
   const [skip, setSkip] = React.useState(0);
   const [commentsLength, setCommentsLength] = React.useState(0);
   const data = React.useMemo(
@@ -51,28 +53,34 @@ const Reply = () => {
       );
   }
   const onSubmit = ({ name, email, body }) => {
-    _addReview(
-      name,
-      email,
-      body,
-      partnerDetailId,
-      () => {
-        reset();
-        toggleModal({
-          render: () => {
-            return (
-              <Alert
-                title={getValue(data, "replysuccesstitle")}
-                info={getValue(data, "replysuccessinfo")}
-                btnText={getValue(data, "replysuccessaction")}
-                onClose={handleCloseAlert}
-              />
-            );
-          },
-        });
-      },
-      () => {}
-    );
+    if (!loading) {
+      toggleLoading(true);
+      _addReview(
+        name,
+        email,
+        body,
+        partnerDetailId,
+        () => {
+          toggleLoading(false);
+          reset();
+          toggleModal({
+            render: () => {
+              return (
+                <Alert
+                  title={getValue(data, "replysuccesstitle")}
+                  info={getValue(data, "replysuccessinfo")}
+                  btnText={getValue(data, "replysuccessaction")}
+                  onClose={handleCloseAlert}
+                />
+              );
+            },
+          });
+        },
+        () => {
+          toggleLoading(false);
+        }
+      );
+    }
   };
   function handleCloseAlert() {
     toggleModal();
@@ -134,23 +142,28 @@ const Reply = () => {
               hasError={errors.body}
             />
           </Row>
-          <Button>{data.replybuttontext}</Button>
+          <SpinnerButton loading={loading}>
+            {data.replybuttontext}
+          </SpinnerButton>
         </Form>
-        <Title>{data.commentslisttitle}</Title>
+        <br />
         {dataList && (
-          <CommentsWrapper>
-            {dataList.map(
-              (item: { name: string; body: string; rate: string }, index) => (
-                <Comment key={index} data={item} />
-              )
-            )}
-            {commentsLength === limit && (
-              <LoadMore onClick={handleLoadMore}>
-                {getValue(data, "commentsloadmore")}&nbsp;
-                <IoIosArrowDown />
-              </LoadMore>
-            )}
-          </CommentsWrapper>
+          <>
+            {dataList.length ? <Title>{data.commentslisttitle}</Title> : null}
+            <CommentsWrapper>
+              {dataList.map(
+                (item: { name: string; body: string; rate: string }, index) => (
+                  <Comment key={index} data={item} />
+                )
+              )}
+              {commentsLength === limit && (
+                <LoadMore onClick={handleLoadMore}>
+                  {getValue(data, "commentsloadmore")}&nbsp;
+                  <IoIosArrowDown />
+                </LoadMore>
+              )}
+            </CommentsWrapper>
+          </>
         )}
       </LayoutBox>
     </VisibilitySensor>

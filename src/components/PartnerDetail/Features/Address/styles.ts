@@ -10,7 +10,8 @@ export const Key = styled.div`
   @apply text-sm text-gray-700;
 `;
 export const Value = styled.div`
-  @apply text-lg font-semibold;
+  @apply text-base font-semibold;
+  padding-inline-end: 10px;
 `;
 
 export const Button = styled.button`
