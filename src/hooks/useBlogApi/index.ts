@@ -187,6 +187,7 @@ const addReview = async (
     }),
   });
 };
+
 const useBlogApi = () => {
   const {
     currentLanguage,
@@ -197,6 +198,7 @@ const useBlogApi = () => {
     tags,
     lastBlogItem,
   } = useGlobalState();
+
   const { dispatch } = useGlobalDispatch();
   const storeData = (key, value) =>
     dispatch({

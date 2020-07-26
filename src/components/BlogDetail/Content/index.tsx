@@ -8,10 +8,6 @@ import useGlobalState from "hooks/useGlobal/useGlobalState";
 import useGlobalApi from "hooks/useGlobalApi";
 
 const Content = () => {
-  const { landingData } = useGlobalState();
-  const [loading, toggleLoading] = useState(true);
-  const [blogsData, setBlogs] = useState([]);
-  useEffect(() => {}, []);
   return (
     <Section bgColor={theme`colors.gray.100`}>
       <Container>
