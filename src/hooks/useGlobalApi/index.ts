@@ -201,7 +201,6 @@ const getPartnerProducts = async (
   });
 };
 const getPartnerComments = async (
-  contentTypeId: string,
   lang: string,
   skip: string | number,
   limit: string | number,
@@ -209,8 +208,8 @@ const getPartnerComments = async (
   token?: string
 ) => {
   return await fetcher(
-    urls.listLeanUrl +
-      `/${contentTypeId}?lang=${lang}&skip=${skip}&limit=${limit}&loadrelations=false&fields.objectid=${partnerId}`
+    urls.getReviewsBaseUrl +
+      `/${partnerId}?lang=${lang}&skip=${skip}&limit=${limit}&loadrelations=false`
   )({
     method: "GET",
     headers: {
@@ -291,6 +290,7 @@ const addReview = async (
       body,
       objectid: partnerId,
       email,
+      rating: 5,
     }),
   });
 };
@@ -413,14 +413,7 @@ const useGlobalApi = () => {
     onSuccess: (data: object[]) => unknown,
     onError: () => unknown
   ) => {
-    getPartnerComments(
-      urls.commentsCollectionGuid,
-      currentLanguage,
-      skip,
-      limit,
-      partnerId,
-      token
-    )
+    getPartnerComments(currentLanguage, skip, limit, partnerId, token)
       .then((data) => {
         if (onSuccess) {
           onSuccess(data);

@@ -1,18 +1,18 @@
-import React from "react";
+import UserIcon from "components/Common/UserIcon";
 import StarRatingComponent from "react-star-rating-component";
-import { CommentWrapper, Top, Info, Profile, Name, Date, Text } from "./styles";
+import { CommentWrapper, Top, Info, Name, Date, Text } from "./styles";
 
 interface IComment {
-  data: { name: string; body: string; rate: string };
+  data: { name: string; body: string; rate: string; issuedate: string };
 }
 const Comment = ({ data }: IComment) => {
   return (
     <CommentWrapper>
       <Top>
-        <Profile src="https://assets.reqter.com/asset/download/file-1589438010203.jpeg" />
+        <UserIcon />
         <Info>
           <Name>{data.name}</Name>
-          <Date>بیست روز قبل</Date>
+          <Date>{data.issuedate}</Date>
         </Info>
         <StarRatingComponent
           name="rate1"

@@ -9,12 +9,7 @@ export const Title = styled.div`
 export const CommentItemWrpapper = styled.div`
   @apply flex mt-8;
 `;
-export const Image = styled.img`
-  @apply rounded-full;
-  width: 60px;
-  height: 60px;
-  margin-inline-end: 20px;
-`;
+
 export const Info = styled.div`
   @apply flex flex-col;
 `;

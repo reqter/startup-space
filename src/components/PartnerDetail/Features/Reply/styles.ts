@@ -26,11 +26,7 @@ export const CommentWrapper = styled.div`
 export const Top = styled.div`
   @apply flex items-center mb-3;
 `;
-export const Profile = styled.img`
-  width: 55px;
-  height: 55px;
-  @apply rounded-full mie-3;
-`;
+
 export const Info = styled.div`
   @apply flex flex-col flex-1;
 `;
@@ -38,7 +34,7 @@ export const Name = styled.div`
   @apply font-semibold;
 `;
 export const Date = styled.div`
-  @apply text-xs;
+  @apply text-xs mt-2;
 `;
 export const Text = styled.p`
   @apply text-sm text-gray-800;

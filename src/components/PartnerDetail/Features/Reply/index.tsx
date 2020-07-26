@@ -152,7 +152,15 @@ const Reply = () => {
             {dataList.length ? <Title>{data.commentslisttitle}</Title> : null}
             <CommentsWrapper>
               {dataList.map(
-                (item: { name: string; body: string; rate: string }, index) => (
+                (
+                  item: {
+                    name: string;
+                    body: string;
+                    rate: string;
+                    issuedate: string;
+                  },
+                  index
+                ) => (
                   <Comment key={index} data={item} />
                 )
               )}
