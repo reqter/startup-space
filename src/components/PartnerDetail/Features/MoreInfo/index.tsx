@@ -14,18 +14,21 @@ const MoreInfo = () => {
     partnerDetail && partnerDetail.workinghours
       ? JSON.parse(partnerDetail.workinghours)
       : [];
+  console.log(workingHours);
   return (partnerDetail && workingHours && workingHours.length) ||
     (partnerDetail && partnerDetail.rules && partnerDetail.rules.length) ? (
     <LayoutBox title={data.thingstoknowboxtitle}>
       {workingHours && workingHours.length ? (
         <>
           <Title>{data.workinghourstitle}</Title>
-          {workingHours.map((item, index) => (
-            <Row key={index}>
-              <IoMdTime />
-              <Rule>{item.header + " - " + item.body}</Rule>
-            </Row>
-          ))}
+          {workingHours.map((item, index) =>
+            item && item.header && item.body ? (
+              <Row key={index}>
+                <IoMdTime />
+                <Rule>{item.header + " - " + item.body}</Rule>
+              </Row>
+            ) : null
+          )}
           <br />
         </>
       ) : null}
