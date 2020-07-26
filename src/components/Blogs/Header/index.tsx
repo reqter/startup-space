@@ -24,14 +24,11 @@ const BlogHeader = ({}) => {
   function handleClicked() {
     _callBlogPageApis(lastBlogItem._id);
   }
+  console.log(lastBlogItem);
   return (
     <Link
       href={`/blogs/${
-        lastBlogItem
-          ? lastBlogItem.slug
-            ? lastBlogItem.slug
-            : lastBlogItem._id
-          : lastBlogItem._id
+        lastBlogItem && lastBlogItem.slug ? lastBlogItem.slug : lastBlogItem._id
       }`}
     >
       <Wrapper onClick={handleClicked}>
