@@ -11,7 +11,7 @@ export const ProductWrapper = styled.div`
 `;
 
 export const Button = styled.button`
-  @apply bg-gray-300 text-gray-700 text-sm font-bold py-3 rounded transition ease-in duration-200;
+  @apply bg-gray-300 text-gray-700 text-sm font-bold py-3 rounded transition ease-in duration-200 hidden;
   width: 90%;
   margin: 0px 5% 10px 5%;
   height: 50px !important;

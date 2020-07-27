@@ -16,7 +16,7 @@ const Gallery = ({ data = [] }) => {
     };
   });
   return (
-    <GalleryWrapper>
+    <GalleryWrapper length={data.length}>
       {!isServer && data.length > 0 ? (
         <ImageGallery
           lazyLoad={true}

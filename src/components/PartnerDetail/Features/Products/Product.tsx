@@ -11,16 +11,21 @@ const Product = ({ data }) => {
     () => (partnerDetailPage ? partnerDetailPage[0] : {}),
     []
   );
-  const { getValue, thousandSeperator } = useObjectPropsValue();
+  const {
+    getValue,
+    thousandSeperator,
+    includeImageBaseUrl,
+  } = useObjectPropsValue();
 
   const perHourPrice = thousandSeperator(getValue(data, "perhourprice"));
   const dailyPrice = thousandSeperator(getValue(data, "dailyprice"));
   const weeklyPrice = thousandSeperator(getValue(data, "weeklyprice"));
   const monthlyPrice = thousandSeperator(getValue(data, "monthlyprice"));
   const media = getValue(data, "media");
+  const img = media ? includeImageBaseUrl(media[0], "image", 200, 200) : null;
   return (
     <ProductWrapper>
-      <Image className="w-full h-40" src={media && media[0]} alt="" />
+      <Image className="w-full h-40" src={img} alt="" />
       <div className="flex flex-col pt-3 px-3 flex-1">
         <div className="font-bold text-lg mb-2">{getValue(data, "name")}</div>
         {perHourPrice && perHourPrice.toString() !== "0" && (

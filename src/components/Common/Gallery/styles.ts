@@ -4,5 +4,5 @@ export const GalleryWrapper = styled.div`
   img {
     object-fit: cover !important;
   }
-  height: 500px;
+  height: ${({ length }) => (length ? "500px" : 0)};
 `;
