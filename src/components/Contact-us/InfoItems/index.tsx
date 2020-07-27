@@ -6,6 +6,7 @@ import InfoItem from "./Item";
 const InfoItems = () => {
   const { contactUsPageData } = useGlobalState();
   const { getValue } = useObjectPropsValue();
+  console.log(contactUsPageData);
   return (
     <InfoItemsContainer>
       <InfoItem

@@ -1,6 +1,7 @@
 import React from "react";
 import Item from "./Item";
 import useGlobalState from "hooks/useGlobal/useGlobalState";
+import useObjectPropsValue from "hooks/useObjectPropsValue";
 import useGlobalApi from "hooks/useGlobalApi";
 import {
   Content,
@@ -12,8 +13,9 @@ import {
 } from "./styles";
 import LayoutBox from "../../LayoutBox";
 
-const NewOfficess = () => {
+const NewOffices = () => {
   const { getOffices } = useGlobalApi();
+  const { getValue } = useObjectPropsValue();
   const { partnerDetail, partnerDetailPage } = useGlobalState();
   const data = React.useMemo(
     () => (partnerDetailPage ? partnerDetailPage[0] : {}),
@@ -27,11 +29,11 @@ const NewOfficess = () => {
   }, []);
   return (
     <LayoutBox width={370}>
-      <Title>فضاهای جدید</Title>
+      <Title>{getValue(data, "newofficestitle")}</Title>
       <Divider />
       {dataList &&
         dataList.map((item, index) => <Item key={index} data={item} />)}
     </LayoutBox>
   );
 };
-export default NewOfficess;
+export default NewOffices;

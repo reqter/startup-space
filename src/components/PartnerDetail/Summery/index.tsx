@@ -49,10 +49,10 @@ const Summery = () => {
             </LogoWrapper>
           ) : null}
           <PartnerInfo>
-            <Name>{partnerDetail.name}</Name>
+            <Name>{getValue(partnerDetail, "name")}</Name>
             <Location>
               <IoIosPin color={theme`colors.blue.500`} />
-              {partnerDetail.address}
+              {getValue(partnerDetail, "address")}
             </Location>
           </PartnerInfo>
         </Left>
@@ -66,7 +66,7 @@ const Summery = () => {
                 }}
               >
                 <IoMdCheckmark size="1.8rem" />
-                {data.isverifedtext}
+                {getValue(partnerDetail, "isverifedtext")}
               </BoxInfo>
             )}
             {partnerDetail.homepage && partnerDetail.homepage.length ? (

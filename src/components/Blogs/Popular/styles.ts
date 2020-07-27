@@ -7,6 +7,7 @@ export const PopularItemWrapper = styled.div`
   }
 `;
 export const Image = styled.img`
+  @apply flex-shrink-0;
   width: 90px;
   height: 70px;
   border-radius: 5px;

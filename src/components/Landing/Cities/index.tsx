@@ -22,8 +22,8 @@ const Cities = ({}) => {
   return data.isareaenabled ? (
     <Section
       bgImage={data.areabackground}
-      title={data.areaheading}
-      header={data.areatitle}
+      title={getValue(data, "areaheading")}
+      header={getValue(data, "areatitle")}
     >
       <CityList />
       <Button>

@@ -17,7 +17,7 @@ const CityCard = ({ data }) => {
     >
       <Content>
         <Plus />
-        <Location>{data.name}</Location>
+        <Location>{getValue(data, "name")}</Location>
       </Content>
     </CardWrapper>
   );

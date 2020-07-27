@@ -21,14 +21,12 @@ const Spaces = () => {
   return data.isofficesenabled ? (
     <Section
       bgColor={theme`colors.gray.100`}
-      title={data.officesheading}
-      header={data.officestitle}
+      title={getValue(data, "officesheading")}
+      header={getValue(data, "officestitle")}
     >
       <SpacesList officesData={landingOfficesData} />
       <Button>
-        <Link href={`/offices`}>
-          {data && data.officesactiontext ? data.officesactiontext : ""}
-        </Link>
+        <Link href={`/offices`}>{getValue(data, "officesactiontext")}</Link>
       </Button>
     </Section>
   ) : null;

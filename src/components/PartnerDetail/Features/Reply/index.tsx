@@ -105,8 +105,8 @@ const Reply = () => {
       offset={{ bottom: -100 }}
     >
       <LayoutBox>
-        <Title>{data.replyboxtitle}</Title>
-        <Description>{data.replyboxdescription}</Description>
+        <Title>{getValue(data, "replyboxtitle")}</Title>
+        <Description>{getValue(data, "replyboxdescription")}</Description>
         <Form onSubmit={handleSubmit(onSubmit)}>
           <Row>
             <Column>
@@ -143,13 +143,15 @@ const Reply = () => {
             />
           </Row>
           <SpinnerButton loading={loading}>
-            {data.replybuttontext}
+            {getValue(data, "replybuttontext")}
           </SpinnerButton>
         </Form>
         <br />
         {dataList && (
           <>
-            {dataList.length ? <Title>{data.commentslisttitle}</Title> : null}
+            {dataList.length ? (
+              <Title>{getValue(data, "commentslisttitle")}</Title>
+            ) : null}
             <CommentsWrapper>
               {dataList.map(
                 (

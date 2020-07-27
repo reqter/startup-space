@@ -20,7 +20,7 @@ const useObjectPropsValue = () => {
         }
       }
     }
-    return val
+    const r = val
       ? Array.isArray(val)
         ? val
         : typeof val === "object"
@@ -29,6 +29,8 @@ const useObjectPropsValue = () => {
           : defaultValue
         : val
       : defaultValue;
+
+    return r;
   };
   const thousandSeperator = (value: string | number, char: string = ",") => {
     return !value

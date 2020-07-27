@@ -31,7 +31,7 @@ const SpacesItem = ({ data }) => {
           {getValue(data, "city.fields.name")}
         </Address>
       </ImageBox>
-      <Name>{data && data.name}</Name>
+      <Name>{getValue(data, "name")}</Name>
       <AmenitiesBox>
         {data.amenities && data.amenities.length
           ? data.amenities.slice(0, 3).map((item, index) => (
