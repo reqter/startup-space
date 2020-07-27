@@ -25,8 +25,8 @@ const Feature = ({ data }) => {
         <Image bgImage={img} />
       </ImageContainer>
       <FeatureContent>
-        <Name>{data.name}</Name>
-        <Location>{data.fullname}</Location>
+        <Name>{getValue(data, "name")}</Name>
+        <Location>{getValue(data, "fullname")}</Location>
       </FeatureContent>
     </FeatureItem>
   );

@@ -21,9 +21,11 @@ import {
 import useGlobalState from "hooks/useGlobal/useGlobalState";
 import useGlobalDispatch from "hooks/useGlobal/useGlobalDispatch";
 import useGlobalApi from "hooks/useGlobalApi";
+import useObjectPropsValue from "hooks/useObjectPropsValue";
 
 const Footer = () => {
   const { dispatch } = useGlobalDispatch();
+  const { getValue } = useObjectPropsValue();
   const { _getNewOffices, _getAppLocales } = useGlobalApi();
   const {
     currentLanguage,
@@ -48,16 +50,17 @@ const Footer = () => {
     }
     _getAppLocales(
       (result) => {
-        const l = config.allLanguages.map((lang) => {
-          const find_l = result.find((item) => item.locale === lang);
-          if (find_l) {
-            return {
-              value: lang,
-              label: lang,
-            };
-          }
-          return null;
-        });
+        const l = config.allLanguages
+          .map((lang) => {
+            const find_l = result.find((item) => item.locale === lang);
+            if (find_l) {
+              return {
+                value: lang,
+                label: lang,
+              };
+            }
+          })
+          .filter((item) => item);
         setLanguagesOption(l);
       },
       () => {}
@@ -90,11 +93,11 @@ const Footer = () => {
     >
       <Section bgColor={theme`colors.black`}>
         <Container>
-          <Box title={footer.aboutustitle}>
-            <span>{footer.aboutusdescription}</span>
+          <Box title={getValue(footer, "aboutustitle")}>
+            <span>{getValue(footer, "aboutusdescription")}</span>
             <br />
             {languagesOption && languagesOption.length ? (
-              <Box title={footer.languagetitle}>
+              <Box title={getValue(footer, "languagetitle")}>
                 <Select
                   menuPlacement="bottom"
                   closeMenuOnScroll={true}
@@ -117,13 +120,13 @@ const Footer = () => {
               </Box>
             ) : null}
           </Box>
-          <Box title={footer.featuredtitle}>
+          <Box title={getValue(footer, "featuredtitle")}>
             {newOfficess &&
               newOfficess.map((item, index) => (
                 <FeatureItem key={index} data={item} />
               ))}
           </Box>
-          <Box title={footer.usefullinkstitle}>
+          <Box title={getValue(footer, "usefullinkstitle")}>
             <ul>
               <li>
                 <a
@@ -131,7 +134,7 @@ const Footer = () => {
                   rel="noopener noreferrer"
                   href={`${footer.link1url}`}
                 >
-                  {footer.link1title}
+                  {getValue(footer, "link1title")}
                 </a>
               </li>
               <li>
@@ -140,7 +143,7 @@ const Footer = () => {
                   rel="noopener noreferrer"
                   href={`${footer.link2url}`}
                 >
-                  {footer.link2title}
+                  {getValue(footer, "link2title")}
                 </a>
               </li>
               <li>
@@ -149,7 +152,7 @@ const Footer = () => {
                   rel="noopener noreferrer"
                   href={`${footer.link3url}`}
                 >
-                  {footer.link3title}
+                  {getValue(footer, "link3title")}
                 </a>
               </li>
               <li>
@@ -158,7 +161,7 @@ const Footer = () => {
                   rel="noopener noreferrer"
                   href={`${footer.link4url}`}
                 >
-                  {footer.link4title}
+                  {getValue(footer, "link4title")}
                 </a>
               </li>
               <li>
@@ -167,7 +170,7 @@ const Footer = () => {
                   rel="noopener noreferrer"
                   href={`${footer.link5url}`}
                 >
-                  {footer.link5title}
+                  {getValue(footer, "link5title")}
                 </a>
               </li>
               <li>
@@ -176,12 +179,12 @@ const Footer = () => {
                   rel="noopener noreferrer"
                   href={`${footer.link6url}`}
                 >
-                  {footer.link6title}
+                  {getValue(footer, "link6title")}
                 </a>
               </li>
             </ul>
           </Box>
-          <Box title={footer.sociallinkstitle}>
+          <Box title={getValue(footer, "sociallinkstitle")}>
             <SocialContainer>
               {header && header.facebookurl && (
                 <SocialLink href={header.facebookurl} target="_blank">
@@ -201,7 +204,7 @@ const Footer = () => {
             </SocialContainer>
           </Box>
         </Container>
-        <CopyRight>{footer.copyright}</CopyRight>
+        <CopyRight>{getValue(footer, "copyright")}</CopyRight>
       </Section>
     </VisibilitySensor>
   );

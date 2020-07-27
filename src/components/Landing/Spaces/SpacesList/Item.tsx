@@ -18,8 +18,8 @@ const SpacesItem = ({ data, colSpan, hasMargin }) => {
     >
       <Image bgImage={img} />
       <Content>
-        <Name>{data && data.name}</Name>
-        <Location>{data && data.fullname}</Location>
+        <Name>{getValue(data, "name")}</Name>
+        <Location>{getValue(data, "fullname")}</Location>
       </Content>
     </CardWrapper>
   );

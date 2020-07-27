@@ -2,15 +2,18 @@ import React from "react";
 import LayoutBox from "../../LayoutBox";
 import { Video, Paragraph } from "./styles";
 import useGlobalState from "hooks/useGlobal/useGlobalState";
+import useObjectPropsValue from "hooks/useObjectPropsValue";
+
 const Description = () => {
   const { partnerDetail, partnerDetailPage } = useGlobalState();
+  const { getValue } = useObjectPropsValue();
   const data = React.useMemo(
     () => (partnerDetailPage ? partnerDetailPage[0] : {}),
     []
   );
   return (partnerDetail && partnerDetail.introduction) ||
     (partnerDetail && partnerDetail.overview) ? (
-    <LayoutBox title={data.introductionboxtitle}>
+    <LayoutBox title={getValue(partnerDetail, "introductionboxtitle")}>
       {partnerDetail.introduction && partnerDetail.introduction.length ? (
         <Video controls width="100%">
           <source
@@ -23,7 +26,7 @@ const Description = () => {
         </Video>
       ) : null}
       {partnerDetail.overview && (
-        <Paragraph>{partnerDetail.overview}</Paragraph>
+        <Paragraph>{getValue(partnerDetail, "overview")}</Paragraph>
       )}
     </LayoutBox>
   ) : null;

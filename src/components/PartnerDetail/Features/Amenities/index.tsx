@@ -15,7 +15,7 @@ const Amenities = () => {
   return partnerDetail &&
     partnerDetail.amenities &&
     partnerDetail.amenities.length ? (
-    <LayoutBox title={data.amenitiesboxtitle}>
+    <LayoutBox title={getValue(data, "amenitiesboxtitle")}>
       <AmenitiesContainer>
         {partnerDetail.amenities.map((item, index) => (
           <Amenit key={index}>

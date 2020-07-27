@@ -58,11 +58,11 @@ const NewsLetter = () => {
       <Container>
         <ImageBox bgUrl={data.newslettermedia} />
         <FormBox onSubmit={handleSubmit(onSubmit)}>
-          <Header>{data.newslettertitle}</Header>
+          <Header>{getValue(data, "newslettertitle")}</Header>
           <Divider />
-          <Description>{data.newsletterdescription}</Description>
+          <Description>{getValue(data, "newsletterdescription")}</Description>
           <Input
-            placeholder={data.newsletterplaceholder}
+            placeholder={getValue(data, "newsletterplaceholder")}
             type="email"
             name="email"
             ref={register({
@@ -72,7 +72,9 @@ const NewsLetter = () => {
             hasError={errors.email}
           />
 
-          <Button type="submit">{data.newsletteractiontext}</Button>
+          <Button type="submit">
+            {getValue(data, "newsletteractiontext")}
+          </Button>
         </FormBox>
       </Container>
     </Section>

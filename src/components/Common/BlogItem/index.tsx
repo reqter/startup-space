@@ -35,7 +35,7 @@ const BlogCard = ({ data, actionName, colSpan = 3 }) => {
                 data ? (data.slug ? data.slug : data._id) : data._id
               }`}
             >
-              {data.name}
+              {getValue(data, "name")}
             </Link>
           </div>
         </div>

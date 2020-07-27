@@ -4,10 +4,16 @@ const NextI18Next = require("next-i18next").default;
 
 const NextI18NextInstance = new NextI18Next({
   defaultLanguage: "en",
-  otherLanguages: ["fa"],
+  otherLanguages: ["fa", "de", "es", "fr", "it", "ar", "sv"],
   localeSubpaths: {
     fa: "fa",
     en: "en",
+    de: "de",
+    es: "es",
+    fr: "fr",
+    it: "it",
+    ar: "ar",
+    sv: "sv",
   },
   // official i18next config: https://www.i18next.com/overview/configuration-options
   // react: {

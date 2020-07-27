@@ -5,8 +5,10 @@ import Section from "../../Common/Section";
 import List from "./BlogList";
 import useGlobalState from "hooks/useGlobal/useGlobalState";
 import useBlogApi from "hooks/useBlogApi";
+import useObjectPropsValue from "hooks/useObjectPropsValue";
 
 const LandingBlogs = () => {
+  const { getValue } = useObjectPropsValue();
   const {
     _getBlogsList,
     _getBlogsPageData,
@@ -42,14 +44,12 @@ const LandingBlogs = () => {
   return data.isblogenabled ? (
     <Section
       bgColor={theme`colors.white`}
-      title={data.blogheading}
-      header={data.blogtitle}
+      title={getValue(data, "blogheading")}
+      header={getValue(data, "blogtitle")}
     >
       <List data={blogsList} />
       <Button onClick={handleMoreClicked}>
-        <Link href={`/blogs`}>
-          {data && data.blogactiontext ? data.blogactiontext : ""}
-        </Link>
+        <Link href={`/blogs`}>{getValue(data, "blogactiontext")}</Link>
       </Button>
     </Section>
   ) : null;

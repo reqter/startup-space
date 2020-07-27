@@ -45,9 +45,7 @@ const PartnerDetail = () => {
       }
       logo={logo}
     >
-      {partnerDetail && partnerDetail.images && partnerDetail.images.length ? (
-        <Gallery data={partnerDetail && partnerDetail.images} />
-      ) : null}
+      <Gallery data={partnerDetail ? partnerDetail.images : []} />
       <Summery />
       <Content />
     </MainLayout>

@@ -13,7 +13,7 @@ const PopularItem = ({ item }) => {
     >
       <PopularItemWrapper onClick={handleItemClicked}>
         <Image src={img} />
-        <Text>{item.name}</Text>
+        <Text>{getValue(item, "name")}</Text>
       </PopularItemWrapper>
     </Link>
   );

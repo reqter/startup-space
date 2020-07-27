@@ -16,10 +16,12 @@ import {
 } from "./styles";
 import useGlobalApi from "hooks/useGlobalApi";
 import useBlogApi from "hooks/useBlogApi";
+import useObjectPropsValue from "hooks/useObjectPropsValue";
 
 interface IProps {}
 
 const Header: React.FC<IProps> = (): JSX.Element => {
+  const { getValue } = useObjectPropsValue();
   const { headerData, landingData } = useGlobalState();
   const {
     _getBlogsPageData,
@@ -107,7 +109,7 @@ const Header: React.FC<IProps> = (): JSX.Element => {
             onClick={_getHomeData}
             isTransparent={checkIsTransparent()}
           >
-            {headerObj ? headerObj.menuitem1text : ""}
+            {getValue(headerObj, "menuitem1text")}
           </MenuItem>
           <MenuItem
             selected={router.pathname === `/faq`}
@@ -116,7 +118,7 @@ const Header: React.FC<IProps> = (): JSX.Element => {
             onClick={handleFAQClicked}
           >
             <Link href={`/faq`}>
-              <a>{headerObj ? headerObj.menuitem3text : ""}</a>
+              <a>{getValue(headerObj, "menuitem3text")}</a>
             </Link>
           </MenuItem>
           <MenuItem
@@ -126,7 +128,7 @@ const Header: React.FC<IProps> = (): JSX.Element => {
             onClick={handleBlogsClicked}
           >
             <Link href={`/blogs`}>
-              <a>{headerObj ? headerObj.menuitem4text : ""}</a>
+              <a>{getValue(headerObj, "menuitem4text")}</a>
             </Link>
           </MenuItem>
           <MenuItem
@@ -136,13 +138,13 @@ const Header: React.FC<IProps> = (): JSX.Element => {
             onClick={handleContactUsClicked}
           >
             <Link href={`/contact-us`}>
-              <a>{headerObj ? headerObj.menuitem5text : ""}</a>
+              <a>{getValue(headerObj, "menuitem5text")}</a>
             </Link>
           </MenuItem>
         </Menu>
         <Button>
           <span>+</span>
-          {headerObj ? headerObj.action1text : ""}
+          {getValue(headerObj, "action1text")}
         </Button>
         <SearchIcon />
       </Content>
