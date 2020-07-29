@@ -8,6 +8,7 @@ export const Video = styled.video`
   }
 `;
 
-export const Paragraph = styled.p`
-  @apply leading-relaxed text-justify;
+export const Paragraph = styled.div`
+  @apply leading-relaxed;
+  white-space: pre-wrap;
 `;

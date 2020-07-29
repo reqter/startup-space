@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "../../../../config/Next18Wrapper";
 import Divider from "../../Common/Divider";
 import useGlobalState from "hooks/useGlobal/useGlobalState";
 import useObjectPropsValue from "hooks/useObjectPropsValue";
@@ -30,7 +31,11 @@ const Service = () => {
           <Header>{getValue(data, "servicetitle")}</Header>
           <Divider />
           <Description>{getValue(data, "servicedescription")}</Description>
-          <Button>{getValue(data, "serviceactiontext")}</Button>
+          <Button>
+            <Link href={data.servicemoredetaillink}>
+              {getValue(data, "serviceactiontext")}
+            </Link>
+          </Button>
         </Right>
       </Content>
     </Wrapper>

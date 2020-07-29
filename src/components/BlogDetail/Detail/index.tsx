@@ -17,6 +17,7 @@ import Comments from "../Comments";
 import CommentForm from "../CommentForm";
 import useGlobalState from "hooks/useGlobal/useGlobalState";
 import useObjectPropsValue from "hooks/useObjectPropsValue";
+import useDate from "hooks/useDate";
 
 const HtmlViewer = dynamic(() => import("./HtmlViewer"), {
   ssr: false,
@@ -25,6 +26,7 @@ const HtmlViewer = dynamic(() => import("./HtmlViewer"), {
 const BlogDetail = () => {
   const { blogsPageData, blogDetailData } = useGlobalState();
   const { getValue, includeImageBaseUrl } = useObjectPropsValue();
+  const { dateFromNow } = useDate();
   const img =
     blogDetailData && blogDetailData.thumbnail
       ? includeImageBaseUrl(blogDetailData.thumbnail[0], "image", 500, 250)
@@ -32,12 +34,12 @@ const BlogDetail = () => {
   return (
     <BlogDetailContainer>
       <Image src={img} />
-      <Date>{getValue(blogDetailData, "publishdate")}</Date>
+      <Date>{dateFromNow(getValue(blogDetailData, "publishdate"))}</Date>
       <Title>{getValue(blogDetailData, "name")}</Title>
       {blogDetailData && blogDetailData.tags && blogDetailData.tags.length ? (
         <Tags>
-          {blogDetailData.tags.map((item) => (
-            <TagItem>{getValue(item, "fields.name")}</TagItem>
+          {blogDetailData.tags.map((item, index) => (
+            <TagItem key={index}>{getValue(item, "fields.name")}</TagItem>
           ))}
         </Tags>
       ) : null}

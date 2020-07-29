@@ -5,6 +5,7 @@ import {
   PagingContainer,
   Button,
 } from "./styles";
+import EmptyList from "components/Common/EmptyList";
 import BlogItem from "components/Common/BlogItem";
 import Loading from "components/Common/CardSkeleton";
 import useGlobalState from "hooks/useGlobal/useGlobalState";
@@ -28,6 +29,11 @@ const BlogsList = ({
           <Loading colSpan={2} />
           <Loading colSpan={2} />
         </LoadingsContainer>
+      ) : !data || !data.length ? (
+        <EmptyList
+          image={blogsPageData.emptylistimage}
+          text={blogsPageData.emptylisttext}
+        />
       ) : (
         <>
           <ListItems>
