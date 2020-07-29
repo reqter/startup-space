@@ -32,7 +32,7 @@ const Agent = () => {
     const val = getValue(partnerDetail, "agent.fields.image");
     if (val && val.length > 0) return includeImageBaseUrl(val[0]);
   }, [partnerDetail]);
-  return partnerDetail.agent ? (
+  return !data.agentvisibility ? null : partnerDetail.agent ? (
     <LayoutBox title={data.agentboxtitle}>
       <AgentContainer>
         <ImageBox src={img}>

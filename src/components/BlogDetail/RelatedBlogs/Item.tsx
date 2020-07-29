@@ -10,10 +10,13 @@ import {
 import { Link } from "../../../../config/Next18Wrapper";
 import useObjectPropsValue from "hooks/useObjectPropsValue";
 import useBlogApi from "hooks/useBlogApi";
+import useDate from "hooks/useDate";
 
 const RelatedBlogItem = ({ data }) => {
   const { getValue, includeImageBaseUrl } = useObjectPropsValue();
   const { _callBlogPageApis } = useBlogApi();
+  const { dateFromNow } = useDate();
+
   const img =
     data && data.thumbnail
       ? includeImageBaseUrl(data.thumbnail[0], "image", 500, 250)
@@ -21,6 +24,7 @@ const RelatedBlogItem = ({ data }) => {
   function handleClicked() {
     _callBlogPageApis(data._id);
   }
+
   return (
     <Link
       href={`/blogs/${data ? (data.slug ? data.slug : data._id) : data._id}`}
@@ -30,11 +34,13 @@ const RelatedBlogItem = ({ data }) => {
         <Content>
           <MetaData>
             {data && data.categoryid && data.categoryid.length
-              ? data.categoryid.map((item) => (
-                  <Category>{getValue(item, "fields.name")}</Category>
+              ? data.categoryid.map((item, index) => (
+                  <Category key={index}>
+                    {getValue(item, "fields.name")}
+                  </Category>
                 ))
               : null}
-            <Date>JANUARY 9, 2018</Date>
+            <Date>{dateFromNow(getValue(data, "publishdate"))}</Date>
           </MetaData>
           <Name>{getValue(data, "name")}</Name>
         </Content>

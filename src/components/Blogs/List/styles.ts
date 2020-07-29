@@ -3,7 +3,7 @@ export const ListContainer = styled.div`
   @apply flex-1 flex flex-wrap flex-col;
 `;
 export const LoadingsContainer = styled.div`
-  @apply flex-1 flex flex-wrap;
+  @apply flex-1 flex flex-wrap content-start;
 `;
 
 export const ListItems = styled.div`

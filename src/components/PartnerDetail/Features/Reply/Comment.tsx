@@ -2,6 +2,7 @@ import UserIcon from "components/Common/UserIcon";
 import StarRatingComponent from "react-star-rating-component";
 import { CommentWrapper, Top, Info, Name, Date, Text } from "./styles";
 import useObjectPropsValue from "hooks/useObjectPropsValue";
+import useDate from "hooks/useDate";
 
 interface IComment {
   data: { name: string; body: string; rate: string; issuedate: string };
@@ -9,13 +10,15 @@ interface IComment {
 
 const Comment = ({ data }: IComment) => {
   const { getValue } = useObjectPropsValue();
+  const { dateFromNow } = useDate();
+
   return (
     <CommentWrapper>
       <Top>
         <UserIcon />
         <Info>
           <Name>{getValue(data, "name")}</Name>
-          <Date>{getValue(data, "issuedate")}</Date>
+          <Date>{dateFromNow(getValue(data, "issuedate"))}</Date>
         </Info>
         <StarRatingComponent
           name="rate1"
