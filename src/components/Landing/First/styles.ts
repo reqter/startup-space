@@ -4,27 +4,22 @@ export const Wrapper = styled.header`
   @apply w-full bg-fixed;
   margin-top: 0px;
   z-index: 1;
-  background-image: ${({ bgImage }) => `url(${bgImage})`};
+  background-image: ${({ bgImage }) => `linear-gradient(
+      to right bottom,
+      rgba(8, 21, 38, 0.5),
+      rgba(8, 21, 38, 0.5)
+    ),url(${bgImage})`};
 `;
 
 export const Content = styled.div`
-  @apply max-w-6xl flex m-auto;
+  @apply max-w-6xl flex m-auto flex-col items-center pt-48 pb-20;
   @screen tab-port {
     @apply px-5;
   }
 `;
-export const Left = styled.div`
-  @apply mt-56 w-1/2;
-  @screen tab-port {
-    @apply mt-32 w-full mb-16;
-  }
+export const Title = styled.div`
+  @apply text-5xl font-semibold mb-2 text-white;
 `;
-export const Right = styled.div`
-  @apply mt-40  w-1/2;
-  @screen tab-port {
-    @apply hidden;
-  }
-`;
-export const User = styled.img`
-  @apply w-full m-auto;
+export const Description = styled.div`
+  @apply text-sm text-white mb-4;
 `;
