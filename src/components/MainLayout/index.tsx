@@ -25,7 +25,6 @@ const MainComponent: React.FC<MainProps> = ({
           href={logo && logo.length ? logo : "images/favicon.ico"}
         />
       </Head>
-      <HeaderInfo />
       <Menu />
       <Content>{children}</Content>
       <Footer />

@@ -5,13 +5,9 @@ export const Wrapper = styled.header`
 
   @apply w-full bg-gray-100  shadow-md transition ease-linear duration-75 z-50;
   background-color: ${({ isSticky, isTransparent }) =>
-    !isTransparent
-      ? theme`colors.white`
-      : isSticky
-      ? "white"
-      : `rgba(255, 255, 255, 0.1)`};
-  top: ${({ isSticky }) => (isSticky ? 0 : "auto")};
-  position: ${({ isSticky }) => (isSticky ? "fixed" : "absolute")};
+    !isTransparent ? theme`colors.white` : isSticky ? "white" : `transparent`};
+  top: 0;
+  position: fixed;
   padding: ${({ isSticky }) =>
     isSticky ? theme`spacing.3` : theme`spacing.5`};
 
@@ -66,12 +62,13 @@ export const MenuItem = styled.li`
   }
 `;
 export const Button = styled.button`
-  @apply bg-blue-500 flex items-center justify-center text-white text-base font-bold py-3 px-5 rounded transition ease-in duration-200;
+  @apply bg-blue-500 flex items-center justify-center text-white text-base font-bold py-2 px-4 rounded transition ease-in duration-200;
   &:hover {
     @apply bg-blue-700 transition ease-in duration-200;
   }
   span {
-    @apply text-2xl px-1;
+    @apply text-2xl;
+    padding-inline-end: 3px;
   }
   @screen tab-port {
     @apply hidden;

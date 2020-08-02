@@ -1,22 +1,17 @@
 import { styled } from "linaria/lib/react";
 
 export const Wrapper = styled.div`
-  @apply shadow rounded-lg p-2 w-10/12;
-  background-color: rgba(255, 255, 255, 0.2);
-  minheight: 300px;
-  @screen tab-port {
-    @apply w-full;
-  }
+  @apply w-full my-5;
 `;
 export const Content = styled.div`
-  @apply bg-white py-8 rounded-lg px-8;
+  @apply flex flex-col;
 `;
 
 export const Actions = styled.div`
   @apply flex items-center pt-3;
 `;
 export const ActionsTitle = styled.h4`
-  @apply mt-8;
+  @apply mt-8 text-white;
 `;
 
 export const Button = styled.button`
