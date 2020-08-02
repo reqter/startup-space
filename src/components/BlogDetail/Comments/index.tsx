@@ -10,7 +10,7 @@ import useBlogApi from "hooks/useBlogApi";
 const limit = 10;
 const BlogDetailComments = () => {
   const { _getBlogComments } = useBlogApi();
-  const { blogsPageData, blogDetailData } = useGlobalState();
+  const { blogsPageData = {}, blogDetailData = {} } = useGlobalState();
   const { getValue } = useObjectPropsValue();
   const [data, setData] = useState([]);
   const [skip, setSkip] = useState(0);

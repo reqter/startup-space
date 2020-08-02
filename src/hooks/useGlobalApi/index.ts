@@ -304,9 +304,11 @@ const useGlobalApi = () => {
     contactUsPageData,
     faqsPageData,
     faqsData,
+    partnerDetail,
+    partnerDetailPage,
   } = useGlobalState();
   const { dispatch } = useGlobalDispatch();
-  const storeData = (key, value) =>
+  const storeData = (key, value) => {
     dispatch({
       type: "SET_DATA",
       payload: {
@@ -314,6 +316,7 @@ const useGlobalApi = () => {
         value,
       },
     });
+  };
   const getLanding = async () => {
     return await getLandingData(currentLanguage, token);
   };
@@ -483,6 +486,27 @@ const useGlobalApi = () => {
       })
       .catch(() => onError && onError());
   };
+  const _getPartnerDetailById = (partnerId) => {
+    if (!partnerDetail) {
+      getPartnerDetailById(partnerId, currentLanguage, token).then((result) => {
+        storeData(
+          "partnerDetail",
+          result && result.data ? result.data.fields : null
+        );
+        storeData(
+          "partnerDetailId",
+          result && result.data ? result.data._id : ""
+        );
+      });
+    }
+  };
+  const _getPartnerDetailPage = () => {
+    if (!partnerDetailPage) {
+      getPartnerDetailPageData(currentLanguage, token).then((result) => {
+        storeData("partnerDetailPage", result);
+      });
+    }
+  };
   const _subscribe = (email, onSuccess, onError) => {
     return fetcher(urls.subscribeUrl)({
       method: "POST",
@@ -558,6 +582,8 @@ const useGlobalApi = () => {
     getHomeData,
     getDataByCtypeId,
     getPopularOffices,
+    _getPartnerDetailPage,
+    _getPartnerDetailById,
     _getPartnersPageData,
     _getPartnerProducts,
     _getPartnerComments,

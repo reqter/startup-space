@@ -3,23 +3,16 @@ import Item from "./Item";
 import useGlobalState from "hooks/useGlobal/useGlobalState";
 import useObjectPropsValue from "hooks/useObjectPropsValue";
 import useGlobalApi from "hooks/useGlobalApi";
-import {
-  Content,
-  Title,
-  Divider,
-  Actions,
-  Button,
-  ActionsTitle,
-} from "./styles";
+import { Title, Divider } from "./styles";
 import LayoutBox from "../../LayoutBox";
 
 const NewOffices = () => {
   const { getOffices } = useGlobalApi();
   const { getValue } = useObjectPropsValue();
-  const { partnerDetail, partnerDetailPage } = useGlobalState();
+  const { partnerDetailPage } = useGlobalState();
   const data = React.useMemo(
     () => (partnerDetailPage ? partnerDetailPage[0] : {}),
-    []
+    [partnerDetailPage]
   );
   const [dataList, setDataList] = React.useState([]);
   React.useEffect(() => {

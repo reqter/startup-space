@@ -13,7 +13,7 @@ import useObjectPropsValue from "hooks/useObjectPropsValue";
 import useBlogApi from "hooks/useBlogApi";
 
 const BlogHeader = ({}) => {
-  const { _callBlogPageApis } = useBlogApi();
+  const { _callBlogDetailPageApis } = useBlogApi();
   const { blogsPageData, lastBlogItem = {} } = useGlobalState();
   const { getValue, includeImageBaseUrl } = useObjectPropsValue();
 
@@ -22,7 +22,7 @@ const BlogHeader = ({}) => {
       ? includeImageBaseUrl(lastBlogItem.thumbnail[0], "image", 1024, 350)
       : "";
   function handleClicked() {
-    _callBlogPageApis(lastBlogItem._id);
+    _callBlogDetailPageApis(lastBlogItem._id);
   }
   return (
     <Link

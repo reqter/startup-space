@@ -14,7 +14,7 @@ import useDate from "hooks/useDate";
 
 const RelatedBlogItem = ({ data }) => {
   const { getValue, includeImageBaseUrl } = useObjectPropsValue();
-  const { _callBlogPageApis } = useBlogApi();
+  const { _callBlogDetailPageApis } = useBlogApi();
   const { dateFromNow } = useDate();
 
   const img =
@@ -22,7 +22,7 @@ const RelatedBlogItem = ({ data }) => {
       ? includeImageBaseUrl(data.thumbnail[0], "image", 500, 250)
       : "";
   function handleClicked() {
-    _callBlogPageApis(data._id);
+    _callBlogDetailPageApis(data._id);
   }
 
   return (

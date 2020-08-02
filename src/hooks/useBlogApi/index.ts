@@ -197,6 +197,7 @@ const useBlogApi = () => {
     newestBlogs,
     tags,
     lastBlogItem,
+    blogDetailData,
   } = useGlobalState();
 
   const { dispatch } = useGlobalDispatch();
@@ -283,18 +284,29 @@ const useBlogApi = () => {
         }
       });
   };
-  const _callBlogPageApis = (blogId: string | number) => {
-    getBlogById(blogId, currentLanguage, token).then((data) => {
-      storeData("blogDetailData", data && data.length ? data[0] : {});
-    });
-    _getCategoriesData();
-    _getNewestBlogs();
-    _getTagsData();
-  };
+
   const _addReview = (name, email, body, blogId, onSuccess, onError) => {
     addReview(name, email, body, blogId, token).then(() => {
       onSuccess();
     });
+  };
+  const _callBlogDetailPageApis = (blogId: string | number) => {
+    if (!blogDetailData) {
+      _getBlogsPageData();
+      getBlogById(blogId, currentLanguage, token).then((data) => {
+        storeData("blogDetailData", data && data.length ? data[0] : {});
+      });
+      _getCategoriesData();
+      _getNewestBlogs();
+      _getTagsData();
+    }
+  };
+  const _callBlogPageApis = () => {
+    _getBlogsPageData();
+    _getLastBlog();
+    _getCategoriesData();
+    _getNewestBlogs();
+    _getTagsData();
   };
   return {
     _getBlogsPageData,
@@ -305,8 +317,9 @@ const useBlogApi = () => {
     _getBlogsList,
     _getRelatedPosts,
     _getBlogComments,
-    _callBlogPageApis,
     _addReview,
+    _callBlogPageApis,
+    _callBlogDetailPageApis,
   };
 };
 export default useBlogApi;

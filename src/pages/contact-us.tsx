@@ -19,6 +19,7 @@ import MapForm from "components/Contact-us/MapForm";
 import NewsLetter from "components/Common/NewsLetterSmall";
 
 const ContactUs = () => {
+  const { _getContactUsPageData } = useGlobalApi();
   const { contactUsPageData } = useGlobalState();
   const { dispatch } = useGlobalDispatch();
   const { getValue, includeImageBaseUrl } = useObjectPropsValue();
@@ -28,6 +29,7 @@ const ContactUs = () => {
     imgProp && imgProp.length ? includeImageBaseUrl(imgProp[0]) : null;
 
   React.useEffect(() => {
+    _getContactUsPageData();
     dispatch({
       type: "SET_CURRENT_ROUTER_NAME",
       payload: "contactUs",

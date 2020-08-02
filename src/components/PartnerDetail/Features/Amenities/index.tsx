@@ -10,7 +10,7 @@ const Amenities = () => {
   const { getValue } = useObjectPropsValue();
   const data = React.useMemo(
     () => (partnerDetailPage ? partnerDetailPage[0] : {}),
-    []
+    [partnerDetailPage]
   );
   return partnerDetail &&
     partnerDetail.amenities &&

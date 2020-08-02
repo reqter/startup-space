@@ -8,7 +8,7 @@ const Address = () => {
   const { partnerDetail, partnerDetailPage } = useGlobalState();
   const data = React.useMemo(
     () => (partnerDetailPage ? partnerDetailPage[0] : {}),
-    []
+    [partnerDetailPage]
   );
   const addressTitle = getValue(data, "addressboxaddresstitle");
   const postalCodeTitle = getValue(data, "addressboxpostcodetitle");

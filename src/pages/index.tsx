@@ -10,6 +10,7 @@ import {
   getContentTypeById,
 } from "../hooks/useGlobalApi";
 import useGlobalState from "hooks/useGlobal/useGlobalState";
+import useGlobalApi from "hooks/useGlobalApi";
 import MainLayout from "components/MainLayout";
 import First from "components/Landing/First";
 import Service from "components/Landing/Service";
@@ -26,8 +27,16 @@ interface IProps {
 }
 
 const Home = (): JSX.Element => {
+  const { getHomeData } = useGlobalApi();
   const { landingData } = useGlobalState();
   const data = React.useMemo(() => (landingData ? landingData[0] : {}), []);
+
+  React.useEffect(() => {
+    if (!landingData || landingData.length === 0) {
+      getHomeData();
+    }
+  }, []);
+
   return (
     <MainLayout title={data && data.name}>
       <First />

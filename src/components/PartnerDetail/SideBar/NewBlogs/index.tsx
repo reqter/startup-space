@@ -2,17 +2,17 @@ import React from "react";
 import Item from "./Item";
 import useGlobalState from "hooks/useGlobal/useGlobalState";
 import useObjectPropsValue from "hooks/useObjectPropsValue";
-import useGlobalApi from "hooks/useGlobalApi";
-import { Content, Title, Divider } from "./styles";
+import { Title, Divider } from "./styles";
 import LayoutBox from "../../LayoutBox";
 
 const NewOffices = () => {
-  const { partnerDetail, partnerDetailPage, newestBlogs } = useGlobalState();
+  const { partnerDetailPage, newestBlogs } = useGlobalState();
   const { getValue } = useObjectPropsValue();
   const data = React.useMemo(
     () => (partnerDetailPage ? partnerDetailPage[0] : {}),
-    []
+    [partnerDetailPage]
   );
+
   return (
     <LayoutBox width={370}>
       <Title>{getValue(data, "newblogstitle")}</Title>

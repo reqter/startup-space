@@ -7,7 +7,7 @@ import useBlogApi from "hooks/useBlogApi";
 import useDate from "hooks/useDate";
 
 const BlogCard = ({ data, actionName, colSpan = 3 }) => {
-  const { _callBlogPageApis } = useBlogApi();
+  const { _callBlogDetailPageApis } = useBlogApi();
   const { getValue, includeImageBaseUrl } = useObjectPropsValue();
   const { dateFromNow } = useDate();
   const img =
@@ -16,7 +16,7 @@ const BlogCard = ({ data, actionName, colSpan = 3 }) => {
       : "";
 
   function handleClicked() {
-    _callBlogPageApis(data._id);
+    _callBlogDetailPageApis(data._id);
   }
   return (
     <CardWrapper colSpan={colSpan}>

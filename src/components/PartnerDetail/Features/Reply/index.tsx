@@ -37,7 +37,7 @@ const Reply = () => {
   const [commentsLength, setCommentsLength] = React.useState(0);
   const data = React.useMemo(
     () => (partnerDetailPage ? partnerDetailPage[0] : {}),
-    []
+    [partnerDetailPage]
   );
   function handleChange(isVisible: boolean) {
     if (isVisible && !dataList)
