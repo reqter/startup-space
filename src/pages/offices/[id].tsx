@@ -3,25 +3,31 @@ import MainLayout from "components/MainLayout";
 import Gallery from "components/Common/Gallery";
 import Summery from "components/PartnerDetail/Summery";
 import Content from "components/PartnerDetail/MainContent";
-import { i18n } from "../../../config/Next18Wrapper";
+import { i18n, Router } from "../../../config/Next18Wrapper";
 import isServer from "utils/isServer";
-import {
+import useGlobalApi, {
   getToken,
   getHeaderData,
   getPartnerDetailById,
   getPartnerDetailPageData,
   getFooterData,
 } from "hooks/useGlobalApi";
-import { getNewestBlogs } from "hooks/useBlogApi";
+import useBlogApi, { getNewestBlogs } from "hooks/useBlogApi";
 import useGlobalState from "hooks/useGlobal/useGlobalState";
 import useGlobalDispatch from "hooks/useGlobal/useGlobalDispatch";
 import useObjectPropsValue from "hooks/useObjectPropsValue";
 
 const PartnerDetail = () => {
-  const { partnerDetail, partnerDetailPage } = useGlobalState();
+  const { _getPartnerDetailById, _getPartnerDetailPage } = useGlobalApi();
+  const { _getNewestBlogs } = useBlogApi();
+  const { partnerDetail = {}, partnerDetailPage } = useGlobalState();
   const { dispatch } = useGlobalDispatch();
   const { includeImageBaseUrl } = useObjectPropsValue();
+
   React.useEffect(() => {
+    _getPartnerDetailById(Router.query.id);
+    _getPartnerDetailPage();
+    _getNewestBlogs();
     dispatch({
       type: "SET_CURRENT_ROUTER_NAME",
       payload: "partnerDetail",

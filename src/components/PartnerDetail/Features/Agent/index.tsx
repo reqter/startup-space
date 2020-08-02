@@ -25,7 +25,7 @@ const Agent = () => {
   const { partnerDetail, partnerDetailPage } = useGlobalState();
   const data = React.useMemo(
     () => (partnerDetailPage ? partnerDetailPage[0] : {}),
-    []
+    [partnerDetailPage]
   );
   const { getValue, includeImageBaseUrl } = useObjectPropsValue();
   const img = React.useMemo(() => {

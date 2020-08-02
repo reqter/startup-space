@@ -13,7 +13,7 @@ const Products = () => {
   const { partnerDetailPage, partnerDetailId } = useGlobalState();
   const data = React.useMemo(
     () => (partnerDetailPage ? partnerDetailPage[0] : {}),
-    []
+    [partnerDetailPage]
   );
   React.useEffect(() => {
     if (!dataList) {

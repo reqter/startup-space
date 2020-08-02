@@ -12,7 +12,7 @@ const Detail = () => {
   } = useGlobalState();
   const data = React.useMemo(
     () => (partnerDetailPage ? partnerDetailPage[0] : {}),
-    []
+    [partnerDetailPage]
   );
   const detail =
     partnerDetail && partnerDetail.details

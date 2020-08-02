@@ -13,16 +13,19 @@ import {
 import useGlobalState from "hooks/useGlobal/useGlobalState";
 import useGlobalDispatch from "hooks/useGlobal/useGlobalDispatch";
 import useObjectPropsValue from "hooks/useObjectPropsValue";
+import useBlogApi from "hooks/useBlogApi";
 import Header from "components/Blogs/Header";
 import Content from "components/Blogs/Content";
 import NewsLetter from "components/Common/NewsLetterSmall";
 
 const Blogs = () => {
+  const { _callBlogPageApis } = useBlogApi();
   const { blogsPageData } = useGlobalState();
   const { dispatch } = useGlobalDispatch();
   const { getValue } = useObjectPropsValue();
 
   React.useEffect(() => {
+    _callBlogPageApis();
     dispatch({
       type: "SET_CURRENT_ROUTER_NAME",
       payload: "blogs",

@@ -19,7 +19,7 @@ const BlogsList = ({
   onNextPageClicked,
   onPrevClicked,
 }) => {
-  const { blogsPageData } = useGlobalState();
+  const { blogsPageData = {} } = useGlobalState();
   const { getValue } = useObjectPropsValue();
   return (
     <ListContainer>

@@ -18,6 +18,7 @@ import Content from "components/FAQ/ExpanderContent";
 import NewsLetter from "components/Common/NewsLetterSmall";
 
 const Faq = () => {
+  const { _getFAQsPageData, _getFAQsData } = useGlobalApi();
   const { faqsPageData } = useGlobalState();
   const { dispatch } = useGlobalDispatch();
   const { getValue, includeImageBaseUrl } = useObjectPropsValue();
@@ -27,6 +28,8 @@ const Faq = () => {
     imgProp && imgProp.length ? includeImageBaseUrl(imgProp[0]) : null;
 
   React.useEffect(() => {
+    _getFAQsPageData();
+    _getFAQsData();
     dispatch({
       type: "SET_CURRENT_ROUTER_NAME",
       payload: "faq",

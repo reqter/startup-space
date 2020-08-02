@@ -10,7 +10,7 @@ const MoreInfo = () => {
   const { getValue } = useObjectPropsValue();
   const data = React.useMemo(
     () => (partnerDetailPage ? partnerDetailPage[0] : {}),
-    []
+    [partnerDetailPage]
   );
   const workingHours =
     partnerDetail && partnerDetail.workinghours

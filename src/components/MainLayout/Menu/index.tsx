@@ -23,13 +23,7 @@ interface IProps {}
 const Header: React.FC<IProps> = (): JSX.Element => {
   const { getValue } = useObjectPropsValue();
   const { headerData, landingData } = useGlobalState();
-  const {
-    _getBlogsPageData,
-    _getLastBlog,
-    _getCategoriesData,
-    _getNewestBlogs,
-    _getTagsData,
-  } = useBlogApi();
+  const { _callBlogPageApis } = useBlogApi();
   const {
     getHomeData,
     _getPartnersPageData,
@@ -56,12 +50,6 @@ const Header: React.FC<IProps> = (): JSX.Element => {
   const _getHomeData = async () => {
     Router.push("/");
     if (!landingData || landingData.length === 0) getHomeData();
-    // if (!isServer) {
-    //   Router.push("/");
-    //   if (!landingData || landingData.length === 0) {
-    //     getHomeData();
-    //   } else Router.push("/");
-    // } else Router.push("/");
   };
   function getOfficesData() {
     _getPartnersPageData();
@@ -74,12 +62,9 @@ const Header: React.FC<IProps> = (): JSX.Element => {
     _getFAQsData();
   }
   function handleBlogsClicked() {
-    _getBlogsPageData();
-    _getLastBlog();
-    _getCategoriesData();
-    _getNewestBlogs();
-    _getTagsData();
+    _callBlogPageApis();
   }
+
   function checkIsTransparent() {
     return router.pathname === "/";
   }

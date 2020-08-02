@@ -43,7 +43,7 @@ const Summery = () => {
     <SummeryWrapper>
       <Content>
         <Left>
-          {partnerDetail.logo && partnerDetail.logo.length ? (
+          {partnerDetail && partnerDetail.logo && partnerDetail.logo.length ? (
             <LogoWrapper>
               <Logo src={includeImageBaseUrl(partnerDetail.logo[0])} alt="" />
             </LogoWrapper>
