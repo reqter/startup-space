@@ -8,10 +8,13 @@ export const SearchInputLeft = styled.div`
 `;
 
 export const Input = styled.input`
-  @apply border h-full flex-1 appearance-none  w-full py-2 px-3 text-gray-700 leading-tight text-sm;
+  @apply h-full flex-1 appearance-none  w-full py-2 px-3 text-gray-700 leading-tight text-sm;
+  background: ${({ isBlack }) => (isBlack ? "rgba(0,0,0,.5)" : "white")};
   &:focus {
-    @apply outline-none border-blue-500;
+    @apply bg-white outline-none border-blue-500 text-black;
   }
+  border: ${({ isBlack }) =>
+    isBlack ? "none" : `1px solid ${theme`colors.gray.300`}`};
 `;
 export const SearchInputRight = styled.div`
   @apply bg-blue-500 text-white text-xl flex items-center justify-center cursor-pointer;

@@ -4,7 +4,14 @@ import { renderFields } from "./helper";
 import { CustomForm } from "./styles";
 
 const Form = (
-  { mode, rowColumns, fieldsArray = [], initialValues = {}, filters },
+  {
+    mode,
+    isBlack = false,
+    rowColumns,
+    fieldsArray = [],
+    initialValues = {},
+    filters,
+  },
   ref
 ) => {
   const methods = useForm({
@@ -17,7 +24,14 @@ const Form = (
     <FormContext {...methods}>
       <form>
         <CustomForm rowColumns={rowColumns}>
-          {renderFields(mode, rowColumns, fieldsArray, initialValues, filters)}
+          {renderFields(
+            mode,
+            isBlack,
+            rowColumns,
+            fieldsArray,
+            initialValues,
+            filters
+          )}
         </CustomForm>
       </form>
     </FormContext>

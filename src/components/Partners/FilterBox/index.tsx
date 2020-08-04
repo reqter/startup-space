@@ -54,18 +54,13 @@ const FilterBox = ({ dataList }) => {
 
   const restField = (): object[] => {
     return searchFormContentType && searchFormContentType.fields
-      ? searchFormContentType.fields
-          .filter(
-            (item) =>
-              item.name !== "name" &&
-              item.name !== "actionstitle" &&
-              item.name !== "action1text" &&
-              item.name !== "action2text"
-          )
-          .map((item, index: number) => {
-            if (index > 1) item.colSpan = 2;
-            return item;
-          })
+      ? searchFormContentType.fields.filter(
+          (item) =>
+            item.name !== "name" &&
+            item.name !== "actionstitle" &&
+            item.name !== "action1text" &&
+            item.name !== "action2text"
+        )
       : [searchFormContentType];
   };
   const formRef = React.useRef(null);
@@ -123,6 +118,7 @@ const FilterBox = ({ dataList }) => {
           initValue={fullName}
           onChange={handleFullNameChanged}
           onSearchClicked={handleFilterData}
+          isBlack={false}
         />
         <Form
           ref={formRef}

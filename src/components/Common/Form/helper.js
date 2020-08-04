@@ -6,6 +6,7 @@ import String from "./components/String";
 import MultiLineString from "./components/MultiLineString";
 export const renderFields = (
   mode,
+  isBlack,
   rowColumns,
   fieldsArray = [],
   initialValues = {},
@@ -23,6 +24,7 @@ export const renderFields = (
       >
         <SingleOption
           field={item}
+          isBlack={isBlack}
           mode={mode}
           initialValue={initialValues && initialValues[item.name]}
           filter={filters && filters[item.name]}
@@ -45,6 +47,7 @@ export const renderFields = (
         <Reference
           field={item}
           mode={mode}
+          isBlack={isBlack}
           initialValue={initialValues && initialValues[item.name]}
           filter={filters && filters[item.name]}
         />
@@ -60,6 +63,7 @@ export const renderFields = (
           <MultiLineString
             field={item}
             mode={mode}
+            isBlack={isBlack}
             initialValue={initialValues && initialValues[item.name]}
             filter={filters && filters[item.name]}
           />
@@ -67,6 +71,7 @@ export const renderFields = (
           <String
             field={item}
             mode={mode}
+            isBlack={isBlack}
             initialValue={initialValues && initialValues[item.name]}
             filter={filters && filters[item.name]}
           />

@@ -6,8 +6,8 @@ export const Wrapper = styled.header`
   z-index: 1;
   background-image: ${({ bgImage }) => `linear-gradient(
       to right bottom,
-      rgba(8, 21, 38, 0.5),
-      rgba(8, 21, 38, 0.5)
+      rgba(8, 21, 38, 0.35),
+      rgba(8, 21, 38, 0.35)
     ),url(${bgImage})`};
 `;
 
