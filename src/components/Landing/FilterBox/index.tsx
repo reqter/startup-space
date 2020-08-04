@@ -12,6 +12,7 @@ const FilterBox = () => {
   const { dispatch } = useGlobalDispatch();
   const { objectToQuerystring } = useObjectPropsValue();
   const [fullName, setFullName] = React.useState("");
+
   const nameField = () => {
     return searchFormContentType && searchFormContentType.fields
       ? searchFormContentType.fields.find((item) => item.name === "name")
@@ -45,7 +46,7 @@ const FilterBox = () => {
               item.name !== "action2text"
           )
           .map((item, index: number) => {
-            if (index > 1) item.colSpan = 2;
+            if (index > 2) item.colSpan = 3;
             return item;
           })
       : [];
@@ -70,6 +71,7 @@ const FilterBox = () => {
   function handleFullNameChanged(e) {
     setFullName(e.target.value);
   }
+
   return (
     <Wrapper>
       <Content>
@@ -78,11 +80,13 @@ const FilterBox = () => {
           initValue={fullName}
           onChange={handleFullNameChanged}
           onSearchClicked={handleSearchClicked}
+          isBlack
         />
         <Form
           ref={formRef}
           mode="filter"
-          rowColumns={2}
+          isBlack
+          rowColumns={3}
           filters={{}}
           initialValues={{}}
           fieldsArray={restField}

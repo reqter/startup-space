@@ -7,7 +7,7 @@ import useGlobalApi from "hooks/useGlobalApi";
 import InputWrapper from "../InputWrapper";
 import { SingleValueText, MultiValueText, Option, borderColor } from "./styles";
 
-const ReferenceInput = ({ field, mode, initialValue, filter }) => {
+const ReferenceInput = ({ field, mode, initialValue, filter, isBlack }) => {
   const {
     register,
     errors,
@@ -160,11 +160,45 @@ const ReferenceInput = ({ field, mode, initialValue, filter }) => {
             placeholder: (base) => ({
               ...base,
               fontSize: "13px",
+              color: !isBlack ? "gray" : "white",
+              fontWeight: "bold",
             }),
             menuList: (provided, state) => {
               const maxHeight = 200;
-              return { ...provided, maxHeight };
+              return {
+                ...provided,
+                maxHeight,
+              };
             },
+            control: (provided, state) => {
+              return {
+                ...provided,
+                height: "43px",
+                background: !isBlack
+                  ? "white"
+                  : state.isFocused
+                  ? theme`colors.blue.500`
+                  : "rgba(0,0,0,.5)",
+                border: !isBlack ? provided.border : "none",
+              };
+            },
+            singleValue: (provided, state) => ({
+              ...provided,
+              color: !isBlack ? "black" : "white",
+              fontWeight: "bold",
+            }),
+            indicatorSeparator: (provided, state) => ({
+              ...provided,
+              color: !isBlack ? "black" : "white",
+            }),
+            dropdownIndicator: (provided, state) => ({
+              ...provided,
+              color: !isBlack ? "black" : "white",
+            }),
+            clearIndicator: (provided, state) => ({
+              ...provided,
+              color: !isBlack ? "black" : "white",
+            }),
           }}
           isMulti={field.isList}
           isDisabled={mode === "view" ? true : false}

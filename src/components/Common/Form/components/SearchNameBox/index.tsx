@@ -8,7 +8,13 @@ import {
   SearchInputRight,
   SearchIcon,
 } from "./styles";
-const FullSearchInput = ({ data, onChange, initValue, onSearchClicked }) => {
+const FullSearchInput = ({
+  data,
+  onChange,
+  isBlack,
+  initValue,
+  onSearchClicked,
+}) => {
   const { currentLanguage } = useGlobalState();
   function handleKeyDown(e: React.KeyboardEvent): any {
     const key = e.which || e.key;
@@ -24,6 +30,7 @@ const FullSearchInput = ({ data, onChange, initValue, onSearchClicked }) => {
         onChange={onChange}
         defaultValue={initValue}
         onKeyDown={handleKeyDown}
+        isBlack={isBlack}
       />
       <SearchInputRight onClick={onSearchClicked}>
         <IoIosSearch />
