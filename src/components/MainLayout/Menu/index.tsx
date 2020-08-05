@@ -72,7 +72,11 @@ const Header: React.FC<IProps> = (): JSX.Element => {
     _getHomeData();
   }
   return (
-    <Wrapper isSticky={isSticky} isTransparent={checkIsTransparent()}>
+    <Wrapper
+      className={isSticky ? "shadow-md" : ""}
+      isSticky={isSticky}
+      isTransparent={checkIsTransparent()}
+    >
       <Content>
         {router.pathname !== "/" || isSticky ? (
           <Logo

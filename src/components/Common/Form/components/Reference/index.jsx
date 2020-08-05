@@ -6,7 +6,7 @@ import useGlobalDispatch from "hooks/useGlobal/useGlobalDispatch";
 import useGlobalApi from "hooks/useGlobalApi";
 import InputWrapper from "../InputWrapper";
 import { SingleValueText, MultiValueText, Option, borderColor } from "./styles";
-
+const document = {};
 const ReferenceInput = ({ field, mode, initialValue, filter, isBlack }) => {
   const {
     register,
@@ -152,6 +152,8 @@ const ReferenceInput = ({ field, mode, initialValue, filter, isBlack }) => {
           closeMenuOnSelect={!field.isList}
           value={values}
           isClearable
+          menuContainerStyle={{ zIndex: 1000 }}
+          menuPortalTarget={document.body}
           onChange={handleChange}
           options={options}
           isSearchable={false}
