@@ -150,7 +150,6 @@ const ReferenceInput = ({ field, mode, initialValue, filter, isBlack }) => {
           menuPlacement="top"
           closeMenuOnScroll={true}
           closeMenuOnSelect={!field.isList}
-          menuContainerStyle={{ zIndex: 9999 }}
           value={values}
           isClearable
           onChange={handleChange}
@@ -173,7 +172,7 @@ const ReferenceInput = ({ field, mode, initialValue, filter, isBlack }) => {
             control: (provided, state) => {
               return {
                 ...provided,
-                height: "43px",
+                minHeight: "43px",
                 background: !isBlack
                   ? "white"
                   : state.isFocused
@@ -190,6 +189,7 @@ const ReferenceInput = ({ field, mode, initialValue, filter, isBlack }) => {
             indicatorSeparator: (provided, state) => ({
               ...provided,
               color: !isBlack ? "black" : "white",
+              display: "none",
             }),
             dropdownIndicator: (provided, state) => ({
               ...provided,
