@@ -1,4 +1,3 @@
-import { FullSearchInput } from "components/Common/Form/components/SearchNameBox";
 import { styled } from "linaria/lib/react";
 
 export const Wrapper = styled.div`
