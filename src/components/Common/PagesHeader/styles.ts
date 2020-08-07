@@ -9,7 +9,7 @@ export const Wrapper = styled.header`
       0.92
     )}),url(${bgImage && bgImage.length ? bgImage : fallbackImage})`};
   height: 200px;
-  margin-top: 100px;
+  margin-top: 80px;
 `;
 
 export const Content = styled.div`
