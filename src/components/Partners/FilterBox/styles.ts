@@ -1,7 +1,7 @@
 import { styled } from "linaria/lib/react";
 
 export const Wrapper = styled.div`
-  @apply shadow-none  overflow-auto;
+  @apply shadow-none;
   width: 400px;
   border-radius: 2px;
   border: 1px solid #f2f2f2;

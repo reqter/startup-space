@@ -24,6 +24,7 @@
     "next": "^9.3.4",
     "next-compose-plugins": "^2.2.0",
     "next-i18next": "^4.2.1",
+    "nprogress": "^0.2.0",
     "pannellum-react": "^1.2.4",
     "polished": "^3.4.4",
     "rc-slider": "^9.2.4",

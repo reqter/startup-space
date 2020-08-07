@@ -10,6 +10,7 @@ import {
   getContentTypeById,
 } from "../hooks/useGlobalApi";
 import useGlobalState from "hooks/useGlobal/useGlobalState";
+import useObjectPropsValue from "hooks/useObjectPropsValue";
 import useGlobalApi from "hooks/useGlobalApi";
 import MainLayout from "components/MainLayout";
 import First from "components/Landing/First";
@@ -28,6 +29,7 @@ interface IProps {
 
 const Home = (): JSX.Element => {
   const { getHomeData } = useGlobalApi();
+  const { getValue } = useObjectPropsValue();
   const { landingData } = useGlobalState();
   const data = React.useMemo(() => (landingData ? landingData[0] : {}), []);
 
@@ -38,7 +40,7 @@ const Home = (): JSX.Element => {
   }, []);
 
   return (
-    <MainLayout title={data && data.name}>
+    <MainLayout title={getValue(data, "name")}>
       <First />
       <Service />
       <Spaces />

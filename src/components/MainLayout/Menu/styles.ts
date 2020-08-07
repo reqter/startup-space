@@ -2,8 +2,7 @@ import { styled } from "linaria/lib/react";
 import { css } from "linaria";
 export const Wrapper = styled.header`
   min-height: 50px;
-
-  @apply w-full bg-gray-100  shadow-md transition ease-linear duration-75 z-50;
+  @apply w-full bg-gray-100  transition ease-linear duration-75 z-50;
   background-color: ${({ isSticky, isTransparent }) =>
     !isTransparent ? theme`colors.white` : isSticky ? "white" : `transparent`};
   top: 0;
@@ -16,10 +15,11 @@ export const Wrapper = styled.header`
   }
 `;
 export const Content = styled.div`
-  @apply max-w-6xl m-auto h-full flex items-center;
+  @apply max-w-6xl m-auto h-full flex items-center relative;
+  height: 50px;
 `;
 export const Logo = styled.img`
-  @apply w-32 cursor-pointer;
+  @apply w-32 cursor-pointer absolute left-0;
   @screen tab-port {
     @apply hidden;
   }
@@ -62,7 +62,7 @@ export const MenuItem = styled.li`
   }
 `;
 export const Button = styled.button`
-  @apply bg-blue-500 flex items-center justify-center text-white text-base font-bold py-2 px-4 rounded transition ease-in duration-200;
+  @apply absolute right-0 bg-blue-500 flex items-center justify-center text-white text-base font-bold py-2 px-4 rounded transition ease-in duration-200;
   &:hover {
     @apply bg-blue-700 transition ease-in duration-200;
   }

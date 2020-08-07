@@ -16,7 +16,8 @@ export const Left = styled.div`
   }
 `;
 export const Image = styled.img`
-  @apply;
+  @apply rounded-lg;
+  margin-inline-end: 20px;
 `;
 export const Right = styled.div`
   @apply flex flex-col;

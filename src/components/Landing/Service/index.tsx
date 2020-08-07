@@ -15,7 +15,7 @@ import {
   Button,
 } from "./styles";
 const Service = () => {
-  const { getValue } = useObjectPropsValue();
+  const { getValue, includeImageBaseUrl } = useObjectPropsValue();
   const { landingData } = useGlobalState();
   const data = React.useMemo(() => (landingData ? landingData[0] : {}), [
     landingData,
@@ -24,7 +24,13 @@ const Service = () => {
     <Wrapper>
       <Content>
         <Left>
-          <Image src={data.servicemedia} />
+          <Image
+            src={
+              data
+                ? includeImageBaseUrl(data.servicemedia[0], "image", 500, 370)
+                : ""
+            }
+          />
         </Left>
         <Right>
           <Title>{getValue(data, "serviceheading")}</Title>

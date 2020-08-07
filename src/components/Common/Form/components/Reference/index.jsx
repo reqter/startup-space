@@ -6,7 +6,7 @@ import useGlobalDispatch from "hooks/useGlobal/useGlobalDispatch";
 import useGlobalApi from "hooks/useGlobalApi";
 import InputWrapper from "../InputWrapper";
 import { SingleValueText, MultiValueText, Option, borderColor } from "./styles";
-
+const document = {};
 const ReferenceInput = ({ field, mode, initialValue, filter, isBlack }) => {
   const {
     register,
@@ -150,9 +150,10 @@ const ReferenceInput = ({ field, mode, initialValue, filter, isBlack }) => {
           menuPlacement="top"
           closeMenuOnScroll={true}
           closeMenuOnSelect={!field.isList}
-          menuContainerStyle={{ zIndex: 9999 }}
           value={values}
           isClearable
+          menuContainerStyle={{ zIndex: 1000 }}
+          menuPortalTarget={document.body}
           onChange={handleChange}
           options={options}
           isSearchable={false}
@@ -173,7 +174,7 @@ const ReferenceInput = ({ field, mode, initialValue, filter, isBlack }) => {
             control: (provided, state) => {
               return {
                 ...provided,
-                height: "43px",
+                minHeight: "43px",
                 background: !isBlack
                   ? "white"
                   : state.isFocused
@@ -190,6 +191,7 @@ const ReferenceInput = ({ field, mode, initialValue, filter, isBlack }) => {
             indicatorSeparator: (provided, state) => ({
               ...provided,
               color: !isBlack ? "black" : "white",
+              display: "none",
             }),
             dropdownIndicator: (provided, state) => ({
               ...provided,
