@@ -1,15 +1,23 @@
 import useGlobalState from "hooks/useGlobal/useGlobalState";
-import * as dayjs from "dayjs";
-var relativeTime = require("dayjs/plugin/relativeTime");
-dayjs.extend(relativeTime);
+import { formatDistanceStrict } from "date-fns";
 
 const useDate = () => {
   const { currentLanguage } = useGlobalState();
-  function dateFromNow(d) {
-    require(`dayjs/locale/${currentLanguage}`);
-    // return dayjs(d).locale(currentLanguage).fromNow();
-    return d;
+
+  function dateFromNow(date: string | number | Date) {
+    let lang = require(`date-fns/locale/${
+      currentLanguage === "fa"
+        ? `fa-IR`
+        : currentLanguage === "en"
+        ? `en-US`
+        : currentLanguage
+    }`).default;
+    return formatDistanceStrict(new Date(date), new Date(), {
+      locale: lang,
+      addSuffix: true,
+    });
   }
+
   return {
     dateFromNow,
   };

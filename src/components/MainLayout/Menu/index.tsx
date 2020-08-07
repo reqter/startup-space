@@ -73,7 +73,7 @@ const Header: React.FC<IProps> = (): JSX.Element => {
   }
   return (
     <Wrapper
-      className={isSticky ? "shadow-md" : ""}
+      className={isSticky || !checkIsTransparent() ? "shadow-md" : ""}
       isSticky={isSticky}
       isTransparent={checkIsTransparent()}
     >

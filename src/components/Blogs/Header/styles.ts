@@ -22,7 +22,7 @@ export const Image = styled.div`
 export const Wrapper = styled.div`
   @apply relative cursor-pointer overflow-hidden w-full;
   height: 400px;
-  margin-top: 100px;
+  margin-top: 80px;
   &:hover {
     ${Content} {
       @apply transition duration-500;
