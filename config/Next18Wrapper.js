@@ -4,7 +4,7 @@ var locales = require("./locales");
 var NextI18Next = require("next-i18next").default;
 
 var NextI18NextInstance = new NextI18Next({
-  defaultLanguage: "en",
+  defaultLanguage: "fa",
   otherLanguages: Object.keys(locales),
   localeSubpaths: locales,
   // official i18next config: https://www.i18next.com/overview/configuration-options
