@@ -1,6 +1,6 @@
 import useGlobalState from "hooks/useGlobal/useGlobalState";
 import { formatDistanceStrict } from "date-fns";
-import { enUS, faIR, de, es, fr, it, ar, sv } from "date-fns/locale";
+import { enUS, faIR, de, es, fr, it, sv } from "date-fns/locale";
 
 const useDate = () => {
   const { currentLanguage } = useGlobalState();
@@ -18,7 +18,7 @@ const useDate = () => {
       : lng === "it"
       ? it
       : lng === "ar"
-      ? ar
+      ? faIR
       : lng === "sv"
       ? sv
       : faIR;
