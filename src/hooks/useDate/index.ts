@@ -1,19 +1,31 @@
 import useGlobalState from "hooks/useGlobal/useGlobalState";
 import { formatDistanceStrict } from "date-fns";
+import { enUS, faIR, de, es, fr, it, ar, sv } from "date-fns/locale";
 
 const useDate = () => {
   const { currentLanguage } = useGlobalState();
-
+  function getLocale(lng: string) {
+    return lng === "fa"
+      ? faIR
+      : lng === "en"
+      ? enUS
+      : lng === "de"
+      ? de
+      : lng === "es"
+      ? es
+      : lng === "fr"
+      ? fr
+      : lng === "it"
+      ? it
+      : lng === "ar"
+      ? ar
+      : lng === "sv"
+      ? sv
+      : faIR;
+  }
   function dateFromNow(date: string | number | Date) {
-    let lang = require(`date-fns/locale/${
-      currentLanguage === "fa"
-        ? `fa-IR`
-        : currentLanguage === "en"
-        ? `en-US`
-        : currentLanguage
-    }`).default;
     return formatDistanceStrict(new Date(date), new Date(), {
-      locale: lang,
+      locale: getLocale(currentLanguage),
       addSuffix: true,
     });
   }
