@@ -23,11 +23,24 @@ const useDate = () => {
       ? sv
       : faIR;
   }
-  function dateFromNow(date: string | number | Date) {
-    return formatDistanceStrict(new Date(date), new Date(), {
-      locale: getLocale(currentLanguage),
-      addSuffix: true,
-    });
+  function dateFromNow(date: string) {
+    try {
+      if (date && typeof date === "string") {
+        const d1 = new Date(date);
+        if (d1) {
+          const d = formatDistanceStrict(d1, new Date(), {
+            locale: getLocale(currentLanguage),
+            addSuffix: true,
+          });
+          console.log(d);
+          return d;
+        }
+      }
+    } catch (error) {
+      console.log(error)
+    }
+
+    return date;
   }
 
   return {
