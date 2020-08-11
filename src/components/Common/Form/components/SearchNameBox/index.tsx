@@ -15,11 +15,15 @@ const FullSearchInput = ({
   initValue,
   onSearchClicked,
 }) => {
+  const inputRef = React.useRef(null);
   const { currentLanguage } = useGlobalState();
   function handleKeyDown(e: React.KeyboardEvent): any {
     const key = e.which || e.key;
     if (key === 13) onSearchClicked();
   }
+  React.useCallback(() => {
+    inputRef.current.focus();
+  }, []);
   return (
     <SearchInput>
       <SearchInputLeft>
@@ -31,6 +35,7 @@ const FullSearchInput = ({
         defaultValue={initValue}
         onKeyDown={handleKeyDown}
         isBlack={isBlack}
+        ref={inputRef}
       />
       <SearchInputRight onClick={onSearchClicked}>
         <IoIosSearch />

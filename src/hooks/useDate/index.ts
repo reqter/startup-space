@@ -32,12 +32,10 @@ const useDate = () => {
             locale: getLocale(currentLanguage),
             addSuffix: true,
           });
-          console.log(d);
           return d;
         }
       }
     } catch (error) {
-      console.log(error)
     }
 
     return date;

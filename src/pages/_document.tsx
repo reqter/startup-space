@@ -21,6 +21,24 @@ class MyDocument extends Document<{
     return (
       <Html lang={language} dir={languageDirection}>
         <Head>
+          <script
+            async
+            src="https://www.googletagmanager.com/gtag/js?id=UA-145850270-1"
+          ></script>
+          <script
+            dangerouslySetInnerHTML={{
+              __html:`
+            <script async src="https://www.googletagmanager.com/gtag/js?id=UA-145850270-1"></script>
+            <script>
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+            
+              gtag('config', 'UA-145850270-1');
+            </script>
+              `
+            }}
+          ></script>
           <link
             rel="stylesheet"
             href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
