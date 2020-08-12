@@ -31,7 +31,9 @@ const Home = (): JSX.Element => {
   const { getHomeData } = useGlobalApi();
   const { getValue } = useObjectPropsValue();
   const { landingData } = useGlobalState();
-  const data = React.useMemo(() => (landingData ? landingData[0] : {}), []);
+  const data = React.useMemo(() => (landingData ? landingData[0] : {}), [
+    landingData,
+  ]);
 
   React.useEffect(() => {
     if (!landingData || landingData.length === 0) {
