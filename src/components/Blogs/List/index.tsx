@@ -33,6 +33,7 @@ const BlogsList = ({
         <EmptyList
           image={blogsPageData.emptylistimage}
           text={blogsPageData.emptylisttext}
+          description={blogsPageData.emptylistdescription}
         />
       ) : (
         <>

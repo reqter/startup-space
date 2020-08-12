@@ -21,7 +21,7 @@ const FullSearchInput = ({
     const key = e.which || e.key;
     if (key === 13) onSearchClicked();
   }
-  React.useCallback(() => {
+  React.useEffect(() => {
     inputRef.current.focus();
   }, []);
   return (

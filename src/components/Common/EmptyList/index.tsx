@@ -1,9 +1,15 @@
-import { Wrapper, Image, Text } from "./styles";
-const EmptyList = ({ image, text }) => {
+import { Wrapper, Image, Title, Description } from "./styles";
+interface IProps {
+  image: string;
+  text: string;
+  description: string;
+}
+const EmptyList = ({ image, text, description }: IProps) => {
   return (
     <Wrapper>
       <Image src={image} />
-      <Text>{text}</Text>
+      <Title>{text}</Title>
+      <Description>{description}</Description>
     </Wrapper>
   );
 };

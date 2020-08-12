@@ -1,5 +1,6 @@
 import React from "react";
 import Card from "./Item";
+import EmptyList from "components/Common/EmptyList";
 import Loading from "components/Common/CardSkeleton";
 import { Container, Button } from "./styles";
 import useGlobalState from "hooks/useGlobal/useGlobalState";
@@ -52,7 +53,13 @@ const SpacesList = ({
           <Loading />
           <Loading />
         </div>
-      ) : dataList ? (
+      ) : !dataList || !dataList.length ? (
+        <EmptyList
+          text={partnersPageData.emptylisttext}
+          image={partnersPageData.emptylistimage}
+          description={partnersPageData.emptylistdescription}
+        />
+      ) : (
         <>
           {dataList.map((item, index) => (
             <Card key={index} data={item} />
@@ -65,7 +72,7 @@ const SpacesList = ({
             </div>
           )}
         </>
-      ) : null}
+      )}
     </Container>
   );
 };

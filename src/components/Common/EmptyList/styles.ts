@@ -4,8 +4,12 @@ export const Wrapper = styled.div`
   @apply flex flex-col w-full justify-center items-center;
 `;
 export const Image = styled.img`
-  width: 100%;
+  width: 400px;
+  height:300px
 `;
-export const Text = styled.div`
-  @apply mt-3 text-lg;
+export const Title = styled.h1`
+  @apply mt-1 text-2xl;
+`;
+export const Description = styled.span`
+  
 `;
