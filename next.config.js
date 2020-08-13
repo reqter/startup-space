@@ -2,8 +2,8 @@ const { withPlugins } = require("next-compose-plugins");
 const path = require("path");
 const withCSS = require("@zeit/next-css");
 const withSvg = require("@svgr/webpack");
-
 require("./scripts/generate-sitemap");
+
 const nextConfig = {
   typescript: {
     ignoreDevErrors: true,
