@@ -35,7 +35,10 @@ async function generateSitemap() {
     "src/!pages/_*.js",
     "src/!pages/api",
   ]);
-  const sitemap = `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  const sitemap = `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd
+  http://www.w3.org/1999/xhtml http://www.w3.org/2002/08/xhtml/xhtml1-strict.xsd"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
 ${pages.map(addPage).join("\n")}
 </urlset>`;
 
