@@ -20,9 +20,9 @@ function addPage(page) {
     ${i18.config.otherLanguages.reduce((acc, lang) => {
       acc =
         acc +
-        `<xhtml:link rel="alternate" hreflang=${`"${lang}"`} href=${
+        `<xhtml:link rel="alternate" hreflang=${`"${lang}"`} href="${
           process.env.WEBSITE_URL + lang + "/" + path
-        } />`;
+        }" />`;
       return acc;
     }, "")}
   </url>`;
