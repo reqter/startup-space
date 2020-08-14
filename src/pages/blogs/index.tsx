@@ -2,6 +2,7 @@ import React from "react";
 import MainLayout from "components/MainLayout";
 import { i18n } from "../../../config/Next18Wrapper";
 import isServer from "utils/isServer";
+import { MetaTags, RobotsContent, PageType } from "interfaces/tag";
 import { getToken, getHeaderData, getFooterData } from "hooks/useGlobalApi";
 import {
   getBlogsPageData,
@@ -32,8 +33,18 @@ const Blogs = () => {
     });
   }, []);
 
+  const metaTags: MetaTags = {
+    keywords: ``,
+    title: `${getValue(blogsPageData, "name")}`,
+    description: ``,
+    image: null,
+    robots: `${RobotsContent.follow},${RobotsContent.index}`,
+    type: PageType.website,
+    canonical: "",
+  };
+
   return (
-    <MainLayout title={getValue(blogsPageData, "name")}>
+    <MainLayout metaTags={metaTags}>
       <Header />
       <Content />
       <NewsLetter />

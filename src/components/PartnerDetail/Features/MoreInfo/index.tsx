@@ -16,7 +16,7 @@ const MoreInfo = () => {
     partnerDetail && partnerDetail.workinghours
       ? JSON.parse(partnerDetail.workinghours)
       : [];
-  console.log(workingHours);
+  
   return (partnerDetail && workingHours && workingHours.length) ||
     (partnerDetail && partnerDetail.rules && partnerDetail.rules.length) ? (
     <LayoutBox title={getValue(data, "thingstoknowboxtitle")}>

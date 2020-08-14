@@ -43,7 +43,7 @@ const KeyValueInput = ({ field, mode, initialValue, filter }) => {
   const selectValue = watch(field.name);
   React.useEffect(() => {
     // if (selectValue === undefined) {
-    //   console.log(register().current);
+    
     // }
     //  selectFieldRef.current.select.clearValue();
   }, [selectValue]);

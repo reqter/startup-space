@@ -5,6 +5,7 @@ import Summery from "components/PartnerDetail/Summery";
 import Content from "components/PartnerDetail/MainContent";
 import { i18n, Router } from "../../../config/Next18Wrapper";
 import isServer from "utils/isServer";
+import { MetaTags, RobotsContent, PageType } from "interfaces/tag";
 import useGlobalApi, {
   getToken,
   getHeaderData,
@@ -20,9 +21,13 @@ import useObjectPropsValue from "hooks/useObjectPropsValue";
 const PartnerDetail = () => {
   const { _getPartnerDetailById, _getPartnerDetailPage } = useGlobalApi();
   const { _getNewestBlogs } = useBlogApi();
-  const { partnerDetail = {}, partnerDetailPage } = useGlobalState();
+  const {
+    partnerDetail = {},
+    partnerDetailPage,
+    partnerDetailId,
+  } = useGlobalState();
   const { dispatch } = useGlobalDispatch();
-  const { includeImageBaseUrl } = useObjectPropsValue();
+  const { getValue, includeImageBaseUrl } = useObjectPropsValue();
 
   React.useEffect(() => {
     _getPartnerDetailById(Router.query.id);
@@ -43,14 +48,25 @@ const PartnerDetail = () => {
     []
   );
 
+  const metaTags: MetaTags = {
+    keywords: `${getValue(partnerDetail, "keywords")}`,
+    title: `${
+      (pageData.pageheadertext ? pageData.pageheadertext : "") +
+      (partnerDetail.name ? partnerDetail.name : "")
+    }`,
+    description: `${getValue(partnerDetail, "metadescription")}`,
+    image: logo,
+    robots: `${RobotsContent.follow},${RobotsContent.index}`,
+    type: PageType.partner,
+    canonical:
+      process.env.NEXT_PUBLIC_CANONICAL_DOMAIN_NAME +
+      i18n.language +
+      "/offices" +
+      partnerDetailId,
+  };
+
   return (
-    <MainLayout
-      title={
-        (pageData.pageheadertext ? pageData.pageheadertext : "") +
-        (partnerDetail.name ? partnerDetail.name : "")
-      }
-      logo={logo}
-    >
+    <MainLayout metaTags={metaTags} logo={logo}>
       <Gallery data={partnerDetail ? partnerDetail.images : []} />
       <Summery />
       <Content />

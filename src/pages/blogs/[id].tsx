@@ -3,6 +3,7 @@ import MainLayout from "components/MainLayout";
 import Content from "components/BlogDetail/Content";
 import { i18n, Router } from "../../../config/Next18Wrapper";
 import isServer from "utils/isServer";
+import { MetaTags, RobotsContent, PageType } from "interfaces/tag";
 import { getToken, getHeaderData, getFooterData } from "hooks/useGlobalApi";
 import {
   getBlogById,
@@ -20,7 +21,7 @@ const BlogDetail = () => {
   const { _callBlogDetailPageApis } = useBlogApi();
   const { blogDetailData } = useGlobalState();
   const { dispatch } = useGlobalDispatch();
-  const { getValue } = useObjectPropsValue();
+  const { getValue, includeImageBaseUrl } = useObjectPropsValue();
   React.useEffect(() => {
     _callBlogDetailPageApis(Router.query.id as string);
     dispatch({
@@ -29,8 +30,31 @@ const BlogDetail = () => {
     });
   }, []);
 
+  const img =
+    blogDetailData && blogDetailData.thumbnail
+      ? includeImageBaseUrl(blogDetailData.thumbnail[0], "image")
+      : "";
+  const blogMetaTags: MetaTags = {
+    author: `${getValue(blogDetailData, "author")}`,
+    keywords: `${getValue(blogDetailData, "keywords")}`,
+    title: `${getValue(blogDetailData, "seotitle")}`,
+    description: `${getValue(blogDetailData, "metdesc")}`,
+    image: img,
+    robots: `${RobotsContent.follow},${RobotsContent.index}`,
+    type: PageType.article,
+    canonical:
+      process.env.NEXT_PUBLIC_CANONICAL_DOMAIN_NAME +
+      i18n.language +
+      "/" +
+      (blogDetailData
+        ? blogDetailData.slug
+          ? blogDetailData.slug
+          : blogDetailData._id
+        : blogDetailData._id),
+  };
+
   return (
-    <MainLayout title={getValue(blogDetailData, "name")}>
+    <MainLayout metaTags={blogMetaTags}>
       <Content />
     </MainLayout>
   );
