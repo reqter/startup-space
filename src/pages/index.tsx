@@ -9,6 +9,7 @@ import {
   getFooterData,
   getContentTypeById,
 } from "../hooks/useGlobalApi";
+import { MetaTags, RobotsContent, PageType } from "interfaces/tag";
 import useGlobalState from "hooks/useGlobal/useGlobalState";
 import useObjectPropsValue from "hooks/useObjectPropsValue";
 import useGlobalApi from "hooks/useGlobalApi";
@@ -29,11 +30,24 @@ interface IProps {
 
 const Home = (): JSX.Element => {
   const { getHomeData } = useGlobalApi();
-  const { getValue } = useObjectPropsValue();
+  const { getValue, includeImageBaseUrl } = useObjectPropsValue();
   const { landingData } = useGlobalState();
   const data = React.useMemo(() => (landingData ? landingData[0] : {}), [
     landingData,
   ]);
+  const img =
+    data && data.metatagimage
+      ? includeImageBaseUrl(data.metatagimage[0], "image", 500, 250)
+      : "";
+  const landingMetaTags: MetaTags = {
+    keywords: `${getValue(data, "metatagkeywords")}`,
+    title: `${getValue(data, "name")}`,
+    description: `${getValue(data, "metatagdescription")}`,
+    image: img,
+    robots: `${RobotsContent.follow},${RobotsContent.index}`,
+    type: PageType.website,
+    canonical: process.env.NEXT_PUBLIC_CANONICAL_DOMAIN_NAME + i18n.language,
+  };
 
   React.useEffect(() => {
     if (!landingData || landingData.length === 0) {
@@ -42,7 +56,7 @@ const Home = (): JSX.Element => {
   }, []);
 
   return (
-    <MainLayout title={getValue(data, "name")}>
+    <MainLayout metaTags={landingMetaTags}>
       <First />
       <Service />
       <Spaces />

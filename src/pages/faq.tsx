@@ -9,6 +9,7 @@ import {
   getFAQsPageData,
   getFAQsData,
 } from "hooks/useGlobalApi";
+import { MetaTags, RobotsContent, PageType } from "interfaces/tag";
 import useGlobalState from "hooks/useGlobal/useGlobalState";
 import useGlobalDispatch from "hooks/useGlobal/useGlobalDispatch";
 import useObjectPropsValue from "hooks/useObjectPropsValue";
@@ -36,8 +37,19 @@ const Faq = () => {
     });
   }, []);
 
+  const metaTags: MetaTags = {
+    keywords: ``,
+    title: `${getValue(faqsPageData, "name")}`,
+    description: ``,
+    image: null,
+    robots: `${RobotsContent.follow},${RobotsContent.index}`,
+    type: PageType.website,
+    canonical:
+      process.env.NEXT_PUBLIC_CANONICAL_DOMAIN_NAME + i18n.language + "/faq",
+  };
+
   return (
-    <MainLayout title={getValue(faqsPageData, "name")}>
+    <MainLayout metaTags={metaTags}>
       <Header
         image={img}
         fallbackImage="https://i.pinimg.com/736x/fe/45/da/fe45daef11dd032c0ecbe7fdfee97057.jpg"

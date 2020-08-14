@@ -10,14 +10,8 @@ import {
 } from "hooks/useGlobalApi";
 import { appWithTranslation, i18n } from "../../config/Next18Wrapper";
 import { Provider } from "../hooks/useGlobal";
-import Router from "next/router";
-import NProgress from "nprogress";
-import "nprogress/nprogress.css";
-
-NProgress.configure({ showSpinner: false });
-Router.events.on("routeChangeStart", () => NProgress.start());
-Router.events.on("routeChangeComplete", () => NProgress.done());
-Router.events.on("routeChangeError", () => NProgress.done());
+import { init } from "services/progressbarHandler";
+init();
 
 const AppComponent: React.FC<AppProps> = ({ Component, pageProps }) => {
   return (

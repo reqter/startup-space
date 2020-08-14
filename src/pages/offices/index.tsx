@@ -2,6 +2,7 @@ import React from "react";
 import MainLayout from "components/MainLayout";
 import { i18n } from "../../../config/Next18Wrapper";
 import isServer from "utils/isServer";
+import { MetaTags, RobotsContent, PageType } from "interfaces/tag";
 import {
   getToken,
   getHeaderData,
@@ -43,8 +44,18 @@ const Spaces = () => {
     };
   }, []);
 
+  const metaTags: MetaTags = {
+    keywords: ``,
+    title: `${getValue(partnersPageData, "pageheadertext")}`,
+    description: ``,
+    image: null,
+    robots: `${RobotsContent.follow},${RobotsContent.index}`,
+    type: PageType.website,
+    canonical: "",
+  };
+
   return (
-    <MainLayout title={getValue(partnersPageData, "pageheadertext")}>
+    <MainLayout metaTags={metaTags}>
       <Header
         image={img}
         fallbackImage="https://i.pinimg.com/736x/fe/45/da/fe45daef11dd032c0ecbe7fdfee97057.jpg"

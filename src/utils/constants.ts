@@ -1,3 +1,5 @@
+import { PageType, RobotsContent, MetaTags } from "interfaces/tag";
+import { concatenateStrings } from "utils";
 export const clientid = "1d42c55e-0f44-4613-adba-a5bbbca878e1";
 export const urls = {
   baseUrl: "https://requester.reqter.com",
@@ -32,4 +34,13 @@ export const urls = {
   newPartnersUrl: "/api/v1/partners/newplaces",
   locales: "/api/v1/config/locales",
   url404: "5f198104ba0925001ad05b89",
+};
+
+export const defaultMetaTags: MetaTags = {
+  canonical: "https://www.techhive.io",
+  description: "Pushing you to the edge of technological innovation",
+  image: "https://www.techhive.io/image.png",
+  robots: concatenateStrings(RobotsContent.index, RobotsContent.follow),
+  title: "Techhive.IO",
+  type: PageType.website,
 };
