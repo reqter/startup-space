@@ -35,11 +35,6 @@
     <xhtml:link rel="alternate" hreflang="fa" href="https://workinja.com/fa/blogs/[id]" /><xhtml:link rel="alternate" hreflang="en" href="https://workinja.com/en/blogs/[id]" /><xhtml:link rel="alternate" hreflang="de" href="https://workinja.com/de/blogs/[id]" /><xhtml:link rel="alternate" hreflang="es" href="https://workinja.com/es/blogs/[id]" /><xhtml:link rel="alternate" hreflang="fr" href="https://workinja.com/fr/blogs/[id]" /><xhtml:link rel="alternate" hreflang="it" href="https://workinja.com/it/blogs/[id]" /><xhtml:link rel="alternate" hreflang="ar" href="https://workinja.com/ar/blogs/[id]" /><xhtml:link rel="alternate" hreflang="sv" href="https://workinja.com/sv/blogs/[id]" />
   </url>
 <url>
-    <loc>https://workinja.com/fa/pages/[id]</loc>
-    <changefreq>hourly</changefreq>
-    <xhtml:link rel="alternate" hreflang="fa" href="https://workinja.com/fa/pages/[id]" /><xhtml:link rel="alternate" hreflang="en" href="https://workinja.com/en/pages/[id]" /><xhtml:link rel="alternate" hreflang="de" href="https://workinja.com/de/pages/[id]" /><xhtml:link rel="alternate" hreflang="es" href="https://workinja.com/es/pages/[id]" /><xhtml:link rel="alternate" hreflang="fr" href="https://workinja.com/fr/pages/[id]" /><xhtml:link rel="alternate" hreflang="it" href="https://workinja.com/it/pages/[id]" /><xhtml:link rel="alternate" hreflang="ar" href="https://workinja.com/ar/pages/[id]" /><xhtml:link rel="alternate" hreflang="sv" href="https://workinja.com/sv/pages/[id]" />
-  </url>
-<url>
     <loc>https://workinja.com/fa/offices/</loc>
     <changefreq>hourly</changefreq>
     <xhtml:link rel="alternate" hreflang="fa" href="https://workinja.com/fa/offices/" /><xhtml:link rel="alternate" hreflang="en" href="https://workinja.com/en/offices/" /><xhtml:link rel="alternate" hreflang="de" href="https://workinja.com/de/offices/" /><xhtml:link rel="alternate" hreflang="es" href="https://workinja.com/es/offices/" /><xhtml:link rel="alternate" hreflang="fr" href="https://workinja.com/fr/offices/" /><xhtml:link rel="alternate" hreflang="it" href="https://workinja.com/it/offices/" /><xhtml:link rel="alternate" hreflang="ar" href="https://workinja.com/ar/offices/" /><xhtml:link rel="alternate" hreflang="sv" href="https://workinja.com/sv/offices/" />
@@ -48,5 +43,10 @@
     <loc>https://workinja.com/fa/offices/[id]</loc>
     <changefreq>hourly</changefreq>
     <xhtml:link rel="alternate" hreflang="fa" href="https://workinja.com/fa/offices/[id]" /><xhtml:link rel="alternate" hreflang="en" href="https://workinja.com/en/offices/[id]" /><xhtml:link rel="alternate" hreflang="de" href="https://workinja.com/de/offices/[id]" /><xhtml:link rel="alternate" hreflang="es" href="https://workinja.com/es/offices/[id]" /><xhtml:link rel="alternate" hreflang="fr" href="https://workinja.com/fr/offices/[id]" /><xhtml:link rel="alternate" hreflang="it" href="https://workinja.com/it/offices/[id]" /><xhtml:link rel="alternate" hreflang="ar" href="https://workinja.com/ar/offices/[id]" /><xhtml:link rel="alternate" hreflang="sv" href="https://workinja.com/sv/offices/[id]" />
+  </url>
+<url>
+    <loc>https://workinja.com/fa/pages/[id]</loc>
+    <changefreq>hourly</changefreq>
+    <xhtml:link rel="alternate" hreflang="fa" href="https://workinja.com/fa/pages/[id]" /><xhtml:link rel="alternate" hreflang="en" href="https://workinja.com/en/pages/[id]" /><xhtml:link rel="alternate" hreflang="de" href="https://workinja.com/de/pages/[id]" /><xhtml:link rel="alternate" hreflang="es" href="https://workinja.com/es/pages/[id]" /><xhtml:link rel="alternate" hreflang="fr" href="https://workinja.com/fr/pages/[id]" /><xhtml:link rel="alternate" hreflang="it" href="https://workinja.com/it/pages/[id]" /><xhtml:link rel="alternate" hreflang="ar" href="https://workinja.com/ar/pages/[id]" /><xhtml:link rel="alternate" hreflang="sv" href="https://workinja.com/sv/pages/[id]" />
   </url>
 </urlset>

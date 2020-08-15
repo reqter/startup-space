@@ -1,10 +1,12 @@
 import { styled } from "linaria/lib/react";
-import { lighten, modularScale, rgba } from "polished";
 
 export const Wrapper = styled.div`
   background: ${({ bgColor, bgImage }) =>
     bgImage ? `url(${bgImage})` : bgColor ? bgColor : theme`colors.white`};
   @apply py-20 bg-cover px-5;
+  @screen phone {
+    @apply py-10
+  }
 `;
 export const Content = styled.div`
   @apply flex flex-col max-w-6xl m-auto;

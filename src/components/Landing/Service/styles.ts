@@ -2,6 +2,9 @@ import { styled } from "linaria/lib/react";
 
 export const Wrapper = styled.div`
   @apply bg-white py-20 max-w-6xl m-auto px-5;
+  @screen tab-land {
+    @apply px-6;
+  }
 `;
 export const Content = styled.div`
   @apply flex flex-row;
@@ -25,9 +28,14 @@ export const Image = styled.img`
 export const Right = styled.div`
   @apply flex flex-col;
   padding-inline-end: 30px;
+  @screen tab-land {
+    padding-inline-start:10px
+  }
+  @screen tab-port {
+    padding-inline-start:0px
+  }
 `;
-export const Title = styled.div`
-`;
+export const Title = styled.div``;
 export const Header = styled.h1`
   @apply text-4xl font-bold;
   @screen tab-port {

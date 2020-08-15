@@ -10,12 +10,21 @@ export const Wrapper = styled.header`
     )}),url(${bgImage && bgImage.length ? bgImage : fallbackImage})`};
   height: 200px;
   margin-top: 80px;
+  @screen phone {
+    height: 150px;
+  }
 `;
 
 export const Content = styled.div`
-  @apply max-w-6xl flex m-auto  bg-opacity-75 h-full items-center;
+  @apply max-w-6xl  flex m-auto bg-opacity-75 h-full items-center;
 `;
 
 export const Title = styled.h1`
   @apply text-white text-5xl font-bold;
+  @screen tab-land {
+    @apply px-5;
+  }
+  @screen phone {
+    @apply text-3xl;
+  }
 `;

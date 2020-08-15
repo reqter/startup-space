@@ -1,8 +1,11 @@
 import { styled } from "linaria/lib/react";
 
 export const ExpanderContainer = styled.div`
-  @apply flex flex-wrap items-start content-start;
+  @apply flex flex-wrap items-start content-start flex-row;
   min-height: 20 0px;
+  @screen phone {
+    @apply flex-col;
+  }
 `;
 export const ExpanderItemContainer = styled.div`
   @apply bg-gray-100 flex flex-col mb-4 w-1/2;
@@ -10,6 +13,12 @@ export const ExpanderItemContainer = styled.div`
   &:nth-child(n + 1) {
     width: calc(50% - 30px);
     margin-inline-end: 30px;
+  }
+  @screen phone {
+    &:nth-child(n + 1) {
+      width: 100%;
+      margin-inline-end: 0px;
+    }
   }
 `;
 
@@ -29,6 +38,10 @@ export const LoadingContent = styled.div`
   @apply bg-gray-100 p-3 rounded mb-2;
   margin-inline-end: 10px;
   width: calc(50% - 10px);
+  @screen phone {
+    margin-inline-end: 0px;
+    width: 100%;
+  }
 `;
 
 export const LoadingText = styled.div`
