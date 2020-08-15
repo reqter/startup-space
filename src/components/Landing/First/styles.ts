@@ -18,8 +18,11 @@ export const Content = styled.div`
     @apply px-5;
   }
 `;
-export const Title = styled.div`
+export const Title = styled.h1`
   @apply text-5xl font-semibold mb-2 text-white;
+  @screen phone {
+    @apply text-3xl
+  }
 `;
 export const Description = styled.div`
   @apply text-sm text-white mb-4;

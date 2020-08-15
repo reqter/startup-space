@@ -12,22 +12,27 @@ export const Content = styled.div`
 export const Left = styled.div`
   @apply w-1/2 flex-shrink-0 flex justify-center;
   @screen tab-port {
-    @apply mb-8;
+    @apply mb-8 w-full;
   }
 `;
 export const Image = styled.img`
   @apply rounded-lg;
   margin-inline-end: 20px;
+  @screen tab-port {
+    margin-inline-end: 0px;
+  }
 `;
 export const Right = styled.div`
   @apply flex flex-col;
   padding-inline-end: 30px;
 `;
 export const Title = styled.div`
-  @apply;
 `;
 export const Header = styled.h1`
   @apply text-4xl font-bold;
+  @screen tab-port {
+    @apply text-2xl;
+  }
 `;
 export const Description = styled.p`
   @apply text-gray-600;

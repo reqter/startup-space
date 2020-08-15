@@ -1,8 +1,10 @@
 import { styled } from "linaria/lib/react";
-import { lighten, modularScale, rgba } from "polished";
 
 export const Container = styled.div`
-  @apply flex mt-10 flex-wrap mli-2;
+  @apply flex mt-10 flex-wrap mli-2 flex-row;
+  @screen phone {
+    @apply flex-col;
+  }
 `;
 
 export const Plus = styled.div`
@@ -53,6 +55,13 @@ export const CardWrapper = styled.a`
   width: calc(${theme`width.1/4`} - 10px);
   margin-inline-start: 10px;
   background-image: ${({ bgUrl }) => `url(${bgUrl})`};
+  @screen tab-port {
+    width: calc(${theme`width.1/2`} - 10px);
+  }
+  @screen phone {
+    @apply w-full;
+    margin-inline-start: 0px;
+  }
 `;
 export const Content = styled.div`
   @apply cursor-pointer w-full h-full absolute top-0 transition duration-500;

@@ -2,7 +2,10 @@ import { styled } from "linaria/lib/react";
 import { css } from "linaria";
 
 export const Container = styled.div`
-  @apply flex relative mb-24 mli-2;
+  @apply flex relative mb-24 mli-2 flex-row flex-wrap;
+  @screen phone {
+    @apply flex-col;
+  }
 `;
 
 export const Box = styled.div`
@@ -16,6 +19,12 @@ export const Box = styled.div`
     li {
       @apply py-2;
     }
+  }
+  @screen tab-port {
+    @apply flex-none w-1/2;
+  }
+  @screen phone {
+    @apply flex-none w-full mb-5;
   }
 `;
 export const Title = styled.div`

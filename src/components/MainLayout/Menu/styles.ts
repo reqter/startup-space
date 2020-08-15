@@ -2,7 +2,7 @@ import { styled } from "linaria/lib/react";
 import { css } from "linaria";
 export const Wrapper = styled.header`
   min-height: 50px;
-  @apply w-full bg-gray-100  transition ease-linear duration-75 z-50;
+  @apply w-full bg-gray-100  transition ease-linear duration-75 z-50 w-full;
   background-color: ${({ isSticky, isTransparent }) =>
     !isTransparent ? theme`colors.white` : isSticky ? "white" : `transparent`};
   top: 0;
@@ -11,7 +11,10 @@ export const Wrapper = styled.header`
     isSticky ? theme`spacing.3` : theme`spacing.5`};
 
   @screen tab-port {
-    @apply bg-white p-5 fixed w-full shadow-md transition ease-linear duration-75 z-50;
+    @apply bg-white p-5 fixed w-full shadow-md transition ease-linear duration-75 z-50 right-0;
+  }
+  @screen phone {
+    @apply w-full;
   }
 `;
 export const Content = styled.div`

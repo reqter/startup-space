@@ -65,4 +65,8 @@ export const Wrapper = styled.div`
         return "0";
     }
   }};
+  @screen phone {
+    width:100%;
+    margin-inline-end:0
+  }
 `;

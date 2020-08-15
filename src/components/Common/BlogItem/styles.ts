@@ -8,4 +8,7 @@ export const CardWrapper = styled.div`
     colSpan === 2
       ? `calc(${theme`width.1/2`} - ${theme`spacing.4`})`
       : `calc(${theme`width.1/3`} - ${theme`spacing.4`})`};
+  @screen tab-port {
+   width:100%
+  }
 `;
