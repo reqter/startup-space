@@ -3,4 +3,7 @@ export const Content = styled.div`
   @apply flex items-start relative;
   flex-direction: ${({ isSideSticky }) =>
     isSideSticky ? "row-reverse" : "row"};
+  @screen tab-port {
+    @apply flex-col
+  }
 `;

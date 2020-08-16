@@ -7,6 +7,7 @@ import { Content } from "./styles";
 import useGlobalApi from "hooks/useGlobalApi";
 import useGlobalState from "hooks/useGlobal/useGlobalState";
 import useObjectPropsValue from "hooks/useObjectPropsValue";
+import { isPhone, isTabLand } from "utils";
 
 const limit = 20;
 const Spaces = () => {
@@ -59,7 +60,7 @@ const Spaces = () => {
       params = partnersPageUrlQuery;
     }
     getOffices(skip, limit, params, (data) => {
-      window.scroll({ top: 200, left: 0, behavior: "smooth" });
+      window.scroll({ top: isTabLand() || isPhone() ?  700 : 200, left: 0, behavior: "smooth" });
       setFilteredParams(params);
       setData(data);
       setDataLength(data ? data.length : 0);

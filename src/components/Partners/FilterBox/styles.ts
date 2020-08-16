@@ -12,6 +12,11 @@ export const Wrapper = styled.div`
   top: ${({ isSideSticky, isVisibleFooter }) =>
     isVisibleFooter ? "auto" : isSideSticky ? "110px" : "0"};
   bottom: ${({ isVisibleFooter }) => (isVisibleFooter ? "15px" : "auto")};
+  @screen tab-port {
+    @apply order-1;
+    width: 100%;
+    position: static;
+  }
 `;
 export const Content = styled.div`
   @apply bg-white py-6 rounded-lg px-8;
