@@ -1,13 +1,19 @@
 import { styled } from "linaria/lib/react";
 export const ListContainer = styled.div`
   @apply flex-1 flex flex-wrap flex-col;
+  @screen tab-port {
+    @apply order-2;
+  }
 `;
 export const LoadingsContainer = styled.div`
   @apply flex-1 flex flex-wrap content-start;
 `;
 
 export const ListItems = styled.div`
-  @apply flex-1 flex flex-wrap content-start;
+  @apply flex-1 flex flex-wrap content-start flex-row ;
+  @screen phone {
+    @apply flex-col;
+  }
 `;
 
 export const PagingContainer = styled.div`

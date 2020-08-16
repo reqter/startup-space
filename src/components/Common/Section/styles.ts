@@ -4,7 +4,7 @@ export const Wrapper = styled.div`
   background: ${({ bgColor, bgImage }) =>
     bgImage ? `url(${bgImage})` : bgColor ? bgColor : theme`colors.white`};
   @apply py-20 bg-cover px-5;
-  @screen phone {
+  @screen tab-port {
     @apply py-10
   }
 `;

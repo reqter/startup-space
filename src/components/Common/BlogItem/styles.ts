@@ -9,6 +9,10 @@ export const CardWrapper = styled.div`
       ? `calc(${theme`width.1/2`} - ${theme`spacing.4`})`
       : `calc(${theme`width.1/3`} - ${theme`spacing.4`})`};
   @screen tab-port {
-   width:100%
+    width: calc(${theme`width.1/2`} - ${theme`spacing.4`});
+  }
+  @screen phone {
+    width: 100%;
+    margin-inline-end: 0;
   }
 `;

@@ -6,6 +6,7 @@ import List from "./BlogList";
 import useGlobalState from "hooks/useGlobal/useGlobalState";
 import useBlogApi from "hooks/useBlogApi";
 import useObjectPropsValue from "hooks/useObjectPropsValue";
+import { isTabPort, isPhone } from "utils";
 
 const LandingBlogs = () => {
   const { getValue } = useObjectPropsValue();
@@ -26,7 +27,7 @@ const LandingBlogs = () => {
     if (!blogsData)
       _getBlogsList(
         0,
-        3,
+        isTabPort() ? 4 : 3,
         null,
         null,
         (data) => setBlogs(data),

@@ -17,6 +17,9 @@ export const Content = styled.div`
   @screen tab-land {
     @apply px-6
   }
+  @screen phone {
+    @apply pt-32
+  }
 `;
 export const Title = styled.h1`
   @apply text-5xl font-semibold mb-2 text-white;

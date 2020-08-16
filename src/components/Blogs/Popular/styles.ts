@@ -5,6 +5,9 @@ export const PopularItemWrapper = styled.div`
   &:first-child {
     margin-top: 30px;
   }
+  @screen tab-port {
+    @apply hidden;
+  }
 `;
 export const Image = styled.img`
   @apply flex-shrink-0;
