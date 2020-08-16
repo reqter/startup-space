@@ -12,6 +12,9 @@ export const TextContainer = styled.div`
 `;
 export const Name = styled.div`
   @apply font-bold text-3xl;
+  @screen phone {
+    @apply text-lg
+  }
 `;
 export const Location = styled.div`
   @apply text-sm;

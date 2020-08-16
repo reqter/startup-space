@@ -5,6 +5,9 @@ export const AddressContainer = styled.div`
 `;
 export const Row = styled.div`
   @apply w-1/2 mb-5;
+  @screen phone {
+    @apply w-full;
+  }
 `;
 export const Key = styled.div`
   @apply text-sm text-gray-700;
@@ -12,6 +15,9 @@ export const Key = styled.div`
 export const Value = styled.div`
   @apply text-base font-semibold;
   padding-inline-end: 10px;
+  @screen phone {
+    padding-inline-end: 0;
+  }
 `;
 
 export const Button = styled.button`

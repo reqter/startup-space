@@ -8,6 +8,10 @@ export const ProductWrapper = styled.div`
   width: calc(33.33% - 20px);
   margin-inline-end: 20px;
   margin-bottom: 20px;
+  @screen phone {
+    width: 100%;
+    margin-inline-end: 0;
+  }
 `;
 
 export const Button = styled.button`

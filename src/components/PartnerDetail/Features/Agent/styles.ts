@@ -2,6 +2,9 @@ import { styled } from "linaria/lib/react";
 
 export const AgentContainer = styled.div`
   @apply flex;
+  @screen phone {
+    @apply flex-col;
+  }
 `;
 export const ImageBox = styled.div`
   background-image: ${({ src }) => `url(${src})`};
@@ -9,6 +12,10 @@ export const ImageBox = styled.div`
   min-height: 280px;
   width: 270px;
   margin-inline-end: 40px;
+  @screen phone {
+    width: 100%;
+    margin-inline-end: 0px;
+  }
 `;
 export const ImageInfo = styled.div`
   @apply absolute bottom-0 w-full p-5 bg-white z-10 flex justify-center items-center bg-opacity-75 text-lg;
