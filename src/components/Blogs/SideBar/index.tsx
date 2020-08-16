@@ -2,9 +2,11 @@ import { SideBarContainer } from "./styles";
 import Categories from "../Categories";
 import PopularPost from "../Popular";
 import Tags from "../Tags";
-const BlogsSideBar = () => {
+import { HTMLAttributes } from "react";
+interface IProps extends HTMLAttributes<HTMLDivElement> {}
+const BlogsSideBar: React.FC<IProps> = ({ className }) => {
   return (
-    <SideBarContainer>
+    <SideBarContainer className={className}>
       <Categories />
       <PopularPost />
       <Tags />

@@ -8,7 +8,10 @@ export const Title = styled.div`
 `;
 
 export const RelatedList = styled.div`
-  @apply flex mt-5;
+  @apply flex mt-5 flex-wrap;
+  @screen phone {
+    @apply flex-col;
+  }
 `;
 
 export const Content = styled.div`
@@ -48,5 +51,11 @@ export const CardWrapper = styled.a`
       @apply transition duration-500;
       background-image: linear-gradient(to bottom, transparent 60%, black);
     }
+  }
+  @screen tab-land {
+    width: calc(50% - 30px);
+  }
+  @screen phone {
+    width: 100%;
   }
 `;
