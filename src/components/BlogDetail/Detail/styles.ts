@@ -3,10 +3,20 @@ import { styled } from "linaria/lib/react";
 export const BlogDetailContainer = styled.div`
   @apply flex-1 flex flex-col bg-white shadow p-5 rounded;
   margin-inline-end: 50px;
+  @screen tab-land {
+    margin-inline-end: 20px;
+  }
+  @screen tab-port {
+    margin-inline-end: 0px;
+  }
+
 `;
 export const Image = styled.img`
   @apply bg-cover;
   min-height: 350px;
+  @screen phone {
+    min-height: 250px;
+  }
 `;
 export const Date = styled.div`
   @apply text-gray-400 my-4;

@@ -62,7 +62,8 @@ const PartnerDetail = () => {
       process.env.NEXT_PUBLIC_CANONICAL_DOMAIN_NAME +
       i18n.language +
       "/offices" +
-      partnerDetailId,
+      "/" +
+      partnerDetail.partnerkey,
   };
 
   return (

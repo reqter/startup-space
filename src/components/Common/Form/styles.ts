@@ -5,6 +5,12 @@ export const CustomForm = styled.div`
   flex-wrap: wrap;
   @apply justify-between;
   margin-inline-end: ${({ rowColumns }) => (rowColumns > 1 ? "-25px" : 0)};
+  @screen tab-port {
+    margin-inline-end: ${({ rowColumns }) => (rowColumns > 1 ? "-15px" : 0)};
+  }
+  @screen phone {
+    margin-inline-end:0
+  }
 `;
 export const OptionsSingleSelected = styled.div`
   font-size: 14px;

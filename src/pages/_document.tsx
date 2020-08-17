@@ -19,7 +19,11 @@ class MyDocument extends Document<{
   render() {
     const { languageDirection, language } = this.props;
     return (
-      <Html lang={language} dir={languageDirection}>
+      <Html
+        lang={language}
+        dir={languageDirection}
+        prefix="og: http://ogp.me/ns#"
+      >
         <Head>
           <script
             async
@@ -27,7 +31,7 @@ class MyDocument extends Document<{
           ></script>
           <script
             dangerouslySetInnerHTML={{
-              __html:`
+              __html: `
             <script async src="https://www.googletagmanager.com/gtag/js?id=UA-145850270-1"></script>
             <script>
               window.dataLayer = window.dataLayer || [];
@@ -36,7 +40,7 @@ class MyDocument extends Document<{
             
               gtag('config', 'UA-145850270-1');
             </script>
-              `
+              `,
             }}
           ></script>
           <link

@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import { Link, Router } from "../../../../config/Next18Wrapper";
 import useGlobalState from "hooks/useGlobal/useGlobalState";
 import { IoMdMenu } from "react-icons/io";
+import SidebarMenu from "../SidebarMenu";
 import {
   Wrapper,
   Content,
@@ -11,8 +12,9 @@ import {
   Menu,
   MenuItem,
   Button,
+  PhoneMenuWrapper,
   SearchIcon,
-  menuIcon,
+  NavBarIcon,
 } from "./styles";
 import useGlobalApi from "hooks/useGlobalApi";
 import useBlogApi from "hooks/useBlogApi";
@@ -34,6 +36,7 @@ const Header: React.FC<IProps> = (): JSX.Element => {
   const headerObj = headerData ? headerData[0] : {};
   const router = useRouter();
   const [isSticky, setSticky] = useState<boolean>(false);
+  const [isOpenSideBar, toggleSideBar] = useState<boolean>(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -71,73 +74,98 @@ const Header: React.FC<IProps> = (): JSX.Element => {
   function handleClickOnLogo() {
     _getHomeData();
   }
+  function handleActionClicked() {
+    const url = getValue(headerObj, "firstactionurl");
+    if (url) {
+      window.open(url, "_blank");
+    }
+  }
+  function openSideBar() {
+    toggleSideBar(true);
+  }
+  function closeSideBar() {
+    toggleSideBar(false);
+  }
   return (
-    <Wrapper
-      className={isSticky || !checkIsTransparent() ? "shadow-md" : ""}
-      isSticky={isSticky}
-      isTransparent={checkIsTransparent()}
-    >
-      <Content>
-        {router.pathname !== "/" || isSticky ? (
-          <Logo
-            src={headerObj ? headerObj["logo2"] : null}
-            onClick={handleClickOnLogo}
-          />
-        ) : (
-          <Logo
-            src={headerObj ? headerObj.logo1 : null}
-            onClick={handleClickOnLogo}
-          />
-        )}
-        <CenterLogo src={headerObj ? headerObj["logo2"] : null} />
-        <IoMdMenu className={menuIcon} />
-        <Menu>
-          <MenuItem
-            selected={router.pathname === "/"}
-            isSticky={isSticky}
-            onClick={_getHomeData}
-            isTransparent={checkIsTransparent()}
-          >
-            {getValue(headerObj, "menuitem1text")}
-          </MenuItem>
-          <MenuItem
-            selected={router.pathname === `/faq`}
-            isSticky={isSticky}
-            isTransparent={checkIsTransparent()}
-            onClick={handleFAQClicked}
-          >
-            <Link href={`/faq`}>
-              <a>{getValue(headerObj, "menuitem3text")}</a>
-            </Link>
-          </MenuItem>
-          <MenuItem
-            selected={router.pathname === `/blogs`}
-            isSticky={isSticky}
-            isTransparent={checkIsTransparent()}
-            onClick={handleBlogsClicked}
-          >
-            <Link href={`/blogs`}>
-              <a>{getValue(headerObj, "menuitem4text")}</a>
-            </Link>
-          </MenuItem>
-          <MenuItem
-            selected={router.pathname === `/contact-us`}
-            isSticky={isSticky}
-            isTransparent={checkIsTransparent()}
-            onClick={handleContactUsClicked}
-          >
-            <Link href={`/contact-us`}>
-              <a>{getValue(headerObj, "menuitem5text")}</a>
-            </Link>
-          </MenuItem>
-        </Menu>
-        <Button>
-          <span>+</span>
-          {getValue(headerObj, "action1text")}
-        </Button>
-        <SearchIcon />
-      </Content>
-    </Wrapper>
+    <>
+      <Wrapper
+        className={isSticky || !checkIsTransparent() ? "shadow-md" : ""}
+        isSticky={isSticky}
+        isTransparent={checkIsTransparent()}
+      >
+        <Content>
+          {router.pathname !== "/" || isSticky ? (
+            <Logo
+              src={headerObj ? headerObj["logo2"] : null}
+              onClick={handleClickOnLogo}
+            />
+          ) : (
+            <Logo
+              src={headerObj ? headerObj.logo1 : null}
+              onClick={handleClickOnLogo}
+            />
+          )}
+          <PhoneMenuWrapper>
+            <NavBarIcon onClick={openSideBar}>
+              <IoMdMenu />
+            </NavBarIcon>
+            <CenterLogo
+              onClick={handleClickOnLogo}
+              src={
+                router.pathname !== "/" || isSticky
+                  ? headerObj["logo2"]
+                  : headerObj["logo1"]
+              }
+            />
+          </PhoneMenuWrapper>
+          <Menu>
+            <MenuItem
+              selected={router.pathname === "/"}
+              isSticky={isSticky}
+              onClick={_getHomeData}
+              isTransparent={checkIsTransparent()}
+            >
+              {getValue(headerObj, "menuitem1text")}
+            </MenuItem>
+            <MenuItem
+              selected={router.pathname === `/faq`}
+              isSticky={isSticky}
+              isTransparent={checkIsTransparent()}
+              onClick={handleFAQClicked}
+            >
+              <Link href={`/faq`}>
+                <a>{getValue(headerObj, "menuitem3text")}</a>
+              </Link>
+            </MenuItem>
+            <MenuItem
+              selected={router.pathname === `/blogs`}
+              isSticky={isSticky}
+              isTransparent={checkIsTransparent()}
+              onClick={handleBlogsClicked}
+            >
+              <Link href={`/blogs`}>
+                <a>{getValue(headerObj, "menuitem4text")}</a>
+              </Link>
+            </MenuItem>
+            <MenuItem
+              selected={router.pathname === `/contact-us`}
+              isSticky={isSticky}
+              isTransparent={checkIsTransparent()}
+              onClick={handleContactUsClicked}
+            >
+              <Link href={`/contact-us`}>
+                <a>{getValue(headerObj, "menuitem5text")}</a>
+              </Link>
+            </MenuItem>
+          </Menu>
+          <Button onClick={handleActionClicked}>
+            {getValue(headerObj, "action1text")}
+          </Button>
+          <SearchIcon />
+        </Content>
+      </Wrapper>
+      {isOpenSideBar ? <SidebarMenu handleCloseClicked={closeSideBar} /> : null}
+    </>
   );
 };
 

@@ -1,14 +1,24 @@
 import { styled } from "linaria/lib/react";
 
 export const Container = styled.div`
-  @apply flex mt-10;
+  @apply flex mt-10 flex-row;
+  @screen phone {
+    @apply flex-col;
+  }
 `;
 export const Left = styled.div`
   @apply w-2/3 flex flex-wrap justify-between;
   padding-inline-end: 15px;
+  @screen phone {
+    @apply w-full;
+    padding-inline-end: 0;
+  }
 `;
 export const Right = styled.div`
   @apply w-2/6 flex;
+  @screen phone {
+    @apply w-full;
+  }
 `;
 
 export const Content = styled.div`
@@ -49,5 +59,8 @@ export const CardWrapper = styled.a`
       @apply transition duration-500;
       background-image: linear-gradient(to bottom, transparent 60%, black);
     }
+  }
+  @screen phone {
+    width: 100%;
   }
 `;

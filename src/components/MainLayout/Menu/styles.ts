@@ -2,7 +2,7 @@ import { styled } from "linaria/lib/react";
 import { css } from "linaria";
 export const Wrapper = styled.header`
   min-height: 50px;
-  @apply w-full bg-gray-100  transition ease-linear duration-75 z-50;
+  @apply w-full bg-gray-100  transition ease-linear duration-75 z-50 w-full;
   background-color: ${({ isSticky, isTransparent }) =>
     !isTransparent ? theme`colors.white` : isSticky ? "white" : `transparent`};
   top: 0;
@@ -11,7 +11,10 @@ export const Wrapper = styled.header`
     isSticky ? theme`spacing.3` : theme`spacing.5`};
 
   @screen tab-port {
-    @apply bg-white p-5 fixed w-full shadow-md transition ease-linear duration-75 z-50;
+    @apply p-5 fixed w-full transition ease-linear duration-75 z-50 right-0;
+  }
+  @screen phone {
+    @apply w-full px-3 py-3;
   }
 `;
 export const Content = styled.div`
@@ -24,23 +27,34 @@ export const Logo = styled.img`
     @apply hidden;
   }
 `;
+export const PhoneMenuWrapper = styled.div`
+  @apply justify-between w-full  items-center hidden;
+  @screen tab-port {
+    @apply flex
+  }
+`;
 export const CenterLogo = styled.img`
-  @apply w-24 absolute hidden;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+  @apply w-32;
+  height:50px;
+  width:100px;
   @screen tab-port {
     @apply block;
   }
 `;
-export const menuIcon = css`
-  font-size: 30px;
-  cursor: pointer;
-  display: none;
-  @media only screen and (max-width: 56.25em) {
-    display: block;
+export const NavBarIcon = styled.div`
+  @apply hidden text-4xl cursor-pointer rounded-full bg-white justify-center items-center;
+  width: 50px;
+  height: 50px;
+  @screen tab-port {
+    @apply flex;
+  }
+  @screen phone {
+    @apply text-2xl;
+    width: 40px;
+    height: 40px;
   }
 `;
+
 export const Menu = styled.ul`
   @apply flex-1 flex justify-center;
   @screen tab-port {

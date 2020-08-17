@@ -1,10 +1,16 @@
 import { styled } from "linaria/lib/react";
 
 export const Container = styled.div`
-  @apply flex  bg-white;
+  @apply flex bg-white flex-row;
+  @screen tab-port {
+    @apply flex-col;
+  }
 `;
 export const FormBox = styled.form`
   @apply w-1/2 flex flex-col py-20 px-12;
+  @screen tab-port {
+    @apply w-full py-4 px-4;
+  }
 `;
 export const Header = styled.h1`
   @apply text-4xl font-bold;
@@ -30,4 +36,7 @@ export const Button = styled.button`
 export const ImageBox = styled.div`
   @apply w-1/2 bg-cover;
   background-image: ${({ bgUrl }) => `url(${bgUrl})`};
+  @screen tab-port {
+    @apply w-full h-56;
+  }
 `;

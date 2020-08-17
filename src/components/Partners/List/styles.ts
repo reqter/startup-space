@@ -5,6 +5,14 @@ export const Container = styled.div`
   @apply flex flex-1 flex-wrap pie-5;
   margin-inline-end: ${({ isSideSticky }) => (isSideSticky ? "400px" : "0px")};
   min-height: 200px;
+  @screen tab-port {
+    @apply order-2 pie-0 mt-6 w-full;
+    margin-inline-end: 0px;
+  }
+  @screen phone {
+    @apply flex-col w-full;
+    margin-inline-end: 0px;
+  }
 `;
 
 export const ImageBox = styled.div`
@@ -55,6 +63,11 @@ export const CardWrapper = styled.a`
     ${Image} {
       @apply transform scale-125 transition duration-500;
     }
+  }
+
+  @screen phone {
+    @apply w-full;
+    margin-inline-end: 0px;
   }
 `;
 export const Button = styled.button`

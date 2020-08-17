@@ -1,6 +1,8 @@
 import { styled } from "linaria/lib/react";
-import { lighten, modularScale, rgba } from "polished";
 
 export const Container = styled.div`
-  @apply flex mt-10 flex-wrap mli-2;
+  @apply flex mt-10 flex-wrap mli-2 flex-row;
+  @screen phone {
+    @apply flex-col;
+  }
 `;

@@ -4,6 +4,12 @@ export const SummeryWrapper = styled.div`
 `;
 export const Content = styled.div`
   @apply flex max-w-6xl m-auto py-10;
+  @screen tab-land {
+    @apply px-5;
+  }
+  @screen phone {
+    @apply flex-col py-5;
+  }
 `;
 export const LogoWrapper = styled.div`
   width: 80px;
@@ -12,6 +18,10 @@ export const LogoWrapper = styled.div`
   box-shadow: 0 0 5px lightgray;
   border-radius: 5px;
   padding: 5px;
+  @screen phone {
+    width: 60px;
+    height: 60px;
+  }
 `;
 export const Logo = styled.img`
   width: 100%;
@@ -28,12 +38,21 @@ export const Right = styled.div`
 `;
 export const Name = styled.div`
   @apply font-semibold text-4xl;
+  @screen phone {
+    @apply text-lg;
+  }
 `;
 export const Location = styled.div`
   @apply flex h-10 items-center text-sm;
+  @screen phone {
+    @apply mt-4;
+  }
 `;
 export const Actions = styled.div`
   @apply flex items-center;
+  @screen phone {
+    @apply items-start mt-5;
+  }
 `;
 export const BoxInfo = styled.a`
   @apply font-semibold border-dashed border border-gray-500 mx-3 flex  items-center justify-center px-4 rounded cursor-pointer;

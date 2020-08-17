@@ -27,7 +27,7 @@ const BlogCard = ({ data, actionName, colSpan = 3 }) => {
               data ? (data.slug ? data.slug : data._id) : data._id
             }`}
           >
-            <img className="h-full bg-cover" src={img} alt="" />
+            <img className="h-full bg-cover w-full" src={img} alt="" />
           </Link>
         </div>
         <div className="px-6 py-4 flex-1">

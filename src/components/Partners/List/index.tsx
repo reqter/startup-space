@@ -6,6 +6,7 @@ import { Container, Button } from "./styles";
 import useGlobalState from "hooks/useGlobal/useGlobalState";
 import useGlobalDispatch from "hooks/useGlobal/useGlobalDispatch";
 import useObjectPropsValue from "hooks/useObjectPropsValue";
+import { isPhone, isTabPort } from "utils";
 
 const SpacesList = ({
   dataList = [],
@@ -32,8 +33,10 @@ const SpacesList = ({
         });
       }
     };
-    handleScroll();
-    window.addEventListener("scroll", handleScroll);
+    if (!isTabPort() && !isPhone()) {
+      handleScroll();
+      window.addEventListener("scroll", handleScroll);
+    }
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };

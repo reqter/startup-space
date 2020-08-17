@@ -14,12 +14,15 @@ export const Wrapper = styled.header`
 
 export const Content = styled.div`
   @apply max-w-6xl flex m-auto flex-col items-center pt-48 pb-20;
-  @screen tab-port {
-    @apply px-5;
+  @screen tab-land {
+    @apply px-6 pt-32
   }
 `;
-export const Title = styled.div`
+export const Title = styled.h1`
   @apply text-5xl font-semibold mb-2 text-white;
+  @screen phone {
+    @apply text-3xl
+  }
 `;
 export const Description = styled.div`
   @apply text-sm text-white mb-4;

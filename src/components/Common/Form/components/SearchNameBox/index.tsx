@@ -8,6 +8,7 @@ import {
   SearchInputRight,
   SearchIcon,
 } from "./styles";
+import { isPhone, isTabPort } from "utils";
 const FullSearchInput = ({
   data,
   onChange,
@@ -22,7 +23,9 @@ const FullSearchInput = ({
     if (key === 13) onSearchClicked();
   }
   React.useEffect(() => {
-    inputRef.current.focus();
+    if (!isTabPort() || !isPhone) {
+      inputRef.current.focus();
+    }
   }, []);
   return (
     <SearchInput>
