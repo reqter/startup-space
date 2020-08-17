@@ -14,7 +14,7 @@ export const Wrapper = styled.header`
     @apply p-5 fixed w-full transition ease-linear duration-75 z-50 right-0;
   }
   @screen phone {
-    @apply w-full;
+    @apply w-full px-3 py-3;
   }
 `;
 export const Content = styled.div`
@@ -28,10 +28,12 @@ export const Logo = styled.img`
   }
 `;
 export const PhoneMenuWrapper = styled.div`
-  @apply flex justify-between w-full;
+  @apply flex justify-between w-full  items-center;
 `;
 export const CenterLogo = styled.img`
-  @apply w-32 ;
+  @apply w-32;
+  height:50px;
+  width:100px;
   @screen tab-port {
     @apply block;
   }
@@ -42,6 +44,11 @@ export const NavBarIcon = styled.div`
   height: 50px;
   @screen tab-port {
     @apply flex;
+  }
+  @screen phone {
+    @apply text-2xl;
+    width: 40px;
+    height: 40px;
   }
 `;
 
