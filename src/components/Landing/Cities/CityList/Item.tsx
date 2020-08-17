@@ -3,7 +3,7 @@ import useGlobalState from "hooks/useGlobal/useGlobalState";
 import useObjectPropsValue from "hooks/useObjectPropsValue";
 import { CardWrapper, Content, Plus, Location, Count } from "./styles";
 const CityCard = ({ data }) => {
-  const { currentLanguage } = useGlobalState();
+  const { currentLanguage  } = useGlobalState();
   const { getValue, includeImageBaseUrl } = useObjectPropsValue();
   const getImage = () => {
     const bg = getValue(data, "thumbnail");

@@ -1,59 +1,41 @@
-import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { Link, Router } from "../../../../config/Next18Wrapper";
 import useGlobalState from "hooks/useGlobal/useGlobalState";
-import { IoMdMenu } from "react-icons/io";
+import { IoMdClose } from "react-icons/io";
 import {
-  Wrapper,
   Content,
+  Header,
+  CloseIcon,
   Logo,
-  CenterLogo,
   Menu,
   MenuItem,
   Button,
-  SearchIcon,
-  NavBarIcon,
 } from "./styles";
 import useGlobalApi from "hooks/useGlobalApi";
 import useBlogApi from "hooks/useBlogApi";
 import useObjectPropsValue from "hooks/useObjectPropsValue";
 
-interface IProps {}
+interface IProps {
+  handleCloseClicked: () => void;
+}
 
-const SideBarMenu: React.FC<IProps> = (): JSX.Element => {
+const SideBarMenu: React.FC<IProps> = ({ handleCloseClicked }): JSX.Element => {
   const { getValue } = useObjectPropsValue();
   const { headerData, landingData } = useGlobalState();
   const { _callBlogPageApis } = useBlogApi();
   const {
     getHomeData,
-    _getPartnersPageData,
     _getContactUsPageData,
     _getFAQsPageData,
     _getFAQsData,
   } = useGlobalApi();
   const headerObj = headerData ? headerData[0] : {};
   const router = useRouter();
-  const [isSticky, setSticky] = useState<boolean>(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.pageYOffset < 45) setSticky(false);
-      else setSticky(true);
-    };
-    handleScroll();
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
 
   const _getHomeData = async () => {
     Router.push("/");
     if (!landingData || landingData.length === 0) getHomeData();
   };
-  function getOfficesData() {
-    _getPartnersPageData();
-  }
   function handleContactUsClicked() {
     _getContactUsPageData();
   }
@@ -65,9 +47,6 @@ const SideBarMenu: React.FC<IProps> = (): JSX.Element => {
     _callBlogPageApis();
   }
 
-  function checkIsTransparent() {
-    return router.pathname === "/";
-  }
   function handleClickOnLogo() {
     _getHomeData();
   }
@@ -78,75 +57,49 @@ const SideBarMenu: React.FC<IProps> = (): JSX.Element => {
     }
   }
   return (
-    <Wrapper>
-      <Content>
-        {router.pathname !== "/" || isSticky ? (
-          <Logo
-            src={headerObj ? headerObj["logo2"] : null}
-            onClick={handleClickOnLogo}
-          />
-        ) : (
-          <Logo
-            src={headerObj ? headerObj.logo1 : null}
-            onClick={handleClickOnLogo}
-          />
-        )}
-        <CenterLogo
-          src={
-            router.pathname !== "/" || isSticky
-              ? headerObj["logo2"]
-              : headerObj["logo1"]
-          }
+    <Content>
+      <Header>
+        <Logo
+          src={headerObj ? headerObj.logo2 : null}
+          onClick={handleClickOnLogo}
         />
-        <NavBarIcon>
-          <IoMdMenu />
-        </NavBarIcon>
-        <Menu>
-          <MenuItem
-            selected={router.pathname === "/"}
-            isSticky={isSticky}
-            onClick={_getHomeData}
-            isTransparent={checkIsTransparent()}
-          >
-            {getValue(headerObj, "menuitem1text")}
-          </MenuItem>
-          <MenuItem
-            selected={router.pathname === `/faq`}
-            isSticky={isSticky}
-            isTransparent={checkIsTransparent()}
-            onClick={handleFAQClicked}
-          >
-            <Link href={`/faq`}>
-              <a>{getValue(headerObj, "menuitem3text")}</a>
-            </Link>
-          </MenuItem>
-          <MenuItem
-            selected={router.pathname === `/blogs`}
-            isSticky={isSticky}
-            isTransparent={checkIsTransparent()}
-            onClick={handleBlogsClicked}
-          >
-            <Link href={`/blogs`}>
-              <a>{getValue(headerObj, "menuitem4text")}</a>
-            </Link>
-          </MenuItem>
-          <MenuItem
-            selected={router.pathname === `/contact-us`}
-            isSticky={isSticky}
-            isTransparent={checkIsTransparent()}
-            onClick={handleContactUsClicked}
-          >
-            <Link href={`/contact-us`}>
-              <a>{getValue(headerObj, "menuitem5text")}</a>
-            </Link>
-          </MenuItem>
-        </Menu>
-        <Button onClick={handleActionClicked}>
-          {getValue(headerObj, "action1text")}
-        </Button>
-        <SearchIcon />
-      </Content>
-    </Wrapper>
+        <CloseIcon onClick={handleCloseClicked}>
+          <IoMdClose />
+        </CloseIcon>
+      </Header>
+      <Menu>
+        <MenuItem selected={router.pathname === "/"} onClick={_getHomeData}>
+          {getValue(headerObj, "menuitem1text")}
+        </MenuItem>
+        <MenuItem
+          selected={router.pathname === `/faq`}
+          onClick={handleFAQClicked}
+        >
+          <Link href={`/faq`}>
+            <a>{getValue(headerObj, "menuitem3text")}</a>
+          </Link>
+        </MenuItem>
+        <MenuItem
+          selected={router.pathname === `/blogs`}
+          onClick={handleBlogsClicked}
+        >
+          <Link href={`/blogs`}>
+            <a>{getValue(headerObj, "menuitem4text")}</a>
+          </Link>
+        </MenuItem>
+        <MenuItem
+          selected={router.pathname === `/contact-us`}
+          onClick={handleContactUsClicked}
+        >
+          <Link href={`/contact-us`}>
+            <a>{getValue(headerObj, "menuitem5text")}</a>
+          </Link>
+        </MenuItem>
+        <MenuItem onClick={handleActionClicked}>
+          <a>{getValue(headerObj, "action1text")}</a>
+        </MenuItem>
+      </Menu>
+    </Content>
   );
 };
 

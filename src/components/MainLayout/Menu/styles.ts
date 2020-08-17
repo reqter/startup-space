@@ -28,7 +28,10 @@ export const Logo = styled.img`
   }
 `;
 export const PhoneMenuWrapper = styled.div`
-  @apply flex justify-between w-full  items-center;
+  @apply justify-between w-full  items-center hidden;
+  @screen tab-port {
+    @apply flex
+  }
 `;
 export const CenterLogo = styled.img`
   @apply w-32;
