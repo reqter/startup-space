@@ -33,21 +33,26 @@ const SideBarMenu: React.FC<IProps> = ({ handleCloseClicked }): JSX.Element => {
   const router = useRouter();
 
   const _getHomeData = async () => {
+    handleCloseClicked();
     Router.push("/");
     if (!landingData || landingData.length === 0) getHomeData();
   };
   function handleContactUsClicked() {
+    handleCloseClicked();
     _getContactUsPageData();
   }
   function handleFAQClicked() {
+    handleCloseClicked();
     _getFAQsPageData();
     _getFAQsData();
   }
   function handleBlogsClicked() {
+    handleCloseClicked();
     _callBlogPageApis();
   }
 
   function handleClickOnLogo() {
+    handleCloseClicked();
     _getHomeData();
   }
   function handleActionClicked() {

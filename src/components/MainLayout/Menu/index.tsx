@@ -110,6 +110,7 @@ const Header: React.FC<IProps> = (): JSX.Element => {
               <IoMdMenu />
             </NavBarIcon>
             <CenterLogo
+              onClick={handleClickOnLogo}
               src={
                 router.pathname !== "/" || isSticky
                   ? headerObj["logo2"]
