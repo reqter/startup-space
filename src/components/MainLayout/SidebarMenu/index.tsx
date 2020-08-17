@@ -11,7 +11,6 @@ import {
   Menu,
   MenuItem,
   Button,
-  PhoneMenuWrapper,
   SearchIcon,
   NavBarIcon,
 } from "./styles";
@@ -21,7 +20,7 @@ import useObjectPropsValue from "hooks/useObjectPropsValue";
 
 interface IProps {}
 
-const Header: React.FC<IProps> = (): JSX.Element => {
+const SideBarMenu: React.FC<IProps> = (): JSX.Element => {
   const { getValue } = useObjectPropsValue();
   const { headerData, landingData } = useGlobalState();
   const { _callBlogPageApis } = useBlogApi();
@@ -79,11 +78,7 @@ const Header: React.FC<IProps> = (): JSX.Element => {
     }
   }
   return (
-    <Wrapper
-      className={isSticky || !checkIsTransparent() ? "shadow-md" : ""}
-      isSticky={isSticky}
-      isTransparent={checkIsTransparent()}
-    >
+    <Wrapper>
       <Content>
         {router.pathname !== "/" || isSticky ? (
           <Logo
@@ -96,18 +91,16 @@ const Header: React.FC<IProps> = (): JSX.Element => {
             onClick={handleClickOnLogo}
           />
         )}
-        <PhoneMenuWrapper>
-          <NavBarIcon>
-            <IoMdMenu />
-          </NavBarIcon>
-          <CenterLogo
-            src={
-              router.pathname !== "/" || isSticky
-                ? headerObj["logo2"]
-                : headerObj["logo1"]
-            }
-          />
-        </PhoneMenuWrapper>
+        <CenterLogo
+          src={
+            router.pathname !== "/" || isSticky
+              ? headerObj["logo2"]
+              : headerObj["logo1"]
+          }
+        />
+        <NavBarIcon>
+          <IoMdMenu />
+        </NavBarIcon>
         <Menu>
           <MenuItem
             selected={router.pathname === "/"}
@@ -157,4 +150,4 @@ const Header: React.FC<IProps> = (): JSX.Element => {
   );
 };
 
-export default Header;
+export default SideBarMenu;

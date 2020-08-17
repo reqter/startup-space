@@ -15,10 +15,7 @@ export const Wrapper = styled.header`
 export const Content = styled.div`
   @apply max-w-6xl flex m-auto flex-col items-center pt-48 pb-20;
   @screen tab-land {
-    @apply px-6
-  }
-  @screen phone {
-    @apply pt-32
+    @apply px-6 pt-32
   }
 `;
 export const Title = styled.h1`

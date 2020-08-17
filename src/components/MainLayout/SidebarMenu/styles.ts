@@ -27,11 +27,11 @@ export const Logo = styled.img`
     @apply hidden;
   }
 `;
-export const PhoneMenuWrapper = styled.div`
-  @apply flex justify-between w-full;
-`;
 export const CenterLogo = styled.img`
-  @apply w-32 ;
+  @apply w-24 absolute hidden;
+  left: 0
+  top: 50%;
+  transform: translateY(-50%);
   @screen tab-port {
     @apply block;
   }
