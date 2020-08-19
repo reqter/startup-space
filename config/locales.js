@@ -1,10 +1,10 @@
 module.exports = {
-  fa: "fa",
-  en: "en",
-  de: "de",
-  es: "es",
-  fr: "fr",
-  it: "it",
-  ar: "ar",
-  sv: "sv",
+  fa: { value: "fa", title: "فارسی", flag: "" },
+  en: { value: "en", title: "English", flag: "" },
+  es: { value: "es", title: "Español", flag: "" },
+  fr: { value: "fr", title: "Français", flag: "" },
+  it: { value: "it", title: "Italian", flag: "" },
+  ar: { value: "ar", title: "العربیه", flag: "" },
+  sv: { value: "sv", title: "Svenska", flag: "" },
+  de: { value: "de", title: "Deutsche", flag: "" },
 };
