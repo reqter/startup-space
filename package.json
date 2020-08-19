@@ -52,6 +52,7 @@
     "babel-plugin-tailwind": "^0.1.10",
     "babel-plugin-tailwind-string": "^1.0.12",
     "babel-preset-env": "^1.7.0",
+    "core-js": "2.6.5",
     "globby": "^11.0.1",
     "postcss-dir-pseudo-class": "^5.0.0",
     "postcss-logical": "^4.0.2",

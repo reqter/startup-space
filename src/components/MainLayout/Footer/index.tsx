@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import Select from "react-select";
-import { i18n, config } from "../../../../config/Next18Wrapper";
+import { config } from "../../../../config/Next18Wrapper";
+import allLocales from "../../../../config/locales";
 import Router from "next/router";
 import {
   IoLogoFacebook,
@@ -56,7 +57,7 @@ const Footer = () => {
             if (find_l) {
               return {
                 value: lang,
-                label: lang,
+                label: allLocales[lang].title,
               };
             }
           })
@@ -114,7 +115,7 @@ const Footer = () => {
                   onChange={handleLangChanged}
                   defaultValue={{
                     value: currentLanguage,
-                    label: currentLanguage,
+                    label: allLocales[currentLanguage].title,
                   }}
                 />
               </Box>
