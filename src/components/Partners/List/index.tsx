@@ -58,9 +58,9 @@ const SpacesList = ({
         </div>
       ) : !dataList || !dataList.length ? (
         <EmptyList
-          text={partnersPageData.emptylisttext}
-          image={partnersPageData.emptylistimage}
-          description={partnersPageData.emptylistdescription}
+          text={getValue(partnersPageData, "emptylisttext")}
+          image={partnersPageData ? partnersPageData.emptylistimage : ""}
+          description={getValue(partnersPageData, "emptylistdescription")}
         />
       ) : (
         <>

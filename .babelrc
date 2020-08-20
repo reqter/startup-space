@@ -1,4 +1,4 @@
 {
   "presets": ["next/babel", "linaria/babel"],
-  "plugins": ["babel-plugin-tailwind", "babel-plugin-tailwind-string", "macros"]
+  "plugins": ["babel-plugin-tailwind", "babel-plugin-tailwind-string"]
 }

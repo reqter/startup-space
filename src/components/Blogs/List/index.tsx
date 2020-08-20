@@ -31,9 +31,9 @@ const BlogsList = ({
         </LoadingsContainer>
       ) : !data || !data.length ? (
         <EmptyList
-          image={blogsPageData.emptylistimage}
-          text={blogsPageData.emptylisttext}
-          description={blogsPageData.emptylistdescription}
+          image={blogsPageData ? blogsPageData.emptylistimage : ""}
+          text={getValue(blogsPageData, "emptylisttext")}
+          description={getValue(blogsPageData, "emptylistdescription")}
         />
       ) : (
         <>

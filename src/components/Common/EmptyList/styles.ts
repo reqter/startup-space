@@ -8,8 +8,8 @@ export const Image = styled.img`
   height:300px
 `;
 export const Title = styled.h1`
-  @apply mt-1 text-2xl;
+  @apply mt-1 text-2xl text-center;
 `;
 export const Description = styled.span`
-  
+  @apply text-center
 `;
