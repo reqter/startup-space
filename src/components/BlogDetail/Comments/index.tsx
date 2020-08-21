@@ -21,7 +21,7 @@ const BlogDetailComments = () => {
       _getBlogComments(
         skip,
         limit,
-        blogDetailData._id,
+        blogDetailData?._id,
         (result) => {
           setData(result);
           setCommentsLength(result ? result.length : 0);
@@ -34,7 +34,7 @@ const BlogDetailComments = () => {
     _getBlogComments(
       skip + 1 * limit,
       limit,
-      blogDetailData._id,
+      blogDetailData?._id,
       (result) => {
         setSkip(skip + 1);
         setData([...data, ...result]);

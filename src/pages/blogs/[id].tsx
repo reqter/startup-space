@@ -1,5 +1,6 @@
 import React from "react";
 import MainLayout from "components/MainLayout";
+import NotFound from "components/Common/NotFoundItem";
 import Content from "components/BlogDetail/Content";
 import { i18n, Router } from "../../../config/Next18Wrapper";
 import isServer from "utils/isServer";
@@ -17,8 +18,8 @@ import useGlobalDispatch from "hooks/useGlobal/useGlobalDispatch";
 import useObjectPropsValue from "hooks/useObjectPropsValue";
 import useBlogApi from "hooks/useBlogApi";
 
-const BlogDetail = () => {
-  const { _callBlogDetailPageApis } = useBlogApi();
+const BlogDetail = (props) => {
+  const { _callBlogPageApis, _callBlogDetailPageApis } = useBlogApi();
   const { blogDetailData } = useGlobalState();
   const { dispatch } = useGlobalDispatch();
   const { getValue, includeImageBaseUrl } = useObjectPropsValue();
@@ -49,13 +50,36 @@ const BlogDetail = () => {
       (blogDetailData
         ? blogDetailData.slug
           ? blogDetailData.slug
-          : blogDetailData._id
-        : blogDetailData._id),
+          : blogDetailData?._id
+        : blogDetailData?._id),
   };
 
+  const failedimg =
+    props.blogsPageData && props.blogsPageData.failedimage
+      ? includeImageBaseUrl(
+          props.blogsPageData.failedimage[0],
+          "image",
+          500,
+          500
+        )
+      : "";
+  function handleClick() {
+    _callBlogPageApis();
+  }
   return (
     <MainLayout metaTags={blogMetaTags}>
-      <Content />
+      {!props.blogDetailData ? (
+        <NotFound
+          image={failedimg}
+          title={getValue(props.blogsPageData, "failedtitle")}
+          description={getValue(props.blogsPageData, "faileddescription")}
+          actionText={getValue(props.blogsPageData, "failedactiontext")}
+          url="/blogs"
+          action={handleClick}
+        />
+      ) : (
+        <Content />
+      )}
     </MainLayout>
   );
 };
@@ -87,7 +111,9 @@ BlogDetail.getInitialProps = async (context) => {
         token,
         headerData,
         blogDetailData:
-          blogDetailData && blogDetailData.length ? blogDetailData[0] : {},
+          blogDetailData && blogDetailData.length
+            ? blogDetailData[0]
+            : undefined,
         blogsPageData:
           blogsPageData && blogsPageData.length ? blogsPageData[0] : {},
         blogsCategories,

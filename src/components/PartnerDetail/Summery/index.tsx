@@ -19,8 +19,6 @@ import {
   Location,
   Actions,
   BoxInfo,
-  Website,
-  Link,
   Logo,
 } from "./styles";
 import useGlobalState from "hooks/useGlobal/useGlobalState";

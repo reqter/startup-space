@@ -33,7 +33,7 @@ const RelatedBlogs = () => {
         c,
         null,
         (result = []) => {
-          const d = result.filter((item) => item._id !== blogDetailData._id);
+          const d = result.filter((item) => item._id !== blogDetailData?._id);
           setData(d);
         },
         () => {}
