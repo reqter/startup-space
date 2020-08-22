@@ -1,6 +1,4 @@
-import Section from "components/Common/Section";
-import { Link } from "../../../config/Next18Wrapper";
-import { Container, Image, Title, Description, Button } from "./styles";
+import NotFound from "components/Common/NotFoundItem";
 import useGlobalState from "hooks/useGlobal/useGlobalState";
 import useObjectPropsValue from "hooks/useObjectPropsValue";
 import useGlobalApi from "hooks/useGlobalApi";
@@ -17,18 +15,14 @@ const ContentNotFound = () => {
     if (!landingData || landingData.length === 0) getHomeData();
   }
   return (
-    <Section bgColor={theme`colors.gray.100`}>
-      <Container>
-        <Image src={img} />
-        <Title>{getValue(notFoundPageInfo, "title")}</Title>
-        <Description>{getValue(notFoundPageInfo, "description")}</Description>
-        <Button onClick={handleClick}>
-          <Link href={"/"}>
-            {getValue(notFoundPageInfo, "actionbuttontext")}
-          </Link>
-        </Button>
-      </Container>
-    </Section>
+    <NotFound
+      image={img}
+      title={getValue(notFoundPageInfo, "title")}
+      description={getValue(notFoundPageInfo, "description")}
+      actionText={getValue(notFoundPageInfo, "actionbuttontext")}
+      action={handleClick}
+      url={"/"}
+    />
   );
 };
 export default ContentNotFound;

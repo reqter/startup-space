@@ -57,7 +57,7 @@ const Footer = () => {
             if (find_l) {
               return {
                 value: lang,
-                label: allLocales[lang].title,
+                label: allLocales[lang]?.title,
               };
             }
           })
@@ -115,7 +115,7 @@ const Footer = () => {
                   onChange={handleLangChanged}
                   defaultValue={{
                     value: currentLanguage,
-                    label: allLocales[currentLanguage].title,
+                    label: allLocales[currentLanguage]?.title,
                   }}
                 />
               </Box>

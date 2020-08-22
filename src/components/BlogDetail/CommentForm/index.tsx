@@ -26,7 +26,7 @@ const Reply = () => {
         name,
         email,
         body,
-        blogDetailData._id,
+        blogDetailData?._id,
         () => {
           toggleLoading(false);
           reset();

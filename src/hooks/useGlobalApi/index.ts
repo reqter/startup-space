@@ -489,14 +489,10 @@ const useGlobalApi = () => {
   const _getPartnerDetailById = (partnerId) => {
     if (!partnerDetail) {
       getPartnerDetailById(partnerId, currentLanguage, token).then((result) => {
-        storeData(
-          "partnerDetail",
-          result && result.data ? result.data.fields : null
-        );
-        storeData(
-          "partnerDetailId",
-          result && result.data ? result.data._id : ""
-        );
+        if (result) {
+          storeData("partnerDetail", result.data ? result.data.fields : null);
+          storeData("partnerDetailId", result.data ? result.data._id : "");
+        }
       });
     }
   };

@@ -1,4 +1,5 @@
 import React from "react";
+import NotFound from "components/Common/NotFoundItem";
 import MainLayout from "components/MainLayout";
 import Gallery from "components/Common/Gallery";
 import Summery from "components/PartnerDetail/Summery";
@@ -18,14 +19,14 @@ import useGlobalState from "hooks/useGlobal/useGlobalState";
 import useGlobalDispatch from "hooks/useGlobal/useGlobalDispatch";
 import useObjectPropsValue from "hooks/useObjectPropsValue";
 
-const PartnerDetail = () => {
-  const { _getPartnerDetailById, _getPartnerDetailPage } = useGlobalApi();
-  const { _getNewestBlogs } = useBlogApi();
+const PartnerDetail = (props) => {
   const {
-    partnerDetail = {},
-    partnerDetailPage,
-    partnerDetailId,
-  } = useGlobalState();
+    _getPartnersPageData,
+    _getPartnerDetailById,
+    _getPartnerDetailPage,
+  } = useGlobalApi();
+  const { _getNewestBlogs } = useBlogApi();
+  const { partnerDetail, partnerDetailPage } = useGlobalState();
   const { dispatch } = useGlobalDispatch();
   const { getValue, includeImageBaseUrl } = useObjectPropsValue();
 
@@ -40,7 +41,7 @@ const PartnerDetail = () => {
   }, []);
 
   const logo =
-    partnerDetail.logo && partnerDetail.logo.length
+    partnerDetail && partnerDetail.logo && partnerDetail.logo.length
       ? includeImageBaseUrl(partnerDetail.logo[0])
       : "";
   const pageData = React.useMemo(
@@ -52,7 +53,7 @@ const PartnerDetail = () => {
     keywords: `${getValue(partnerDetail, "keywords")}`,
     title: `${
       (pageData.pageheadertext ? pageData.pageheadertext : "") +
-      (partnerDetail.name ? partnerDetail.name : "")
+      (partnerDetail && partnerDetail.name ? partnerDetail.name : "")
     }`,
     description: `${getValue(partnerDetail, "metadescription")}`,
     image: logo,
@@ -63,14 +64,35 @@ const PartnerDetail = () => {
       i18n.language +
       "/offices" +
       "/" +
-      partnerDetail.partnerkey,
+      partnerDetail?.partnerkey,
   };
+
+  const img =
+    pageData && pageData.failedimage
+      ? includeImageBaseUrl(pageData.failedimage[0], "image", 500, 500)
+      : "";
+  function handleClick() {
+    _getPartnersPageData();
+  }
 
   return (
     <MainLayout metaTags={metaTags} logo={logo}>
-      <Gallery data={partnerDetail ? partnerDetail.images : []} />
-      <Summery />
-      <Content />
+      {!props.partnerDetail ? (
+        <NotFound
+          image={img}
+          title={getValue(pageData, "failedtitle")}
+          description={getValue(pageData, "faileddescription")}
+          actionText={getValue(pageData, "failedactiontext")}
+          url="/offices"
+          action={handleClick}
+        />
+      ) : (
+        <>
+          <Gallery data={partnerDetail ? partnerDetail.images : []} />
+          <Summery />
+          <Content />
+        </>
+      )}
     </MainLayout>
   );
 };
@@ -98,7 +120,9 @@ PartnerDetail.getInitialProps = async (context) => {
         token,
         headerData,
         partnerDetail:
-          partnerDetail && partnerDetail.data ? partnerDetail.data.fields : {},
+          partnerDetail && partnerDetail.data
+            ? partnerDetail.data.fields
+            : undefined,
         partnerDetailId:
           partnerDetail && partnerDetail.data ? partnerDetail.data._id : "",
         partnerDetailPage,
