@@ -6,7 +6,7 @@ import {
   IoLogoInstagram,
   IoMdCheckmark,
   IoIosGlobe,
-  IoIosInformationCircleOutline,
+  IoLogoTwitter,
 } from "react-icons/io";
 import {
   SummeryWrapper,
@@ -29,7 +29,7 @@ const Summery = () => {
   const { getValue, includeImageBaseUrl } = useObjectPropsValue();
   const data = React.useMemo(
     () => (partnerDetailPage ? partnerDetailPage[0] : {}),
-    []
+    [partnerDetailPage]
   );
   function getWebSite(link: string): string {
     if (link.includes("http") || link.includes("https")) {
@@ -84,6 +84,11 @@ const Summery = () => {
             {partnerDetail.linkedin ? (
               <BoxInfo href={partnerDetail.linkedin} target="_blank">
                 <IoLogoLinkedin color={theme`colors.blue.500`} size="1.8rem" />
+              </BoxInfo>
+            ) : null}
+             {partnerDetail.twitter ? (
+              <BoxInfo href={partnerDetail.twitter} target="_blank">
+                <IoLogoTwitter color={theme`colors.blue.500`} size="1.8rem" />
               </BoxInfo>
             ) : null}
             {partnerDetail.instagram ? (
