@@ -7,7 +7,7 @@ export const Content = styled.div`
   @screen tab-land {
     @apply px-5;
   }
-  @screen phone {
+  @screen tab-port {
     @apply flex-col py-5;
   }
 `;
@@ -49,7 +49,7 @@ export const Location = styled.div`
   }
 `;
 export const Actions = styled.div`
-  @apply flex items-center;
+  @apply flex items-center flex-wrap;
   @screen phone {
     @apply items-start mt-5;
   }
@@ -58,6 +58,9 @@ export const BoxInfo = styled.a`
   @apply font-semibold border-dashed border border-gray-500 mx-3 flex  items-center justify-center px-4 rounded cursor-pointer;
   min-width: 60px;
   min-height: 40px;
+  @screen phone {
+    @apply mx-1 mb-2;
+  }
 `;
 
 export const Website = styled.a`
