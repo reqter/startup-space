@@ -1,7 +1,7 @@
 import React from "react";
 import NotFound from "components/Common/NotFoundItem";
 import MainLayout from "components/MainLayout";
-import Gallery from "components/Common/Gallery";
+import HeaderImage from "components/PartnerDetail/HeaderImages";
 import Summery from "components/PartnerDetail/Summery";
 import Content from "components/PartnerDetail/MainContent";
 import { i18n, Router } from "../../../config/Next18Wrapper";
@@ -88,7 +88,8 @@ const PartnerDetail = (props) => {
         />
       ) : (
         <>
-          <Gallery data={partnerDetail ? partnerDetail.images : []} />
+          <HeaderImage data={partnerDetail ? partnerDetail.images : []} />
+          {/* <Gallery data={partnerDetail ? partnerDetail.images : []} /> */}
           <Summery />
           <Content />
         </>

@@ -7,7 +7,7 @@ export const Content = styled.div`
   @screen tab-land {
     @apply px-5;
   }
-  @screen phone {
+  @screen tab-port {
     @apply flex-col py-5;
   }
 `;
@@ -29,6 +29,9 @@ export const Logo = styled.img`
 `;
 export const Left = styled.div`
   @apply flex-1 flex items-center;
+  @screen phone {
+    @apply flex-col;
+  }
 `;
 export const PartnerInfo = styled.div`
   @apply flex-1;
@@ -39,17 +42,14 @@ export const Right = styled.div`
 export const Name = styled.div`
   @apply font-semibold text-4xl;
   @screen phone {
-    @apply text-lg;
+    @apply text-lg mt-4 text-center;
   }
 `;
 export const Location = styled.div`
   @apply flex h-10 items-center text-sm;
-  @screen phone {
-    @apply mt-4;
-  }
 `;
 export const Actions = styled.div`
-  @apply flex items-center;
+  @apply flex items-center flex-wrap;
   @screen phone {
     @apply items-start mt-5;
   }
@@ -58,6 +58,12 @@ export const BoxInfo = styled.a`
   @apply font-semibold border-dashed border border-gray-500 mx-3 flex  items-center justify-center px-4 rounded cursor-pointer;
   min-width: 60px;
   min-height: 40px;
+  @screen phone {
+    min-width: 30px;
+    width: 40px;
+    @apply mx-1 mb-2 px-0;
+    font-size:20px
+  }
 `;
 
 export const Website = styled.a`
