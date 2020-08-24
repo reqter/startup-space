@@ -1,4 +1,5 @@
 import React from "react";
+import { NextPageContext } from "next";
 import MainLayout from "components/MainLayout";
 import Section from "components/Common/Section";
 import { i18n } from "../../config/Next18Wrapper";

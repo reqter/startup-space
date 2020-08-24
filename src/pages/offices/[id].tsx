@@ -1,7 +1,6 @@
 import React from "react";
 import NotFound from "components/Common/NotFoundItem";
 import MainLayout from "components/MainLayout";
-import Gallery from "components/Common/Gallery";
 import HeaderImage from "components/PartnerDetail/HeaderImages";
 import Summery from "components/PartnerDetail/Summery";
 import Content from "components/PartnerDetail/MainContent";
