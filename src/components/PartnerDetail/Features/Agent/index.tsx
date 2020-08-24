@@ -32,7 +32,7 @@ const Agent = () => {
     const val = getValue(partnerDetail, "agent.fields.image");
     if (val && val.length > 0) return includeImageBaseUrl(val[0]);
   }, [partnerDetail]);
-  console.log(partnerDetail);
+
   const skypeId = getValue(partnerDetail, "agent.fields.skypeid") as string;
   const email = getValue(partnerDetail, "agent.fields.email") as string;
   const instagramId = getValue(

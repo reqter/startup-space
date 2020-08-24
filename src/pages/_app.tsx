@@ -13,7 +13,11 @@ import { Provider } from "../hooks/useGlobal";
 import { init } from "services/progressbarHandler";
 init();
 
-const AppComponent: React.FC<AppProps> = ({ Component, pageProps }) => {
+interface IAppProps extends AppProps {
+  getInitialProps: () => void;
+}
+
+const AppComponent: React.FC<IAppProps> = ({ Component, pageProps }) => {
   return (
     <>
       <Head>
@@ -27,11 +31,7 @@ const AppComponent: React.FC<AppProps> = ({ Component, pageProps }) => {
 };
 AppComponent["getInitialProps"] = async ({ Component, ctx }) => {
   const currentLanguage = ctx.req ? ctx.req.language : i18n.language;
-  let props = {},
-    headerData,
-    notFound,
-    footerData;
-
+  let props = {};
   if (Component.getInitialProps) {
     props = await Component.getInitialProps(ctx);
   }

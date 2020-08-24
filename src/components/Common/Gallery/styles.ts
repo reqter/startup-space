@@ -1,11 +1,14 @@
 import { styled } from "linaria/lib/react";
 export const GalleryWrapper = styled.div`
-  margin-top: 80px;
+  @apply fixed h-screen w-full z-50 top-0 bottom-0 left-0 bg-black pb-5;
   img {
-    object-fit: cover !important;
+    object-fit: contain !important;
+    height: 100%;
   }
-  height: ${({ length }) => (length ? "500px" : 0)};
-  @screen phone {
-    height: ${({ length }) => (length ? "250px" : 0)};
-  }
+`;
+
+export const CloseButton = styled.div`
+  @apply text-white absolute text-3xl cursor-pointer;
+  right: 20px;
+  top: 20px;
 `;

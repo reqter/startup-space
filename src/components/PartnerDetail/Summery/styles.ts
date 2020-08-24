@@ -29,6 +29,9 @@ export const Logo = styled.img`
 `;
 export const Left = styled.div`
   @apply flex-1 flex items-center;
+  @screen phone {
+    @apply flex-col;
+  }
 `;
 export const PartnerInfo = styled.div`
   @apply flex-1;
@@ -39,14 +42,11 @@ export const Right = styled.div`
 export const Name = styled.div`
   @apply font-semibold text-4xl;
   @screen phone {
-    @apply text-lg;
+    @apply text-lg mt-4 text-center;
   }
 `;
 export const Location = styled.div`
   @apply flex h-10 items-center text-sm;
-  @screen phone {
-    @apply mt-4;
-  }
 `;
 export const Actions = styled.div`
   @apply flex items-center flex-wrap;
@@ -59,7 +59,10 @@ export const BoxInfo = styled.a`
   min-width: 60px;
   min-height: 40px;
   @screen phone {
-    @apply mx-1 mb-2;
+    min-width: 30px;
+    width: 40px;
+    @apply mx-1 mb-2 px-0;
+    font-size:20px
   }
 `;
 

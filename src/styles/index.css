@@ -24,9 +24,9 @@ body {
 }
 
 .image-gallery-slides {
-  height: 500px;
+  height: 82vh;
 }
-.image-gallery-thumbnails-wrapper {
+/*.image-gallery-thumbnails-wrapper {
   bottom: 110px;
   height: 0;
 }
@@ -49,7 +49,7 @@ body {
 }
 .image-gallery-thumbnail-image {
   height: 100%;
-}
+} */
 .rdw-editor-main {
   overflow: hidden !important;
 }
@@ -271,10 +271,5 @@ body {
 }
 
 @media only screen and (max-width: 37.5em) {
-  .image-gallery-thumbnails-wrapper {
-    display: none;
-  }
-  .image-gallery-slides {
-    height: 250px;
-  }
+  
 }
