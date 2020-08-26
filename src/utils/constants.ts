@@ -34,6 +34,8 @@ export const urls = {
   newPartnersUrl: "/api/v1/partners/newplaces",
   locales: "/api/v1/config/locales",
   url404: "5f198104ba0925001ad05b89",
+  citiesContentTypeCollectionId: "5d35e6fa8e6e9a0017c28fce",
+  cityPageDetailCollectionId: "5f43c48c975971001a759c1f",
 };
 
 export const defaultMetaTags: MetaTags = {

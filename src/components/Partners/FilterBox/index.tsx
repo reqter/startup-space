@@ -14,8 +14,10 @@ import {
 import useGlobalState from "hooks/useGlobal/useGlobalState";
 import useObjectPropsValue from "hooks/useObjectPropsValue";
 import useGlobalDispatch from "hooks/useGlobal/useGlobalDispatch";
+import { useRouter } from "next/router";
 
 const FilterBox = ({ dataList }) => {
+  const { query } = useRouter();
   const {
     searchFormContentType = {},
     currentLanguage,
@@ -68,7 +70,7 @@ const FilterBox = ({ dataList }) => {
     if (!needsUrlQueryToConvert) {
       return partnersPageUrlQuery;
     }
-    const params = partnersPageUrlQuery;
+    const params = partnersPageUrlQuery || query;
     if (params) {
       const keys = Object.keys(params);
       if (keys && keys.length) {

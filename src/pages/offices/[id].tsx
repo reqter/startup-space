@@ -1,7 +1,7 @@
 import React from "react";
 import NotFound from "components/Common/NotFoundItem";
 import MainLayout from "components/MainLayout";
-import HeaderImage from "components/PartnerDetail/HeaderImages";
+import GridImages from "components/Common/GridImages";
 import Summery from "components/PartnerDetail/Summery";
 import Content from "components/PartnerDetail/MainContent";
 import { i18n, Router } from "../../../config/Next18Wrapper";
@@ -46,7 +46,7 @@ const PartnerDetail = (props) => {
       : "";
   const pageData = React.useMemo(
     () => (partnerDetailPage ? partnerDetailPage[0] : {}),
-    []
+    [partnerDetailPage]
   );
 
   const metaTags: MetaTags = {
@@ -88,7 +88,10 @@ const PartnerDetail = (props) => {
         />
       ) : (
         <>
-          <HeaderImage data={partnerDetail ? partnerDetail.images : []} />
+          <GridImages
+            data={partnerDetail ? partnerDetail.images : []}
+            allPhotosBtnText={getValue(pageData, "showgallerytext")}
+          />
           {/* <Gallery data={partnerDetail ? partnerDetail.images : []} /> */}
           <Summery />
           <Content />

@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import dynamic from "next/dynamic";
-import useGlobalState from "hooks/useGlobal/useGlobalState";
 import useObjectPropsValue from "hooks/useObjectPropsValue";
 import {
   Wrapper,
@@ -14,20 +13,28 @@ const Gallery = dynamic(() => import("components/Common/Gallery"), {
   ssr: false,
 });
 
-const HeaderImages = ({ data }) => {
+interface IProps {
+  data: any;
+  allPhotosBtnText: string;
+}
+
+const GridImages = ({ data, allPhotosBtnText }: IProps) => {
   const [isShowAllPhotos, toggleAllPhotos] = useState(false);
   const [selectedIndex, setGalleryIndex] = useState(0);
-  const { partnerDetailPage } = useGlobalState();
-  const { getValue, includeImageBaseUrl } = useObjectPropsValue();
+  const { includeImageBaseUrl } = useObjectPropsValue();
   if (!data || !data.length) {
     return null;
   }
-  const pageData = partnerDetailPage ? partnerDetailPage[0] : {};
-  const imageLeft = includeImageBaseUrl(data[0], "image", 1024, 420);
-  const imageRight1 = includeImageBaseUrl(data[1], "image", 1024, 210);
-  const imageRight2 = includeImageBaseUrl(data[2], "image", 1024, 210);
-  const imageRight3 = includeImageBaseUrl(data[3], "image", 1024, 210);
-  const imageRight4 = includeImageBaseUrl(data[4], "image", 1024, 210);
+  // const imageLeft = includeImageBaseUrl(data[0], "image", 1024, 420);
+  // const imageRight1 = includeImageBaseUrl(data[1], "image", 1024, 210);
+  // const imageRight2 = includeImageBaseUrl(data[2], "image", 1024, 210);
+  // const imageRight3 = includeImageBaseUrl(data[3], "image", 1024, 210);
+  // const imageRight4 = includeImageBaseUrl(data[4], "image", 1024, 210);
+  const imageLeft = data[0]
+  const imageRight1 = data[1]
+  const imageRight2 = data[2]
+  const imageRight3 = data[3]
+  const imageRight4 = data[4]
 
   function handleClickAllPhotos(index?: number) {
     setGalleryIndex(index ? index : 0);
@@ -49,7 +56,7 @@ const HeaderImages = ({ data }) => {
         <ImageRight src={imageRight4} onClick={() => handleClickAllPhotos(4)} />
       </Right>
       <ShowGalleryBtn onClick={() => handleClickAllPhotos()}>
-        {getValue(pageData, "showgallerytext")}
+        {allPhotosBtnText}
       </ShowGalleryBtn>
       {isShowAllPhotos ? (
         <Gallery
@@ -62,4 +69,4 @@ const HeaderImages = ({ data }) => {
   );
 };
 
-export default HeaderImages;
+export default GridImages;
