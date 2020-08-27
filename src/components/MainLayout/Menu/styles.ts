@@ -30,13 +30,13 @@ export const Logo = styled.img`
 export const PhoneMenuWrapper = styled.div`
   @apply justify-between w-full  items-center hidden;
   @screen tab-port {
-    @apply flex
+    @apply flex;
   }
 `;
 export const CenterLogo = styled.img`
   @apply w-32;
-  height:50px;
-  width:100px;
+  height: 50px;
+  width: 100px;
   @screen tab-port {
     @apply block;
   }
@@ -75,6 +75,14 @@ export const MenuItem = styled.li`
     @apply text-blue-500 transition duration-300;
   }
 `;
+export const ButtonsContainer = styled.div`
+  @apply right-0 flex justify-between absolute items-center;
+  min-width: 210px;
+  margin-top: 10px;
+  @screen tab-port {
+    @apply hidden;
+  }
+`;
 export const Button = styled.button`
   @apply absolute right-0 bg-blue-500 flex items-center justify-center text-white text-base font-bold py-2 px-4 rounded transition ease-in duration-200;
   &:hover {
@@ -84,8 +92,28 @@ export const Button = styled.button`
     @apply text-2xl;
     padding-inline-end: 3px;
   }
-  @screen tab-port {
-    @apply hidden;
+`;
+export const Translations = styled.div`
+  @apply bg-white rounded-lg px-3 py-1 absolute left-0 shadow;
+  margin-inline-end: 10px;
+  &:hover {
+    @apply bg-gray-100;
   }
 `;
-export const SearchIcon = styled.span``;
+export const TranslationButton = styled.button`
+  @apply flex text-gray-800 w-full justify-between items-center transition duration-300;
+  &:focus {
+    @apply outline-none;
+  }
+`;
+export const LanguagesContainer = styled.div`
+  @apply flex flex-col absolute right-0 bg-white shadow rounded overflow-hidden;
+  margin-top: 10px;
+  width: 200px;
+`;
+export const LanguageItem = styled.div`
+  @apply text-right p-3 w-full cursor-pointer border-b border-gray-100;
+  &:hover {
+    @apply bg-gray-100;
+  }
+`;

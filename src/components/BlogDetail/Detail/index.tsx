@@ -19,7 +19,7 @@ import useGlobalState from "hooks/useGlobal/useGlobalState";
 import useObjectPropsValue from "hooks/useObjectPropsValue";
 import useDate from "hooks/useDate";
 
-const HtmlViewer = dynamic(() => import("./HtmlViewer"), {
+const HtmlViewer = dynamic(() => import("../../Common/TextEditorViewer"), {
   ssr: false,
 });
 

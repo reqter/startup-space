@@ -10,6 +10,7 @@ import {
 } from "hooks/useGlobalApi";
 import { appWithTranslation, i18n } from "../../config/Next18Wrapper";
 import { Provider } from "../hooks/useGlobal";
+import RouteHandler from "../components/Common/RouterHandler";
 import { init } from "services/progressbarHandler";
 init();
 
@@ -24,7 +25,9 @@ const AppComponent: React.FC<IAppProps> = ({ Component, pageProps }) => {
         <link rel="icon" type="image/x-icon" href="images/favicon.ico" />
       </Head>
       <Provider initialDataFromServer={pageProps}>
-        <Component {...pageProps} />
+        <RouteHandler>
+          <Component {...pageProps} />
+        </RouteHandler>
       </Provider>
     </>
   );

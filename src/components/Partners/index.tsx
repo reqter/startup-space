@@ -30,7 +30,7 @@ const Spaces = () => {
     if (!loading) {
       toggleLoading(true);
     }
-
+    debugger
     let params = {};
     if (needsUrlQueryToConvert) {
       const _fields =
@@ -57,10 +57,14 @@ const Spaces = () => {
       }
       params = paramsToValidValueType(fields, p);
     } else {
-      params = partnersPageUrlQuery;
+      params = partnersPageUrlQuery || query;
     }
     getOffices(skip, limit, params, (data) => {
-      window.scroll({ top: isTabLand() || isPhone() ?  700 : 200, left: 0, behavior: "smooth" });
+      window.scroll({
+        top: isTabLand() || isPhone() ? 700 : 200,
+        left: 0,
+        behavior: "smooth",
+      });
       setFilteredParams(params);
       setData(data);
       setDataLength(data ? data.length : 0);

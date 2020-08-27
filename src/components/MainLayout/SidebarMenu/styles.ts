@@ -36,3 +36,15 @@ export const Button = styled.button`
     padding-inline-end: 3px;
   }
 `;
+
+export const LocalesContainer = styled.div`
+  @apply flex absolute justify-center items-center;
+  bottom: 30px;
+`;
+export const LocaleItem = styled.div`
+  @apply rounded border border-gray-100 mx-2 py-2 px-3 shadow;
+  background: ${({ isCurrent }) =>
+    isCurrent ? theme`colors.blue.500` : "transparent"};
+  color: ${({ isCurrent }) =>
+    isCurrent ? theme`colors.white` : theme`colors.black`};
+`;

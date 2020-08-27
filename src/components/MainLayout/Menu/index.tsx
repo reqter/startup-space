@@ -2,7 +2,12 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { Link, Router } from "../../../../config/Next18Wrapper";
 import useGlobalState from "hooks/useGlobal/useGlobalState";
-import { IoMdMenu } from "react-icons/io";
+import {
+  IoMdMenu,
+  IoIosGlobe,
+  IoIosArrowDown,
+  IoIosArrowUp,
+} from "react-icons/io";
 import SidebarMenu from "../SidebarMenu";
 import {
   Wrapper,
@@ -11,10 +16,14 @@ import {
   CenterLogo,
   Menu,
   MenuItem,
+  ButtonsContainer,
   Button,
   PhoneMenuWrapper,
-  SearchIcon,
   NavBarIcon,
+  Translations,
+  TranslationButton,
+  LanguagesContainer,
+  LanguageItem,
 } from "./styles";
 import useGlobalApi from "hooks/useGlobalApi";
 import useBlogApi from "hooks/useBlogApi";
@@ -24,7 +33,7 @@ interface IProps {}
 
 const Header: React.FC<IProps> = (): JSX.Element => {
   const { getValue } = useObjectPropsValue();
-  const { headerData, landingData } = useGlobalState();
+  const { headerData, landingData, currentLanguage } = useGlobalState();
   const { _callBlogPageApis } = useBlogApi();
   const {
     getHomeData,
@@ -32,11 +41,14 @@ const Header: React.FC<IProps> = (): JSX.Element => {
     _getContactUsPageData,
     _getFAQsPageData,
     _getFAQsData,
+    _getAppLocales,
   } = useGlobalApi();
   const headerObj = headerData ? headerData[0] : {};
   const router = useRouter();
   const [isSticky, setSticky] = useState<boolean>(false);
   const [isOpenSideBar, toggleSideBar] = useState<boolean>(false);
+  const [languagesOption, setLanguagesOption] = useState([]);
+  const [isOpenLanguagesContainer, toggleLanguagesContainer] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -48,6 +60,12 @@ const Header: React.FC<IProps> = (): JSX.Element => {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
+  }, []);
+  useEffect(() => {
+    _getAppLocales(
+      (result) => setLanguagesOption(result),
+      () => {}
+    );
   }, []);
 
   const _getHomeData = async () => {
@@ -85,6 +103,13 @@ const Header: React.FC<IProps> = (): JSX.Element => {
   }
   function closeSideBar() {
     toggleSideBar(false);
+  }
+  function handleClickTranslations() {
+    toggleLanguagesContainer((prev) => !prev);
+  }
+  function handleLangClicked(item) {
+    const path = window.location.href.replace(currentLanguage, item.value);
+    window.location.href = path;
   }
   return (
     <>
@@ -158,10 +183,33 @@ const Header: React.FC<IProps> = (): JSX.Element => {
               </Link>
             </MenuItem>
           </Menu>
-          <Button onClick={handleActionClicked}>
-            {getValue(headerObj, "action1text")}
-          </Button>
-          <SearchIcon />
+          <ButtonsContainer>
+            <Translations onClick={handleClickTranslations}>
+              <TranslationButton>
+                <IoIosArrowDown size=".9em" />
+                <IoIosGlobe size="1.2em" />
+              </TranslationButton>
+              {isOpenLanguagesContainer ? (
+                <LanguagesContainer>
+                  {languagesOption
+                    ? languagesOption.map((item, index) => {
+                        return (
+                          <LanguageItem
+                            key={index}
+                            onClick={() => handleLangClicked(item)}
+                          >
+                            {item.label}
+                          </LanguageItem>
+                        );
+                      })
+                    : null}
+                </LanguagesContainer>
+              ) : null}
+            </Translations>
+            <Button onClick={handleActionClicked}>
+              {getValue(headerObj, "action1text")}
+            </Button>
+          </ButtonsContainer>
         </Content>
       </Wrapper>
       {isOpenSideBar ? <SidebarMenu handleCloseClicked={closeSideBar} /> : null}

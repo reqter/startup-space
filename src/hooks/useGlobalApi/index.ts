@@ -1,7 +1,10 @@
 import fetch from "isomorphic-unfetch";
+import { config, Link, Router } from "../../../config/Next18Wrapper";
+import allLocales from "../../../config/locales";
 import { clientid, urls } from "../../utils/constants";
 import useGlobalState from "../useGlobal/useGlobalState";
 import useGlobalDispatch from "../useGlobal/useGlobalDispatch";
+import { useState } from "react";
 let token: string = "";
 const setToken = (t: string) => {
   token = t;
@@ -272,6 +275,38 @@ const getNotFoundPageData = async (lang: string, token?: string) => {
     },
   });
 };
+const getCityDetailData = async (
+  lang: string,
+  id: string | number,
+  token?: string
+) => {
+  return await fetcher(
+    urls.listLeanUrl +
+      "/" +
+      urls.citiesContentTypeCollectionId +
+      `?lang=${lang}&loadrelations=true&_id=${id}`
+  )({
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      authorization: "Bearer " + (getLocalToken() || token),
+    },
+  });
+};
+const getCityDetailPageData = async (lang: string, token?: string) => {
+  return await fetcher(
+    urls.listLeanUrl +
+      "/" +
+      urls.cityPageDetailCollectionId +
+      `?lang=${lang}&loadrelations=false`
+  )({
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      authorization: "Bearer " + (getLocalToken() || token),
+    },
+  });
+};
 const addReview = async (
   name: string,
   email: string,
@@ -296,6 +331,7 @@ const addReview = async (
 };
 ////////////////////////////////////////
 const useGlobalApi = () => {
+  const [loading, toggleLoading] = useState(false);
   const {
     currentLanguage,
     token,
@@ -306,6 +342,7 @@ const useGlobalApi = () => {
     faqsData,
     partnerDetail,
     partnerDetailPage,
+    cityDetailPage,
   } = useGlobalState();
   const { dispatch } = useGlobalDispatch();
   const storeData = (key, value) => {
@@ -566,8 +603,42 @@ const useGlobalApi = () => {
         authorization: "Bearer " + token,
       },
     })
-      .then((result) => onSuccess && onSuccess(result ? result.data : []))
+      .then((response) => {
+        const result = response ? response.data : null;
+        if (result) {
+          onSuccess();
+        }
+        const l = config.allLanguages
+          .map((lang) => {
+            const find_l = result.find((item) => item.locale === lang);
+            if (find_l) {
+              return {
+                value: lang,
+                label: allLocales[lang]?.title,
+              };
+            }
+          })
+          .filter((item) => item);
+        onSuccess(l);
+        storeData("availableLocales", l);
+      })
       .catch((error) => onError && onError(error));
+  };
+  const _getCityDetailPageData = () => {
+    if (!cityDetailPage) {
+      getCityDetailPageData(currentLanguage, token).then((result) => {
+        storeData("cityDetailPage", result ? result[0] : undefined);
+      });
+    }
+  };
+  const _getCityDetailData = (id: string | number) => {
+    if (!loading) {
+      toggleLoading(true);
+      getCityDetailData(currentLanguage, id, token).then((result) => {
+        toggleLoading(false);
+        storeData("cityDetail", result ? result[0] : undefined);
+      });
+    }
   };
   return {
     getData,
@@ -591,6 +662,8 @@ const useGlobalApi = () => {
     _addContactUs,
     _getNewOffices,
     _getAppLocales,
+    _getCityDetailPageData,
+    _getCityDetailData,
   };
 };
 export default useGlobalApi;
@@ -611,4 +684,6 @@ export {
   getFAQsData,
   getContactUsPageData,
   getNotFoundPageData,
+  getCityDetailPageData,
+  getCityDetailData,
 };

@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react";
 import Select from "react-select";
-import { config } from "../../../../config/Next18Wrapper";
 import allLocales from "../../../../config/locales";
-import Router from "next/router";
 import {
   IoLogoFacebook,
   IoLogoInstagram,
@@ -27,17 +25,16 @@ import useObjectPropsValue from "hooks/useObjectPropsValue";
 const Footer = () => {
   const { dispatch } = useGlobalDispatch();
   const { getValue } = useObjectPropsValue();
-  const { _getNewOffices, _getAppLocales } = useGlobalApi();
+  const { _getNewOffices } = useGlobalApi();
   const {
     currentLanguage,
     headerData,
     footerData,
     isVisibleFooter,
     curentRouterName,
+    availableLocales,
   } = useGlobalState();
   const [newOfficess, setNewOffices] = useState([]);
-  const [appLocales, setAppLocales] = useState();
-  const [languagesOption, setLanguagesOption] = useState([]);
   const header = headerData ? headerData[0] : {};
   const footer = footerData && footerData.length ? footerData[0] : {};
   useEffect(() => {
@@ -49,23 +46,6 @@ const Footer = () => {
         () => {}
       );
     }
-    _getAppLocales(
-      (result) => {
-        const l = config.allLanguages
-          .map((lang) => {
-            const find_l = result.find((item) => item.locale === lang);
-            if (find_l) {
-              return {
-                value: lang,
-                label: allLocales[lang]?.title,
-              };
-            }
-          })
-          .filter((item) => item);
-        setLanguagesOption(l);
-      },
-      () => {}
-    );
   }, []);
   const handleChange = (isVisible: boolean) => {
     if (isVisible) {
@@ -97,13 +77,13 @@ const Footer = () => {
           <Box title={getValue(footer, "aboutustitle")}>
             <span>{getValue(footer, "aboutusdescription")}</span>
             <br />
-            {languagesOption && languagesOption.length ? (
+            {availableLocales && availableLocales.length ? (
               <Box title={getValue(footer, "languagetitle")}>
                 <Select
                   menuPlacement="bottom"
                   closeMenuOnScroll={true}
                   closeMenuOnSelect={true}
-                  options={languagesOption}
+                  options={availableLocales}
                   styles={{
                     option: (base) => ({
                       ...base,
