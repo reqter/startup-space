@@ -36,6 +36,7 @@ export const urls = {
   url404: "5f198104ba0925001ad05b89",
   citiesContentTypeCollectionId: "5d35e6fa8e6e9a0017c28fce",
   cityPageDetailCollectionId: "5f43c48c975971001a759c1f",
+  activitiesCollectionGuid: "5d4169c642afbf00179b0569",
 };
 
 export const defaultMetaTags: MetaTags = {

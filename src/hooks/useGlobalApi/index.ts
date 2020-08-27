@@ -307,6 +307,20 @@ const getCityDetailPageData = async (lang: string, token?: string) => {
     },
   });
 };
+const getActivitiesData = async (lang: string, token?: string) => {
+  return await fetcher(
+    urls.listLeanUrl +
+      "/" +
+      urls.activitiesCollectionGuid +
+      `?lang=${lang}&loadrelations=false&skip=0&limit=${8}`
+  )({
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      authorization: "Bearer " + (getLocalToken() || token),
+    },
+  });
+};
 const addReview = async (
   name: string,
   email: string,
@@ -640,6 +654,11 @@ const useGlobalApi = () => {
       });
     }
   };
+  const _getActivitiesData = (skip = 0, limit = 6, onSuccess) => {
+    getActivitiesData(currentLanguage, token).then((result) => {
+      onSuccess(result);
+    });
+  };
   return {
     getData,
     getLanding,
@@ -664,6 +683,7 @@ const useGlobalApi = () => {
     _getAppLocales,
     _getCityDetailPageData,
     _getCityDetailData,
+    _getActivitiesData,
   };
 };
 export default useGlobalApi;
