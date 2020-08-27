@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import { Link, Router } from "../../../../config/Next18Wrapper";
+import allLocales from "../../../../config/locales";
 import useGlobalState from "hooks/useGlobal/useGlobalState";
 import { IoMdClose } from "react-icons/io";
 import {
@@ -10,6 +11,8 @@ import {
   Menu,
   MenuItem,
   Button,
+  LocalesContainer,
+  LocaleItem,
 } from "./styles";
 import useGlobalApi from "hooks/useGlobalApi";
 import useBlogApi from "hooks/useBlogApi";
@@ -21,7 +24,12 @@ interface IProps {
 
 const SideBarMenu: React.FC<IProps> = ({ handleCloseClicked }): JSX.Element => {
   const { getValue } = useObjectPropsValue();
-  const { headerData, landingData } = useGlobalState();
+  const {
+    headerData,
+    landingData,
+    availableLocales,
+    currentLanguage,
+  } = useGlobalState();
   const { _callBlogPageApis } = useBlogApi();
   const {
     getHomeData,
@@ -104,6 +112,20 @@ const SideBarMenu: React.FC<IProps> = ({ handleCloseClicked }): JSX.Element => {
           <a>{getValue(headerObj, "action1text")}</a>
         </MenuItem>
       </Menu>
+      {availableLocales && availableLocales.length ? (
+        <LocalesContainer>
+          {availableLocales.map((item, index) => {
+            return (
+              <LocaleItem
+                key={index}
+                isCurrent={item.value === currentLanguage}
+              >
+                {item.label}
+              </LocaleItem>
+            );
+          })}
+        </LocalesContainer>
+      ) : null}
     </Content>
   );
 };

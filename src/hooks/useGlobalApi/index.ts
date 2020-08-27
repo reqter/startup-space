@@ -1,4 +1,6 @@
 import fetch from "isomorphic-unfetch";
+import { config, Link, Router } from "../../../config/Next18Wrapper";
+import allLocales from "../../../config/locales";
 import { clientid, urls } from "../../utils/constants";
 import useGlobalState from "../useGlobal/useGlobalState";
 import useGlobalDispatch from "../useGlobal/useGlobalDispatch";
@@ -601,7 +603,25 @@ const useGlobalApi = () => {
         authorization: "Bearer " + token,
       },
     })
-      .then((result) => onSuccess && onSuccess(result ? result.data : []))
+      .then((response) => {
+        const result = response ? response.data : null;
+        if (result) {
+          onSuccess();
+        }
+        const l = config.allLanguages
+          .map((lang) => {
+            const find_l = result.find((item) => item.locale === lang);
+            if (find_l) {
+              return {
+                value: lang,
+                label: allLocales[lang]?.title,
+              };
+            }
+          })
+          .filter((item) => item);
+        onSuccess(l);
+        storeData("availableLocales", l);
+      })
       .catch((error) => onError && onError(error));
   };
   const _getCityDetailPageData = () => {
