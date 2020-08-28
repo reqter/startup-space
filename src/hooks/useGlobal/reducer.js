@@ -4,7 +4,7 @@ export const initialData = {
   isVisibleFooter: false,
 };
 
-export function reducer(state = initialData, action) {
+function reducer(state = initialData, action) {
   const { type, payload } = action;
   switch (type) {
     case "SET_PAGE_DATA":
@@ -48,3 +48,5 @@ export function reducer(state = initialData, action) {
       state;
   }
 }
+
+export default reducer;

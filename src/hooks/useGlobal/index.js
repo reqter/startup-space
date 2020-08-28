@@ -1,5 +1,5 @@
 import React, { useReducer } from "react";
-import { reducer, initialData, AppContextInterface } from "./reducer";
+import reducer, { initialData, AppContextInterface } from "./reducer";
 
 export const GlobalContextState = React.createContext();
 const StateProvider = GlobalContextState.Provider;

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "../../../../config/Next18Wrapper";
+import { Link, Router } from "../../../../config/Next18Wrapper";
 import { useRouter } from "next/router";
 import LayoutBox from "../LayoutBox";
 import { ListContainer, Button } from "./styles";
@@ -7,14 +7,16 @@ import useGlobalApi from "hooks/useGlobalApi";
 import Item from "./Item";
 import useObjectPropsValue from "hooks/useObjectPropsValue";
 import useGlobalState from "hooks/useGlobal/useGlobalState";
+import useGlobalDispatch from "hooks/useGlobal/useGlobalDispatch";
 
 const About = () => {
   const { query } = useRouter();
+  const { dispatch } = useGlobalDispatch();
   const { getOffices } = useGlobalApi();
   const [dataList, setData] = useState<object[]>();
   const [loading, toggleLoading] = useState(true);
   const { cityDetailPage, cityDetail } = useGlobalState();
-  const { getValue } = useObjectPropsValue();
+  const { getValue, objectToQuerystring } = useObjectPropsValue();
 
   useEffect(() => {
     if ((!dataList || !dataList.length) && cityDetail) {
@@ -25,7 +27,20 @@ const About = () => {
     }
   }, [cityDetail]);
 
-  function showAll() {}
+  function showAll() {
+    const values = {
+      city: cityDetail?._id,
+    };
+    dispatch({
+      type: "SET_PARTNERS_QUERY_DATA",
+      payload: {
+        data: values,
+        isNeedConvert: false,
+      },
+    });
+    const s = objectToQuerystring(values);
+    Router.push(`/offices${s && s.length ? s : ""}`);
+  }
 
   return (
     <LayoutBox
@@ -33,9 +48,7 @@ const About = () => {
       actions={() => {
         return (
           <Button onClick={showAll}>
-            <Link href={`/offices?city=${cityDetail?._id}`}>
-              {getValue(cityDetailPage, "listsectionbuttontext")}
-            </Link>
+            {getValue(cityDetailPage, "listsectionbuttontext")}
           </Button>
         );
       }}
