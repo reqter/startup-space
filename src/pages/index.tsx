@@ -16,6 +16,7 @@ import useGlobalApi from "hooks/useGlobalApi";
 import MainLayout from "components/MainLayout";
 import First from "components/Landing/First";
 import Service from "components/Landing/Service";
+import Activities from "components/Landing/Activities";
 import Spaces from "components/Landing/Spaces";
 import Cities from "components/Landing/Cities";
 import NewsLetter from "components/Landing/NewsLetter";
@@ -60,6 +61,7 @@ const Home = (): JSX.Element => {
       <First />
       <Service />
       <Spaces />
+      <Activities />
       <Cities />
       <Agents />
       <NewsLetter />
