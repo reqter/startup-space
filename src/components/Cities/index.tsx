@@ -1,5 +1,4 @@
 import Section from "../Common/Section";
-import Description from "./Description";
 import About from "./About";
 import List from "./List";
 import Map from "./Map";
@@ -15,7 +14,6 @@ const MainContent = () => {
           cityDetail && cityDetail.images && cityDetail.images.length
         }
       >
-        <Description />
         <About />
         <List />
         <Map />

@@ -1,9 +1,6 @@
 import { styled } from "linaria/lib/react";
 export const Wrapper = styled.div`
-  @apply flex bg-white p-8 mb-10 w-full shadow rounded;
-  @screen tab-port {
-    @apply p-4;
-  }
+  @apply flex mb-4;
 `;
 
 export const ImageBox = styled.div`
