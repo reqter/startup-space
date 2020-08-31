@@ -44,6 +44,11 @@ function reducer(state = initialData, action) {
         ...state,
         isVisibleFooter: payload,
       };
+    case "TOGGLE_IS_PARTNER_DETAIL_PAGE":
+      return {
+        ...state,
+        isPartnerDetailPage: payload,
+      };
     default:
       state;
   }

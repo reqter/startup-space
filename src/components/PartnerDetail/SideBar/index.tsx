@@ -8,7 +8,6 @@ import useGlobalState from "hooks/useGlobal/useGlobalState";
 const ActionsBox = () => {
   return (
     <ActionsContainer>
-      <Reserve />
       <NewOffices />
       <NewBlogs />
     </ActionsContainer>

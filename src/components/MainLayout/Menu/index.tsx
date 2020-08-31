@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { Link, Router } from "../../../../config/Next18Wrapper";
 import useGlobalState from "hooks/useGlobal/useGlobalState";
+import useGlobalDispatch from "hooks/useGlobal/useGlobalDispatch";
 import {
   IoMdMenu,
   IoIosGlobe,
@@ -9,6 +10,7 @@ import {
   IoIosArrowUp,
 } from "react-icons/io";
 import SidebarMenu from "../SidebarMenu";
+import SearchInput from "./SearchInput";
 import {
   Wrapper,
   Content,
@@ -32,8 +34,15 @@ import useObjectPropsValue from "hooks/useObjectPropsValue";
 interface IProps {}
 
 const Header: React.FC<IProps> = (): JSX.Element => {
-  const { getValue } = useObjectPropsValue();
-  const { headerData, landingData, currentLanguage } = useGlobalState();
+  const { getValue, objectToQuerystring } = useObjectPropsValue();
+  const {
+    isPartnerDetailPage,
+    partnerDetail,
+    headerData,
+    landingData,
+    currentLanguage,
+  } = useGlobalState();
+  const { dispatch } = useGlobalDispatch();
   const { _callBlogPageApis } = useBlogApi();
   const {
     getHomeData,
@@ -111,6 +120,24 @@ const Header: React.FC<IProps> = (): JSX.Element => {
     const path = window.location.href.replace(currentLanguage, item.value);
     window.location.href = path;
   }
+  function handleSearchClicked(data) {
+    const values = {
+      name: data,
+    };
+    dispatch({
+      type: "SET_PARTNERS_QUERY_DATA",
+      payload: {
+        data: values,
+        isNeedConvert: false,
+      },
+    });
+    dispatch({
+      type: "TOGGLE_IS_PARTNER_DETAIL_PAGE",
+      payload: false,
+    });
+    const s = objectToQuerystring(values);
+    Router.push(`/offices${s && s.length ? s : ""}`);
+  }
   return (
     <>
       <Wrapper
@@ -143,47 +170,60 @@ const Header: React.FC<IProps> = (): JSX.Element => {
               }
             />
           </PhoneMenuWrapper>
-          <Menu>
-            <MenuItem
-              selected={router.pathname === "/"}
-              isSticky={isSticky}
-              onClick={_getHomeData}
-              isTransparent={checkIsTransparent()}
-            >
-              {getValue(headerObj, "menuitem1text")}
-            </MenuItem>
-            <MenuItem
-              selected={router.pathname === `/faq`}
-              isSticky={isSticky}
-              isTransparent={checkIsTransparent()}
-              onClick={handleFAQClicked}
-            >
-              <Link href={`/faq`}>
-                <a>{getValue(headerObj, "menuitem3text")}</a>
-              </Link>
-            </MenuItem>
-            <MenuItem
-              selected={router.pathname === `/blogs`}
-              isSticky={isSticky}
-              isTransparent={checkIsTransparent()}
-              onClick={handleBlogsClicked}
-            >
-              <Link href={`/blogs`}>
-                <a>{getValue(headerObj, "menuitem4text")}</a>
-              </Link>
-            </MenuItem>
-            <MenuItem
-              selected={router.pathname === `/contact-us`}
-              isSticky={isSticky}
-              isTransparent={checkIsTransparent()}
-              onClick={handleContactUsClicked}
-            >
-              <Link href={`/contact-us`}>
-                <a>{getValue(headerObj, "menuitem5text")}</a>
-              </Link>
-            </MenuItem>
-          </Menu>
-          <ButtonsContainer>
+          {!isPartnerDetailPage ? (
+            <Menu>
+              <MenuItem
+                selected={router.pathname === "/"}
+                isSticky={isSticky}
+                onClick={_getHomeData}
+                isTransparent={checkIsTransparent()}
+              >
+                {getValue(headerObj, "menuitem1text")}
+              </MenuItem>
+              <MenuItem
+                selected={router.pathname === `/faq`}
+                isSticky={isSticky}
+                isTransparent={checkIsTransparent()}
+                onClick={handleFAQClicked}
+              >
+                <Link href={`/faq`}>
+                  <a>{getValue(headerObj, "menuitem3text")}</a>
+                </Link>
+              </MenuItem>
+              <MenuItem
+                selected={router.pathname === `/blogs`}
+                isSticky={isSticky}
+                isTransparent={checkIsTransparent()}
+                onClick={handleBlogsClicked}
+              >
+                <Link href={`/blogs`}>
+                  <a>{getValue(headerObj, "menuitem4text")}</a>
+                </Link>
+              </MenuItem>
+              <MenuItem
+                selected={router.pathname === `/contact-us`}
+                isSticky={isSticky}
+                isTransparent={checkIsTransparent()}
+                onClick={handleContactUsClicked}
+              >
+                <Link href={`/contact-us`}>
+                  <a>{getValue(headerObj, "menuitem5text")}</a>
+                </Link>
+              </MenuItem>
+            </Menu>
+          ) : (
+            <SearchInput
+              placeholder={getValue(headerObj, "searchinputtitle")}
+              onSearchClicked={handleSearchClicked}
+            />
+          )}
+          <ButtonsContainer
+            isPartnerDetailPage={
+              isPartnerDetailPage &&
+              partnerDetail &&
+              partnerDetail.visitingenabled
+            }
+          >
             <Translations onClick={handleClickTranslations}>
               <TranslationButton>
                 <IoIosArrowDown size=".9em" />
@@ -206,9 +246,16 @@ const Header: React.FC<IProps> = (): JSX.Element => {
                 </LanguagesContainer>
               ) : null}
             </Translations>
-            <Button onClick={handleActionClicked}>
+            <Button name="partnersPanel" onClick={handleActionClicked}>
               {getValue(headerObj, "action1text")}
             </Button>
+            {isPartnerDetailPage &&
+            partnerDetail &&
+            partnerDetail.visitingenabled ? (
+              <Button name="visit" isPartnerDetailPage={isPartnerDetailPage}>
+                {getValue(headerObj, "secondactiontext")}
+              </Button>
+            ) : null}
           </ButtonsContainer>
         </Content>
       </Wrapper>

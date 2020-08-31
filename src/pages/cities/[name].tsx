@@ -39,7 +39,7 @@ const CityDetail = (props) => {
   const metaTags: MetaTags = {
     keywords: `${getValue(cityDetail, "keywords")}`,
     title: `${getValue(cityDetail, "name")}`,
-    description: `${getValue(cityDetail, "fullname")}`,
+    description: `${getValue(cityDetail, "metadescription")}`,
     image: img,
     robots: `${RobotsContent.follow},${RobotsContent.index}`,
     type: PageType.website,

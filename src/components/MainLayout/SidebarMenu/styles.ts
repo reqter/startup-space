@@ -18,6 +18,9 @@ export const Logo = styled.img`
 
 export const Menu = styled.ul`
   @apply flex justify-center flex-col w-full my-32;
+  @screen phone {
+    @apply my-16;
+  }
 `;
 export const MenuItem = styled.li`
   @apply font-bold px-6 cursor-pointer text-center text-2xl py-5;
@@ -25,6 +28,9 @@ export const MenuItem = styled.li`
     selected ? theme`colors.white` : theme`colors.black`};
   background-color: ${({ selected }) =>
     selected ? theme`colors.blue.500` : `transparent`};
+  @screen phone {
+    @apply text-xl;
+  }
 `;
 export const Button = styled.button`
   @apply bg-blue-500 flex items-center justify-center text-white text-base font-bold py-2 px-4 rounded transition ease-in duration-200;
