@@ -8,6 +8,9 @@ export const Layout = styled.div`
   ${".leaflet-container"} {
     height: 85%;
   }
+  @screen phone {
+    @apply p-4
+  }
 `;
 
 export const Header = styled.div`

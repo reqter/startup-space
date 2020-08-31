@@ -16,12 +16,7 @@ const Address = () => {
   const cityTitle = getValue(data, "addressboxcitytitle");
   const countryTitle = getValue(data, "addressboxcountrytitle");
   return (
-    <LayoutBox
-      title={getValue(data, "addressboxtitle")}
-      actions={() => {
-        return <Button>{getValue(data, "addressboxmaptext")}</Button>;
-      }}
-    >
+    <LayoutBox title={getValue(data, "addressboxtitle")}>
       <AddressContainer>
         <Row>
           <Key>{addressTitle}:</Key>

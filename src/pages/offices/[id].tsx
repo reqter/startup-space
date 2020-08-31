@@ -77,7 +77,7 @@ const PartnerDetail = (props) => {
 
   return (
     <MainLayout metaTags={metaTags} logo={logo}>
-      {!props.partnerDetail ? (
+      {!props.partnerDetail && !partnerDetail ? (
         <NotFound
           image={img}
           title={getValue(pageData, "failedtitle")}
@@ -132,6 +132,7 @@ PartnerDetail.getInitialProps = async (context) => {
         partnerDetailPage,
         newestBlogs,
         footerData,
+        isPartnerDetailPage: true,
       };
     } catch (error) {
       return {

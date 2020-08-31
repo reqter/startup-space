@@ -77,38 +77,36 @@ export const MenuItem = styled.li`
 `;
 export const ButtonsContainer = styled.div`
   @apply right-0 flex justify-between absolute items-center;
-  min-width: 210px;
-  margin-top: 10px;
   @screen tab-port {
     @apply hidden;
   }
+  min-width: ${({ isPartnerDetailPage }) =>
+    isPartnerDetailPage ? "340px" : "205px"};
 `;
 export const Button = styled.button`
-  @apply absolute right-0 bg-blue-500 flex items-center justify-center text-white text-base font-bold py-2 px-4 rounded transition ease-in duration-200;
+  @apply absolute flex items-center justify-center text-white text-sm font-bold py-2 px-4 rounded transition ease-in duration-200;
   &:hover {
-    @apply bg-blue-700 transition ease-in duration-200;
+    @apply bg-blue-600 transition ease-in duration-200;
   }
-  span {
-    @apply text-2xl;
-    padding-inline-end: 3px;
-  }
+  right: ${({ name }) => (name === "partnersPanel" ? 0 : "135px")};
+  background-color: ${({ name, isPartnerDetailPage }) =>
+    name === "visit" ? theme`colors.blue.400` : theme`colors.blue.500`};
+  min-width: 130px;
 `;
 export const Translations = styled.div`
-  @apply bg-white rounded-lg px-3 py-1 absolute left-0 shadow;
-  margin-inline-end: 10px;
+  @apply bg-white rounded absolute left-0 border;
   &:hover {
     @apply bg-gray-100;
   }
 `;
 export const TranslationButton = styled.button`
-  @apply flex text-gray-800 w-full justify-between items-center transition duration-300;
+  @apply flex text-gray-800 w-full justify-between items-center transition duration-300 py-2 px-4 rounded;
   &:focus {
     @apply outline-none;
   }
 `;
 export const LanguagesContainer = styled.div`
-  @apply flex flex-col absolute right-0 bg-white shadow rounded overflow-hidden;
-  margin-top: 10px;
+  @apply bg-white flex flex-col absolute right-0  overflow-hidden;
   width: 200px;
 `;
 export const LanguageItem = styled.div`

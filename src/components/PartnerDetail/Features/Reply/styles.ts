@@ -43,6 +43,9 @@ export const Text = styled.p`
 export const Form = styled.form``;
 export const Row = styled.div`
   @apply flex mb-5;
+  @screen phone {
+    @apply flex-col;
+  }
 `;
 
 export const Column = styled.div`
@@ -50,6 +53,13 @@ export const Column = styled.div`
   margin-inline-end: 10px;
   &:last-child {
     margin: 0;
+  }
+  @screen phone {
+    @apply mb-5;
+    margin-inline-end: 0px;
+    &:last-child {
+      margin: 0;
+    }
   }
 `;
 export const LoadMore = styled.button`

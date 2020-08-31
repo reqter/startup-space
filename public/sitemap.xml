@@ -25,11 +25,6 @@
 
 
 <url>
-    <loc>https://workinja.com/fa/cities/[name]</loc>
-    <changefreq>hourly</changefreq>
-    <xhtml:link rel="alternate" hreflang="fa" href="https://workinja.com/fa/cities/[name]" /><xhtml:link rel="alternate" hreflang="en" href="https://workinja.com/en/cities/[name]" /><xhtml:link rel="alternate" hreflang="es" href="https://workinja.com/es/cities/[name]" /><xhtml:link rel="alternate" hreflang="fr" href="https://workinja.com/fr/cities/[name]" /><xhtml:link rel="alternate" hreflang="it" href="https://workinja.com/it/cities/[name]" /><xhtml:link rel="alternate" hreflang="ar" href="https://workinja.com/ar/cities/[name]" /><xhtml:link rel="alternate" hreflang="sv" href="https://workinja.com/sv/cities/[name]" /><xhtml:link rel="alternate" hreflang="de" href="https://workinja.com/de/cities/[name]" />
-  </url>
-<url>
     <loc>https://workinja.com/fa/blogs/</loc>
     <changefreq>hourly</changefreq>
     <xhtml:link rel="alternate" hreflang="fa" href="https://workinja.com/fa/blogs/" /><xhtml:link rel="alternate" hreflang="en" href="https://workinja.com/en/blogs/" /><xhtml:link rel="alternate" hreflang="es" href="https://workinja.com/es/blogs/" /><xhtml:link rel="alternate" hreflang="fr" href="https://workinja.com/fr/blogs/" /><xhtml:link rel="alternate" hreflang="it" href="https://workinja.com/it/blogs/" /><xhtml:link rel="alternate" hreflang="ar" href="https://workinja.com/ar/blogs/" /><xhtml:link rel="alternate" hreflang="sv" href="https://workinja.com/sv/blogs/" /><xhtml:link rel="alternate" hreflang="de" href="https://workinja.com/de/blogs/" />
@@ -38,6 +33,11 @@
     <loc>https://workinja.com/fa/blogs/[id]</loc>
     <changefreq>hourly</changefreq>
     <xhtml:link rel="alternate" hreflang="fa" href="https://workinja.com/fa/blogs/[id]" /><xhtml:link rel="alternate" hreflang="en" href="https://workinja.com/en/blogs/[id]" /><xhtml:link rel="alternate" hreflang="es" href="https://workinja.com/es/blogs/[id]" /><xhtml:link rel="alternate" hreflang="fr" href="https://workinja.com/fr/blogs/[id]" /><xhtml:link rel="alternate" hreflang="it" href="https://workinja.com/it/blogs/[id]" /><xhtml:link rel="alternate" hreflang="ar" href="https://workinja.com/ar/blogs/[id]" /><xhtml:link rel="alternate" hreflang="sv" href="https://workinja.com/sv/blogs/[id]" /><xhtml:link rel="alternate" hreflang="de" href="https://workinja.com/de/blogs/[id]" />
+  </url>
+<url>
+    <loc>https://workinja.com/fa/cities/[name]</loc>
+    <changefreq>hourly</changefreq>
+    <xhtml:link rel="alternate" hreflang="fa" href="https://workinja.com/fa/cities/[name]" /><xhtml:link rel="alternate" hreflang="en" href="https://workinja.com/en/cities/[name]" /><xhtml:link rel="alternate" hreflang="es" href="https://workinja.com/es/cities/[name]" /><xhtml:link rel="alternate" hreflang="fr" href="https://workinja.com/fr/cities/[name]" /><xhtml:link rel="alternate" hreflang="it" href="https://workinja.com/it/cities/[name]" /><xhtml:link rel="alternate" hreflang="ar" href="https://workinja.com/ar/cities/[name]" /><xhtml:link rel="alternate" hreflang="sv" href="https://workinja.com/sv/cities/[name]" /><xhtml:link rel="alternate" hreflang="de" href="https://workinja.com/de/cities/[name]" />
   </url>
 <url>
     <loc>https://workinja.com/fa/offices/</loc>
