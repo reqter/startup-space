@@ -1,9 +1,10 @@
 import React from "react";
-import { Link } from "../../../../../config/Next18Wrapper";
 import useGlobalApi from "hooks/useGlobalApi";
+import useGlobalState from "hooks/useGlobal/useGlobalState";
 import useObjectPropsValue from "hooks/useObjectPropsValue";
 import { CardWrapper, Content, Plus, Location, Count } from "./styles";
 const CityCard = ({ data }) => {
+  const { currentLanguage } = useGlobalState();
   const { getValue, includeImageBaseUrl } = useObjectPropsValue();
   const { _getCityDetailPageData, _getCityDetailData } = useGlobalApi();
   const getImage = () => {
@@ -17,14 +18,18 @@ const CityCard = ({ data }) => {
   }
 
   return (
-    <Link href={`/cities/${data?._id}`}>
-      <CardWrapper bgUrl={getImage()} onClick={handleClick}>
-        <Content>
-          <Plus />
-          <Location>{getValue(data, "name")}</Location>
-        </Content>
-      </CardWrapper>
-    </Link>
+    <CardWrapper
+      bgUrl={getImage()}
+      onClick={handleClick}
+      target="_blank"
+      rel="noopener noreferrer"
+      href={`${currentLanguage}/cities/${data?._id}`}
+    >
+      <Content>
+        <Plus />
+        <Location>{getValue(data, "name")}</Location>
+      </Content>
+    </CardWrapper>
   );
 };
 export default CityCard;

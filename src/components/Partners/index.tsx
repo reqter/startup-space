@@ -30,7 +30,6 @@ const Spaces = () => {
     if (!loading) {
       toggleLoading(true);
     }
-    debugger
     let params = {};
     if (needsUrlQueryToConvert) {
       const _fields =

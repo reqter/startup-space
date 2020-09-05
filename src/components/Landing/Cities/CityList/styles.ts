@@ -50,7 +50,7 @@ export const Count = styled.div`
   }};
 `;
 
-export const CardWrapper = styled.div`
+export const CardWrapper = styled.a`
   @apply mb-4 h-64 shadow-lg rounded-lg py-40 bg-cover overflow-hidden relative;
   width: calc(${theme`width.1/4`} - 10px);
   margin-inline-start: 10px;

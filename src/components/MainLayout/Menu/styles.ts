@@ -34,11 +34,12 @@ export const PhoneMenuWrapper = styled.div`
   }
 `;
 export const CenterLogo = styled.img`
-  @apply w-32;
   height: 50px;
-  width: 100px;
   @screen tab-port {
     @apply block;
+  }
+  @screen phone {
+    height: 40px;
   }
 `;
 export const NavBarIcon = styled.div`

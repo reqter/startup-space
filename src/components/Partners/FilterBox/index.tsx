@@ -66,7 +66,7 @@ const FilterBox = ({ dataList }) => {
       : [searchFormContentType];
   };
   const formRef = React.useRef(null);
-  const getParams = () => {
+  const getParams = React.useMemo(() => {
     if (!needsUrlQueryToConvert) {
       return partnersPageUrlQuery;
     }
@@ -79,7 +79,7 @@ const FilterBox = ({ dataList }) => {
       }
     }
     return {};
-  };
+  }, [searchFormContentType, partnersPageData]);
 
   function handleFilterData() {
     const values = formRef.current.getValues();
